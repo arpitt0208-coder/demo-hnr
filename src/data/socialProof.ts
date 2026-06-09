@@ -1,10 +1,6 @@
 import {
   Bike,
-  CalendarCheck,
-  Headphones,
-  ShieldCheck,
   Star,
-  Tag,
   Users,
   Zap,
   type LucideIcon,
@@ -18,13 +14,6 @@ export type SocialProofCard = {
   titleHighlight?: string;
   titleAfter?: string;
   title?: string;
-  description: string;
-};
-
-export type SocialProofBenefit = {
-  id: number;
-  icon: LucideIcon;
-  title: string;
   description: string;
 };
 
@@ -69,32 +58,5 @@ export const socialProofCards: SocialProofCard[] = [
     titleAfter: " Everything",
     description:
       "Book, verify, and hit the road in minutes—no long waits, no hassle.",
-  },
-];
-
-export const socialProofBenefits: SocialProofBenefit[] = [
-  {
-    id: 1,
-    icon: ShieldCheck,
-    title: "Verified Bikes",
-    description: "Quality checked & safe.",
-  },
-  {
-    id: 2,
-    icon: Tag,
-    title: "Fair Prices",
-    description: "Transparent & honest.",
-  },
-  {
-    id: 3,
-    icon: Headphones,
-    title: "24/7 Support",
-    description: "We're here anytime.",
-  },
-  {
-    id: 4,
-    icon: CalendarCheck,
-    title: "Easy Bookings",
-    description: "Book in just a few taps.",
   },
 ];

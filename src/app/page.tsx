@@ -1,6 +1,5 @@
 import { AppPromoSection } from "@/components/AppPromo";
 import { HelpInfoSection } from "@/components/HelpInfo";
-import { ImprovementSummarySection } from "@/components/ImprovementSummary";
 import { FeaturesSection } from "@/components/Features";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero/Hero";
