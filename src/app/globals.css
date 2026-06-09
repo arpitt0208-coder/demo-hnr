@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@import "../styles/animations.css";
+
+:root {
+  --primary-yellow: #efbe3d;
+  --dark-navy: #0f172a;
+  --text-gray: #64748b;
+  --surface: #fafafa;
+  --border: #eaeaea;
+  --white: #ffffff;
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --primary: #efbe3d;
+  --primary-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #0f172a;
+  --input: #eaeaea;
+  --ring: #efbe3d;
+  --card: #ffffff;
+  --muted: #f1f5f9;
+}
+
+@theme inline {
+  --color-primary-yellow: #efbe3d;
+  --color-dark-navy: #0f172a;
+  --color-text-gray: #64748b;
+  --color-surface: #fafafa;
+  --color-border: #eaeaea;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-inter);
+  --font-script: var(--font-caveat);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+  background-color: #ffffff;
+  color: var(--dark-navy);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.maplibregl-map,
+.maplibregl-canvas-container {
+  overflow: hidden;
+}
+
+.font-script {
+  font-family: var(--font-caveat), cursive;
+}
+
+.font-neurial {
+  font-family: "Neurial Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif !important;
+}
