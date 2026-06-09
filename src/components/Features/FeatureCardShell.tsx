@@ -18,17 +18,22 @@ export function FeatureCardShell({
   return (
     <article
       className={cn(
-        "relative flex min-h-[340px] flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_4px_24px_rgba(15,23,42,0.06)] sm:min-h-[380px]",
+        "relative flex h-full min-h-[248px] flex-col overflow-hidden rounded-[20px] border border-[#EEF2F6] bg-white shadow-[0_2px_14px_rgba(15,23,42,0.05)] transition-shadow duration-300 hover:shadow-[0_6px_24px_rgba(15,23,42,0.08)] sm:min-h-[268px]",
         className
       )}
     >
-      <div className={cn("relative z-10 shrink-0 p-5 pb-3 sm:p-6", contentClassName)}>
+      <div
+        className={cn(
+          "relative z-10 flex shrink-0 flex-col p-4 pb-2 sm:p-5 sm:pb-2.5",
+          contentClassName
+        )}
+      >
         {children}
       </div>
 
       <div
         className={cn(
-          "relative mt-auto h-[140px] w-full shrink-0 overflow-hidden sm:h-[165px]",
+          "relative mt-auto h-[108px] w-full shrink-0 overflow-hidden sm:h-[120px]",
           illustrationClassName
         )}
       >

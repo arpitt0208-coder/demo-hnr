@@ -14,8 +14,8 @@ export function FeaturesSupportCard() {
           src={support}
           alt=""
           fill
-          sizes="(max-width: 640px) 90vw, 320px"
-          className="object-contain object-bottom"
+          sizes="(max-width: 640px) 45vw, 220px"
+          className="object-contain object-bottom px-2 pb-1"
           aria-hidden="true"
         />
       }
@@ -31,7 +31,7 @@ export function FeaturesSupportCard() {
         }
       />
 
-      <p className="mt-3 text-[12px] font-medium leading-[1.7] text-[#333333] sm:text-[13px]">
+      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#555555] sm:text-[12px]">
         Real people. Real help. Get support and route tips, whenever you need.
       </p>
     </FeatureCardShell>

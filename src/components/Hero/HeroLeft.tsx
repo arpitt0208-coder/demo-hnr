@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { adventure } from "@/assets/images";
+import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/UI/Badge";
-import { Button } from "@/components/UI/Button";
+import ShinyButton from "@/components/UI/shiny-button";
 
 export function HeroLeft() {
   return (
@@ -67,7 +68,13 @@ export function HeroLeft() {
         transition={{ duration: 0.5, delay: 0.9 }}
         className="mt-6"
       >
-        <Button>Explore bikes</Button>
+        <ShinyButton className="group inline-flex items-center gap-2 text-[14px] font-bold">
+          Explore bikes
+          <ArrowRight
+            className="size-4 transition-transform group-hover:translate-x-0.5"
+            aria-hidden="true"
+          />
+        </ShinyButton>
       </motion.div>
     </motion.div>
   );

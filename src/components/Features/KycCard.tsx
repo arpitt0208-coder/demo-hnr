@@ -9,7 +9,7 @@ import { FeatureCardShell } from "./FeatureCardShell";
 function KycTopDotGrid() {
   return (
     <div
-      className="pointer-events-none absolute right-4 top-2 z-10 grid gap-[5px] opacity-45 sm:right-5"
+      className="pointer-events-none absolute right-3 top-1.5 z-10 grid gap-[4px] opacity-40 sm:right-4"
       style={{
         gridTemplateColumns: "repeat(5, 4px)",
         gridTemplateRows: "repeat(3, 4px)",
@@ -34,8 +34,8 @@ export function KycCard() {
             src={kyc}
             alt=""
             fill
-            sizes="(max-width: 640px) 70vw, 300px"
-            className="object-contain object-bottom px-2"
+            sizes="(max-width: 640px) 45vw, 220px"
+            className="object-contain object-bottom px-3 pb-0.5"
             aria-hidden="true"
           />
         </>
@@ -45,12 +45,9 @@ export function KycCard() {
         compact
         icon={Calendar}
         title="Instant Booking & KYC"
-        iconClassName="text-yellow-500"
-        iconBgClassName="rounded-[14px] bg-[#ffffff]"
-        accentClassName="bg-[#FFFCF7]"
       />
 
-      <p className="mt-3 text-[12px] font-medium leading-[1.7] text-[#333333] sm:text-[13px]">
+      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#555555] sm:text-[12px]">
         Verify and ride in minutes, not hours. Secure, digital onboarding from
         anywhere.
       </p>

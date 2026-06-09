@@ -9,15 +9,13 @@ import { FeatureCardShell } from "./FeatureCardShell";
 export function CommunityCard() {
   return (
     <FeatureCardShell
-      illustrationClassName="h-auto"
       illustration={
         <Image
           src={card}
           alt="Riders high-fiving beside a motorcycle in the mountains"
-          width={600}
-          height={460}
-          sizes="(max-width: 1024px) 90vw, 320px"
-          className="h-auto w-full"
+          fill
+          sizes="(max-width: 640px) 45vw, 220px"
+          className="object-contain object-bottom px-2 pb-1"
         />
       }
     >
@@ -34,7 +32,7 @@ export function CommunityCard() {
         iconBgClassName="rounded-full bg-primary-yellow/15"
       />
 
-      <p className="mt-3 text-[12px] font-medium leading-[1.7] text-[#333333] sm:text-[13px]">
+      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#555555] sm:text-[12px]">
         Join riders who share tips, photos, and stories. You&apos;re never just
         a number.
       </p>

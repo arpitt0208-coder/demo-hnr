@@ -108,8 +108,8 @@ export function Navbar() {
             className={cn(
               "bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)] transition-shadow duration-300",
               dropdownOpen
-                ? "shadow-[0_16px_48px_rgba(15,23,42,0.12)]"
-                : "rounded-b-[24px]"
+                ? "rounded-t-[24px] shadow-[0_16px_48px_rgba(15,23,42,0.12)]"
+                : "rounded-[24px]"
             )}
           >
             <nav

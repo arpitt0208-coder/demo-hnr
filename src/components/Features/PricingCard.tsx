@@ -11,27 +11,25 @@ export function PricingCard() {
     <FeatureCardShell
       className="bg-[#FFFCF7]"
       illustration={
-        <div className="grid h-full grid-cols-1 grid-rows-1">
-          <div className="relative col-start-1 row-start-1 flex items-end">
-            <div className="relative h-[55%] w-full">
-              <Image
-                src={mountainbg}
-                alt=""
-                fill
-                sizes="(max-width: 640px) 50vw, 300px"
-                className="object-cover object-bottom opacity-85"
-                aria-hidden="true"
-              />
-            </div>
+        <div className="relative h-full w-full">
+          <div className="absolute inset-x-0 bottom-0 h-[62%]">
+            <Image
+              src={mountainbg}
+              alt=""
+              fill
+              sizes="(max-width: 640px) 45vw, 220px"
+              className="object-cover object-bottom opacity-80"
+              aria-hidden="true"
+            />
           </div>
 
-          <div className="col-start-1 row-start-1 flex h-full items-end justify-center pb-1">
-            <div className="relative h-[96px] w-[110px] sm:h-[104px] sm:w-[118px]">
+          <div className="absolute inset-x-0 bottom-1 flex justify-center">
+            <div className="relative h-[76px] w-[92px] sm:h-[84px] sm:w-[100px]">
               <Image
                 src={fee}
                 alt=""
                 fill
-                sizes="(max-width: 640px) 50vw, 144px"
+                sizes="(max-width: 640px) 40vw, 120px"
                 className="object-contain object-bottom"
                 aria-hidden="true"
               />
@@ -52,7 +50,7 @@ export function PricingCard() {
         }
       />
 
-      <p className="mt-3 text-[12px] font-medium leading-[1.7] text-[#333333] sm:text-[13px]">
+      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#555555] sm:text-[12px]">
         No hidden fees. No &apos;oh, we forgot to mention&apos; charges. Just
         honest, all-inclusive rates from start to finish.
       </p>
