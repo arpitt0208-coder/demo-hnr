@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { navItems } from "@/data/navigation";
 import { cn } from "@/lib/cn";
@@ -32,6 +32,7 @@ export function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<NavDropdownId | null>(
     null
   );
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const cancelScheduledClose = useCallback(() => {
     if (closeTimerRef.current) {
@@ -67,7 +68,18 @@ export function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   const dropdownOpen = activeDropdown !== null;
+
+  const closeMobileMenu = useCallback(() => {
+    setMobileMenuOpen(false);
+  }, []);
 
   return (
     <div className="pointer-events-none sticky top-0 z-50 h-0 overflow-visible">
@@ -168,14 +180,51 @@ export function Navbar() {
               <button
                 type="button"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-border lg:hidden"
-                aria-label="Open menu"
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileMenuOpen}
+                onClick={() => setMobileMenuOpen((open) => !open)}
               >
-                <span className="flex flex-col gap-1">
-                  <span className="block h-0.5 w-5 bg-dark-navy" />
-                  <span className="block h-0.5 w-5 bg-dark-navy" />
-                </span>
+                {mobileMenuOpen ? (
+                  <X className="size-5 text-dark-navy" aria-hidden="true" />
+                ) : (
+                  <span className="flex flex-col gap-1" aria-hidden="true">
+                    <span className="block h-0.5 w-5 bg-dark-navy" />
+                    <span className="block h-0.5 w-5 bg-dark-navy" />
+                  </span>
+                )}
               </button>
             </nav>
+
+            <div
+              className={cn(
+                "overflow-hidden border-t border-[#F1F5F9] bg-white transition-[max-height,opacity] duration-300 ease-out lg:hidden",
+                mobileMenuOpen
+                  ? "max-h-[min(70dvh,520px)] opacity-100"
+                  : "max-h-0 opacity-0"
+              )}
+              aria-hidden={!mobileMenuOpen}
+            >
+              <ul className="flex max-h-[min(70dvh,520px)] flex-col gap-1 overflow-y-auto px-4 py-4 sm:px-6">
+                {navItems.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      onClick={closeMobileMenu}
+                      className="flex items-center justify-between rounded-xl px-3 py-3.5 text-[15px] font-semibold text-dark-navy transition-colors hover:bg-[#FAFAFA] hover:text-primary-yellow"
+                    >
+                      {item.label}
+                      <ChevronDown
+                        className={cn(
+                          "size-4 -rotate-90 text-text-gray",
+                          item.hasDropdown && "opacity-100"
+                        )}
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div

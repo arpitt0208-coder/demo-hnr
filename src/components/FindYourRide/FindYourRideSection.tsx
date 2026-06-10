@@ -32,7 +32,7 @@ export function FindYourRideSection() {
             </span>
           </div>
 
-          <h2 className="mt-4 text-[34px] font-extrabold leading-[1.08] tracking-tight text-dark-navy sm:text-[42px] md:text-[50px] xl:text-[56px]">
+          <h2 className="mt-4 text-[26px] font-extrabold leading-[1.08] tracking-tight text-dark-navy min-[400px]:text-[30px] sm:text-[38px] md:text-[46px] xl:text-[52px]">
             <span className="block">
               Find Your Perfect{" "}
               <span className="relative inline-block">

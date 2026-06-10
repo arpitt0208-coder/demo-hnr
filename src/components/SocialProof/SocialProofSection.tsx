@@ -33,7 +33,7 @@ export function SocialProofSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="relative w-full overflow-hidden bg-black px-4 py-14 sm:px-6 sm:py-16"
+      className="relative w-full overflow-x-clip bg-black px-4 py-12 sm:px-6 sm:py-14 md:py-16"
       aria-label="Social proof"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
@@ -59,7 +59,7 @@ export function SocialProofSection() {
             </span>
           </div>
 
-          <h2 className="mt-5 text-[28px] font-extrabold leading-[1.08] tracking-tight text-white sm:text-[36px] md:text-[42px] xl:text-[46px]">
+          <h2 className="mt-5 text-[24px] font-extrabold leading-[1.08] tracking-tight text-white min-[400px]:text-[28px] sm:text-[34px] md:text-[40px] xl:text-[46px]">
             Trusted By{" "}
             <span className="relative inline-block text-primary-yellow">
               Thousands
@@ -73,8 +73,8 @@ export function SocialProofSection() {
           </p>
         </div>
 
-        <div className="mt-10 flex justify-center lg:mt-12">
-          <div className="relative flex w-full max-w-[1456px] items-center justify-center">
+        <div className="mt-8 flex justify-center overflow-hidden sm:mt-10 lg:mt-12">
+          <div className="relative flex w-full max-w-[1456px] items-center justify-center overflow-hidden">
             <CircularTestimonials
               testimonials={testimonials}
               autoplay
@@ -86,11 +86,6 @@ export function SocialProofSection() {
                 arrowBackground: "#ffffff",
                 arrowForeground: "#0f172a",
                 arrowHoverBackground: "#efbe3d",
-              }}
-              fontSizes={{
-                name: "28px",
-                designation: "20px",
-                quote: "20px",
               }}
             />
           </div>

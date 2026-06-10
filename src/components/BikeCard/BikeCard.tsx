@@ -14,8 +14,9 @@ interface BikeCardProps {
 
 export function BikeCard({ bike, className, variant = "floating" }: BikeCardProps) {
   const isFloating = variant === "floating";
+  const isGrid = variant === "grid";
   const isFixedTransform = bike.position.transform === "none";
-  const isClickable = isFloating && Boolean(bike.href);
+  const isClickable = Boolean(bike.href);
   const CardTag = isClickable ? motion.a : motion.article;
 
   return (
@@ -26,16 +27,30 @@ export function BikeCard({ bike, className, variant = "floating" }: BikeCardProp
             "aria-label": `${bike.brand} ${bike.model} in ${bike.location}`,
           }
         : {})}
-      initial={isFixedTransform ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
-      animate={isFixedTransform ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+      initial={
+        isFloating && !isFixedTransform ? { opacity: 0, scale: 0.9 } : { opacity: 1 }
+      }
+      animate={
+        isFloating && !isFixedTransform
+          ? { opacity: 1, scale: 1 }
+          : { opacity: 1 }
+      }
       transition={{ duration: 0.5, delay: bike.floatDelay + 0.6 }}
-      whileHover={isFixedTransform ? { y: -6 } : { y: -6, scale: 1.02 }}
+      whileHover={
+        isClickable
+          ? isFixedTransform || isGrid
+            ? { y: -4, scale: 1.02 }
+            : { y: -6, scale: 1.02 }
+          : undefined
+      }
       className={cn(
-        "z-20 rounded-2xl border border-border/50 bg-white p-3 shadow-[0_8px_32px_rgba(15,23,42,0.08)]",
-        isFloating
-          ? "absolute hidden w-[162px] md:block lg:w-[172px]"
-          : "relative w-full",
-        isClickable && "cursor-pointer no-underline transition-shadow hover:shadow-[0_12px_40px_rgba(15,23,42,0.12)]",
+        "rounded-2xl border border-border/50 bg-white p-3 shadow-[0_8px_32px_rgba(15,23,42,0.08)]",
+        isFloating &&
+          "absolute z-20 hidden w-[140px] lg:block lg:w-[172px] xl:w-[178px]",
+        isGrid && "relative w-[148px] shrink-0 sm:w-[156px]",
+        !isFloating && !isGrid && "relative w-full",
+        isClickable &&
+          "cursor-pointer no-underline transition-shadow hover:shadow-[0_12px_40px_rgba(15,23,42,0.12)]",
         className
       )}
       style={
@@ -53,10 +68,10 @@ export function BikeCard({ bike, className, variant = "floating" }: BikeCardProp
       }
     >
       <div>
-        <p className="text-[9px] font-bold tracking-[0.12em] text-primary-yellow">
+        <p className="text-[8px] font-bold tracking-[0.12em] text-primary-yellow sm:text-[9px]">
           {bike.brand}
         </p>
-        <h3 className="text-[13px] font-bold leading-tight text-dark-navy lg:text-[14px]">
+        <h3 className="text-[12px] font-bold leading-tight text-dark-navy sm:text-[13px] lg:text-[14px]">
           {bike.model}
         </h3>
         <p className="mb-2 mt-1 flex items-center gap-1">
@@ -65,17 +80,22 @@ export function BikeCard({ bike, className, variant = "floating" }: BikeCardProp
             strokeWidth={2.25}
             aria-hidden="true"
           />
-          <span className="truncate text-[10px] font-semibold text-text-gray">
+          <span className="truncate text-[10px] font-semibold text-[#475569]">
             {bike.location}
           </span>
         </p>
-        <div className="relative h-[74px] w-full lg:h-[80px]">
+        <div
+          className={cn(
+            "relative w-full",
+            isGrid ? "h-[64px] sm:h-[70px]" : "h-[74px] lg:h-[80px]"
+          )}
+        >
           <Image
             src={bike.image}
             alt={`${bike.brand} ${bike.model}`}
             fill
             className="object-contain object-bottom p-1"
-            sizes="178px"
+            sizes={isGrid ? "156px" : "178px"}
           />
         </div>
       </div>

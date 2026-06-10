@@ -20,7 +20,7 @@ export function HelpInfoSection() {
     >
       <div className="relative mx-auto w-full max-w-[1280px]">
         <div className="overflow-hidden rounded-[28px] border border-[#E8ECF0] bg-white shadow-[0_8px_40px_rgba(15,23,42,0.06)]">
-          <div className="grid gap-8 p-5 sm:p-8 lg:grid-cols-2 lg:gap-10 lg:p-10">
+          <div className="grid gap-6 p-4 sm:gap-8 sm:p-6 md:p-8 lg:grid-cols-2 lg:gap-10 lg:p-10">
             <div>
               <div className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-white px-4 py-2 shadow-[0_2px_12px_rgba(15,23,42,0.04)]">
                 <span className="flex size-5 items-center justify-center rounded-full bg-primary-yellow">

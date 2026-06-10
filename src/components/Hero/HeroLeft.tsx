@@ -23,7 +23,7 @@ export function HeroLeft() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="mt-4 text-[32px] font-extrabold leading-[1.08] tracking-tight text-dark-navy sm:text-[46px] md:text-[50px] lg:text-[55px]"
+        className="mt-4 text-[28px] font-extrabold leading-[1.08] tracking-tight text-dark-navy min-[400px]:text-[32px] sm:text-[40px] md:text-[46px] lg:text-[52px] xl:text-[55px]"
       >
         <span className="block">Premium Himalayan</span>
         <span className="block">Bike Rentals</span>
@@ -46,7 +46,7 @@ export function HeroLeft() {
           />
         </span>
         {/* mt-4 text-[32px] font-extrabold leading-[1.08] tracking-tight text-dark-navy sm:text-[46px] md:text-[50px] lg:text-[55px] */}
-        <span className="mb-1 text-[26px] font-extrabold leading-none text-dark-navy sm:text-[32px] md:text-[36px] lg:text-[40px]">
+        <span className="mb-1 text-[22px] font-extrabold leading-none text-dark-navy min-[400px]:text-[26px] sm:text-[30px] md:text-[34px] lg:text-[38px] xl:text-[40px]">
           Ready &amp; Reliable
         </span>
       </motion.div>

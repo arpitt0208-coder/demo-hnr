@@ -12,7 +12,7 @@ import { WhatsAppContactButton } from "@/components/UI/WhatsAppContactButton";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-white">
+    <main className="relative min-h-screen overflow-x-clip bg-white pb-24 sm:pb-28">
       <Navbar />
       <WhatsAppContactButton />
       <div className="relative z-10 mx-auto w-full max-w-full overflow-x-clip">

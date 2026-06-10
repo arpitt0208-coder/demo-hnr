@@ -117,26 +117,24 @@ function LocationCard({ place }: { place: Place }) {
       </div>
 
       <div className="p-4 sm:p-5">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
           <MapPin
             size={16}
             strokeWidth={2}
-            className={cn(
-              "shrink-0",
-            )}
+            className="shrink-0"
             aria-hidden="true"
           />
-          <h3 className="min-w-0 flex-1 truncate text-[16px] font-extrabold leading-tight text-[#0f172a] sm:text-[17px]">
+          <h3 className="min-w-0 flex-1 text-[16px] font-extrabold leading-tight text-[#0f172a] sm:text-[17px]">
             {place.name}
           </h3>
           {isAvailable && place.bikesLabel && (
-            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary-yellow/15 px-3 py-1 text-[11px] font-bold text-primary-yellow">
+            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary-yellow/15 px-2.5 py-1 text-[10px] font-bold text-primary-yellow sm:px-3 sm:text-[11px]">
               <Bike className="size-3.5 shrink-0" aria-hidden="true" />
               {place.bikesLabel}
             </span>
           )}
           {!isAvailable && (
-            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#E11D48]/10 px-3 py-1 text-[11px] font-bold text-[#E11D48]">
+            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#E11D48]/10 px-2.5 py-1 text-[10px] font-bold text-[#E11D48] sm:px-3 sm:text-[11px]">
               <Clock className="size-3.5 shrink-0" aria-hidden="true" />
               Coming Soon
             </span>
@@ -199,7 +197,7 @@ export function LocationsMapSection() {
           </p>
         </div>
 
-        <div className="mx-auto mt-8 flex w-full max-w-[640px] items-center justify-center gap-1 rounded-2xl border border-border/60 bg-white p-1.5 shadow-sm sm:mt-10 sm:gap-2 sm:p-2">
+        <div className="mx-auto mt-8 flex w-full max-w-[640px] items-stretch justify-center gap-1 rounded-2xl border border-border/60 bg-white p-1.5 shadow-sm sm:mt-10 sm:gap-2 sm:p-2">
           {filterOptions.map(({ id, label, icon: Icon }) => {
             const isActive = activeFilter === id;
 
@@ -209,7 +207,7 @@ export function LocationsMapSection() {
                 type="button"
                 onClick={() => setActiveFilter(id)}
                 className={[
-                  "inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-[12px] font-bold transition-colors sm:gap-2 sm:px-4 sm:py-3 sm:text-[13px]",
+                  "inline-flex min-w-0 flex-1 items-center justify-center gap-1 rounded-xl px-2 py-2.5 text-[10px] font-bold leading-tight transition-colors min-[400px]:gap-1.5 min-[400px]:px-3 min-[400px]:text-[11px] sm:gap-2 sm:px-4 sm:py-3 sm:text-[13px]",
                   isActive
                     ? "bg-primary-yellow/15 text-primary-yellow"
                     : "text-[#0f172a] hover:bg-[#FAFAFA]",

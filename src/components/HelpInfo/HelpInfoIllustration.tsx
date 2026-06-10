@@ -5,7 +5,7 @@ import { faqSection } from "@/assets/images";
 
 export function HelpInfoIllustration() {
   return (
-    <div className="relative mt-8 h-[280px] w-full overflow-hidden rounded-[20px] sm:mt-10 sm:h-[320px] lg:mt-12 lg:h-[360px]">
+    <div className="relative mt-6 h-[220px] w-full overflow-hidden rounded-[20px] sm:mt-8 sm:h-[280px] md:h-[320px] lg:mt-12 lg:h-[360px]">
       <Image
         src={faqSection}
         alt="Scenic mountain road illustration with a help question mark"

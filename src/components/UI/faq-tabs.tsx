@@ -31,7 +31,7 @@ export function FAQItem({ question, answer, className }: FAQItemProps) {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between gap-4 p-4 text-left"
+        className="flex w-full items-center justify-between gap-3 p-3.5 text-left sm:gap-4 sm:p-4"
         aria-expanded={isOpen}
       >
         <span

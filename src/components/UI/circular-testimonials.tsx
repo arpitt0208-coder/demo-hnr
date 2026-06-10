@@ -199,11 +199,11 @@ export const CircularTestimonials = ({
   const isNarrow = containerWidth < 768;
 
   return (
-    <div className="mx-auto w-full px-0 py-4 sm:p-6 md:p-8">
-      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
+    <div className="mx-auto w-full overflow-hidden px-0 py-4 sm:p-6 md:p-8">
+      <div className="grid items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
         <div
           ref={imageContainerRef}
-          className="relative mx-auto h-64 w-full max-w-[280px] [perspective:1000px] sm:h-80 sm:max-w-sm md:h-96 md:max-w-md"
+          className="relative mx-auto h-56 w-full max-w-[240px] [perspective:1000px] min-[400px]:h-64 min-[400px]:max-w-[280px] sm:h-80 sm:max-w-sm md:h-96 md:max-w-md"
         >
           {testimonials.map((testimonial, index) => (
             <img

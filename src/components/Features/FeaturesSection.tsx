@@ -39,7 +39,7 @@ export function FeaturesSection() {
             </span>
           </div>
 
-          <h2 className="mt-5 text-[28px] font-extrabold leading-[1.08] tracking-tight text-dark-navy sm:text-[36px] md:text-[42px] xl:text-[46px]">
+          <h2 className="mt-5 text-[24px] font-extrabold leading-[1.12] tracking-tight text-dark-navy min-[400px]:text-[28px] sm:text-[34px] md:text-[40px] xl:text-[46px]">
             Here&apos;s What{" "}
             <span className="text-primary-yellow">Makes Us Different</span>
           </h2>

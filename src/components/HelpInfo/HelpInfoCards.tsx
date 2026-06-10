@@ -104,10 +104,10 @@ export function HelpInfoCards() {
 
   return (
     <div className="flex flex-col gap-4">
-      <article className="rounded-[20px] border border-[#F1F5F9] bg-white p-5 shadow-[0_4px_20px_rgba(15,23,42,0.05)] sm:p-6">
-        <div className="flex items-start gap-4">
+      <article className="rounded-[20px] border border-[#F1F5F9] bg-white p-4 shadow-[0_4px_20px_rgba(15,23,42,0.05)] sm:p-6">
+        <div className="flex items-start gap-3 sm:gap-4">
           <PanelIcon icon={FaqIcon} />
-          <div className="flex min-w-0 flex-1 items-start justify-between gap-3">
+          <div className="flex min-w-0 flex-1 items-start justify-between gap-2 sm:gap-3">
             <div>
               <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
                 {helpFaqPanel.title}
@@ -136,7 +136,7 @@ export function HelpInfoCards() {
         </ExpandablePanelContent>
       </article>
 
-      <article className="rounded-[20px] border border-[#F1F5F9] bg-white p-5 shadow-[0_4px_20px_rgba(15,23,42,0.05)] sm:p-6">
+      <article className="rounded-[20px] border border-[#F1F5F9] bg-white p-4 shadow-[0_4px_20px_rgba(15,23,42,0.05)] sm:p-6">
         <button
           type="button"
           onClick={() => setDisclaimerOpen((prev) => !prev)}
@@ -146,10 +146,10 @@ export function HelpInfoCards() {
               ? "Collapse disclaimer section"
               : "Expand disclaimer section"
           }
-          className="flex w-full cursor-pointer items-start gap-4 text-left transition-opacity hover:opacity-90"
+          className="flex w-full cursor-pointer items-start gap-3 text-left transition-opacity hover:opacity-90 sm:gap-4"
         >
           <PanelIcon icon={DisclaimerIcon} />
-          <div className="flex min-w-0 flex-1 items-start justify-between gap-3">
+          <div className="flex min-w-0 flex-1 items-start justify-between gap-2 sm:gap-3">
             <div>
               <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
                 {helpDisclaimerPanel.title}
@@ -169,9 +169,9 @@ export function HelpInfoCards() {
         </ExpandablePanelContent>
       </article>
 
-      <article className="rounded-[20px] border border-[#F1F5F9] bg-white p-5 shadow-[0_4px_20px_rgba(15,23,42,0.05)] sm:p-6">
+      <article className="rounded-[20px] border border-[#F1F5F9] bg-white p-4 shadow-[0_4px_20px_rgba(15,23,42,0.05)] sm:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <PanelIcon icon={ContactIcon} />
             <div>
               <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
