@@ -49,8 +49,8 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { label: "About Us", href: "#" },
       { label: "Blog", href: "#" },
-      { label: "Gallery", href: "#" },
-      { label: "Contact Us", href: "#" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "Contact Us", href: "/contact" },
     ],
   },
   {
@@ -83,32 +83,32 @@ export const footerSocialTooltipItems: {
   color: string;
   svgUrl: string;
 }[] = [
-  {
-    href: footerSocialLinks[0].href,
-    ariaLabel: "Instagram",
-    tooltip: "Instagram",
-    color: "#E4405F",
-    svgUrl: socialInstagram.src,
-  },
-  {
-    href: footerSocialLinks[1].href,
-    ariaLabel: "Facebook",
-    tooltip: "Facebook",
-    color: "#1877F2",
-    svgUrl: socialFacebook.src,
-  },
-  {
-    href: footerSocialLinks[2].href,
-    ariaLabel: "X",
-    tooltip: "X",
-    color: "#000000",
-    svgUrl: socialX.src,
-  },
-  {
-    href: footerSocialLinks[3].href,
-    ariaLabel: "YouTube",
-    tooltip: "YouTube",
-    color: "#FF0000",
-    svgUrl: socialYoutube.src,
-  },
-];
+    {
+      href: footerSocialLinks[0].href,
+      ariaLabel: "Instagram",
+      tooltip: "Instagram",
+      color: "#E4405F",
+      svgUrl: socialInstagram.src,
+    },
+    {
+      href: footerSocialLinks[1].href,
+      ariaLabel: "Facebook",
+      tooltip: "Facebook",
+      color: "#1877F2",
+      svgUrl: socialFacebook.src,
+    },
+    {
+      href: footerSocialLinks[2].href,
+      ariaLabel: "X",
+      tooltip: "X",
+      color: "#000000",
+      svgUrl: socialX.src,
+    },
+    {
+      href: footerSocialLinks[3].href,
+      ariaLabel: "YouTube",
+      tooltip: "YouTube",
+      color: "#FF0000",
+      svgUrl: socialYoutube.src,
+    },
+  ];

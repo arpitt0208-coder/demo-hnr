@@ -119,8 +119,9 @@ export function LocationsDropdown() {
                   src={location.image}
                   alt={location.title}
                   fill
-                  className="object-cover object-center transition-transform duration-500 ease-out group-hover/card:scale-[1.04]"
-                  sizes="(max-width: 640px) 100vw, 280px"
+                  quality={90}
+                  className="object-cover object-center transition-transform duration-500 ease-out group-hover/card:scale-[1.02]"
+                  sizes="(max-width: 640px) 100vw, 360px"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/10" />

@@ -41,7 +41,7 @@ export const aboutCards: AboutCard[] = [
     description:
       "Questions before you ride? Our team is here to help with bookings, routes, and on-trip assistance.",
     cta: "Get in touch",
-    href: "#contact",
+    href: "/contact",
     image: aboutCardSupport,
     icon: Headphones,
   },
@@ -51,7 +51,7 @@ export const aboutCards: AboutCard[] = [
     description:
       "See real journeys from fellow riders—scenic routes, mountain passes, and unforgettable memories.",
     cta: "View gallery",
-    href: "#gallery",
+    href: "/gallery",
     image: aboutCardGallery,
     icon: Camera,
   },
@@ -66,6 +66,6 @@ export type AboutQuickLink = {
 export const aboutQuickLinks: AboutQuickLink[] = [
   { label: "About Hire N Ride", href: "#about", icon: Users },
   { label: "All blogs", href: "#blogs", icon: FileText },
-  { label: "Gallery", href: "#gallery", icon: ImageIcon },
-  { label: "Contact Us", href: "#contact", icon: Phone },
+  { label: "Gallery", href: "/gallery", icon: ImageIcon },
+  { label: "Contact Us", href: "/contact", icon: Phone },
 ];

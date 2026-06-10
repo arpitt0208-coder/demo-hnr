@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Bike, Compass, MapPin } from "lucide-react";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
-import { bhuntar, kasolBig, manali } from "@/assets/images";
+import { bhuntar, kasol, manali } from "@/assets/images";
 
 type Place = {
   id: number;
@@ -27,7 +27,7 @@ const places: Place[] = [
     name: "Kasol",
     category: "Himachal Pradesh",
     bikesLabel: "40+ Bikes",
-    image: kasolBig,
+    image: kasol,
   },
   {
     id: 3,
@@ -86,8 +86,9 @@ function LocationCard({
           src={place.image}
           alt={`${place.name}, ${place.category}`}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
+          quality={90}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
+          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
         <div
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"

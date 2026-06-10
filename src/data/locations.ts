@@ -9,7 +9,7 @@ import {
   Waves,
 } from "lucide-react";
 import type { StaticImageData } from "next/image";
-import { bhuntar, kasolBig, manali } from "@/assets/images";
+import { bhuntar, kasol, manali } from "@/assets/images";
 
 type LocationFeature = {
   icon: LucideIcon;
@@ -57,7 +57,7 @@ export const featuredLocations: FeaturedLocation[] = [
     title: "Kasol",
     region: "Himachal Pradesh, India",
     href: "#locations",
-    image: kasolBig,
+    image: kasol,
     features: [
       { icon: Waves, label: "Parvati River" },
       { icon: Trees, label: "Pine forests" },

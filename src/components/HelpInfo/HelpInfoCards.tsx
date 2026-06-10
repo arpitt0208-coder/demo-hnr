@@ -184,7 +184,7 @@ export function HelpInfoCards() {
           </div>
 
           <a
-            href="#contact"
+            href="/contact"
             className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary-yellow px-6 py-3 text-[13px] font-bold text-dark-navy shadow-[0_6px_24px_rgba(239,190,61,0.35)] transition-shadow hover:shadow-[0_10px_32px_rgba(239,190,61,0.45)] sm:w-auto sm:shrink-0"
           >
             {helpContactPanel.cta}

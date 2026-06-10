@@ -19,6 +19,25 @@ const CLOSE_DELAY_MS = 200;
 
 type NavDropdownId = "fleet" | "about" | "locations" | "earn";
 
+function isScrollableMenuElement(element: HTMLElement) {
+  const { overflowY } = getComputedStyle(element);
+  return (
+    (overflowY === "auto" || overflowY === "scroll") &&
+    element.scrollHeight > element.clientHeight
+  );
+}
+
+function shouldPreventMenuWheel(
+  element: HTMLElement,
+  deltaY: number,
+) {
+  const atTop = element.scrollTop <= 0;
+  const atBottom =
+    element.scrollTop + element.clientHeight >= element.scrollHeight - 1;
+
+  return (deltaY < 0 && atTop) || (deltaY > 0 && atBottom);
+}
+
 function getNavDropdownId(label: string): NavDropdownId | null {
   if (label === FLEET_LABEL) return "fleet";
   if (label === ABOUT_LABEL) return "about";
@@ -29,6 +48,8 @@ function getNavDropdownId(label: string): NavDropdownId | null {
 
 export function Navbar() {
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navContainerRef = useRef<HTMLDivElement>(null);
+  const lockedScrollYRef = useRef(0);
   const [activeDropdown, setActiveDropdown] = useState<NavDropdownId | null>(
     null
   );
@@ -73,15 +94,18 @@ export function Navbar() {
   useEffect(() => {
     if (!mobileMenuOpen) return;
 
-    const scrollY = window.scrollY;
+    lockedScrollYRef.current = window.scrollY;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
     const { style: bodyStyle } = document.body;
     const { style: htmlStyle } = document.documentElement;
 
     bodyStyle.position = "fixed";
-    bodyStyle.top = `-${scrollY}px`;
+    bodyStyle.top = `-${lockedScrollYRef.current}px`;
     bodyStyle.left = "0";
     bodyStyle.right = "0";
     bodyStyle.width = "100%";
+    bodyStyle.paddingRight = `${scrollbarWidth}px`;
     bodyStyle.overflow = "hidden";
     htmlStyle.overflow = "hidden";
 
@@ -91,22 +115,73 @@ export function Navbar() {
       bodyStyle.left = "";
       bodyStyle.right = "";
       bodyStyle.width = "";
+      bodyStyle.paddingRight = "";
       bodyStyle.overflow = "";
       htmlStyle.overflow = "";
-      window.scrollTo(0, scrollY);
+      window.scrollTo(0, lockedScrollYRef.current);
     };
   }, [mobileMenuOpen]);
 
   useEffect(() => {
     if (!dropdownOpen || mobileMenuOpen) return;
 
-    const handleScroll = () => {
+    const preventBackgroundScroll = (event: WheelEvent | TouchEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+
+      if (navContainerRef.current?.contains(target)) {
+        let element = target instanceof Element ? target : target.parentElement;
+
+        while (element && navContainerRef.current.contains(element)) {
+          if (
+            element instanceof HTMLElement &&
+            isScrollableMenuElement(element)
+          ) {
+            if (
+              event instanceof WheelEvent &&
+              shouldPreventMenuWheel(element, event.deltaY)
+            ) {
+              event.preventDefault();
+            }
+            return;
+          }
+
+          element = element.parentElement;
+        }
+
+        event.preventDefault();
+        return;
+      }
+
+      event.preventDefault();
+    };
+
+    document.addEventListener("wheel", preventBackgroundScroll, {
+      passive: false,
+    });
+    document.addEventListener("touchmove", preventBackgroundScroll, {
+      passive: false,
+    });
+
+    return () => {
+      document.removeEventListener("wheel", preventBackgroundScroll);
+      document.removeEventListener("touchmove", preventBackgroundScroll);
+    };
+  }, [dropdownOpen, mobileMenuOpen]);
+
+  useEffect(() => {
+    if (!dropdownOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (navContainerRef.current?.contains(target)) return;
       closeDropdown();
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [dropdownOpen, mobileMenuOpen, closeDropdown]);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [dropdownOpen, closeDropdown]);
 
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
@@ -122,16 +197,14 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "fixed inset-0 z-40 bg-[#0F172A]/20 transition-opacity duration-200 ease-out",
-            dropdownOpen
-              ? "opacity-100"
-              : "pointer-events-none opacity-0"
+            "pointer-events-none fixed inset-0 z-40 bg-[#0F172A]/20 transition-opacity duration-200 ease-out",
+            dropdownOpen ? "opacity-100" : "opacity-0"
           )}
           aria-hidden={!dropdownOpen}
-          onClick={closeDropdown}
         />
 
         <div
+          ref={navContainerRef}
           className="relative z-50"
           onMouseEnter={cancelScheduledClose}
           onMouseLeave={scheduleCloseDropdown}
@@ -232,14 +305,14 @@ export function Navbar() {
 
             <div
               className={cn(
-                "overflow-hidden border-t border-[#F1F5F9] bg-white transition-[max-height,opacity] duration-300 ease-out lg:hidden",
+                "border-t border-[#F1F5F9] bg-white transition-[max-height,opacity] duration-300 ease-out lg:hidden",
                 mobileMenuOpen
-                  ? "max-h-[min(70dvh,520px)] opacity-100"
-                  : "max-h-0 opacity-0"
+                  ? "max-h-[min(70dvh,520px)] touch-pan-y overflow-y-auto overscroll-y-contain opacity-100 [-webkit-overflow-scrolling:touch]"
+                  : "max-h-0 overflow-hidden opacity-0"
               )}
               aria-hidden={!mobileMenuOpen}
             >
-              <ul className="flex max-h-[min(70dvh,520px)] flex-col gap-1 overflow-y-auto px-4 py-4 sm:px-6">
+              <ul className="flex flex-col gap-1 px-4 py-4 sm:px-6">
                 {navItems.map((item) => (
                   <li key={item.label}>
                     <a
@@ -271,7 +344,7 @@ export function Navbar() {
           >
             <div
               className={cn(
-                "max-h-[calc(100dvh-6.5rem)] overflow-x-hidden overflow-y-auto rounded-b-[24px] border-t border-[#F1F5F9] bg-gradient-to-b from-[#FAFAFA]/80 to-white shadow-[0_16px_48px_rgba(15,23,42,0.12)] transition-[opacity,transform] duration-200 ease-out",
+                "max-h-[calc(100dvh-6.5rem)] overflow-x-hidden overflow-y-auto overscroll-y-contain rounded-b-[24px] border-t border-[#F1F5F9] bg-gradient-to-b from-[#FAFAFA]/80 to-white shadow-[0_16px_48px_rgba(15,23,42,0.12)] transition-[opacity,transform] duration-200 ease-out",
                 dropdownOpen
                   ? "translate-y-0 opacity-100"
                   : "pointer-events-none -translate-y-1 opacity-0"

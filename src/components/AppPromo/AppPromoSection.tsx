@@ -3,17 +3,13 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Smartphone } from "lucide-react";
-import { appText } from "@/assets/images";
+import { appText, manali } from "@/assets/images";
 import {
   appFeatures,
   appStatCards,
-  appTrustItems,
 } from "@/data/appPromo";
 import { AppDownloadBadges } from "./AppDownloadBadges";
 import { AppPhoneMockup } from "./AppPhoneMockup";
-
-const ROAD_BG =
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&h=1100&fit=crop";
 
 export function AppPromoSection() {
   return (
@@ -32,11 +28,11 @@ export function AppPromoSection() {
             aria-hidden="true"
           >
             <Image
-              src={ROAD_BG}
+              src={manali}
               alt=""
               fill
               sizes="(max-width: 1024px) 0px, 740px"
-              className="object-cover object-center"
+              className="object-cover object-[62%_45%]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7]/20 via-[#FDFBF7]/90 to-[#FDFBF7] sm:bg-gradient-to-r sm:from-[#FDFBF7] sm:via-[#FDFBF7]/88 sm:to-[#FDFBF7]/15" />
           </div>
@@ -179,43 +175,6 @@ export function AppPromoSection() {
                 })}
               </div>
             </div>
-
-            {/* <div className="mt-8 border-t border-[#E8ECF0] pt-6 sm:mt-10">
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-0">
-                {appTrustItems.map((item, index) => {
-                  const Icon = item.icon;
-
-                  return (
-                    <div
-                      key={item.title}
-                      className="relative flex items-center gap-3 sm:justify-center sm:px-5"
-                    >
-                      {index > 0 && (
-                        <div
-                          className="absolute -left-px top-1/2 hidden h-10 w-px -translate-y-1/2 bg-[#E8ECF0] sm:block"
-                          aria-hidden="true"
-                        />
-                      )}
-                      <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-yellow/12">
-                        <Icon
-                          className="size-[18px] text-primary-yellow"
-                          strokeWidth={1.8}
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-[14px] font-bold leading-tight text-dark-navy">
-                          {item.title}
-                        </p>
-                        <p className="mt-0.5 text-[12px] font-medium leading-snug text-[#475569]">
-                          {item.subtitle}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
