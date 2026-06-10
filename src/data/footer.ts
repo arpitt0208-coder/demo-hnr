@@ -1,3 +1,11 @@
+import type { ComponentType } from "react";
+import {
+  FacebookBrandIcon,
+  InstagramBrandIcon,
+  XBrandIcon,
+  YoutubeBrandIcon,
+} from "@/components/UI/social-icons";
+
 export interface FooterLink {
   label: string;
   href: string;
@@ -68,3 +76,40 @@ export const footerSocialLinks = [
   { label: "X", href: "https://x.com/hire_n_ride" },
   { label: "YouTube", href: "https://www.youtube.com/@HireNRide" },
 ] as const;
+
+export const footerSocialTooltipItems: {
+  href: string;
+  ariaLabel: string;
+  tooltip: string;
+  color: string;
+  Icon: ComponentType<{ className?: string }>;
+}[] = [
+  {
+    href: footerSocialLinks[0].href,
+    ariaLabel: "Instagram",
+    tooltip: "Instagram",
+    color: "#E4405F",
+    Icon: InstagramBrandIcon,
+  },
+  {
+    href: footerSocialLinks[1].href,
+    ariaLabel: "Facebook",
+    tooltip: "Facebook",
+    color: "#1877F2",
+    Icon: FacebookBrandIcon,
+  },
+  {
+    href: footerSocialLinks[2].href,
+    ariaLabel: "X",
+    tooltip: "X",
+    color: "#000000",
+    Icon: XBrandIcon,
+  },
+  {
+    href: footerSocialLinks[3].href,
+    ariaLabel: "YouTube",
+    tooltip: "YouTube",
+    color: "#FF0000",
+    Icon: YoutubeBrandIcon,
+  },
+];

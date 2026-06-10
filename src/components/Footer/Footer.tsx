@@ -1,19 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Bike, Mail, MapPin, Phone, ShieldCheck, User } from "lucide-react";
-import { logoWhite } from "@/assets/images";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  XIcon,
-  YoutubeIcon,
-} from "@/components/UI/social-icons";
+import logoWhite from "@/assets/images/logowhite.png";
+import logoWhite2x from "@/assets/images/logowhite-2x.png";
+import { SocialTooltip } from "@/components/UI/social-media";
 import {
   footerColumns,
   footerContact,
-  footerSocialLinks,
+  footerSocialTooltipItems,
 } from "@/data/footer";
 import { BorderRotate } from "@/components/UI/animated-gradient-border";
 import { FooterAppBadges } from "./FooterAppBadges";
@@ -23,13 +18,6 @@ const columnIcons = {
   SERVICES: Bike,
   COMPANY: User,
   POLICIES: ShieldCheck,
-} as const;
-
-const socialIcons = {
-  Instagram: InstagramIcon,
-  Facebook: FacebookIcon,
-  X: XIcon,
-  YouTube: YoutubeIcon,
 } as const;
 
 function FooterLinkList({
@@ -66,12 +54,14 @@ export function Footer() {
               className="inline-flex shrink-0 items-center"
               aria-label="Hire n Ride home"
             >
-              <Image
-                src={logoWhite}
-                alt="Hire n Ride — Your travel partner"
+              <img
+                src={logoWhite.src}
+                srcSet={`${logoWhite.src} 1x, ${logoWhite2x.src} 2x`}
                 width={121}
                 height={32}
-                className="block h-8 w-auto"
+                alt="Hire n Ride — Your travel partner"
+                decoding="async"
+                className="block h-8 w-[121px] max-w-none"
               />
             </Link>
             <p className="mt-8 text-sm text-white/65 md:mt-0">
@@ -179,29 +169,14 @@ export function Footer() {
                 <FooterAppBadges />
               </div>
 
-              <div className="border-t border-primary-yellow/15 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+              <div className="overflow-visible border-t border-primary-yellow/15 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
                 <p className="mb-3 text-[10px] font-bold tracking-[0.18em] text-white/70">
                   FOLLOW US
                 </p>
-                <div className="flex items-center gap-2.5">
-                  {footerSocialLinks.map((social) => {
-                    const Icon =
-                      socialIcons[social.label as keyof typeof socialIcons];
-
-                    return (
-                      <a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={social.label}
-                        className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-[#1a1a1a] text-white transition-all duration-300 hover:border-primary-yellow/40 hover:text-primary-yellow"
-                      >
-                        <Icon className="size-4" aria-hidden="true" />
-                      </a>
-                    );
-                  })}
-                </div>
+                <SocialTooltip
+                  items={footerSocialTooltipItems}
+                  className="justify-start gap-2.5 [&_a]:size-9 [&_a]:h-9 [&_a]:w-9 [&_a]:rounded-lg [&_a]:shadow-sm [&_a]:transition-transform [&_a]:hover:scale-105"
+                />
               </div>
             </div>
           </BorderRotate>
