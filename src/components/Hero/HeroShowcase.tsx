@@ -45,16 +45,14 @@ export function HeroShowcase() {
         </div>
       </motion.div>
 
-      <div className="mt-4 lg:hidden">
-        <p className="mb-2.5 text-center text-[11px] font-bold tracking-[0.14em] text-[#475569]">
+      <div className="mt-5 w-full lg:hidden">
+        <p className="mb-3 text-center text-[11px] font-bold tracking-[0.14em] text-[#475569]">
           EXPLORE BY LOCATION
         </p>
-        <div className="-mx-1 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="flex w-max gap-3 sm:gap-3.5">
-            {featuredBikes.map((bike) => (
-              <BikeCard key={`mobile-${bike.id}`} bike={bike} variant="grid" />
-            ))}
-          </div>
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+          {featuredBikes.map((bike) => (
+            <BikeCard key={`mobile-${bike.id}`} bike={bike} variant="grid" />
+          ))}
         </div>
       </div>
     </div>

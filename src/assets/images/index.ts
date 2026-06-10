@@ -12,7 +12,7 @@ import card from "./card.webp";
 import logoWhite from "./logowhite.png";
 import heroBg from "./bg.png";
 import sectionBg from "./bgimg.png";
-import faqSection from "./faqsection.png";
+import faqsec from "./faqsec.png";
 import fee from "./fee.webp";
 import him4 from "./him4.webp";
 import him5 from "./him5.webp";
@@ -57,7 +57,7 @@ export {
   earnHotel,
   earnRestaurant,
   earnVolvo,
-  faqSection,
+  faqsec,
   fee,
   him4,
   him5,

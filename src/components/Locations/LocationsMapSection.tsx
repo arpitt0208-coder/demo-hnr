@@ -1,32 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Bike,
-  CircleCheck,
-  Clock,
-  Compass,
-  Globe,
-  MapPin,
-  Rocket,
-  Sparkles,
-} from "lucide-react";
+import { Bike, Compass, MapPin } from "lucide-react";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
-import { useState } from "react";
 import { bhuntar, kasolBig, manali } from "@/assets/images";
-import { cn } from "@/lib/cn";
-
-type PlaceStatus = "available" | "coming";
-type FilterOption = "all" | "available" | "coming";
 
 type Place = {
   id: number;
   name: string;
   category: string;
-  status: PlaceStatus;
-  bikesLabel?: string;
-  image: StaticImageData | string;
+  bikesLabel: string;
+  image: StaticImageData;
 };
 
 const places: Place[] = [
@@ -34,7 +19,6 @@ const places: Place[] = [
     id: 1,
     name: "Manali",
     category: "Himachal Pradesh",
-    status: "available",
     bikesLabel: "55+ Bikes",
     image: manali,
   },
@@ -42,7 +26,6 @@ const places: Place[] = [
     id: 2,
     name: "Kasol",
     category: "Himachal Pradesh",
-    status: "available",
     bikesLabel: "40+ Bikes",
     image: kasolBig,
   },
@@ -50,60 +33,12 @@ const places: Place[] = [
     id: 3,
     name: "Bhuntar",
     category: "Himachal Pradesh",
-    status: "available",
     bikesLabel: "30+ Bikes",
     image: bhuntar,
   },
-  {
-    id: 4,
-    name: "Delhi",
-    category: "Delhi",
-    status: "coming",
-    image:
-      "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=400&h=260&fit=crop",
-  },
-  {
-    id: 5,
-    name: "Chandigarh",
-    category: "Chandigarh",
-    status: "coming",
-    image:
-      "https://images.unsplash.com/photo-1716131985076-07350de31afd?w=400&h=260&fit=crop",
-  },
-  {
-    id: 6,
-    name: "Jaipur",
-    category: "Jaipur",
-    status: "coming",
-    image:
-      "https://images.unsplash.com/photo-1477587458883-47145ed94245?w=400&h=260&fit=crop",
-  },
 ];
 
-const filterOptions: {
-  id: FilterOption;
-  label: string;
-  icon: typeof Globe;
-  iconClass?: string;
-}[] = [
-    { id: "all", label: "All Locations", icon: Globe },
-    {
-      id: "available",
-      label: "Available Now",
-      icon: MapPin,
-      iconClass: "fill-primary-yellow text-primary-yellow",
-    },
-    {
-      id: "coming",
-      label: "Coming Soon",
-      icon: MapPin,
-      iconClass: "fill-[#E11D48] text-[#E11D48]",
-    },
-  ];
-
 function LocationCard({ place }: { place: Place }) {
-  const isAvailable = place.status === "available";
-
   return (
     <article className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-shadow hover:shadow-[0_8px_32px_rgba(15,23,42,0.1)]">
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -127,18 +62,10 @@ function LocationCard({ place }: { place: Place }) {
           <h3 className="min-w-0 flex-1 text-[16px] font-extrabold leading-tight text-[#0f172a] sm:text-[17px]">
             {place.name}
           </h3>
-          {isAvailable && place.bikesLabel && (
-            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary-yellow/15 px-2.5 py-1 text-[10px] font-bold text-primary-yellow sm:px-3 sm:text-[11px]">
-              <Bike className="size-3.5 shrink-0" aria-hidden="true" />
-              {place.bikesLabel}
-            </span>
-          )}
-          {!isAvailable && (
-            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#E11D48]/10 px-2.5 py-1 text-[10px] font-bold text-[#E11D48] sm:px-3 sm:text-[11px]">
-              <Clock className="size-3.5 shrink-0" aria-hidden="true" />
-              Coming Soon
-            </span>
-          )}
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary-yellow/15 px-2.5 py-1 text-[10px] font-bold text-primary-yellow sm:px-3 sm:text-[11px]">
+            <Bike className="size-3.5 shrink-0" aria-hidden="true" />
+            {place.bikesLabel}
+          </span>
         </div>
 
         {place.category !== place.name && (
@@ -151,25 +78,7 @@ function LocationCard({ place }: { place: Place }) {
   );
 }
 
-function LocationGrid({ items }: { items: Place[] }) {
-  return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
-      {items.map((place) => (
-        <LocationCard key={place.id} place={place} />
-      ))}
-    </div>
-  );
-}
-
 export function LocationsMapSection() {
-  const [activeFilter, setActiveFilter] = useState<FilterOption>("all");
-
-  const availablePlaces = places.filter((p) => p.status === "available");
-  const comingPlaces = places.filter((p) => p.status === "coming");
-
-  const showAvailable = activeFilter === "all" || activeFilter === "available";
-  const showComing = activeFilter === "all" || activeFilter === "coming";
-
   return (
     <motion.section
       id="locations"
@@ -192,87 +101,14 @@ export function LocationsMapSection() {
           </h2>
 
           <p className="mt-3 max-w-[560px] text-[14px] font-medium leading-[1.75] text-[#475569] sm:mt-4 sm:text-[15px]">
-            Explore the places we currently serve and the new locations
-            we&apos;re bringing our service to soon.
+            Explore the places we currently serve across the Himalayas.
           </p>
         </div>
 
-        <div className="mx-auto mt-8 flex w-full max-w-[640px] items-stretch justify-center gap-1 rounded-2xl border border-border/60 bg-white p-1.5 shadow-sm sm:mt-10 sm:gap-2 sm:p-2">
-          {filterOptions.map(({ id, label, icon: Icon }) => {
-            const isActive = activeFilter === id;
-
-            return (
-              <button
-                key={id}
-                type="button"
-                onClick={() => setActiveFilter(id)}
-                className={[
-                  "inline-flex min-w-0 flex-1 items-center justify-center gap-1 rounded-xl px-2 py-2.5 text-[10px] font-bold leading-tight transition-colors min-[400px]:gap-1.5 min-[400px]:px-3 min-[400px]:text-[11px] sm:gap-2 sm:px-4 sm:py-3 sm:text-[13px]",
-                  isActive
-                    ? "bg-primary-yellow/15 text-primary-yellow"
-                    : "text-[#0f172a] hover:bg-[#FAFAFA]",
-                ].join(" ")}
-              >
-                <Icon
-                  className={cn(
-                    "shrink-0",
-                  )}
-                  aria-hidden="true"
-                />
-                {label}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-8 space-y-10 sm:mt-10">
-          {showAvailable && (
-            <div>
-              {activeFilter === "all" && (
-                <h2 className="mb-5 flex items-center gap-2 text-[20px] font-extrabold text-[#0f172a] sm:mb-6 sm:text-[22px]">
-                  <CircleCheck
-                    className="size-5 shrink-0 text-primary-yellow"
-                    aria-hidden="true"
-                  />
-                  Available Now
-                </h2>
-              )}
-              <LocationGrid items={availablePlaces} />
-            </div>
-          )}
-
-          {showComing && (
-            <div>
-              {activeFilter === "all" && (
-                <h2 className="mb-5 flex items-center gap-2 text-[20px] font-extrabold text-[#0f172a] sm:mb-6 sm:text-[22px]">
-                  <Clock
-                    className="size-5 shrink-0 text-[#E11D48]"
-                    aria-hidden="true"
-                  />
-                  Coming Soon
-                </h2>
-              )}
-              <LocationGrid items={comingPlaces} />
-            </div>
-          )}
-        </div>
-
-        <div className="mt-8 flex items-center gap-4 rounded-2xl border border-border/60 bg-white px-5 py-4 shadow-sm sm:mt-10 sm:px-6 sm:py-5">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-yellow/15 sm:size-11">
-            <Rocket
-              className="size-5 text-primary-yellow sm:size-[22px]"
-              aria-hidden="true"
-            />
-          </div>
-          <div>
-            <p className="text-[14px] font-extrabold text-[#0f172a] sm:text-[15px]">
-              More locations on the way!
-            </p>
-            <p className="mt-0.5 flex items-center gap-1.5 text-[13px] font-semibold text-[#0f172a]">
-              <Sparkles className="size-3.5 shrink-0" aria-hidden="true" />
-              We&apos;re expanding to serve you better.
-            </p>
-          </div>
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+          {places.map((place) => (
+            <LocationCard key={place.id} place={place} />
+          ))}
         </div>
       </div>
     </motion.section>
