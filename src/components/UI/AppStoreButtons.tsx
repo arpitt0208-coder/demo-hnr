@@ -15,7 +15,7 @@ const badgeSizeClassName: Record<StoreButtonVariant, string> = {
 
 const badgeVariantClassName: Record<StoreButtonVariant, string> = {
   default: "bg-black",
-  footer: "border border-white/15 bg-white",
+  footer: "border border-white/15 bg-[#111111]",
 };
 
 const iconBoxClassName: Record<StoreButtonVariant, string> = {
@@ -25,12 +25,12 @@ const iconBoxClassName: Record<StoreButtonVariant, string> = {
 
 const topLineVariantClassName: Record<StoreButtonVariant, string> = {
   default: "text-[10px] text-white/90",
-  footer: "text-[9px] text-text-gray",
+  footer: "text-[9px] text-white/75",
 };
 
 const bottomLineVariantClassName: Record<StoreButtonVariant, string> = {
   default: "text-[17px] text-white",
-  footer: "text-[14px] text-dark-navy",
+  footer: "text-[14px] text-white",
 };
 
 type StoreBadgeProps = {

@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Bike, Mail, MapPin, Phone, ShieldCheck, User } from "lucide-react";
 import { logoWhite } from "@/assets/images";
-import { AnimatedContainer } from "@/components/UI/footer-section";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -39,12 +38,12 @@ function FooterLinkList({
   links: { label: string; href: string }[];
 }) {
   return (
-    <ul className="space-y-2 text-sm text-white/70">
+    <ul className="space-y-2.5 text-sm text-white/85">
       {links.map((link) => (
         <li key={link.label}>
           <a
             href={link.href}
-            className="inline-flex items-center transition-all duration-300 hover:text-primary-yellow"
+            className="block leading-snug transition-colors duration-300 hover:text-primary-yellow"
           >
             {link.label}
           </a>
@@ -58,10 +57,10 @@ export function Footer() {
   return (
     <footer className="relative w-full border-t border-white/10 bg-black text-white">
       <div className="relative mx-auto px-4 py-10 sm:px-6 sm:py-12 md:px-10 lg:px-20 xl:px-32 lg:py-16">
-        <div className="absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground/20 blur" />
+        <div className="absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/20" />
 
         <div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8">
-          <AnimatedContainer className="space-y-4">
+          <div className="space-y-4">
             <Link
               href="/"
               className="inline-flex shrink-0 items-center"
@@ -75,21 +74,18 @@ export function Footer() {
                 className="block h-8 w-auto"
               />
             </Link>
-            <p className="mt-8 text-sm text-white/45 md:mt-0">
+            <p className="mt-8 text-sm text-white/65 md:mt-0">
               © {new Date().getFullYear()} Hire N Ride — All rights reserved.
             </p>
-          </AnimatedContainer>
+          </div>
 
-          <div className="mt-8 grid grid-cols-2 gap-6 sm:mt-10 sm:gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">
-            {footerColumns.map((column, index) => {
+          <div className="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 sm:gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">
+            {footerColumns.map((column) => {
               const Icon =
                 columnIcons[column.title as keyof typeof columnIcons];
 
               return (
-                <AnimatedContainer
-                  key={column.title}
-                  delay={0.1 + index * 0.1}
-                >
+                <div key={column.title}>
                   <div className="mb-10 md:mb-0">
                     <div className="mb-4 flex items-center gap-2">
                       <Icon
@@ -103,7 +99,7 @@ export function Footer() {
                     </div>
 
                     {column.secondaryLinks ? (
-                      <div className="grid grid-cols-2 gap-x-4">
+                      <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-2">
                         <FooterLinkList links={column.links} />
                         <FooterLinkList links={column.secondaryLinks} />
                       </div>
@@ -111,13 +107,13 @@ export function Footer() {
                       <FooterLinkList links={column.links} />
                     )}
                   </div>
-                </AnimatedContainer>
+                </div>
               );
             })}
           </div>
         </div>
 
-        <AnimatedContainer delay={0.5} className="mt-10">
+        <div className="mt-10">
           <BorderRotate
             animationMode="auto-rotate"
             animationSpeed={6}
@@ -145,7 +141,7 @@ export function Footer() {
                     />
                   </span>
                   <span>
-                    <span className="block text-[11px] font-medium text-white/55">
+                    <span className="block text-[11px] font-medium text-white/70">
                       Call Us
                     </span>
                     <span className="mt-1 block text-[15px] font-semibold text-white">
@@ -166,7 +162,7 @@ export function Footer() {
                     />
                   </span>
                   <span>
-                    <span className="block text-[11px] font-medium text-white/55">
+                    <span className="block text-[11px] font-medium text-white/70">
                       Email Us
                     </span>
                     <span className="mt-1 block text-[15px] font-semibold text-white">
@@ -177,14 +173,14 @@ export function Footer() {
               </div>
 
               <div>
-                <p className="mb-3 text-[9px] font-bold tracking-[0.18em] text-white/45">
+                <p className="mb-3 text-[10px] font-bold tracking-[0.18em] text-white/70">
                   DOWNLOAD OUR APP
                 </p>
                 <FooterAppBadges />
               </div>
 
               <div className="border-t border-primary-yellow/15 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-                <p className="mb-3 text-[9px] font-bold tracking-[0.18em] text-white/45">
+                <p className="mb-3 text-[10px] font-bold tracking-[0.18em] text-white/70">
                   FOLLOW US
                 </p>
                 <div className="flex items-center gap-2.5">
@@ -199,7 +195,7 @@ export function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={social.label}
-                        className="flex size-9 items-center justify-center rounded-full border border-white/10 bg-[#1a1a1a] text-white/85 transition-all duration-300 hover:border-primary-yellow/40 hover:text-primary-yellow"
+                        className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-[#1a1a1a] text-white transition-all duration-300 hover:border-primary-yellow/40 hover:text-primary-yellow"
                       >
                         <Icon className="size-4" aria-hidden="true" />
                       </a>
@@ -209,24 +205,22 @@ export function Footer() {
               </div>
             </div>
           </BorderRotate>
-        </AnimatedContainer>
+        </div>
 
-        <AnimatedContainer delay={0.6}>
-          <div className="mt-8 flex flex-col items-center justify-between gap-3 text-[11px] font-medium text-white/40 sm:flex-row sm:gap-4">
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 text-[11px] font-medium text-white/65 sm:flex-row sm:gap-4">
             <p className="text-center sm:text-left">
               All information is subject to specific conditions.
             </p>
             <p className="text-center sm:text-right">
-              <a href="#" className="transition-all duration-300 hover:text-white/70">
+              <a href="#" className="text-white/80 transition-all duration-300 hover:text-white">
                 Terms &amp; Conditions
               </a>
-              <span className="mx-2 text-white/25">|</span>
-              <a href="#" className="transition-all duration-300 hover:text-white/70">
+              <span className="mx-2 text-white/40">|</span>
+              <a href="#" className="text-white/80 transition-all duration-300 hover:text-white">
                 Privacy Policy
               </a>
             </p>
-          </div>
-        </AnimatedContainer>
+        </div>
       </div>
     </footer>
   );
