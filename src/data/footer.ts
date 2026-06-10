@@ -73,8 +73,8 @@ export const footerContact = {
 };
 
 export const footerSocialLinks = [
-  { label: "Instagram", href: "#" },
-  { label: "Facebook", href: "#" },
-  { label: "X", href: "#" },
-  { label: "YouTube", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/hirenride/" },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61576470655755" },
+  { label: "X", href: "https://x.com/hire_n_ride" },
+  { label: "YouTube", href: "https://www.youtube.com/@HireNRide" },
 ] as const;

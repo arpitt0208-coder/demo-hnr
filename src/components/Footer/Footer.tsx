@@ -1,6 +1,9 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { Bike, Mail, MapPin, Phone, ShieldCheck, User } from "lucide-react";
+import { logoWhite } from "@/assets/images";
 import { AnimatedContainer } from "@/components/UI/footer-section";
 import {
   FacebookIcon,
@@ -59,15 +62,19 @@ export function Footer() {
 
         <div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8">
           <AnimatedContainer className="space-y-4">
-            <div className="flex flex-col gap-1">
-              <span className="text-xl font-extrabold leading-none">
-                <span className="text-white">hiren</span>
-                <span className="text-primary-yellow">ride</span>
-              </span>
-              <span className="text-[10px] font-semibold tracking-[0.15em] text-white/50">
-                YOUR TRAVEL PARTNER
-              </span>
-            </div>
+            <Link
+              href="/"
+              className="inline-flex shrink-0 items-center"
+              aria-label="Hire n Ride home"
+            >
+              <Image
+                src={logoWhite}
+                alt="Hire n Ride — Your travel partner"
+                width={121}
+                height={32}
+                className="block h-8 w-auto"
+              />
+            </Link>
             <p className="mt-8 text-sm text-white/45 md:mt-0">
               © {new Date().getFullYear()} Hire N Ride — All rights reserved.
             </p>
@@ -189,6 +196,8 @@ export function Footer() {
                       <a
                         key={social.label}
                         href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         aria-label={social.label}
                         className="flex size-9 items-center justify-center rounded-full border border-white/10 bg-[#1a1a1a] text-white/85 transition-all duration-300 hover:border-primary-yellow/40 hover:text-primary-yellow"
                       >

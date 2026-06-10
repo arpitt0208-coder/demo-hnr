@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { navItems } from "@/data/navigation";
@@ -11,7 +11,7 @@ import { Logo } from "./Logo";
 
 const FLEET_LABEL = "Our Fleet";
 const ABOUT_LABEL = "About Us";
-const CLOSE_DELAY_MS = 160;
+const CLOSE_DELAY_MS = 200;
 
 type NavDropdownId = "fleet" | "about";
 
@@ -27,56 +27,39 @@ export function Navbar() {
     null
   );
 
-  const openDropdown = useCallback((id: NavDropdownId) => {
+  const cancelScheduledClose = useCallback(() => {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
       closeTimerRef.current = null;
     }
-    setActiveDropdown(id);
   }, []);
+
+  const openDropdown = useCallback(
+    (id: NavDropdownId) => {
+      cancelScheduledClose();
+      setActiveDropdown(id);
+    },
+    [cancelScheduledClose]
+  );
 
   const closeDropdown = useCallback(() => {
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
-    }
+    cancelScheduledClose();
     setActiveDropdown(null);
-  }, []);
+  }, [cancelScheduledClose]);
 
   const scheduleCloseDropdown = useCallback(() => {
-    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
-    closeTimerRef.current = setTimeout(
-      () => setActiveDropdown(null),
-      CLOSE_DELAY_MS
-    );
-  }, []);
+    cancelScheduledClose();
+    closeTimerRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+      closeTimerRef.current = null;
+    }, CLOSE_DELAY_MS);
+  }, [cancelScheduledClose]);
 
   useEffect(() => {
     return () => {
       if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     };
   }, []);
-
-  useEffect(() => {
-    if (!activeDropdown) return;
-
-    const scrollY = window.scrollY;
-    const { style } = document.body;
-    style.position = "fixed";
-    style.top = `-${scrollY}px`;
-    style.left = "0";
-    style.right = "0";
-    style.overflow = "hidden";
-
-    return () => {
-      style.position = "";
-      style.top = "";
-      style.left = "";
-      style.right = "";
-      style.overflow = "";
-      window.scrollTo(0, scrollY);
-    };
-  }, [activeDropdown]);
 
   const dropdownOpen = activeDropdown !== null;
 
@@ -88,25 +71,21 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="pointer-events-auto absolute top-4 right-4 left-4 sm:top-5 sm:right-5 sm:left-5 lg:top-6 lg:right-6 lg:left-6"
       >
-        <AnimatePresence>
-          {dropdownOpen && (
-            <motion.div
-              key="nav-backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed inset-0 z-40 bg-[#0F172A]/20"
-              aria-hidden="true"
-              onMouseEnter={closeDropdown}
-            />
+        <div
+          className={cn(
+            "fixed inset-0 z-40 bg-[#0F172A]/20 transition-opacity duration-200 ease-out",
+            dropdownOpen
+              ? "opacity-100"
+              : "pointer-events-none opacity-0"
           )}
-        </AnimatePresence>
+          aria-hidden={!dropdownOpen}
+          onClick={closeDropdown}
+        />
 
         <div className="relative z-50" onMouseLeave={scheduleCloseDropdown}>
           <div
             className={cn(
-              "bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)] transition-shadow duration-300",
+              "bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)] transition-[border-radius,box-shadow] duration-200",
               dropdownOpen
                 ? "rounded-t-[24px] shadow-[0_16px_48px_rgba(15,23,42,0.12)]"
                 : "rounded-[24px]"
@@ -130,7 +109,7 @@ export function Navbar() {
                       onMouseEnter={
                         dropdownId
                           ? () => openDropdown(dropdownId)
-                          : scheduleCloseDropdown
+                          : closeDropdown
                       }
                     >
                       <a
@@ -194,19 +173,31 @@ export function Navbar() {
           </div>
 
           <div
-            onMouseEnter={() => {
-              if (activeDropdown) openDropdown(activeDropdown);
-            }}
-            className="absolute left-0 right-0 top-full z-50 hidden lg:block"
+            className={cn(
+              "absolute top-full right-0 left-0 z-50 hidden pt-1 lg:block",
+              !dropdownOpen && "pointer-events-none"
+            )}
+            aria-hidden={!dropdownOpen}
           >
-            <AnimatePresence mode="wait">
-              {activeDropdown === "fleet" && (
-                <FleetDropdown key="fleet-dropdown" />
+            <div
+              className={cn(
+                "overflow-hidden rounded-b-[24px] border-t border-[#F1F5F9] bg-gradient-to-b from-[#FAFAFA]/80 to-white shadow-[0_16px_48px_rgba(15,23,42,0.12)] transition-[opacity,transform] duration-200 ease-out",
+                dropdownOpen
+                  ? "translate-y-0 opacity-100"
+                  : "pointer-events-none -translate-y-1 opacity-0"
               )}
-              {activeDropdown === "about" && (
-                <AboutDropdown key="about-dropdown" />
+            >
+              {dropdownOpen && (
+                <>
+                  <div hidden={activeDropdown !== "fleet"}>
+                    <FleetDropdown />
+                  </div>
+                  <div hidden={activeDropdown !== "about"}>
+                    <AboutDropdown />
+                  </div>
+                </>
               )}
-            </AnimatePresence>
+            </div>
           </div>
         </div>
       </motion.header>

@@ -15,7 +15,7 @@ const AUTOPLAY_MS = 5000;
 const SWIPE_OFFSET = 60;
 const SWIPE_VELOCITY = 400;
 const SLIDE_W_MAX = 720;
-const SLIDE_GAP = 24;
+const SLIDE_GAP = 8;
 
 function getSlideWidth(containerWidth: number): number {
   if (containerWidth <= 0) return SLIDE_W_MAX;
@@ -195,7 +195,7 @@ export function HowItWorksCarousel() {
     : 0;
 
   return (
-    <div className="font-neurial flex flex-col items-center bg-white px-4 sm:px-6">
+    <div className="flex flex-col items-center bg-white px-4 sm:px-6">
       <motion.div
         ref={containerRef}
         className="relative w-full cursor-grab select-none overflow-hidden active:cursor-grabbing"

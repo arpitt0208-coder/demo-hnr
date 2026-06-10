@@ -22,7 +22,7 @@ export function AppPromoSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="font-neurial relative w-full overflow-hidden px-4 py-14 sm:px-6 sm:py-16"
+      className="relative w-full overflow-hidden px-4 py-14 sm:px-6 sm:py-16"
       aria-label="Download the Hire N Ride app"
     >
       <div className="relative mx-auto w-full max-w-[1280px]">

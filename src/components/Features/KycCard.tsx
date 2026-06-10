@@ -26,7 +26,7 @@ function KycTopDotGrid() {
 export function KycCard() {
   return (
     <FeatureCardShell
-      className="font-neurial bg-white"
+      className="bg-white"
       illustration={
         <>
           <KycTopDotGrid />

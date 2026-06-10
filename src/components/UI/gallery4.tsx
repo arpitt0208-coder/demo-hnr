@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
 import { useEffect, useState } from "react";
 
@@ -29,6 +29,7 @@ export interface Gallery4Props {
   className?: string;
   ctaLabel?: string;
   compact?: boolean;
+  variant?: "default" | "fleet";
   showDots?: boolean;
 }
 
@@ -60,8 +61,11 @@ const Gallery4 = ({
   className,
   ctaLabel = "Read more",
   compact = false,
+  variant = "default",
   showDots = true,
 }: Gallery4Props) => {
+  const useFleetCards = variant === "fleet";
+  const useCompactLayout = compact || useFleetCards;
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -131,7 +135,7 @@ const Gallery4 = ({
           <div
             className={cn(
               "flex justify-end gap-2 px-4 sm:px-6",
-              compact ? "mb-3" : "mb-6",
+              useCompactLayout ? "mb-3" : "mb-6",
             )}
           >
             <Button
@@ -143,11 +147,11 @@ const Gallery4 = ({
               disabled={!canScrollPrev}
               className={cn(
                 "rounded-full border-border bg-white shadow-sm disabled:pointer-events-auto",
-                compact ? "size-8" : "size-9",
+                useCompactLayout ? "size-8" : "size-9",
               )}
               aria-label="Previous slide"
             >
-              <ArrowLeft className={compact ? "size-3.5" : "size-4"} />
+              <ArrowLeft className={useCompactLayout ? "size-3.5" : "size-4"} />
             </Button>
             <Button
               size="icon"
@@ -158,11 +162,11 @@ const Gallery4 = ({
               disabled={!canScrollNext}
               className={cn(
                 "rounded-full border-border bg-white shadow-sm disabled:pointer-events-auto",
-                compact ? "size-8" : "size-9",
+                useCompactLayout ? "size-8" : "size-9",
               )}
               aria-label="Next slide"
             >
-              <ArrowRight className={compact ? "size-3.5" : "size-4"} />
+              <ArrowRight className={useCompactLayout ? "size-3.5" : "size-4"} />
             </Button>
           </div>
         )}
@@ -182,12 +186,41 @@ const Gallery4 = ({
               <CarouselItem
                 key={item.id}
                 className={cn(
-                  compact
+                  useCompactLayout
                     ? "max-w-[240px] pl-2.5 lg:max-w-[280px]"
                     : "max-w-[360px] pl-[20px] lg:max-w-[400px]",
                 )}
               >
-                {compact ? (
+                {useFleetCards ? (
+                  <a
+                    href={item.href}
+                    aria-label={item.ctaText ?? item.title}
+                    className="group/card flex h-full flex-col rounded-[16px] border border-[#E8ECF0] bg-white p-4 shadow-[0_2px_14px_rgba(15,23,42,0.04)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary-yellow/35 hover:shadow-[0_12px_32px_rgba(239,190,61,0.12)]"
+                  >
+                    <div className="relative mb-3 h-[84px] w-full sm:mb-4 sm:h-[92px]">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 240px, 280px"
+                        className="object-contain object-center transition-transform duration-500 ease-out group-hover/card:scale-[1.06]"
+                      />
+                    </div>
+                    <div className="mt-auto flex items-center justify-between gap-2">
+                      <p className="text-[12px] font-semibold leading-tight text-[#1E293B] transition-colors group-hover/card:text-[#0F172A] sm:text-[13px]">
+                        {item.title}
+                      </p>
+                      <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary-yellow shadow-[0_2px_8px_rgba(239,190,61,0.35)] transition-all duration-300 group-hover/card:scale-110 group-hover/card:shadow-[0_4px_14px_rgba(239,190,61,0.45)]">
+                        <ChevronRight
+                          className="size-3.5 text-dark-navy transition-transform duration-300 group-hover/card:translate-x-0.5"
+                          strokeWidth={2.5}
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </div>
+                    <span className="sr-only">{item.description}</span>
+                  </a>
+                ) : compact ? (
                   <a
                     href={item.href}
                     className="group block overflow-hidden rounded-xl border border-border/60 bg-white shadow-[0_2px_12px_rgba(15,23,42,0.06)]"
@@ -249,7 +282,7 @@ const Gallery4 = ({
           <div
             className={cn(
               "flex justify-center gap-2",
-              compact ? "mt-4" : "mt-8",
+              useCompactLayout ? "mt-4" : "mt-8",
             )}
           >
             {items.map((_, index) => (

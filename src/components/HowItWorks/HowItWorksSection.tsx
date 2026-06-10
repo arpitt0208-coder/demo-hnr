@@ -28,7 +28,7 @@ export function HowItWorksSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="font-neurial relative flex flex-col overflow-x-clip px-4 py-8 sm:px-6 sm:py-10"
+      className="relative flex flex-col overflow-x-clip px-4 py-8 sm:px-6 sm:py-10"
       aria-label="How it works"
     >
       <SectionDotGrid />

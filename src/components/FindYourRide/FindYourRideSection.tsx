@@ -15,7 +15,7 @@ export function FindYourRideSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="font-neurial relative w-full overflow-hidden px-4 py-10 sm:px-6 sm:py-12"
+      className="relative w-full overflow-hidden px-4 py-10 sm:px-6 sm:py-12"
       aria-label="Find your perfect ride"
     >
       <div className="relative mx-auto w-full max-w-[1280px]">
@@ -61,6 +61,7 @@ export function FindYourRideSection() {
           items={findYourRideGalleryItems}
           className="mt-6 lg:mt-8"
           compact
+          variant="fleet"
           showDots={false}
         />
       </div>

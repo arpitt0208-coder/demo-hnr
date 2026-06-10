@@ -7,22 +7,6 @@ import { fleetBikes, fleetQuickLinks } from "@/data/fleet";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const panelVariants = {
-  hidden: { opacity: 0, y: -10, scale: 0.985 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.38, ease: EASE },
-  },
-  exit: {
-    opacity: 0,
-    y: -8,
-    scale: 0.99,
-    transition: { duration: 0.26, ease: EASE },
-  },
-};
-
 const gridVariants = {
   hidden: {},
   visible: {
@@ -50,17 +34,11 @@ const sidebarVariants = {
 
 export function FleetDropdown() {
   return (
-    <motion.div
-      variants={panelVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className="font-neurial overflow-hidden rounded-b-[24px] border-t border-[#F1F5F9] bg-gradient-to-b from-[#FAFAFA]/80 to-white px-6 pb-8 pt-5 shadow-[0_16px_48px_rgba(15,23,42,0.12)] md:px-8 lg:px-10"
-    >
+    <div className="px-6 pb-8 pt-5 md:px-8 lg:px-10">
       <div className="flex flex-col gap-6 xl:flex-row xl:items-start">
         <motion.div
           variants={gridVariants}
-          initial="hidden"
+          initial={false}
           animate="visible"
           className="grid min-w-0 flex-1 grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5"
         >
@@ -100,7 +78,7 @@ export function FleetDropdown() {
 
         <motion.aside
           variants={sidebarVariants}
-          initial="hidden"
+          initial={false}
           animate="visible"
           className="w-full shrink-0 rounded-[20px] border border-[#E8ECF0] bg-white p-6 shadow-[0_4px_24px_rgba(15,23,42,0.06)] xl:w-[300px]"
         >
@@ -149,6 +127,6 @@ export function FleetDropdown() {
           </ul>
         </motion.aside>
       </div>
-    </motion.div>
+    </div>
   );
 }
