@@ -69,53 +69,44 @@ export function Navbar() {
   }, []);
 
   const dropdownOpen = activeDropdown !== null;
-  const menuOpen = mobileMenuOpen || dropdownOpen;
 
   useEffect(() => {
-    if (!menuOpen) return;
+    if (!mobileMenuOpen) return;
 
     const scrollY = window.scrollY;
     const { style: bodyStyle } = document.body;
     const { style: htmlStyle } = document.documentElement;
 
-    // Fixed-body lock avoids iOS scroll bleed for the mobile drawer; it shifts
-    // the whole page and flickers on desktop hover dropdowns, so use overflow
-    // only there.
-    if (mobileMenuOpen) {
-      bodyStyle.position = "fixed";
-      bodyStyle.top = `-${scrollY}px`;
-      bodyStyle.left = "0";
-      bodyStyle.right = "0";
-      bodyStyle.width = "100%";
-      bodyStyle.overflow = "hidden";
-      htmlStyle.overflow = "hidden";
-
-      return () => {
-        bodyStyle.position = "";
-        bodyStyle.top = "";
-        bodyStyle.left = "";
-        bodyStyle.right = "";
-        bodyStyle.width = "";
-        bodyStyle.overflow = "";
-        htmlStyle.overflow = "";
-        window.scrollTo(0, scrollY);
-      };
-    }
-
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-    if (scrollbarWidth > 0) {
-      bodyStyle.paddingRight = `${scrollbarWidth}px`;
-    }
+    bodyStyle.position = "fixed";
+    bodyStyle.top = `-${scrollY}px`;
+    bodyStyle.left = "0";
+    bodyStyle.right = "0";
+    bodyStyle.width = "100%";
     bodyStyle.overflow = "hidden";
     htmlStyle.overflow = "hidden";
 
     return () => {
-      bodyStyle.paddingRight = "";
+      bodyStyle.position = "";
+      bodyStyle.top = "";
+      bodyStyle.left = "";
+      bodyStyle.right = "";
+      bodyStyle.width = "";
       bodyStyle.overflow = "";
       htmlStyle.overflow = "";
+      window.scrollTo(0, scrollY);
     };
-  }, [menuOpen, mobileMenuOpen]);
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (!dropdownOpen || mobileMenuOpen) return;
+
+    const handleScroll = () => {
+      closeDropdown();
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [dropdownOpen, mobileMenuOpen, closeDropdown]);
 
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
@@ -140,7 +131,11 @@ export function Navbar() {
           onClick={closeDropdown}
         />
 
-        <div className="relative z-50" onMouseLeave={scheduleCloseDropdown}>
+        <div
+          className="relative z-50"
+          onMouseEnter={cancelScheduledClose}
+          onMouseLeave={scheduleCloseDropdown}
+        >
           <div
             className={cn(
               "bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)] transition-[border-radius,box-shadow] duration-200",
@@ -269,7 +264,7 @@ export function Navbar() {
 
           <div
             className={cn(
-              "absolute top-full right-0 left-0 z-50 hidden pt-1 lg:block",
+              "absolute top-full right-0 left-0 z-50 hidden lg:block",
               !dropdownOpen && "pointer-events-none"
             )}
             aria-hidden={!dropdownOpen}
