@@ -33,6 +33,10 @@ import earnRestaurant from "./earn-restaurant.jpg";
 import earnVolvo from "./earn-volvo.jpg";
 import iphoneFrame15 from "./iphoneframe15.png";
 import qrDownloadApp from "./newqrdownloadapp.avif";
+import socialFacebook from "./social/facebook.png";
+import socialInstagram from "./social/instagram.png";
+import socialX from "./social/x.png";
+import socialYoutube from "./social/youtube.png";
 
 export const bikeImages = {
   himalayan,
@@ -70,6 +74,10 @@ export {
   podium,
   qrDownloadApp,
   safe2,
+  socialFacebook,
+  socialInstagram,
+  socialX,
+  socialYoutube,
   support,
   textJourney,
   textSparkle,

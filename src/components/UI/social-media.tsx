@@ -33,7 +33,7 @@ const SocialTooltip = React.forwardRef<HTMLUListElement, SocialTooltipProps>(
         {...props}
       >
         {items.map((item, index) => {
-          const usesBrandIcon = Boolean(item.Icon);
+          const usesBrandIcon = Boolean(item.Icon || item.svgUrl);
 
           return (
             <li key={index} className="relative group">
