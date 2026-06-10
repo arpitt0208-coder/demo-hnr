@@ -24,7 +24,7 @@ export const referralCards: ReferralCard[] = [
     description: "Refer premium stays and earn exciting rewards.",
     href: "#earn-hotel",
     image: earnHotel,
-    imagePosition: "object-[82%_center]",
+    imagePosition: "object-center",
     icon: Building2,
     badge: {
       label: "Trusted Partners",
@@ -37,7 +37,7 @@ export const referralCards: ReferralCard[] = [
     description: "Refer reliable travel and earn more together.",
     href: "#earn-volvo",
     image: earnVolvo,
-    imagePosition: "object-[18%_center]",
+    imagePosition: "object-center",
     icon: Bus,
   },
   {
@@ -46,7 +46,7 @@ export const referralCards: ReferralCard[] = [
     description: "Refer great dining experiences and get rewarded.",
     href: "#earn-restaurant",
     image: earnRestaurant,
-    imagePosition: "object-[center_45%]",
+    imagePosition: "object-center",
     icon: Utensils,
   },
 ];

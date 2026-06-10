@@ -29,7 +29,6 @@ import podium from "./podium.webp";
 import scram from "./scram.png";
 import textJourney from "./textjourney.webp";
 import textSparkle from "./text.webp";
-import verify from "./verify.webp";
 import downloadAppVideoPoster from "./downloadappvideoposter.png";
 import earnHotel from "./earn-hotel.jpg";
 import earnRestaurant from "./earn-restaurant.jpg";
@@ -78,5 +77,4 @@ export {
   support,
   textJourney,
   textSparkle,
-  verify,
 };

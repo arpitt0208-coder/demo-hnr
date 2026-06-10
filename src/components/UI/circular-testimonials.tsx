@@ -310,4 +310,3 @@ export const CircularTestimonials = ({
   );
 };
 
-export default CircularTestimonials;

@@ -40,7 +40,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className="min-h-full overflow-x-clip antialiased"
+        className={`${montserrat.className} min-h-full overflow-x-clip font-sans antialiased`}
         suppressHydrationWarning
       >
         {children}

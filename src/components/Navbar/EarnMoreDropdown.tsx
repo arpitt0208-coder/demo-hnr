@@ -2,15 +2,9 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Award, ChevronRight } from "lucide-react";
-import { Playfair_Display } from "next/font/google";
 import Image from "next/image";
 import { referralCards } from "@/data/earnMore";
 import { cn } from "@/lib/cn";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-});
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -42,7 +36,7 @@ const sidebarVariants = {
 export function EarnMoreDropdown() {
   return (
     <div className="bg-gradient-to-b from-[#FAFAFA] to-white px-5 pb-4 pt-4 md:px-7 lg:px-9">
-      <div className="flex flex-col gap-5 xl:flex-row xl:items-stretch">
+      <div className="flex flex-col gap-5 xl:flex-row xl:items-start">
         <motion.div
           variants={gridVariants}
           initial={false}
@@ -61,7 +55,7 @@ export function EarnMoreDropdown() {
                 whileHover={{ y: -3, transition: { duration: 0.22 } }}
                 className="group/card flex flex-col overflow-hidden rounded-[12px] border border-[#E8ECF0] bg-white shadow-[0_2px_12px_rgba(15,23,42,0.05)]"
               >
-                <div className="relative h-[88px] overflow-hidden sm:h-[94px]">
+                <div className="relative aspect-[3/2] w-full overflow-hidden">
                   <Image
                     src={card.image}
                     alt={card.title}
@@ -70,7 +64,7 @@ export function EarnMoreDropdown() {
                       "object-cover transition-transform duration-500 ease-out group-hover/card:scale-[1.03]",
                       card.imagePosition
                     )}
-                    sizes="(max-width: 640px) 100vw, 180px"
+                    sizes="(max-width: 640px) 100vw, 280px"
                   />
 
                   {card.badge && BadgeIcon && (
@@ -92,7 +86,7 @@ export function EarnMoreDropdown() {
 
                   <div className="min-w-0 flex-1">
                     <h3
-                      className={`${playfair.className} truncate text-[13px] font-semibold leading-tight text-white sm:text-[14px]`}
+                      className="truncate text-[13px] font-semibold leading-tight text-white sm:text-[14px]"
                     >
                       {card.title}
                     </h3>

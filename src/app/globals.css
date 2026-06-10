@@ -45,8 +45,17 @@
   --font-sans: var(--font-montserrat);
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
 html {

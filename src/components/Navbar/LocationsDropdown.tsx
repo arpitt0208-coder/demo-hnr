@@ -2,18 +2,12 @@
 
 import { motion } from "framer-motion";
 import { Link2, Mountain, Sparkles } from "lucide-react";
-import { Playfair_Display } from "next/font/google";
 import Image from "next/image";
 import {
   featuredLocations,
   locationQuickLinkIcon,
   locationQuickLinks,
 } from "@/data/locations";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-});
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -141,7 +135,7 @@ export function LocationsDropdown() {
                 <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col gap-3 p-4">
                   <div>
                     <h3
-                      className={`${playfair.className} text-[22px] font-semibold leading-tight text-white sm:text-[24px]`}
+                      className="text-[22px] font-semibold leading-tight text-white sm:text-[24px]"
                     >
                       {location.title}
                     </h3>
