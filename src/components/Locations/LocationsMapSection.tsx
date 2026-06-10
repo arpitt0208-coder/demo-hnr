@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Bike, Compass, MapPin } from "lucide-react";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
@@ -38,54 +38,136 @@ const places: Place[] = [
   },
 ];
 
-function LocationCard({ place }: { place: Place }) {
+const easeOut = [0.22, 1, 0.36, 1] as const;
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.94, filter: "blur(6px)" },
+  visible: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: {
+      delay: index * 0.14,
+      duration: 0.7,
+      ease: easeOut,
+    },
+  }),
+};
+
+function LocationCard({
+  place,
+  index,
+  reduceMotion,
+}: {
+  place: Place;
+  index: number;
+  reduceMotion: boolean | null;
+}) {
   return (
-    <article className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-shadow hover:shadow-[0_8px_32px_rgba(15,23,42,0.1)]">
+    <motion.article
+      custom={index}
+      initial={reduceMotion ? false : "hidden"}
+      whileInView={reduceMotion ? undefined : "visible"}
+      viewport={{ once: true, margin: "-60px" }}
+      variants={cardVariants}
+      whileHover={
+        reduceMotion
+          ? undefined
+          : {
+              y: -8,
+              transition: { duration: 0.3, ease: easeOut },
+            }
+      }
+      className="group overflow-hidden rounded-2xl border border-border/60 bg-white shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-shadow duration-300 hover:shadow-[0_16px_40px_rgba(15,23,42,0.12)]"
+    >
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={place.image}
           alt={`${place.name}, ${place.category}`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-          className="object-cover object-center"
+          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
         />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          aria-hidden="true"
+        />
+        <motion.span
+          initial={reduceMotion ? false : { opacity: 0, x: 12 }}
+          whileInView={
+            reduceMotion
+              ? undefined
+              : { opacity: 1, x: 0, transition: { delay: index * 0.14 + 0.35, duration: 0.5 } }
+          }
+          viewport={{ once: true }}
+          className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-bold text-primary-yellow shadow-sm backdrop-blur-sm sm:px-3 sm:text-[11px]"
+        >
+          <Bike className="size-3.5 shrink-0" aria-hidden="true" />
+          {place.bikesLabel}
+        </motion.span>
       </div>
 
       <div className="p-4 sm:p-5">
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
-          <MapPin
-            size={16}
-            strokeWidth={2}
-            className="shrink-0"
-            aria-hidden="true"
-          />
-          <h3 className="min-w-0 flex-1 text-[16px] font-extrabold leading-tight text-[#0f172a] sm:text-[17px]">
+          <motion.span
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
+            whileInView={
+              reduceMotion
+                ? undefined
+                : {
+                    opacity: 1,
+                    scale: 1,
+                    transition: { delay: index * 0.14 + 0.4, duration: 0.45, ease: easeOut },
+                  }
+            }
+            viewport={{ once: true }}
+          >
+            <MapPin
+              size={16}
+              strokeWidth={2}
+              className="shrink-0 text-primary-yellow transition-transform duration-300 group-hover:-translate-y-0.5"
+              aria-hidden="true"
+            />
+          </motion.span>
+          <h3 className="min-w-0 flex-1 text-[16px] font-extrabold leading-tight text-[#0f172a] transition-colors duration-300 group-hover:text-primary-yellow sm:text-[17px]">
             {place.name}
           </h3>
-          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary-yellow/15 px-2.5 py-1 text-[10px] font-bold text-primary-yellow sm:px-3 sm:text-[11px]">
-            <Bike className="size-3.5 shrink-0" aria-hidden="true" />
-            {place.bikesLabel}
-          </span>
         </div>
 
         {place.category !== place.name && (
-          <p className="mt-1 pl-6 text-[13px] font-semibold text-[#64748b]">
+          <motion.p
+            initial={reduceMotion ? false : { opacity: 0, x: -8 }}
+            whileInView={
+              reduceMotion
+                ? undefined
+                : {
+                    opacity: 1,
+                    x: 0,
+                    transition: { delay: index * 0.14 + 0.48, duration: 0.5, ease: easeOut },
+                  }
+            }
+            viewport={{ once: true }}
+            className="mt-1 pl-6 text-[13px] font-semibold text-[#64748b]"
+          >
             {place.category}
-          </p>
+          </motion.p>
         )}
       </div>
-    </article>
+    </motion.article>
   );
 }
 
 export function LocationsMapSection() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <motion.section
       id="locations"
       initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, ease: easeOut }}
       className="scroll-mt-24 overflow-x-clip px-4 py-8 sm:px-6 sm:py-10"
       aria-label="Locations"
     >
@@ -106,8 +188,13 @@ export function LocationsMapSection() {
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
-          {places.map((place) => (
-            <LocationCard key={place.id} place={place} />
+          {places.map((place, index) => (
+            <LocationCard
+              key={place.id}
+              place={place}
+              index={index}
+              reduceMotion={reduceMotion}
+            />
           ))}
         </div>
       </div>
