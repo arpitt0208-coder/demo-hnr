@@ -11,7 +11,7 @@ import {
 import type { StaticImageData } from "next/image";
 import { bhuntar, kasolBig, manali } from "@/assets/images";
 
-export type LocationFeature = {
+type LocationFeature = {
   icon: LucideIcon;
   label: string;
 };

@@ -75,9 +75,9 @@ function LocationCard({
         reduceMotion
           ? undefined
           : {
-              y: -8,
-              transition: { duration: 0.3, ease: easeOut },
-            }
+            y: -8,
+            transition: { duration: 0.3, ease: easeOut },
+          }
       }
       className="group overflow-hidden rounded-2xl border border-border/60 bg-white shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-shadow duration-300 hover:shadow-[0_16px_40px_rgba(15,23,42,0.12)]"
     >
@@ -116,10 +116,10 @@ function LocationCard({
               reduceMotion
                 ? undefined
                 : {
-                    opacity: 1,
-                    scale: 1,
-                    transition: { delay: index * 0.14 + 0.4, duration: 0.45, ease: easeOut },
-                  }
+                  opacity: 1,
+                  scale: 1,
+                  transition: { delay: index * 0.14 + 0.4, duration: 0.45, ease: easeOut },
+                }
             }
             viewport={{ once: true }}
           >
@@ -142,10 +142,10 @@ function LocationCard({
               reduceMotion
                 ? undefined
                 : {
-                    opacity: 1,
-                    x: 0,
-                    transition: { delay: index * 0.14 + 0.48, duration: 0.5, ease: easeOut },
-                  }
+                  opacity: 1,
+                  x: 0,
+                  transition: { delay: index * 0.14 + 0.48, duration: 0.5, ease: easeOut },
+                }
             }
             viewport={{ once: true }}
             className="mt-1 pl-6 text-[13px] font-semibold text-[#64748b]"

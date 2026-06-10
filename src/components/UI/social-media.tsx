@@ -1,7 +1,7 @@
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
-export interface SocialItem {
+interface SocialItem {
   href: string;
   ariaLabel: string;
   tooltip: string;
@@ -10,7 +10,7 @@ export interface SocialItem {
   Icon?: React.ComponentType<{ className?: string }>;
 }
 
-export interface SocialTooltipProps
+interface SocialTooltipProps
   extends React.HTMLAttributes<HTMLUListElement> {
   items: SocialItem[];
 }

@@ -11,7 +11,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/UI/carousel";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
 export interface Gallery4Item {
   id: string;
@@ -22,7 +22,7 @@ export interface Gallery4Item {
   ctaText?: string;
 }
 
-export interface Gallery4Props {
+interface Gallery4Props {
   title?: string;
   description?: string;
   items: Gallery4Item[];

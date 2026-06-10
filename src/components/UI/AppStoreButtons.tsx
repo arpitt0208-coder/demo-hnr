@@ -3,7 +3,7 @@ import type { StaticImageData } from "next/image";
 import { appStoreIcon, googlePlayIcon } from "@/assets/images";
 import { cn } from "@/lib/cn";
 
-export type StoreButtonVariant = "default" | "footer";
+type StoreButtonVariant = "default" | "footer";
 
 const badgeBaseClassName =
   "inline-flex items-center rounded-[10px] transition-opacity hover:opacity-90";
@@ -111,7 +111,7 @@ type StoreButtonProps = {
   variant?: StoreButtonVariant;
 };
 
-export function AppStoreButton({
+function AppStoreButton({
   href = "#download",
   variant = "default",
 }: StoreButtonProps) {
@@ -129,7 +129,7 @@ export function AppStoreButton({
   );
 }
 
-export function GooglePlayButton({
+function GooglePlayButton({
   href = "#download",
   variant = "default",
 }: StoreButtonProps) {

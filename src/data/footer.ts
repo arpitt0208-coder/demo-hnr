@@ -6,7 +6,7 @@ import {
   YoutubeBrandIcon,
 } from "@/components/UI/social-icons";
 
-export interface FooterLink {
+interface FooterLink {
   label: string;
   href: string;
 }
@@ -70,7 +70,7 @@ export const footerContact = {
   email: "info@hirenride.com",
 };
 
-export const footerSocialLinks = [
+const footerSocialLinks = [
   { label: "Instagram", href: "https://www.instagram.com/hirenride/" },
   { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61576470655755" },
   { label: "X", href: "https://x.com/hire_n_ride" },

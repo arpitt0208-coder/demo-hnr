@@ -9,9 +9,7 @@ import kasolBig from "./kasolbig.webp";
 import manali from "./Manali.webp";
 import bike from "./bike.png";
 import card from "./card.webp";
-import logoWhite from "./logowhite.png";
 import heroBg from "./bg.png";
-import sectionBg from "./bgimg.png";
 import faqsec from "./faqsec.png";
 import fee from "./fee.webp";
 import him4 from "./him4.webp";
@@ -67,13 +65,11 @@ export {
   iphoneFrame15,
   kasolBig,
   kyc,
-  logoWhite,
   manali,
   mountainbg,
   podium,
   qrDownloadApp,
   safe2,
-  sectionBg,
   support,
   textJourney,
   textSparkle,

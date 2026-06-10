@@ -9,7 +9,7 @@
  * @website: https://emerald-ui.com
  */
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
 interface ShinyButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
