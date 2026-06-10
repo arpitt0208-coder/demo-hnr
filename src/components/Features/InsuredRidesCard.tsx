@@ -43,14 +43,14 @@ export function InsuredRidesCard() {
         </div>
       </div>
 
-      <div className="relative min-h-[140px] flex-1 sm:min-h-[150px] lg:min-h-0">
+      <div className="relative min-h-[200px] flex-1 sm:min-h-[220px] lg:min-h-0">
         <div className="absolute inset-0 z-[2] flex items-end justify-center px-2 pb-1 sm:px-3 lg:justify-end lg:px-0 lg:pb-0">
-          <div className="relative h-[140px] w-full max-w-[320px] sm:h-[150px] sm:max-w-[360px] lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-full lg:max-w-none">
+          <div className="relative h-[200px] w-full max-w-[440px] sm:h-[220px] sm:max-w-[500px] lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-full lg:max-w-none lg:origin-bottom-right lg:scale-[1.2]">
             <Image
               src={bike}
               alt=""
               fill
-              sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 400px"
+              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 56vw, 500px"
               className="pointer-events-none object-contain object-bottom lg:object-right-bottom"
               aria-hidden="true"
             />

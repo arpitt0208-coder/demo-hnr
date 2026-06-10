@@ -141,7 +141,7 @@ export function AppPromoSection() {
                 })}
               </div>
 
-              <div className="flex justify-center lg:col-span-4 lg:justify-end">
+              <div className="lg:col-span-4">
                 <AppPhoneMockup />
               </div>
 

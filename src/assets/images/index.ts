@@ -19,6 +19,8 @@ import podium from "./podium.webp";
 import scram from "./scram.png";
 import textJourney from "./textjourney.webp";
 import textSparkle from "./text.webp";
+import downloadAppVideoPoster from "./downloadappvideoposter.png";
+import iphoneFrame15 from "./iphoneframe15.png";
 import qrDownloadApp from "./newqrdownloadapp.avif";
 
 export const bikeImages = {
@@ -34,10 +36,12 @@ export {
   adventure,
   bike,
   card,
+  downloadAppVideoPoster,
   faqSection,
   fee,
   googlePlayIcon,
   heroBg,
+  iphoneFrame15,
   kyc,
   logoWhite,
   mountainbg,
