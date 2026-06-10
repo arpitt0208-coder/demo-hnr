@@ -78,25 +78,44 @@ export function Navbar() {
     const { style: bodyStyle } = document.body;
     const { style: htmlStyle } = document.documentElement;
 
-    bodyStyle.position = "fixed";
-    bodyStyle.top = `-${scrollY}px`;
-    bodyStyle.left = "0";
-    bodyStyle.right = "0";
-    bodyStyle.width = "100%";
+    // Fixed-body lock avoids iOS scroll bleed for the mobile drawer; it shifts
+    // the whole page and flickers on desktop hover dropdowns, so use overflow
+    // only there.
+    if (mobileMenuOpen) {
+      bodyStyle.position = "fixed";
+      bodyStyle.top = `-${scrollY}px`;
+      bodyStyle.left = "0";
+      bodyStyle.right = "0";
+      bodyStyle.width = "100%";
+      bodyStyle.overflow = "hidden";
+      htmlStyle.overflow = "hidden";
+
+      return () => {
+        bodyStyle.position = "";
+        bodyStyle.top = "";
+        bodyStyle.left = "";
+        bodyStyle.right = "";
+        bodyStyle.width = "";
+        bodyStyle.overflow = "";
+        htmlStyle.overflow = "";
+        window.scrollTo(0, scrollY);
+      };
+    }
+
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    if (scrollbarWidth > 0) {
+      bodyStyle.paddingRight = `${scrollbarWidth}px`;
+    }
     bodyStyle.overflow = "hidden";
     htmlStyle.overflow = "hidden";
 
     return () => {
-      bodyStyle.position = "";
-      bodyStyle.top = "";
-      bodyStyle.left = "";
-      bodyStyle.right = "";
-      bodyStyle.width = "";
+      bodyStyle.paddingRight = "";
       bodyStyle.overflow = "";
       htmlStyle.overflow = "";
-      window.scrollTo(0, scrollY);
     };
-  }, [menuOpen]);
+  }, [menuOpen, mobileMenuOpen]);
 
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
