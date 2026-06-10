@@ -2,13 +2,13 @@ import type { StaticImageData } from "next/image";
 import type { Gallery4Item } from "@/components/UI/gallery4";
 import { bikeImages } from "@/assets/images";
 
-export type FindYourRideBike = {
+type FindYourRideBike = {
   id: string;
   name: string;
   image: StaticImageData;
 };
 
-export const findYourRideBikes: FindYourRideBike[] = [
+const findYourRideBikes: FindYourRideBike[] = [
   { id: "classic-350", name: "CLASSIC 350", image: bikeImages.meteor },
   { id: "hunter", name: "Royal Enfield Hunter", image: bikeImages.hunter },
   {

@@ -3,7 +3,6 @@ import appText from "./apptext.webp";
 import adventure from "./adventure.avif";
 import bike from "./bike.png";
 import card from "./card.webp";
-import logo from "./logo.png";
 import logoWhite from "./logowhite.png";
 import heroBg from "./bg.png";
 import sectionBg from "./bgimg.png";
@@ -40,7 +39,6 @@ export {
   googlePlayIcon,
   heroBg,
   kyc,
-  logo,
   logoWhite,
   mountainbg,
   podium,

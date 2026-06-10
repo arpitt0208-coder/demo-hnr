@@ -9,16 +9,6 @@ export interface FooterColumn {
   secondaryLinks?: FooterLink[];
 }
 
-export const footerRouteStops = [
-  { label: "Manali", x: 8 },
-  { label: "Solang", x: 22 },
-  { label: "Rohtang", x: 35 },
-  { label: "Leh", x: 48 },
-  { label: "Spiti", x: 58 },
-  { label: "Dharamshala", x: 75 },
-  { label: "Bir Billing", x: 90 },
-] as const;
-
 export const footerColumns: FooterColumn[] = [
   {
     title: "LOCATIONS",

@@ -31,11 +31,3 @@ export function XIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
-export function LinkedinIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M6.5 8.5a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-1.5 2.5h3v10h-3v-10zm5 0h2.9v1.4h.1c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.6v5.6h-3v-5c0-1.2 0-2.7-1.7-2.7s-2 1.3-2 2.6v5.1h-3v-10z" />
-    </svg>
-  );
-}
