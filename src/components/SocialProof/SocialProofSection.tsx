@@ -23,7 +23,7 @@ const testimonials = socialProofCards.map((card) => ({
   titleHighlight: card.titleHighlight,
   titleAfter: card.titleAfter,
   designation: "",
-  src: card.image,
+  src: card.image.src,
 }));
 
 export function SocialProofSection() {

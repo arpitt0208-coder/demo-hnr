@@ -5,10 +5,12 @@ import {
   Zap,
   type LucideIcon,
 } from "lucide-react";
+import type { StaticImageData } from "next/image";
+import { him4, him5, instant2, safe2 } from "@/assets/images";
 
 export type SocialProofCard = {
   id: number;
-  image: string;
+  image: StaticImageData;
   icon: LucideIcon;
   titleBefore?: string;
   titleHighlight?: string;
@@ -20,8 +22,7 @@ export type SocialProofCard = {
 export const socialProofCards: SocialProofCard[] = [
   {
     id: 1,
-    image:
-      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=480&h=320&fit=crop",
+    image: him4,
     icon: Users,
     titleBefore: "Trusted by ",
     titleHighlight: "10K+",
@@ -31,8 +32,7 @@ export const socialProofCards: SocialProofCard[] = [
   },
   {
     id: 2,
-    image:
-      "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=480&h=320&fit=crop",
+    image: safe2,
     icon: Bike,
     titleHighlight: "500+",
     titleAfter: " Curated Rides",
@@ -41,8 +41,7 @@ export const socialProofCards: SocialProofCard[] = [
   },
   {
     id: 3,
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=480&h=320&fit=crop",
+    image: him5,
     icon: Star,
     titleHighlight: "4.8 ★",
     titleAfter: " Real Reviews",
@@ -51,8 +50,7 @@ export const socialProofCards: SocialProofCard[] = [
   },
   {
     id: 4,
-    image:
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=480&h=320&fit=crop",
+    image: instant2,
     icon: Zap,
     titleHighlight: "Instant",
     titleAfter: " Everything",

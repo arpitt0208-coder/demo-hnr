@@ -6,18 +6,24 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { navItems } from "@/data/navigation";
 import { cn } from "@/lib/cn";
 import { AboutDropdown } from "./AboutDropdown";
+import { EarnMoreDropdown } from "./EarnMoreDropdown";
 import { FleetDropdown } from "./FleetDropdown";
+import { LocationsDropdown } from "./LocationsDropdown";
 import { Logo } from "./Logo";
 
 const FLEET_LABEL = "Our Fleet";
 const ABOUT_LABEL = "About Us";
+const LOCATIONS_LABEL = "Locations";
+const EARN_MORE_LABEL = "Earn More";
 const CLOSE_DELAY_MS = 200;
 
-type NavDropdownId = "fleet" | "about";
+type NavDropdownId = "fleet" | "about" | "locations" | "earn";
 
 function getNavDropdownId(label: string): NavDropdownId | null {
   if (label === FLEET_LABEL) return "fleet";
   if (label === ABOUT_LABEL) return "about";
+  if (label === LOCATIONS_LABEL) return "locations";
+  if (label === EARN_MORE_LABEL) return "earn";
   return null;
 }
 
@@ -181,7 +187,7 @@ export function Navbar() {
           >
             <div
               className={cn(
-                "overflow-hidden rounded-b-[24px] border-t border-[#F1F5F9] bg-gradient-to-b from-[#FAFAFA]/80 to-white shadow-[0_16px_48px_rgba(15,23,42,0.12)] transition-[opacity,transform] duration-200 ease-out",
+                "max-h-[calc(100dvh-6.5rem)] overflow-x-hidden overflow-y-auto rounded-b-[24px] border-t border-[#F1F5F9] bg-gradient-to-b from-[#FAFAFA]/80 to-white shadow-[0_16px_48px_rgba(15,23,42,0.12)] transition-[opacity,transform] duration-200 ease-out",
                 dropdownOpen
                   ? "translate-y-0 opacity-100"
                   : "pointer-events-none -translate-y-1 opacity-0"
@@ -194,6 +200,12 @@ export function Navbar() {
                   </div>
                   <div hidden={activeDropdown !== "about"}>
                     <AboutDropdown />
+                  </div>
+                  <div hidden={activeDropdown !== "locations"}>
+                    <LocationsDropdown />
+                  </div>
+                  <div hidden={activeDropdown !== "earn"}>
+                    <EarnMoreDropdown />
                   </div>
                 </>
               )}

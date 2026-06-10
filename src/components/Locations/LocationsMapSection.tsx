@@ -11,7 +11,10 @@ import {
   Rocket,
   Sparkles,
 } from "lucide-react";
+import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import { useState } from "react";
+import { bhuntar, kasolBig, manali } from "@/assets/images";
 import { cn } from "@/lib/cn";
 
 type PlaceStatus = "available" | "coming";
@@ -23,7 +26,7 @@ type Place = {
   category: string;
   status: PlaceStatus;
   bikesLabel?: string;
-  image: string;
+  image: StaticImageData | string;
 };
 
 const places: Place[] = [
@@ -33,17 +36,15 @@ const places: Place[] = [
     category: "Himachal Pradesh",
     status: "available",
     bikesLabel: "55+ Bikes",
-    image:
-      "https://images.unsplash.com/photo-1666955479256-92b430bfa23b?w=400&h=260&fit=crop",
+    image: manali,
   },
   {
     id: 2,
-    name: "Kullu",
+    name: "Kasol",
     category: "Himachal Pradesh",
     status: "available",
     bikesLabel: "40+ Bikes",
-    image:
-      "https://images.unsplash.com/photo-1621340978972-1e3717f1eef6?w=400&h=260&fit=crop",
+    image: kasolBig,
   },
   {
     id: 3,
@@ -51,8 +52,7 @@ const places: Place[] = [
     category: "Himachal Pradesh",
     status: "available",
     bikesLabel: "30+ Bikes",
-    image:
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=260&fit=crop",
+    image: bhuntar,
   },
   {
     id: 4,
@@ -106,11 +106,13 @@ function LocationCard({ place }: { place: Place }) {
 
   return (
     <article className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-shadow hover:shadow-[0_8px_32px_rgba(15,23,42,0.1)]">
-      <div className="aspect-[16/10] overflow-hidden">
-        <img
+      <div className="relative aspect-[16/10] overflow-hidden">
+        <Image
           src={place.image}
           alt={`${place.name}, ${place.category}`}
-          className="h-full w-full object-cover"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+          className="object-cover object-center"
         />
       </div>
 

@@ -57,8 +57,8 @@ export function AppPromoSection() {
 
                 <h2 className="mt-5 text-[28px] font-extrabold leading-[1.08] tracking-tight text-dark-navy sm:text-[34px] md:text-[40px] xl:text-[44px]">
                   <span className="block">Hire N Ride</span>
-                  <span className="block">Bike Rental</span>
-                  <span className="mt-1 inline-block">
+                  <span className="flex flex-wrap items-center gap-2">
+                    Bike Rental
                     <Image
                       src={appText}
                       alt="App"
@@ -163,10 +163,10 @@ export function AppPromoSection() {
                           />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-[22px] font-extrabold leading-none text-dark-navy">
+                          <p className="text-[22px] font-medium leading-none text-dark-navy">
                             {card.value}
                           </p>
-                          <p className="mt-1 text-[13px] font-bold text-dark-navy">
+                          <p className="mt-1 text-[13px] font-medium text-dark-navy">
                             {card.label}
                           </p>
                           <p className="mt-0.5 text-[11px] font-medium leading-snug text-text-gray">
@@ -180,7 +180,7 @@ export function AppPromoSection() {
               </div>
             </div>
 
-            <div className="mt-8 border-t border-[#E8ECF0] pt-6 sm:mt-10">
+            {/* <div className="mt-8 border-t border-[#E8ECF0] pt-6 sm:mt-10">
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-0">
                 {appTrustItems.map((item, index) => {
                   const Icon = item.icon;
@@ -215,7 +215,7 @@ export function AppPromoSection() {
                   );
                 })}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

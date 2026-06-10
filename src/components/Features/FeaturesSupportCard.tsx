@@ -13,9 +13,10 @@ export function FeaturesSupportCard() {
         <Image
           src={support}
           alt=""
-          fill
+          width={520}
+          height={480}
           sizes="(max-width: 640px) 45vw, 220px"
-          className="object-contain object-bottom px-2 pb-1"
+          className="absolute bottom-0 left-1/2 h-full max-h-full w-auto -translate-x-1/2 object-contain object-bottom"
           aria-hidden="true"
         />
       }

@@ -8,7 +8,11 @@ import {
   Users,
 } from "lucide-react";
 import type { StaticImageData } from "next/image";
-import { adventure } from "@/assets/images";
+import {
+  aboutCardGallery,
+  aboutCardStory,
+  aboutCardSupport,
+} from "@/assets/images";
 
 export type AboutCard = {
   id: string;
@@ -28,7 +32,7 @@ export const aboutCards: AboutCard[] = [
       "Discover how we started, what drives us, and why riders across India trust us for every road trip.",
     cta: "Explore our story",
     href: "#about",
-    image: adventure,
+    image: aboutCardStory,
     icon: Users,
   },
   {
@@ -38,7 +42,7 @@ export const aboutCards: AboutCard[] = [
       "Questions before you ride? Our team is here to help with bookings, routes, and on-trip assistance.",
     cta: "Get in touch",
     href: "#contact",
-    image: adventure,
+    image: aboutCardSupport,
     icon: Headphones,
   },
   {
@@ -48,7 +52,7 @@ export const aboutCards: AboutCard[] = [
       "See real journeys from fellow riders—scenic routes, mountain passes, and unforgettable memories.",
     cta: "View gallery",
     href: "#gallery",
-    image: adventure,
+    image: aboutCardGallery,
     icon: Camera,
   },
 ];

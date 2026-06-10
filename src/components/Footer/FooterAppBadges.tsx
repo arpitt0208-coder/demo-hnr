@@ -12,7 +12,7 @@ export function FooterAppBadges() {
         height={96}
         className="size-[80px] shrink-0 rounded-[4px] sm:size-[96px]"
       />
-      <AppStoreButtonStack />
+      <AppStoreButtonStack variant="footer" />
     </div>
   );
 }

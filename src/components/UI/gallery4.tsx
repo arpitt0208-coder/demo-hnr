@@ -186,9 +186,11 @@ const Gallery4 = ({
               <CarouselItem
                 key={item.id}
                 className={cn(
-                  useCompactLayout
-                    ? "max-w-[240px] pl-2.5 lg:max-w-[280px]"
-                    : "max-w-[360px] pl-[20px] lg:max-w-[400px]",
+                  useFleetCards
+                    ? "max-w-[260px] pl-2.5 lg:max-w-[300px]"
+                    : useCompactLayout
+                      ? "max-w-[240px] pl-2.5 lg:max-w-[280px]"
+                      : "max-w-[360px] pl-[20px] lg:max-w-[400px]",
                 )}
               >
                 {useFleetCards ? (
@@ -197,17 +199,17 @@ const Gallery4 = ({
                     aria-label={item.ctaText ?? item.title}
                     className="group/card flex h-full flex-col rounded-[16px] border border-[#E8ECF0] bg-white p-4 shadow-[0_2px_14px_rgba(15,23,42,0.04)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary-yellow/35 hover:shadow-[0_12px_32px_rgba(239,190,61,0.12)]"
                   >
-                    <div className="relative mb-3 h-[84px] w-full sm:mb-4 sm:h-[92px]">
+                    <div className="relative mb-3 h-[90px] w-full sm:mb-3.5 sm:h-[104px]">
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
-                        sizes="(max-width: 768px) 240px, 280px"
+                        sizes="(max-width: 768px) 260px, 300px"
                         className="object-contain object-center transition-transform duration-500 ease-out group-hover/card:scale-[1.06]"
                       />
                     </div>
                     <div className="mt-auto flex items-center justify-between gap-2">
-                      <p className="text-[12px] font-semibold leading-tight text-[#1E293B] transition-colors group-hover/card:text-[#0F172A] sm:text-[13px]">
+                      <p className="text-[12px] font-semibold leading-tight text-[#1E293B] transition-colors group-hover/card:text-[#0F172A] sm:text-[14px]">
                         {item.title}
                       </p>
                       <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary-yellow shadow-[0_2px_8px_rgba(239,190,61,0.35)] transition-all duration-300 group-hover/card:scale-110 group-hover/card:shadow-[0_4px_14px_rgba(239,190,61,0.45)]">

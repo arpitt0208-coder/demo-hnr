@@ -9,14 +9,14 @@ import { FeatureCardShell } from "./FeatureCardShell";
 export function CommunityCard() {
   return (
     <FeatureCardShell
-      illustrationClassName="h-[132px] sm:h-[148px]"
       illustration={
         <Image
           src={card}
           alt="Riders high-fiving beside a motorcycle in the mountains"
-          fill
+          width={640}
+          height={400}
           sizes="(max-width: 640px) 45vw, 220px"
-          className="object-cover object-[center_38%]"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
       }
     >

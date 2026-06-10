@@ -12,29 +12,25 @@ export function PricingCard() {
       className="bg-[#FFFCF7]"
       illustration={
         <div className="relative h-full w-full">
-          <div className="absolute inset-x-0 bottom-0 h-[62%]">
-            <Image
-              src={mountainbg}
-              alt=""
-              fill
-              sizes="(max-width: 640px) 45vw, 220px"
-              className="object-cover object-bottom opacity-80"
-              aria-hidden="true"
-            />
-          </div>
+          <Image
+            src={mountainbg}
+            alt=""
+            width={640}
+            height={400}
+            sizes="(max-width: 640px) 45vw, 220px"
+            className="absolute inset-x-0 bottom-0 h-[78%] w-full object-cover object-bottom opacity-80"
+            aria-hidden="true"
+          />
 
-          <div className="absolute inset-x-0 bottom-1 flex justify-center">
-            <div className="relative h-[76px] w-[92px] sm:h-[84px] sm:w-[100px]">
-              <Image
-                src={fee}
-                alt=""
-                fill
-                sizes="(max-width: 640px) 40vw, 120px"
-                className="object-contain object-bottom"
-                aria-hidden="true"
-              />
-            </div>
-          </div>
+          <Image
+            src={fee}
+            alt=""
+            width={260}
+            height={220}
+            sizes="(max-width: 640px) 40vw, 120px"
+            className="absolute bottom-1 left-1/2 h-[72%] w-auto max-w-[85%] -translate-x-1/2 object-contain object-bottom"
+            aria-hidden="true"
+          />
         </div>
       }
     >

@@ -31,7 +31,7 @@ export function FindYourRideSection() {
             </span>
           </div>
 
-          <h2 className="mt-4 text-[28px] font-extrabold leading-[1.08] tracking-tight text-dark-navy sm:text-[36px] md:text-[42px] xl:text-[46px]">
+          <h2 className="mt-4 text-[34px] font-extrabold leading-[1.08] tracking-tight text-dark-navy sm:text-[42px] md:text-[50px] xl:text-[56px]">
             <span className="block">
               Find Your Perfect{" "}
               <span className="relative inline-block">
@@ -46,7 +46,7 @@ export function FindYourRideSection() {
                 alt="Journey Ahead"
                 width={600}
                 height={149}
-                className="inline-block h-[36px] w-auto align-baseline mix-blend-screen sm:h-[44px] md:h-[50px] xl:h-[54px]"
+                className="inline-block h-[42px] w-auto align-baseline mix-blend-screen sm:h-[50px] md:h-[58px] xl:h-[64px]"
               />
             </span>
           </h2>
