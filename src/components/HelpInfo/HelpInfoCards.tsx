@@ -112,7 +112,7 @@ export function HelpInfoCards() {
               <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
                 {helpFaqPanel.title}
               </h3>
-              <p className="mt-1 text-[12px] font-medium leading-[1.6] text-text-gray sm:text-[13px]">
+              <p className="mt-1 text-[12px] font-medium leading-[1.6] text-[#475569] sm:text-[13px]">
                 {helpFaqPanel.description}
               </p>
             </div>
@@ -130,7 +130,7 @@ export function HelpInfoCards() {
               key={item.id}
               question={item.question}
               answer={item.answer}
-              className="rounded-2xl border-[#EEF2F6] shadow-none [&_button_span:first-child]:text-[13px] [&_button_span:first-child]:font-semibold [&_button_span:first-child]:sm:text-[14px] [&_p]:text-[12px] [&_p]:font-medium [&_p]:leading-[1.7] [&_p]:sm:text-[13px]"
+              className="rounded-2xl shadow-none [&_button_span:first-child]:text-[13px] [&_button_span:first-child]:sm:text-[14px] [&_p]:text-[12px] [&_p]:leading-[1.7] [&_p]:sm:text-[13px]"
             />
           ))}
         </ExpandablePanelContent>
@@ -154,7 +154,7 @@ export function HelpInfoCards() {
               <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
                 {helpDisclaimerPanel.title}
               </h3>
-              <p className="mt-1 text-[12px] font-medium leading-[1.6] text-text-gray sm:text-[13px]">
+              <p className="mt-1 text-[12px] font-medium leading-[1.6] text-[#475569] sm:text-[13px]">
                 {helpDisclaimerPanel.description}
               </p>
             </div>
@@ -163,7 +163,7 @@ export function HelpInfoCards() {
         </button>
 
         <ExpandablePanelContent isOpen={disclaimerOpen}>
-          <p className="text-[12px] font-medium leading-[1.75] text-text-gray sm:text-[13px]">
+          <p className="text-[12px] font-medium leading-[1.75] text-[#475569] sm:text-[13px]">
             {helpDisclaimerContent}
           </p>
         </ExpandablePanelContent>
@@ -177,7 +177,7 @@ export function HelpInfoCards() {
               <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
                 {helpContactPanel.title}
               </h3>
-              <p className="mt-1 text-[12px] font-medium leading-[1.6] text-text-gray sm:text-[13px]">
+              <p className="mt-1 text-[12px] font-medium leading-[1.6] text-[#475569] sm:text-[13px]">
                 {helpContactPanel.description}
               </p>
             </div>

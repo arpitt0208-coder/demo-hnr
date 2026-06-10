@@ -55,7 +55,7 @@ export function HeroLeft() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.7 }}
-        className="mt-5 max-w-[440px] text-[14px] leading-[1.75] text-text-gray lg:text-[15px]"
+        className="mt-5 max-w-[440px] text-[14px] font-medium leading-[1.75] text-[#475569] lg:text-[15px]"
       >
         Stop dreaming, start riding with Hire N Ride. You get a fully maintained
         bike, transparent pricing, and 24/7 local support. Your epic mountain

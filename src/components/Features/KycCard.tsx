@@ -48,7 +48,7 @@ export function KycCard() {
         title="Instant Booking & KYC"
       />
 
-      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#555555] sm:text-[12px]">
+      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#475569] sm:text-[12px]">
         Verify and ride in minutes, not hours. Secure, digital onboarding from
         anywhere.
       </p>

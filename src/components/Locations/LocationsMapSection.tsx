@@ -174,11 +174,12 @@ export function LocationsMapSection() {
 
   return (
     <motion.section
+      id="locations"
       initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="overflow-x-clip px-4 py-8 sm:px-6 sm:py-10"
+      className="scroll-mt-24 overflow-x-clip px-4 py-8 sm:px-6 sm:py-10"
       aria-label="Locations"
     >
       <div className="mx-auto max-w-[1200px]">
@@ -192,7 +193,7 @@ export function LocationsMapSection() {
             We&apos;re Where You Need Us
           </h2>
 
-          <p className="mt-3 max-w-[560px] text-[14px] font-semibold leading-[1.75] text-[#0f172a] sm:mt-4 sm:text-[15px]">
+          <p className="mt-3 max-w-[560px] text-[14px] font-medium leading-[1.75] text-[#475569] sm:mt-4 sm:text-[15px]">
             Explore the places we currently serve and the new locations
             we&apos;re bringing our service to soon.
           </p>

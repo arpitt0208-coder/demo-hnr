@@ -11,11 +11,12 @@ import { HeadingSparkle } from "../UI/HeadingSparkle";
 export function FindYourRideSection() {
   return (
     <motion.section
+      id="fleet"
       initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="relative w-full overflow-hidden px-4 py-10 sm:px-6 sm:py-12"
+      className="relative w-full scroll-mt-24 overflow-hidden px-4 py-10 sm:px-6 sm:py-12"
       aria-label="Find your perfect ride"
     >
       <div className="relative mx-auto w-full max-w-[1280px]">
@@ -51,7 +52,7 @@ export function FindYourRideSection() {
             </span>
           </h2>
 
-          <p className="mt-3 max-w-[560px] text-[14px] font-medium leading-[1.75] text-text-gray sm:text-[15px]">
+          <p className="mt-3 max-w-[560px] text-[14px] font-medium leading-[1.75] text-[#475569] sm:text-[15px]">
             Pick a category to see what we offer—then jump straight into
             available models.
           </p>

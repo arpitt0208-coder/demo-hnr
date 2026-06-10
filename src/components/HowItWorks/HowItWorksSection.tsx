@@ -40,7 +40,7 @@ export function HowItWorksSection() {
               Rent.{" "}
               <span className="text-primary-yellow">Ride.</span> Go.
             </h2>
-            <p className="mt-3 max-w-[480px] text-[14px] font-semibold leading-[1.75] text-[#64748B] sm:text-[15px]">
+            <p className="mt-3 max-w-[480px] text-[14px] font-medium leading-[1.75] text-[#475569] sm:text-[15px]">
               From scooters to adventure bikes—transparent pricing and pickup
               when you&apos;re ready.
             </p>

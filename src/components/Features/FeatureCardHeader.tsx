@@ -44,7 +44,7 @@ export function FeatureCardHeader({
 
       <h3
         className={cn(
-          "font-extrabold leading-[1.22] tracking-tight text-black",
+          "font-extrabold leading-[1.22] tracking-tight text-dark-navy",
           large
             ? "text-[22px] sm:text-[26px]"
             : compact

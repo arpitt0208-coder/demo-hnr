@@ -33,7 +33,7 @@ export function CommunityCard() {
         iconBgClassName="rounded-full bg-primary-yellow/15"
       />
 
-      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#555555] sm:text-[12px]">
+      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#475569] sm:text-[12px]">
         Join riders who share tips, photos, and stories. You&apos;re never just
         a number.
       </p>

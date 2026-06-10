@@ -46,7 +46,7 @@ export function PricingCard() {
         }
       />
 
-      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#555555] sm:text-[12px]">
+      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#475569] sm:text-[12px]">
         No hidden fees. No &apos;oh, we forgot to mention&apos; charges. Just
         honest, all-inclusive rates from start to finish.
       </p>

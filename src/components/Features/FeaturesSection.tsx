@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { Mountain } from "lucide-react";
-import { sectionBg } from "@/assets/images";
+import backBg from "@/assets/images/back.png";
 import { CommunityCard } from "./CommunityCard";
 import { FeaturesSupportCard } from "./FeaturesSupportCard";
 import { InsuredRidesCard } from "./InsuredRidesCard";
@@ -21,16 +20,11 @@ export function FeaturesSection() {
       className="relative w-full overflow-hidden px-4 py-14 sm:px-6 sm:py-16"
       aria-label="What makes us different"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <Image
-          src={sectionBg}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover object-top"
-          priority={false}
-        />
-      </div>
+      <div
+        className="pointer-events-none absolute inset-0 bg-top bg-no-repeat bg-[length:100%_auto] opacity-50"
+        style={{ backgroundImage: `url(${backBg.src})` }}
+        aria-hidden="true"
+      />
 
       <div className="relative mx-auto w-full max-w-[1280px]">
         <div className="flex flex-col items-center text-center">
@@ -50,7 +44,7 @@ export function FeaturesSection() {
             <span className="text-primary-yellow">Makes Us Different</span>
           </h2>
 
-          <p className="mt-4 max-w-[620px] text-[14px] font-medium leading-[1.75] text-text-gray sm:text-[15px]">
+          <p className="mt-4 max-w-[620px] text-[14px] font-medium leading-[1.75] text-[#475569] sm:text-[15px]">
             We&apos;re more than a bike rental. We&apos;re your trusted riding
             partner. From maintained rides to local guides, we make sure your
             journey is safe, smooth, and unforgettable.

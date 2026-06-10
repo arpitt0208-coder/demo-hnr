@@ -18,7 +18,7 @@ export function InsuredRidesCard() {
             />
           </div>
 
-          <h3 className="text-[18px] font-extrabold leading-[1.18] tracking-tight text-black sm:text-[20px]">
+          <h3 className="text-[18px] font-extrabold leading-[1.18] tracking-tight text-dark-navy sm:text-[20px]">
             Insured Rides <span className="text-primary-yellow">Only</span>
           </h3>
 
@@ -27,13 +27,13 @@ export function InsuredRidesCard() {
             aria-hidden="true"
           />
 
-          <p className="mt-2.5 max-w-full text-[11px] font-medium leading-[1.65] text-[#555555] sm:max-w-[320px] sm:text-[12px] lg:max-w-none">
+          <p className="mt-2.5 max-w-full text-[11px] font-medium leading-[1.65] text-[#475569] sm:max-w-[320px] sm:text-[12px] lg:max-w-none">
             Every bike comes with valid government insurance. Because your
             safety matters.
           </p>
         </div>
 
-        <div className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full bg-[#FFF3E0] px-3 py-1.5 text-[10px] font-bold text-[#333333] sm:text-[11px]">
+        <div className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full bg-[#FFF3E0] px-3 py-1.5 text-[10px] font-bold text-dark-navy sm:text-[11px]">
           <ShieldCheck
             className="size-3.5 shrink-0 text-primary-yellow"
             strokeWidth={2}

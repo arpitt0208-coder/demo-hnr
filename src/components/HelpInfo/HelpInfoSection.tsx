@@ -43,7 +43,7 @@ export function HelpInfoSection() {
                 </span>
               </h2>
 
-              <p className="mt-4 max-w-[420px] text-[14px] font-medium leading-[1.75] text-text-gray sm:text-[15px]">
+              <p className="mt-4 max-w-[420px] text-[14px] font-medium leading-[1.75] text-[#475569] sm:text-[15px]">
                 Find quick answers to common questions and important
                 information.
               </p>

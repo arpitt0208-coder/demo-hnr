@@ -32,7 +32,7 @@ export function FeaturesSupportCard() {
         }
       />
 
-      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#555555] sm:text-[12px]">
+      <p className="mt-2 text-[11px] font-medium leading-[1.65] text-[#475569] sm:text-[12px]">
         Real people. Real help. Get support and route tips, whenever you need.
       </p>
     </FeatureCardShell>

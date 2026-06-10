@@ -66,7 +66,7 @@ export function SocialProofSection() {
             </span>
           </h2>
 
-          <p className="mt-4 max-w-[560px] text-[14px] font-medium leading-[1.75] text-white/70 sm:text-[15px]">
+          <p className="mt-4 max-w-[560px] text-[14px] font-medium leading-[1.75] text-white/85 sm:text-[15px]">
             You need a great bike at a fair price—we make that simple. Book with
             confidence, ride with peace of mind, and join riders who keep coming
             back.

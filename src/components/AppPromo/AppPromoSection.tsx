@@ -69,7 +69,7 @@ export function AppPromoSection() {
                   </span>
                 </h2>
 
-                <p className="mt-4 max-w-[380px] text-[14px] font-medium leading-[1.75] text-text-gray sm:text-[15px]">
+                <p className="mt-4 max-w-[380px] text-[14px] font-medium leading-[1.75] text-[#475569] sm:text-[15px]">
                   Download and start your adventure today.
                 </p>
 
@@ -93,7 +93,7 @@ export function AppPromoSection() {
                           <p className="text-[14px] font-bold leading-tight text-dark-navy">
                             {feature.title}
                           </p>
-                          <p className="mt-0.5 text-[12px] font-medium text-text-gray">
+                          <p className="mt-0.5 text-[12px] font-medium text-[#475569]">
                             {feature.subtitle}
                           </p>
                         </div>
@@ -131,7 +131,7 @@ export function AppPromoSection() {
                           <p className="mt-1 text-[13px] font-bold text-dark-navy">
                             {card.label}
                           </p>
-                          <p className="mt-0.5 text-[11px] font-medium leading-snug text-text-gray">
+                          <p className="mt-0.5 text-[11px] font-medium leading-snug text-[#475569]">
                             {card.description}
                           </p>
                         </div>
@@ -169,7 +169,7 @@ export function AppPromoSection() {
                           <p className="mt-1 text-[13px] font-medium text-dark-navy">
                             {card.label}
                           </p>
-                          <p className="mt-0.5 text-[11px] font-medium leading-snug text-text-gray">
+                          <p className="mt-0.5 text-[11px] font-medium leading-snug text-[#475569]">
                             {card.description}
                           </p>
                         </div>
@@ -207,7 +207,7 @@ export function AppPromoSection() {
                         <p className="text-[14px] font-bold leading-tight text-dark-navy">
                           {item.title}
                         </p>
-                        <p className="mt-0.5 text-[12px] font-medium leading-snug text-text-gray">
+                        <p className="mt-0.5 text-[12px] font-medium leading-snug text-[#475569]">
                           {item.subtitle}
                         </p>
                       </div>

@@ -21,8 +21,10 @@ export function FAQItem({ question, answer, className }: FAQItemProps) {
     <motion.div
       animate={isOpen ? "open" : "closed"}
       className={cn(
-        "rounded-xl border border-border transition-colors",
-        isOpen ? "bg-muted/50" : "bg-card",
+        "rounded-xl border transition-colors",
+        isOpen
+          ? "border-primary-yellow/40 bg-[#FFF8E7]"
+          : "border-[#EEF2F6] bg-[#FFFBF0]",
         className,
       )}
     >
@@ -34,8 +36,7 @@ export function FAQItem({ question, answer, className }: FAQItemProps) {
       >
         <span
           className={cn(
-            "text-lg font-medium transition-colors",
-            isOpen ? "text-foreground" : "text-muted-foreground",
+            "text-lg font-semibold transition-colors text-dark-navy",
           )}
         >
           {question}
@@ -50,7 +51,7 @@ export function FAQItem({ question, answer, className }: FAQItemProps) {
           <Plus
             className={cn(
               "h-5 w-5 shrink-0 transition-colors",
-              isOpen ? "text-foreground" : "text-muted-foreground",
+              isOpen ? "text-primary-yellow" : "text-dark-navy",
             )}
             aria-hidden="true"
           />
@@ -65,7 +66,7 @@ export function FAQItem({ question, answer, className }: FAQItemProps) {
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="overflow-hidden px-4"
       >
-        <p className="text-muted-foreground">{answer}</p>
+        <p className="pb-1 text-text-gray">{answer}</p>
       </motion.div>
     </motion.div>
   );
