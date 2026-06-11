@@ -3,6 +3,7 @@ import appText from "./apptext.webp";
 import aboutCardGallery from "./about-card-gallery.png";
 import aboutCardStory from "./about-card-story.png";
 import aboutCardSupport from "./about-card-support.png";
+import blogHero from "./blog-hero.jpg";
 import bhuntar from "./bhuntar.jpg";
 import adventure from "./adventure.avif";
 import kasol from "./kasol.jpeg";
@@ -54,6 +55,7 @@ export {
   appStoreIcon,
   appText,
   adventure,
+  blogHero,
   bhuntar,
   bike,
   card,

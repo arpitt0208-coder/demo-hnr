@@ -3,6 +3,7 @@ import { BookOpen, MapPin, Shield } from "lucide-react";
 import type { StaticImageData } from "next/image";
 import {
   adventure,
+  blogHero,
   bhuntar,
   earnHotel,
   him4,
@@ -56,12 +57,12 @@ export const blogHeroCategories: BlogHeroCategory[] = [
 
 export const blogHeroOverlay = {
   location: "HIMALAYAS",
-  quote: "Every turn tells a story.",
+  quote: "Every turn tells a story",
   subtext: "Where journeys become memories.",
   thumbnail: him5,
 };
 
-export const blogHeroImage = manali;
+export const blogHeroImage = blogHero;
 
 export const blogTrendingTitle = "Our Trending Insights & Stories";
 
