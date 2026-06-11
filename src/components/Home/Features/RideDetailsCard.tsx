@@ -47,18 +47,6 @@ export function RideDetailsCard() {
             &apos;Wait, where do I pick it up?&apos; after booking.
           </p>
         </div>
-
-        <button
-          type="button"
-          className="group mt-4 inline-flex w-fit items-center gap-1.5 rounded-lg bg-primary-yellow px-4 py-2 text-[12px] font-bold text-dark-navy transition-shadow hover:shadow-[0_6px_20px_rgba(239,190,61,0.35)]"
-          aria-label="Know More"
-        >
-          Know More
-          <ArrowRight
-            className="size-4 transition-transform group-hover:translate-x-0.5"
-            aria-hidden="true"
-          />
-        </button>
       </div>
     </article>
   );

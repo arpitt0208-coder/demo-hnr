@@ -122,7 +122,7 @@ export function AboutCoreValuesSection() {
       className="relative w-full overflow-hidden bg-[#FAF8F4]"
       aria-label="Our core values"
     >
-      <div className="pointer-events-none absolute inset-0 min-h-full" aria-hidden="true">
+      <div className="pointer-events-none absolute inset-0 hidden min-h-full lg:block" aria-hidden="true">
         <Image
           src={corebg}
           alt=""
