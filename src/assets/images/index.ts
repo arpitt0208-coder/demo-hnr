@@ -4,10 +4,8 @@ import aboutCardGallery from "./about-card-gallery.png";
 import aboutCardStory from "./about-card-story.png";
 import aboutCardSupport from "./about-card-support.png";
 import bhuntar from "./bhuntar.jpg";
-import bhuntarWebp from "./bhuntar.webp";
 import adventure from "./adventure.avif";
 import kasol from "./kasol.jpeg";
-import kasolBig from "./kasolbig.webp";
 import manali from "./Manali.webp";
 import bike from "./bike.png";
 import card from "./card.webp";
@@ -56,7 +54,6 @@ export {
   appText,
   adventure,
   bhuntar,
-  bhuntarWebp,
   bike,
   card,
   contact,
@@ -73,7 +70,6 @@ export {
   heroBg,
   iphoneFrame15,
   kasol,
-  kasolBig,
   kyc,
   manali,
   mountainbg,

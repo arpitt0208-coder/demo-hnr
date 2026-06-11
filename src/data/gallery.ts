@@ -56,5 +56,5 @@ export const galleryHeroCopy = {
     highlight: "Location Gallery",
   },
   description:
-    "Manali, Kullu, Bhuntar, and Kasol—browse the Himalayan destinations where Hire N Ride is ready for your next trip.",
+    "Manali, Kullu Valley, Leh Ladakh, and more—browse Himalayan destinations where Hire N Ride is ready for your next trip.",
 } as const;
