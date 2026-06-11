@@ -133,9 +133,9 @@ export function AboutCoreValuesSection() {
       </div>
 
       <div className="relative z-10 mx-auto hidden w-full px-10 pb-10 xl:px-16 lg:block">
-        <CoreValuesHeader className="shrink-0 pt-8 xl:pt-10" />
+        <CoreValuesHeader className="shrink-0 pt-12 xl:pt-16" />
 
-        <div className="relative mx-[220px] mt-[180px] min-h-[280px] w-full">
+        <div className="relative mx-[220px] mt-[180px] min-h-[380px] w-full">
           {aboutCoreValues.map((value, index) => (
             <CoreValueCard
               key={value.id}
@@ -154,7 +154,7 @@ export function AboutCoreValuesSection() {
         </div>
       </div>
 
-      <div className="relative z-10 px-4 pt-8 pb-6 sm:px-6 sm:pt-10 sm:pb-6 lg:hidden">
+      <div className="relative z-10 px-4 pt-10 pb-14 sm:px-6 sm:pt-16 sm:pb-12 lg:hidden">
         <CoreValuesHeader />
 
         <div className="mx-auto mt-10 grid max-w-[640px] grid-cols-1 gap-10 sm:mt-12 sm:max-w-none sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12">

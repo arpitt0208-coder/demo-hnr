@@ -111,7 +111,7 @@ export const aboutCoreValues: AboutCoreValue[] = [
     icon: MapPin,
     color: "#F5A623",
     glowColor: "rgba(245, 166, 35, 0.45)",
-    desktopPosition: { top: "8px", left: "10px" },
+    desktopPosition: { top: "-52px", left: "10px" },
   },
   {
     id: "safety-trust",
@@ -122,7 +122,7 @@ export const aboutCoreValues: AboutCoreValue[] = [
     icon: ShieldCheck,
     color: "#3B82F6",
     glowColor: "rgba(59, 130, 246, 0.45)",
-    desktopPosition: { top: "-12px", left: "398px" },
+    desktopPosition: { top: "-75px", left: "398px" },
   },
   {
     id: "community-driven",
@@ -133,7 +133,7 @@ export const aboutCoreValues: AboutCoreValue[] = [
     icon: Users,
     color: "#22C55E",
     glowColor: "rgba(34, 197, 94, 0.45)",
-    desktopPosition: { top: "-5px", right: "762px" },
+    desktopPosition: { top: "-68px", right: "762px" },
   },
   {
     id: "sustainable-tourism",
@@ -144,7 +144,7 @@ export const aboutCoreValues: AboutCoreValue[] = [
     icon: Leaf,
     color: "#8B5CF6",
     glowColor: "rgba(139, 92, 246, 0.45)",
-    desktopPosition: { top: "4px", right: "416px" },
+    desktopPosition: { top: "-60px", right: "416px" },
   },
 ];
 
