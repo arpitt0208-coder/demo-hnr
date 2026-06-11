@@ -1,3 +1,4 @@
+export { AboutCustomerRatingSection } from "./AboutCustomerRatingSection";
 export { AboutCoreValuesSection } from "./AboutCoreValuesSection";
 export { AboutHeroSection } from "./AboutHeroSection";
 export { AboutOurStorySection } from "./AboutOurStorySection";

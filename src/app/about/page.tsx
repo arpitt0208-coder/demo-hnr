@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   AboutCoreValuesSection,
+  AboutCustomerRatingSection,
   AboutHeroSection,
   AboutOurStorySection,
   AboutWhatWeDoSection,
@@ -26,6 +27,7 @@ export default function AboutPage() {
         <AboutOurStorySection />
         <AboutCoreValuesSection />
         <AboutWhyChooseSection />
+        <AboutCustomerRatingSection />
         <Footer />
       </div>
     </main>

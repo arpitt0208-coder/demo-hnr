@@ -1,7 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, Mountain } from "lucide-react";
+import {
+  ClipboardCheck,
+  Handshake,
+  Headphones,
+  Mountain,
+  ShieldCheck,
+  type LucideIcon,
+} from "lucide-react";
 import Image from "next/image";
 import {
   aboutWhyChooseCards,
@@ -9,6 +16,13 @@ import {
   type AboutWhyChooseCard,
 } from "@/data/aboutPage";
 import { cn } from "@/lib/cn";
+
+const BULLET_ICONS: LucideIcon[] = [
+  ClipboardCheck,
+  ShieldCheck,
+  Handshake,
+  Headphones,
+];
 
 function WhyChooseHeader() {
   return (
@@ -20,7 +34,9 @@ function WhyChooseHeader() {
       />
 
       <h2 className="mt-2.5 max-w-[760px] text-[22px] font-extrabold leading-[1.12] tracking-tight text-dark-navy min-[400px]:text-[26px] sm:text-[30px] md:text-[34px] lg:text-[36px]">
-        Why Travelers Choose Hire N Ride Again And Again
+        Why Travelers{" "}
+        <span className="text-primary-yellow">Choose Hire N Ride</span> Again And
+        Again
       </h2>
 
       <p className="mt-2.5 max-w-[620px] text-[13px] font-medium leading-[1.65] text-[#475569] sm:text-[14px]">
@@ -30,7 +46,43 @@ function WhyChooseHeader() {
   );
 }
 
-function WhyChooseBulletList({
+function WhyChooseFeatureItem({
+  label,
+  icon: Icon,
+  color,
+  showDivider,
+}: {
+  label: string;
+  icon: LucideIcon;
+  color: string;
+  showDivider: boolean;
+}) {
+  return (
+    <li
+      className={cn(
+        "flex flex-1 flex-col items-center px-1.5 text-center min-[480px]:px-2 sm:px-2.5",
+        showDivider && "min-[480px]:border-l min-[480px]:border-[#E5E7EB]",
+      )}
+    >
+      <span
+        className="flex size-8 items-center justify-center rounded-full sm:size-9"
+        style={{ backgroundColor: `${color}18` }}
+      >
+        <Icon
+          className="size-4"
+          style={{ color }}
+          strokeWidth={1.75}
+          aria-hidden="true"
+        />
+      </span>
+      <p className="mt-1.5 text-[10px] font-bold leading-snug text-dark-navy min-[400px]:text-[10.5px] sm:mt-2 sm:text-[11px]">
+        {label}
+      </p>
+    </li>
+  );
+}
+
+function WhyChooseFeatureRow({
   bullets,
   color,
 }: {
@@ -38,21 +90,15 @@ function WhyChooseBulletList({
   color: string;
 }) {
   return (
-    <ul className="mt-3 grid grid-cols-1 gap-x-4 gap-y-2 min-[420px]:grid-cols-2 sm:mt-3.5">
-      {bullets.map((bullet) => (
-        <li
+    <ul className="grid grid-cols-2 gap-x-2 gap-y-3 border-t border-[#EEF2F6] px-3.5 py-3 min-[480px]:flex min-[480px]:items-start min-[480px]:gap-0 min-[480px]:px-4 min-[480px]:py-3.5 sm:px-5">
+      {bullets.map((bullet, index) => (
+        <WhyChooseFeatureItem
           key={bullet}
-          className="flex items-start gap-2 text-left text-[11px] font-medium leading-snug text-dark-navy sm:text-[12px]"
-        >
-          <span
-            className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full"
-            style={{ backgroundColor: `${color}22`, color }}
-            aria-hidden="true"
-          >
-            <Check className="size-2.5" strokeWidth={3} />
-          </span>
-          {bullet}
-        </li>
+          label={bullet}
+          icon={BULLET_ICONS[index % BULLET_ICONS.length]}
+          color={color}
+          showDivider={index > 0}
+        />
       ))}
     </ul>
   );
@@ -67,6 +113,9 @@ function WhyChooseCard({
   index: number;
   className?: string;
 }) {
+  const Icon = card.icon;
+  const isReversed = card.side === "right";
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 16 }}
@@ -78,34 +127,66 @@ function WhyChooseCard({
         ease: [0.22, 1, 0.36, 1],
       }}
       className={cn(
-        "overflow-hidden rounded-[18px] border border-[#E8ECF0] bg-white shadow-[0_8px_28px_rgba(15,23,42,0.06)] sm:rounded-[20px]",
+        "overflow-hidden rounded-[18px] border border-[#E8ECF0] bg-white shadow-[0_6px_24px_rgba(15,23,42,0.06)] sm:rounded-[20px]",
         className,
       )}
     >
-      <div className="flex flex-col sm:flex-row">
-        <div className="relative flex min-h-[140px] items-center justify-center bg-[#FAFBFC] p-4 sm:min-h-0 sm:w-[38%] sm:p-5">
-          <Image
-            src={card.image}
-            alt={card.imageAlt}
-            className="relative z-10 h-auto max-h-[120px] w-auto max-w-[85%] object-contain sm:max-h-[132px]"
-          />
+      <div
+        className={cn(
+          "flex flex-col items-center min-[480px]:flex-row min-[480px]:items-stretch",
+          isReversed && "min-[480px]:flex-row-reverse",
+        )}
+      >
+        <div
+          className={cn(
+            "flex w-full shrink-0 items-center justify-center px-3.5 py-3.5 min-[480px]:w-[36%] min-[480px]:self-stretch min-[480px]:px-4 min-[480px]:py-4 sm:w-[34%]",
+            card.iconBgClassName,
+          )}
+        >
+          <div className="relative h-[148px] w-[112px] shrink-0 overflow-hidden rounded-xl shadow-[0_4px_14px_rgba(15,23,42,0.08)] sm:h-[164px] sm:w-[124px]">
+            <Image
+              src={card.image}
+              alt={card.imageAlt}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 640px) 112px, 124px"
+            />
+          </div>
         </div>
 
-        <div className="flex flex-1 flex-col p-4 sm:p-5 sm:pl-4">
-          <h3
-            className="text-left text-[15px] font-extrabold leading-snug sm:text-[16px]"
-            style={{ color: card.color }}
-          >
-            {card.title}
-          </h3>
+        <div className="flex w-full min-w-0 flex-1 flex-col justify-center px-3.5 pb-3.5 min-[480px]:px-4 min-[480px]:py-4 sm:pr-5">
+          <div className="flex items-center gap-2.5">
+            <span
+              className="flex size-8 shrink-0 items-center justify-center rounded-lg sm:size-9"
+              style={{ backgroundColor: `${card.color}18` }}
+            >
+              <Icon
+                className="size-4 sm:size-[18px]"
+                style={{ color: card.color }}
+                strokeWidth={1.75}
+                aria-hidden="true"
+              />
+            </span>
 
-          <p className="mt-2 text-left text-[12px] font-medium leading-[1.65] text-[#64748B] sm:text-[13px]">
+            <div className="min-w-0">
+              <h3 className="text-left text-[16px] font-extrabold leading-tight tracking-tight text-dark-navy sm:text-[17px]">
+                {card.title}
+              </h3>
+              <span
+                className="mt-1.5 block h-[3px] w-8 rounded-full"
+                style={{ backgroundColor: card.color }}
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+
+          <p className="mt-2.5 text-left text-[11px] font-medium leading-[1.65] text-[#4B5563] sm:mt-3 sm:text-[12px]">
             {card.description}
           </p>
-
-          <WhyChooseBulletList bullets={card.bullets} color={card.color} />
         </div>
       </div>
+
+      <WhyChooseFeatureRow bullets={card.bullets} color={card.color} />
     </motion.article>
   );
 }
@@ -133,11 +214,11 @@ function TimelineNode({
       />
 
       <span
-        className="flex size-10 items-center justify-center rounded-full border-2 bg-white shadow-[0_4px_14px_rgba(15,23,42,0.08)] sm:size-11"
+        className="flex size-9 items-center justify-center rounded-full border-2 bg-white shadow-[0_4px_14px_rgba(15,23,42,0.08)]"
         style={{ borderColor: card.color }}
       >
         <Icon
-          className="size-4 sm:size-[18px]"
+          className="size-4"
           style={{ color: card.color }}
           strokeWidth={2}
           aria-hidden="true"
@@ -157,10 +238,19 @@ function WhyChooseTimelineRow({
   const isLeft = card.side === "left";
 
   return (
-    <div className="relative grid grid-cols-[minmax(0,1fr)_44px_minmax(0,1fr)] items-center gap-3 xl:gap-5">
-      <div className={cn(!isLeft && "hidden lg:block")}>
+    <div className="relative grid grid-cols-[minmax(0,1fr)_40px_minmax(0,1fr)] items-center gap-2.5 xl:gap-4">
+      <div
+        className={cn(
+          !isLeft && "hidden lg:block",
+          isLeft && "flex justify-end",
+        )}
+      >
         {isLeft ? (
-          <WhyChooseCard card={card} index={index} />
+          <WhyChooseCard
+            card={card}
+            index={index}
+            className="w-full max-w-[620px]"
+          />
         ) : (
           <span aria-hidden="true" />
         )}
@@ -168,9 +258,18 @@ function WhyChooseTimelineRow({
 
       <TimelineNode card={card} align={card.side} />
 
-      <div className={cn(isLeft && "hidden lg:block")}>
+      <div
+        className={cn(
+          isLeft && "hidden lg:block",
+          !isLeft && "flex justify-start",
+        )}
+      >
         {!isLeft ? (
-          <WhyChooseCard card={card} index={index} />
+          <WhyChooseCard
+            card={card}
+            index={index}
+            className="w-full max-w-[620px]"
+          />
         ) : (
           <span aria-hidden="true" />
         )}
@@ -192,19 +291,19 @@ export function AboutWhyChooseSection() {
       <div className="relative mx-auto w-full max-w-[1120px]">
         <WhyChooseHeader />
 
-        <div className="mt-8 space-y-5 sm:mt-9 lg:hidden">
+        <div className="mx-auto mt-7 max-w-[620px] space-y-4 sm:mt-8 sm:space-y-5 lg:hidden">
           {aboutWhyChooseCards.map((card, index) => (
             <WhyChooseCard key={card.id} card={card} index={index} />
           ))}
         </div>
 
-        <div className="relative mt-8 hidden sm:mt-9 lg:block">
+        <div className="relative mt-7 hidden sm:mt-8 lg:block">
           <div
-            className="pointer-events-none absolute left-1/2 top-6 bottom-6 w-px -translate-x-1/2 bg-[#E2E8F0]"
+            className="pointer-events-none absolute left-1/2 top-5 bottom-5 w-px -translate-x-1/2 bg-[#E2E8F0]"
             aria-hidden="true"
           />
 
-          <div className="flex flex-col gap-8 xl:gap-10">
+          <div className="flex flex-col gap-6 xl:gap-7">
             {aboutWhyChooseCards.map((card, index) => (
               <WhyChooseTimelineRow key={card.id} card={card} index={index} />
             ))}

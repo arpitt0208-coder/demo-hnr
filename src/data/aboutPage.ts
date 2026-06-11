@@ -8,8 +8,10 @@ import {
   Leaf,
   MapPin,
   Mountain,
+  Route,
   Shield,
   ShieldCheck,
+  Star,
   Timer,
   Users,
   Zap,
@@ -18,10 +20,9 @@ import type { StaticImageData } from "next/image";
 import {
   aboutCardGallery,
   aboutCardSupport,
-  bike,
   him4,
   him5,
-  mountainbg,
+  kasol,
   safe2,
 } from "@/assets/images";
 
@@ -326,7 +327,7 @@ export const aboutWhyChooseCards: AboutWhyChooseCard[] = [
       "24/7 roadside help",
     ],
     image: safe2,
-    imageAlt: "Safety shield illustration",
+    imageAlt: "Rider in gear standing next to a motorcycle in the Himalayas",
     icon: ShieldCheck,
     color: "#F5A623",
     iconBgClassName: "bg-[#FFFBF0]",
@@ -343,8 +344,8 @@ export const aboutWhyChooseCards: AboutWhyChooseCard[] = [
       "Multiple bike categories",
       "Adventure-ready fleet",
     ],
-    image: bike,
-    imageAlt: "Premium motorcycle illustration",
+    image: him5,
+    imageAlt: "Rider on a Royal Enfield Himalayan along a mountain road",
     icon: Bike,
     color: "#3B82F6",
     iconBgClassName: "bg-[#EFF6FF]",
@@ -362,7 +363,7 @@ export const aboutWhyChooseCards: AboutWhyChooseCard[] = [
       "Local insights",
     ],
     image: aboutCardSupport,
-    imageAlt: "Customer support illustration",
+    imageAlt: "Hire N Ride support team assisting a customer in the showroom",
     icon: Headphones,
     color: "#22C55E",
     iconBgClassName: "bg-[#F0FDF4]",
@@ -379,14 +380,51 @@ export const aboutWhyChooseCards: AboutWhyChooseCard[] = [
       "Local expertise",
       "Mountain-ready service",
     ],
-    image: mountainbg,
-    imageAlt: "Himalayan mountain landscape illustration",
+    image: aboutCardGallery,
+    imageAlt: "Group of riders overlooking snow-capped Himalayan peaks at sunset",
     icon: Mountain,
     color: "#8B5CF6",
     iconBgClassName: "bg-[#F5F3FF]",
     side: "right",
   },
 ];
+
+export type AboutCustomerRatingStat = {
+  id: string;
+  value: string;
+  label: string;
+  icon: LucideIcon;
+};
+
+export const aboutCustomerRating = {
+  score: "4.8",
+  maxScore: "5",
+  title: "Customer Rating",
+  description:
+    "Join thousands of satisfied customers who have experienced the magic of the Himalayas with us.",
+  image: kasol,
+  imageAlt: "Scenic Himalayan lake surrounded by snow-capped mountains",
+  stats: [
+    {
+      id: "happy-customers",
+      value: "10,000+",
+      label: "Happy Customers",
+      icon: Users,
+    },
+    {
+      id: "himalayan-routes",
+      value: "50+",
+      label: "Himalayan Routes",
+      icon: Route,
+    },
+    {
+      id: "satisfaction-rate",
+      value: "99%",
+      label: "Satisfaction Rate",
+      icon: Star,
+    },
+  ] satisfies AboutCustomerRatingStat[],
+};
 
 export const aboutWhatWeDoImages: AboutGalleryImage[] = [
   {
