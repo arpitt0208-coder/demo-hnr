@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { BrowseVehiclesSection } from "@/components/Explore/BrowseVehiclesSection";
-import { ExploreHeroSection } from "@/components/Explore/ExploreHeroSection";
-import { Footer } from "@/components/Footer";
-import { Navbar } from "@/components/Navbar/Navbar";
+import {
+  BrowseVehiclesSection,
+  ExploreHeroSection,
+} from "@/components/Explore";
+import { Footer, Navbar } from "@/components/Layout";
 import { WhatsAppContactButton } from "@/components/UI/WhatsAppContactButton";
 import { browseVehicles } from "@/data/vehicles";
 

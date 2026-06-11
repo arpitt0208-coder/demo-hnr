@@ -1,13 +1,14 @@
-import { AppPromoSection } from "@/components/AppPromo";
-import { HelpInfoSection } from "@/components/HelpInfo";
-import { FeaturesSection } from "@/components/Features";
-import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/Hero/Hero";
-import { FindYourRideSection } from "@/components/FindYourRide";
-import { HowItWorksSection } from "@/components/HowItWorks";
-import { LocationsMapSection } from "@/components/Locations";
-import { Navbar } from "@/components/Navbar/Navbar";
-import { SocialProofSection } from "@/components/SocialProof";
+import {
+  HomeAppPromoSection,
+  HomeFeaturesSection,
+  HomeFindYourRideSection,
+  HomeHelpInfoSection,
+  HomeHero,
+  HomeHowItWorksSection,
+  HomeLocationsMapSection,
+  HomeSocialProofSection,
+} from "@/components/Home";
+import { Footer, Navbar } from "@/components/Layout";
 import { WhatsAppContactButton } from "@/components/UI/WhatsAppContactButton";
 
 export default function Home() {
@@ -16,16 +17,16 @@ export default function Home() {
       <Navbar />
       <WhatsAppContactButton />
       <div className="relative z-10 mx-auto w-full max-w-full overflow-x-clip">
-        <Hero />
+        <HomeHero />
         <div className="relative z-10 mx-auto w-full max-w-[1440px] overflow-x-clip px-0">
-          <LocationsMapSection />
-          <HowItWorksSection />
-          <FindYourRideSection />
+          <HomeLocationsMapSection />
+          <HomeHowItWorksSection />
+          <HomeFindYourRideSection />
         </div>
-        <SocialProofSection />
-        <FeaturesSection />
-        <AppPromoSection />
-        <HelpInfoSection />
+        <HomeSocialProofSection />
+        <HomeFeaturesSection />
+        <HomeAppPromoSection />
+        <HomeHelpInfoSection />
         <Footer />
       </div>
     </main>

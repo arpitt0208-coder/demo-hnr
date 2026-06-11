@@ -1,4 +1,4 @@
-import type { MediaItemType } from "@/components/UI/interactive-bento-gallery";
+import type { MediaItemType } from "@/components/Gallery/GalleryBentoGallery";
 import type { GalleryLocationImage } from "@/data/galleryLocations";
 
 const BENTO_SPAN_PATTERNS = [

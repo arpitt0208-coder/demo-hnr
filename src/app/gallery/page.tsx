@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Footer } from "@/components/Footer";
-import { LocationGallerySections } from "@/components/Gallery/LocationGallerySections";
-import { Navbar } from "@/components/Navbar/Navbar";
+import {
+  GalleryImageAccordion,
+  GalleryLocationSections,
+} from "@/components/Gallery";
+import { Footer, Navbar } from "@/components/Layout";
 import { WhatsAppContactButton } from "@/components/UI/WhatsAppContactButton";
-import { GalleryImageAccordion } from "@/components/UI/interactive-image-accordion";
 import {
   galleryAccordionItems,
   galleryHeroBackground,
@@ -48,12 +49,12 @@ export default function GalleryPage() {
               }
               description={galleryHeroCopy.description}
               ctaLabel="Explore bikes"
-              ctaHref="#location-galleries"
+              ctaHref="/explore"
             />
           </div>
         </section>
 
-        <LocationGallerySections />
+        <GalleryLocationSections />
 
         <Footer />
       </div>

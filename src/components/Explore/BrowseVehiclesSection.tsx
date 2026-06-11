@@ -9,12 +9,18 @@ import { VehicleCard, type BrowseVehicle } from "@/app/explore/VehicleCard";
 
 type BrowseVehiclesSectionProps = {
   vehicles: BrowseVehicle[];
+  initialLocation?: string;
+  lockLocationFilter?: boolean;
 };
 
-export function BrowseVehiclesSection({ vehicles }: BrowseVehiclesSectionProps) {
+export function BrowseVehiclesSection({
+  vehicles,
+  initialLocation = "all",
+  lockLocationFilter = false,
+}: BrowseVehiclesSectionProps) {
   const [filters, setFilters] = useState<VehicleFilters>({
     category: "all",
-    location: "all",
+    location: initialLocation,
   });
 
   const locationCounts = useMemo(() => {
@@ -29,11 +35,13 @@ export function BrowseVehiclesSection({ vehicles }: BrowseVehiclesSectionProps) 
       const matchesCategory =
         filters.category === "all" || vehicle.category === filters.category;
       const matchesLocation =
-        filters.location === "all" || vehicle.location === filters.location;
+        lockLocationFilter ||
+        filters.location === "all" ||
+        vehicle.location === filters.location;
 
       return matchesCategory && matchesLocation;
     });
-  }, [filters.category, filters.location, vehicles]);
+  }, [filters.category, filters.location, lockLocationFilter, vehicles]);
 
   return (
     <>
@@ -41,6 +49,7 @@ export function BrowseVehiclesSection({ vehicles }: BrowseVehiclesSectionProps) 
         filters={filters}
         onFiltersChange={setFilters}
         locationCounts={locationCounts}
+        hideLocationFilter={lockLocationFilter}
       />
 
       <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

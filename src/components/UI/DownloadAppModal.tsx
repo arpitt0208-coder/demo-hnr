@@ -5,10 +5,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { qrDownloadApp } from "@/assets/images";
+import { APP_STORE_URL, GOOGLE_PLAY_URL } from "@/lib/appStoreLinks";
 import { cn } from "@/lib/cn";
-
-const ANDROID_DOWNLOAD_HREF = "#download";
-const IOS_DOWNLOAD_HREF = "#download";
 
 const downloadButtonClassName = cn(
   "flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#1A1A1A] text-[13px] font-bold text-white shadow-[0_4px_16px_rgba(15,23,42,0.18)] transition-all hover:bg-[#111111] hover:shadow-[0_6px_20px_rgba(15,23,42,0.24)] active:scale-[0.99] sm:h-[52px] sm:text-[14px]",
@@ -118,13 +116,20 @@ export function DownloadAppModal({ isOpen, onClose }: DownloadAppModalProps) {
 
           <div className="mt-6 flex w-full flex-col gap-2.5 sm:mt-7 sm:gap-3">
             <a
-              href={ANDROID_DOWNLOAD_HREF}
+              href={GOOGLE_PLAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className={downloadButtonClassName}
             >
               <Download className="size-4 shrink-0" aria-hidden="true" />
               Download for Android
             </a>
-            <a href={IOS_DOWNLOAD_HREF} className={downloadButtonClassName}>
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={downloadButtonClassName}
+            >
               <Download className="size-4 shrink-0" aria-hidden="true" />
               Download for iOS
             </a>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { appStoreIcon, googlePlayIcon } from "@/assets/images";
+import { APP_STORE_URL, GOOGLE_PLAY_URL } from "@/lib/appStoreLinks";
 import { cn } from "@/lib/cn";
 
 type StoreButtonVariant = "default" | "footer";
@@ -45,7 +46,7 @@ type StoreBadgeProps = {
 };
 
 function StoreBadge({
-  href = "#download",
+  href,
   ariaLabel,
   icon,
   iconWidth,
@@ -59,6 +60,8 @@ function StoreBadge({
   return (
     <a
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       aria-label={ariaLabel}
       className={cn(
         badgeBaseClassName,
@@ -112,7 +115,7 @@ type StoreButtonProps = {
 };
 
 function AppStoreButton({
-  href = "#download",
+  href = APP_STORE_URL,
   variant = "default",
 }: StoreButtonProps) {
   return (
@@ -130,7 +133,7 @@ function AppStoreButton({
 }
 
 function GooglePlayButton({
-  href = "#download",
+  href = GOOGLE_PLAY_URL,
   variant = "default",
 }: StoreButtonProps) {
   return (

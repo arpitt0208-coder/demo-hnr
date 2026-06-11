@@ -282,13 +282,13 @@ export function VehicleBookingSidebar({
             <p className="text-[16px] font-extrabold leading-tight text-white sm:text-[18px]">
               {vehicle.promoTitle}
             </p>
-            <button
-              type="button"
+            <Link
+              href="/explore"
               className="mt-2.5 inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-[11px] font-bold text-dark-navy transition-opacity hover:opacity-90 sm:mt-3 sm:px-4 sm:py-2 sm:text-[12px]"
             >
               {vehicle.promoCta}
               <ArrowRight className="size-3.5" aria-hidden="true" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>

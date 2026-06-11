@@ -7,6 +7,7 @@ export interface Bike {
   brand: string;
   model: string;
   location: string;
+  locationSlug: string;
   href: string;
   image: StaticImageData;
   position: {
@@ -28,9 +29,10 @@ export const featuredBikes: Bike[] = [
     brand: "ROYAL ENFIELD",
     model: "Scram 411",
     location: "Manali",
+    locationSlug: "manali",
     href: vehicleDetailPath("scram-411"),
     image: bikeImages.scram,
-    position: { top: "35%", left: "0%", opacity: 1, transform: "none" },
+    position: { top: "35%", left: "-3%", opacity: 1, transform: "none" },
     floatDelay: 0.8,
     floatDuration: 5,
   },
@@ -39,9 +41,10 @@ export const featuredBikes: Bike[] = [
     brand: "ROYAL ENFIELD",
     model: "Meteor 350",
     location: "Kullu",
+    locationSlug: "kullu",
     href: vehicleDetailPath("meteor-350"),
     image: bikeImages.meteor,
-    position: { top: "26%", right: "0%", opacity: 1, transform: "none" },
+    position: { top: "26%", right: "-4%", opacity: 1, transform: "none" },
     floatDelay: 1.2,
     floatDuration: 4.5,
   },
@@ -50,6 +53,7 @@ export const featuredBikes: Bike[] = [
     brand: "ROYAL ENFIELD",
     model: "Himalayan 450",
     location: "Leh Ladakh",
+    locationSlug: "leh-ladakh",
     href: vehicleDetailPath("himalayan-450"),
     image: bikeImages.himalayan,
     position: {
@@ -67,6 +71,7 @@ export const featuredBikes: Bike[] = [
     brand: "ROYAL ENFIELD",
     model: "Hunter 350",
     location: "Kasol",
+    locationSlug: "kasol",
     href: vehicleDetailPath("hunter-350"),
     image: bikeImages.hunter,
     position: {

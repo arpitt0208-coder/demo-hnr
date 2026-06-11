@@ -15,6 +15,7 @@ type BrowseVehiclesFilterProps = {
   filters: VehicleFilters;
   onFiltersChange: (filters: VehicleFilters) => void;
   locationCounts: Record<string, number>;
+  hideLocationFilter?: boolean;
 };
 
 const categoryOptions = [
@@ -49,6 +50,7 @@ export function BrowseVehiclesFilter({
   filters,
   onFiltersChange,
   locationCounts,
+  hideLocationFilter = false,
 }: BrowseVehiclesFilterProps) {
   const categoryId = useId();
   const locationId = useId();
@@ -97,7 +99,12 @@ export function BrowseVehiclesFilter({
         </h3>
       </div>
 
-      <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+      <div
+        className={cn(
+          "mt-5 grid grid-cols-1 gap-4 sm:gap-5",
+          hideLocationFilter ? "max-w-md" : "sm:grid-cols-2",
+        )}
+      >
         <div className="space-y-2">
           <Label
             htmlFor={categoryId}
@@ -124,50 +131,52 @@ export function BrowseVehiclesFilter({
           </SelectNative>
         </div>
 
-        <div className="space-y-2">
-          <Label
-            htmlFor={locationId}
-            className="text-[13px] font-medium text-[#64748B]"
-          >
-            Location
-          </Label>
-          <div className="relative">
-            <SelectNative
-              id={locationId}
-              value={location}
-              onChange={(event) =>
-                onFiltersChange({ ...filters, location: event.target.value })
-              }
-              className={cn(
-                selectClassName,
-                "border-[#E2E8F0] ps-3.5",
-                location !== "all" ? "pe-[4.5rem]" : "pe-10",
-              )}
+        {!hideLocationFilter ? (
+          <div className="space-y-2">
+            <Label
+              htmlFor={locationId}
+              className="text-[13px] font-medium text-[#64748B]"
             >
-              {locationOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </SelectNative>
-            {location !== "all" && (
-              <div className="absolute end-9 top-1/2 z-10 flex -translate-y-1/2 items-center">
-                <button
-                  type="button"
-                  aria-label="Clear location filter"
-                  onClick={clearLocation}
-                  className="flex size-7 items-center justify-center text-[#94A3B8] transition-colors hover:text-dark-navy"
-                >
-                  <X className="size-3.5" strokeWidth={2.5} aria-hidden="true" />
-                </button>
-                <span
-                  className="mx-1 h-5 w-px bg-[#E2E8F0]"
-                  aria-hidden="true"
-                />
-              </div>
-            )}
+              Location
+            </Label>
+            <div className="relative">
+              <SelectNative
+                id={locationId}
+                value={location}
+                onChange={(event) =>
+                  onFiltersChange({ ...filters, location: event.target.value })
+                }
+                className={cn(
+                  selectClassName,
+                  "border-[#E2E8F0] ps-3.5",
+                  location !== "all" ? "pe-[4.5rem]" : "pe-10",
+                )}
+              >
+                {locationOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </SelectNative>
+              {location !== "all" && (
+                <div className="absolute end-9 top-1/2 z-10 flex -translate-y-1/2 items-center">
+                  <button
+                    type="button"
+                    aria-label="Clear location filter"
+                    onClick={clearLocation}
+                    className="flex size-7 items-center justify-center text-[#94A3B8] transition-colors hover:text-dark-navy"
+                  >
+                    <X className="size-3.5" strokeWidth={2.5} aria-hidden="true" />
+                  </button>
+                  <span
+                    className="mx-1 h-5 w-px bg-[#E2E8F0]"
+                    aria-hidden="true"
+                  />
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
 
       {hasActiveFilters && (

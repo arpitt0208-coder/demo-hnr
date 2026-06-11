@@ -31,7 +31,7 @@ export const aboutCards: AboutCard[] = [
     description:
       "Discover how we started, what drives us, and why riders across India trust us for every road trip.",
     cta: "Explore our story",
-    href: "#about",
+    href: "/about",
     image: aboutCardStory,
     icon: Users,
   },
@@ -64,7 +64,7 @@ export type AboutQuickLink = {
 };
 
 export const aboutQuickLinks: AboutQuickLink[] = [
-  { label: "About Hire N Ride", href: "#about", icon: Users },
+  { label: "About Hire N Ride", href: "/about", icon: Users },
   { label: "All blogs", href: "#blogs", icon: FileText },
   { label: "Gallery", href: "/gallery", icon: ImageIcon },
   { label: "Contact Us", href: "/contact", icon: Phone },

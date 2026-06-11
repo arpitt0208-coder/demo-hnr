@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { ContactHelpSection } from "@/components/Contact/ContactHelpSection";
-import { ContactHeroSection } from "@/components/Contact/ContactHeroSection";
-import { ContactIntroSection } from "@/components/Contact/ContactIntroSection";
-import { Footer } from "@/components/Footer";
-import { Navbar } from "@/components/Navbar/Navbar";
+import {
+  ContactHelpSection,
+  ContactHeroSection,
+  ContactIntroSection,
+} from "@/components/Contact";
+import { Footer, Navbar } from "@/components/Layout";
 import { WhatsAppContactButton } from "@/components/UI/WhatsAppContactButton";
 
 export const metadata: Metadata = {

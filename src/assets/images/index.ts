@@ -10,6 +10,7 @@ import manali from "./Manali.webp";
 import bike from "./bike.png";
 import card from "./card.webp";
 import contact from "./contact.png";
+import corebg from "./corebg.png";
 import heroBg from "./bg.png";
 import faqsec from "./faqsec.png";
 import fee from "./fee.webp";
@@ -57,6 +58,7 @@ export {
   bike,
   card,
   contact,
+  corebg,
   downloadAppVideoPoster,
   earnHotel,
   earnRestaurant,

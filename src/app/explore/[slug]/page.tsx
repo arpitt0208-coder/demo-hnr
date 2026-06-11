@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Footer } from "@/components/Footer";
-import { Navbar } from "@/components/Navbar/Navbar";
+import { Footer, Navbar } from "@/components/Layout";
 import { WhatsAppContactButton } from "@/components/UI/WhatsAppContactButton";
-import { VehicleDetailView } from "@/components/VehicleDetail/VehicleDetailView";
+import { VehicleDetailView } from "@/components/VehicleDetail";
 import {
   getRelatedVehicles,
   getVehicleBySlug,
