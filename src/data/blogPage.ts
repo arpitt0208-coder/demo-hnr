@@ -249,9 +249,6 @@ export const blogRelatedPostSlugs = [
   "how-instant-bike-booking-works-at-hire-n-ride",
 ] as const;
 
-export const blogRelatedHighlightedSlug =
-  "kasol-vs-tosh-vs-malana-best-place-to-rent-a-bike";
-
 export function getBlogRelatedPosts(): BlogPost[] {
   return blogRelatedPostSlugs
     .map((slug) => blogPosts.find((post) => post.slug === slug))
