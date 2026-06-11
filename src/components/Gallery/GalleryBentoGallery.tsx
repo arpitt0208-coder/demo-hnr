@@ -345,7 +345,7 @@ const GalleryModal = ({
               <motion.button
                 type="button"
                 aria-label="Previous image"
-                className="absolute left-2 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70 sm:-left-14 sm:size-11"
+                className="absolute left-2 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70 md:-left-14 md:size-11"
                 onClick={(event) => {
                   event.stopPropagation();
                   goToPrevious();
@@ -358,7 +358,7 @@ const GalleryModal = ({
               <motion.button
                 type="button"
                 aria-label="Next image"
-                className="absolute right-2 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70 sm:-right-14 sm:size-11"
+                className="absolute right-2 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70 md:-right-14 md:size-11"
                 onClick={(event) => {
                   event.stopPropagation();
                   goToNext();
@@ -469,7 +469,7 @@ function BentoMediaGrid({
 }: BentoMediaGridProps) {
   return (
     <motion.div
-      className="grid auto-rows-[60px] grid-cols-1 gap-3 sm:grid-cols-3 md:grid-cols-4"
+      className="grid auto-rows-[minmax(160px,45vw)] grid-cols-1 gap-3 sm:auto-rows-[60px] sm:grid-cols-3 md:grid-cols-4"
       initial="hidden"
       animate="visible"
       variants={{

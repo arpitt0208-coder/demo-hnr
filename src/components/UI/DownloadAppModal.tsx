@@ -79,7 +79,7 @@ export function DownloadAppModal({ isOpen, onClose }: DownloadAppModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[400px] rounded-2xl bg-white px-6 py-7 shadow-[0_24px_80px_rgba(15,23,42,0.18)] sm:max-w-[420px] sm:px-8 sm:py-8"
+        className="relative max-h-[calc(100dvh-2rem)] w-full max-w-[400px] overflow-y-auto rounded-2xl bg-white px-6 py-7 shadow-[0_24px_80px_rgba(15,23,42,0.18)] sm:max-w-[420px] sm:px-8 sm:py-8"
         onClick={(event) => event.stopPropagation()}
       >
         <button

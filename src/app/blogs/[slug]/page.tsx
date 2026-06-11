@@ -44,7 +44,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <Navbar />
       <WhatsAppContactButton />
       <div className="relative z-10 mx-auto w-full max-w-full overflow-x-clip">
-        <article className="px-4 pb-12 pt-24 sm:px-6 sm:pt-28 md:px-10 lg:px-16 xl:px-20">
+        <article className="px-4 pb-24 pt-24 sm:px-6 sm:pb-12 sm:pt-28 md:px-10 lg:px-16 xl:px-20">
           <div className="mx-auto w-full max-w-[800px]">
             <Link
               href="/blogs"

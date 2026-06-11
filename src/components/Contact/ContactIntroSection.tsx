@@ -30,7 +30,7 @@ export function ContactIntroSection() {
           />
         </div>
 
-        <div className="relative z-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8 sm:pr-[min(48vw,440px)] lg:gap-12 lg:pr-[min(44vw,520px)]">
+        <div className="relative z-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8 sm:pr-[min(52vw,480px)] lg:gap-12 lg:pr-[min(48vw,560px)]">
           <div className="flex size-[72px] shrink-0 items-center justify-center rounded-[20px] bg-[#FFF0D4] sm:size-[80px] lg:size-[88px]">
             <Headphones
               className="size-8 text-dark-navy sm:size-9"

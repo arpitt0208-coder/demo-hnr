@@ -89,7 +89,10 @@ function CoreValueCard({
         delay: index * 0.08,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className={cn("flex w-[240px] flex-col items-center text-center", className)}
+      className={cn(
+        "mx-auto flex w-full max-w-[240px] flex-col items-center text-center",
+        className,
+      )}
       style={style}
     >
       <ValueNumberBadge number={value.number} color={value.color} />

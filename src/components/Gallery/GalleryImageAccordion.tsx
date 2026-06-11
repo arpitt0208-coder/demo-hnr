@@ -39,8 +39,10 @@ function AccordionItem({ item, isActive, onActivate }: AccordionItemProps) {
       aria-label={item.title}
       transition={panelSpring}
       className={cn(
-        "relative h-[300px] min-w-0 cursor-pointer overflow-hidden rounded-2xl border-0 p-0 sm:h-[360px] lg:h-[420px]",
-        isActive ? "flex-[4]" : "flex-[0.38] max-w-[56px] sm:max-w-[64px]",
+        "relative h-[280px] min-w-0 cursor-pointer overflow-hidden rounded-2xl border-0 p-0 min-[400px]:h-[300px] sm:h-[360px] lg:h-[420px]",
+        isActive
+          ? "flex-[4]"
+          : "min-w-[44px] flex-1 sm:flex-[0.38] sm:max-w-[64px]",
       )}
       onMouseEnter={onActivate}
       onFocus={onActivate}
@@ -81,7 +83,7 @@ function AccordionItem({ item, isActive, onActivate }: AccordionItemProps) {
           "pointer-events-none absolute left-1/2 z-10 max-w-[calc(100%-1rem)] truncate text-base font-semibold text-white sm:text-lg",
           isActive
             ? "bottom-6 -translate-x-1/2"
-            : "bottom-[5.5rem] w-max max-w-none -translate-x-1/2 origin-center",
+            : "bottom-[5.5rem] hidden max-w-[calc(100%-0.5rem)] -translate-x-1/2 origin-center sm:block sm:w-max sm:max-w-none",
         )}
         animate={{
           rotate: isActive ? 0 : 90,
@@ -150,7 +152,7 @@ export function GalleryImageAccordion({
           <div className="w-full min-w-0 lg:w-1/2">
             <motion.div
               layout
-              className="flex w-full max-w-full flex-row items-stretch justify-center gap-2 overflow-hidden p-2 sm:gap-3 sm:p-4"
+              className="flex w-full max-w-full flex-row items-stretch justify-center gap-1.5 overflow-x-auto overflow-y-hidden p-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-3 sm:overflow-hidden sm:p-4 [&::-webkit-scrollbar]:hidden"
             >
               {items.map((item, index) => (
                 <AccordionItem

@@ -10,7 +10,7 @@ import {
   Copy,
   Heart,
   Headphones,
-  MessageCircle,
+  Share2,
   ShieldCheck,
   Wallet,
 } from "lucide-react";
@@ -18,7 +18,7 @@ import type { Vehicle } from "@/data/vehicles";
 import { vehiclePromoImage } from "@/data/vehicles";
 import { DownloadAppModal } from "@/components/UI/DownloadAppModal";
 import ShinyButton from "@/components/UI/shiny-button";
-import { FacebookIcon } from "@/components/UI/social-icons";
+import { FacebookIcon, WhatsAppIcon } from "@/components/UI/social-icons";
 import { cn } from "@/lib/cn";
 import { getTrustIconStyle } from "./vehicle-detail-icons";
 
@@ -39,9 +39,12 @@ const trustItems = [
 ] as const;
 
 const shareButtonBase =
-  "flex h-8 w-full min-w-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-neutral-200 bg-white px-2 text-[11px] font-medium leading-none text-neutral-700 whitespace-nowrap transition-all duration-200 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 sm:text-xs";
+  "inline-flex h-8 w-full min-w-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-neutral-200 bg-white px-2 text-neutral-700 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1";
 
-const shareIconClass = "size-3 shrink-0 sm:size-3.5";
+const shareLabelClass = "text-[10px] font-medium leading-none sm:text-[11px]";
+
+const shareIconClass =
+  "flex size-3 shrink-0 items-center justify-center sm:size-3.5 [&_svg]:size-full";
 
 export function VehicleBookingSidebar({
   vehicle,
@@ -189,21 +192,21 @@ export function VehicleBookingSidebar({
           Save this bike
         </button>
 
-        <div className="mt-3 rounded-xl border border-neutral-200 p-2.5 sm:p-3">
+        <div className="mt-3 rounded-xl border border-neutral-200 p-3">
           <div className="flex items-center justify-between gap-2">
-            <p className="text-[11px] font-semibold leading-none text-neutral-900 sm:text-xs">
+            <p className="text-xs font-semibold leading-none text-neutral-900">
               Share this bike
             </p>
             <p
               className={cn(
-                "shrink-0 text-[11px] font-medium leading-none transition-colors sm:text-xs",
+                "shrink-0 text-xs font-medium leading-none transition-colors",
                 copied ? "text-emerald-600" : "text-neutral-400",
               )}
             >
               {copied ? "Link copied" : "Tap to share"}
             </p>
           </div>
-          <div className="mt-2.5 grid grid-cols-2 gap-2 [&>*]:min-h-8 [&>*]:w-full">
+          <div className="mt-3 grid grid-cols-2 gap-2">
             <a
               href={
                 shareUrl
@@ -214,11 +217,13 @@ export function VehicleBookingSidebar({
               rel="noopener noreferrer"
               className={cn(
                 shareButtonBase,
-                "hover:-translate-y-0.5 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700 focus-visible:ring-emerald-300",
+                "hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700 focus-visible:ring-emerald-300",
               )}
             >
-              <MessageCircle className={shareIconClass} aria-hidden="true" />
-              WhatsApp
+              <span className={shareIconClass} aria-hidden="true">
+                <WhatsAppIcon />
+              </span>
+              <span className={shareLabelClass}>WhatsApp</span>
             </a>
             <a
               href={
@@ -230,11 +235,13 @@ export function VehicleBookingSidebar({
               rel="noopener noreferrer"
               className={cn(
                 shareButtonBase,
-                "hover:-translate-y-0.5 hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700 focus-visible:ring-sky-300",
+                "hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700 focus-visible:ring-sky-300",
               )}
             >
-              <FacebookIcon className={shareIconClass} />
-              Facebook
+              <span className={shareIconClass} aria-hidden="true">
+                <FacebookIcon />
+              </span>
+              <span className={shareLabelClass}>Facebook</span>
             </a>
             <button
               type="button"
@@ -242,22 +249,32 @@ export function VehicleBookingSidebar({
               onClick={handleNativeShare}
               className={cn(
                 shareButtonBase,
-                "hover:-translate-y-0.5 hover:border-violet-200 hover:bg-violet-50 hover:text-violet-700 focus-visible:ring-neutral-300",
+                "hover:border-violet-200 hover:bg-violet-50 hover:text-violet-700 focus-visible:ring-violet-300",
               )}
             >
-              <MessageCircle className={shareIconClass} aria-hidden="true" />
-              Share
+              <Share2
+                className="size-3 shrink-0 sm:size-3.5"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+              <span className={shareLabelClass}>Share</span>
             </button>
             <button
               type="button"
               onClick={handleCopyLink}
               className={cn(
                 shareButtonBase,
-                "hover:-translate-y-0.5 hover:border-neutral-300 hover:bg-neutral-50 focus-visible:ring-neutral-300",
+                "hover:border-neutral-300 hover:bg-neutral-50 focus-visible:ring-neutral-300",
               )}
             >
-              <Copy className={shareIconClass} aria-hidden="true" />
-              Copy URL
+              <Copy
+                className="size-3 shrink-0 sm:size-3.5"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+              <span className={cn(shareLabelClass, "whitespace-nowrap")}>
+                Copy URL
+              </span>
             </button>
           </div>
         </div>

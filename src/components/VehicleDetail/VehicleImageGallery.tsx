@@ -58,7 +58,11 @@ export function VehicleImageGallery({
               aria-label="Share this bike"
               className="flex size-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#9CA3AF] shadow-[0_1px_4px_rgba(15,23,42,0.06)] transition-colors hover:text-dark-navy"
             >
-              <Share2 className="size-3.5" strokeWidth={2} aria-hidden="true" />
+              <Share2
+                className="size-3.5 shrink-0"
+                strokeWidth={2.25}
+                aria-hidden="true"
+              />
             </button>
             <button
               type="button"
@@ -97,9 +101,13 @@ export function VehicleImageGallery({
 
           <button
             type="button"
-            className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-[11px] font-medium text-dark-navy shadow-[0_1px_4px_rgba(15,23,42,0.08)]"
+            className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-[10px] font-medium leading-none text-dark-navy shadow-[0_1px_4px_rgba(15,23,42,0.08)]"
           >
-            <Camera className="size-3.5 text-[#6B7280]" strokeWidth={2} aria-hidden="true" />
+            <Camera
+              className="size-3 shrink-0 text-[#6B7280]"
+              strokeWidth={2}
+              aria-hidden="true"
+            />
             View photos ({images.length})
           </button>
         </div>

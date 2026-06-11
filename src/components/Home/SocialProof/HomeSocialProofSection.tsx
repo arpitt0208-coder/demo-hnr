@@ -73,8 +73,8 @@ export function HomeSocialProofSection() {
           </p>
         </div>
 
-        <div className="mt-8 flex justify-center overflow-hidden sm:mt-10 lg:mt-12">
-          <div className="relative flex w-full max-w-[1456px] items-center justify-center overflow-hidden">
+        <div className="mt-8 flex justify-center overflow-x-clip sm:mt-10 lg:mt-12">
+          <div className="relative flex w-full max-w-[1456px] items-center justify-center overflow-x-clip">
             <CircularTestimonials
               testimonials={testimonials}
               autoplay

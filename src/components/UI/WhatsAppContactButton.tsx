@@ -53,7 +53,7 @@ export function WhatsAppContactButton() {
 
   return (
     <div
-      className="pointer-events-none fixed right-4 bottom-6 z-50 flex flex-col gap-3 sm:right-5 sm:bottom-8"
+      className="pointer-events-none fixed right-4 bottom-[calc(env(safe-area-inset-bottom,0px)+5.5rem)] z-50 flex flex-col gap-3 sm:right-5 sm:bottom-8"
       aria-label="Contact options"
     >
       <motion.a

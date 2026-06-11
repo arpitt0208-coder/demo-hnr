@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Footer, Navbar } from "@/components/Layout";
+import { InstantScrollToTop } from "@/components/UI/InstantScrollToTop";
 import { WhatsAppContactButton } from "@/components/UI/WhatsAppContactButton";
 import { VehicleDetailView } from "@/components/VehicleDetail";
 import {
@@ -47,6 +48,7 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
 
   return (
     <main className="relative min-h-screen overflow-x-clip bg-white">
+      <InstantScrollToTop />
       <Navbar />
       <WhatsAppContactButton />
       <div className="relative z-10 mx-auto w-full max-w-full overflow-x-clip">

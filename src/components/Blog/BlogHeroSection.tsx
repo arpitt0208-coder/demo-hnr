@@ -33,12 +33,12 @@ export function BlogHeroSection({ ctaHref }: BlogHeroSectionProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-[#FFFBF5]/30 via-transparent to-transparent lg:hidden" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[inherit] w-full max-w-[1320px] flex-col justify-center py-2 sm:py-4">
+      <div className="relative z-10 mx-auto flex min-h-[inherit] w-full max-w-[1320px] flex-col justify-center py-2 sm:py-4 xl:min-h-[480px]">
         <div className="lg:max-w-[54%] xl:max-w-[580px]">
           <BlogHeroLeft ctaHref={ctaHref} />
         </div>
 
-        <div className="mt-5 flex justify-center sm:mt-6 lg:absolute lg:bottom-6 lg:right-8 lg:mt-0 lg:justify-end xl:bottom-8 xl:right-12">
+        <div className="mt-5 flex justify-center sm:mt-6 xl:absolute xl:bottom-8 xl:right-12 xl:mt-0 xl:justify-end">
           <BlogHeroOverlay />
         </div>
       </div>

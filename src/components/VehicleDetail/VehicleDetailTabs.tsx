@@ -33,7 +33,7 @@ type TabId = (typeof tabs)[number]["id"];
 
 function SpecificationsGrid({ vehicle }: { vehicle: Vehicle }) {
   return (
-    <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-2.5 md:grid-cols-5 lg:grid-cols-7">
+    <div className="grid grid-cols-2 gap-2 min-[400px]:grid-cols-3 sm:grid-cols-4 sm:gap-2.5 md:grid-cols-5 lg:grid-cols-7">
       {vehicle.specifications.map((spec) => {
         const { Icon, bg, color } = getSpecIconStyle(spec.label);
         return (
