@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, Mountain } from "lucide-react";
+import { Mountain } from "lucide-react";
 
 const RIDE_DETAILS_IMAGE =
   "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&h=600&fit=crop";

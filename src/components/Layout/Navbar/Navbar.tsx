@@ -55,6 +55,7 @@ function getNavDropdownId(label: string): NavDropdownId | null {
 export function Navbar() {
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navContainerRef = useRef<HTMLDivElement>(null);
+  const mobileMenuScrollRef = useRef<HTMLDivElement>(null);
   const lockedScrollYRef = useRef(0);
   const [activeDropdown, setActiveDropdown] = useState<NavDropdownId | null>(
     null
@@ -129,7 +130,7 @@ export function Navbar() {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    if (!dropdownOpen || mobileMenuOpen) return;
+    if (!dropdownOpen && !mobileMenuOpen) return;
 
     const preventBackgroundScroll = (event: WheelEvent | TouchEvent) => {
       const target = event.target;
@@ -208,32 +209,61 @@ export function Navbar() {
     [closeMobileMenu]
   );
 
+  const navPanelOpen = dropdownOpen || mobileMenuOpen;
+
   return (
-    <div className="pointer-events-none sticky top-0 z-50 h-0 overflow-visible">
+    <div
+      className={cn(
+        "pointer-events-none sticky top-0 h-0 overflow-visible",
+        mobileMenuOpen ? "z-[100]" : "z-50"
+      )}
+    >
       <motion.header
         initial={false}
-        className="pointer-events-auto absolute top-4 right-4 left-4 sm:top-5 sm:right-5 sm:left-5 lg:top-6 lg:right-6 lg:left-6"
+        className={cn(
+          "pointer-events-auto top-4 right-4 left-4 sm:top-5 sm:right-5 sm:left-5 lg:top-6 lg:right-6 lg:left-6",
+          mobileMenuOpen
+            ? "fixed z-[100] lg:absolute lg:z-auto"
+            : "absolute"
+        )}
       >
+        <button
+          type="button"
+          className={cn(
+            "fixed inset-0 bg-[#0F172A]/40 transition-opacity duration-200 ease-out lg:hidden",
+            mobileMenuOpen
+              ? "pointer-events-auto z-0 opacity-100"
+              : "pointer-events-none z-0 opacity-0"
+          )}
+          aria-label="Close menu"
+          onClick={closeMobileMenu}
+          tabIndex={mobileMenuOpen ? 0 : -1}
+        />
+
         <div
           className={cn(
-            "pointer-events-none fixed inset-0 z-40 bg-[#0F172A]/20 transition-opacity duration-200 ease-out",
-            dropdownOpen ? "opacity-100" : "opacity-0"
+            "pointer-events-none fixed inset-0 transition-opacity duration-200 ease-out",
+            mobileMenuOpen
+              ? "z-0 opacity-0 lg:block"
+              : "z-40 bg-[#0F172A]/20",
+            !mobileMenuOpen && dropdownOpen ? "opacity-100" : !mobileMenuOpen ? "opacity-0" : ""
           )}
-          aria-hidden={!dropdownOpen}
+          aria-hidden={!dropdownOpen || mobileMenuOpen}
         />
 
         <div
           ref={navContainerRef}
-          className="relative z-50"
+          className="relative z-10"
           onMouseEnter={cancelScheduledClose}
           onMouseLeave={scheduleCloseDropdown}
         >
           <div
             className={cn(
               "bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)] transition-[border-radius,box-shadow] duration-200",
-              dropdownOpen
-                ? "rounded-t-[24px] shadow-[0_16px_48px_rgba(15,23,42,0.12)]"
-                : "rounded-[24px]"
+              navPanelOpen
+                ? "rounded-t-[24px] shadow-[0_16px_48px_rgba(15,23,42,0.12)] lg:rounded-b-none"
+                : "rounded-[24px]",
+              mobileMenuOpen && "rounded-b-[24px]"
             )}
           >
             <nav
@@ -333,65 +363,71 @@ export function Navbar() {
               className={cn(
                 "border-t border-[#F1F5F9] bg-white transition-[max-height,opacity] duration-300 ease-out lg:hidden",
                 mobileMenuOpen
-                  ? activeDropdown
-                    ? "max-h-[min(90dvh,800px)] touch-pan-y overflow-y-auto overscroll-y-contain opacity-100 [-webkit-overflow-scrolling:touch]"
-                    : "max-h-[min(70dvh,520px)] touch-pan-y overflow-y-auto overscroll-y-contain opacity-100 [-webkit-overflow-scrolling:touch]"
+                  ? "flex max-h-[calc(100dvh-5.5rem-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px))] flex-col opacity-100"
                   : "max-h-0 overflow-hidden opacity-0"
               )}
               aria-hidden={!mobileMenuOpen}
             >
-              {activeDropdown ? (
-                <>
-                  <div className="sticky top-0 z-10 border-b border-[#F1F5F9] bg-white px-4 py-3 sm:px-6">
-                    <button
-                      type="button"
-                      onClick={() => setActiveDropdown(null)}
-                      className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-[14px] font-semibold text-dark-navy transition-colors hover:bg-[#FAFAFA] hover:text-primary-yellow"
-                    >
-                      <ChevronDown
-                        className="size-4 rotate-90 text-text-gray"
-                        aria-hidden="true"
-                      />
-                      Back
-                    </button>
-                  </div>
-                  <div onClick={handleMobileMenuLinkClick}>
-                    {activeDropdown === "fleet" && <FleetDropdown />}
-                    {activeDropdown === "about" && <AboutDropdown />}
-                    {activeDropdown === "locations" && <LocationsDropdown />}
-                    {activeDropdown === "earn" && <EarnMoreDropdown />}
-                  </div>
-                </>
-              ) : (
-                <ul className="flex flex-col gap-1 px-4 py-4 sm:px-6">
-                  {navItems.map((item) => {
-                    const dropdownId = getNavDropdownId(item.label);
+              <div
+                ref={mobileMenuScrollRef}
+                className={cn(
+                  "min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-y-contain pb-[env(safe-area-inset-bottom,0px)] [-webkit-overflow-scrolling:touch]",
+                  !mobileMenuOpen && "hidden"
+                )}
+              >
+                {activeDropdown ? (
+                  <>
+                    <div className="sticky top-0 z-10 border-b border-[#F1F5F9] bg-white px-4 py-3 sm:px-6">
+                      <button
+                        type="button"
+                        onClick={() => setActiveDropdown(null)}
+                        className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-[14px] font-semibold text-dark-navy transition-colors hover:bg-[#FAFAFA] hover:text-primary-yellow"
+                      >
+                        <ChevronDown
+                          className="size-4 rotate-90 text-text-gray"
+                          aria-hidden="true"
+                        />
+                        Back
+                      </button>
+                    </div>
+                    <div onClick={handleMobileMenuLinkClick}>
+                      {activeDropdown === "fleet" && <FleetDropdown />}
+                      {activeDropdown === "about" && <AboutDropdown />}
+                      {activeDropdown === "locations" && <LocationsDropdown />}
+                      {activeDropdown === "earn" && <EarnMoreDropdown />}
+                    </div>
+                  </>
+                ) : (
+                  <ul className="flex flex-col gap-1 px-4 py-4 sm:px-6">
+                    {navItems.map((item) => {
+                      const dropdownId = getNavDropdownId(item.label);
 
-                    return (
-                      <li key={item.label}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (dropdownId) openMobileDropdown(dropdownId);
-                          }}
-                          className="flex w-full items-center justify-between rounded-xl px-3 py-3.5 text-left text-[15px] font-semibold text-dark-navy transition-colors hover:bg-[#FAFAFA] hover:text-primary-yellow"
-                          aria-expanded={dropdownId ? false : undefined}
-                          aria-haspopup={dropdownId ? "true" : undefined}
-                        >
-                          {item.label}
-                          <ChevronDown
-                            className={cn(
-                              "size-4 -rotate-90 text-text-gray",
-                              item.hasDropdown && "opacity-100"
-                            )}
-                            aria-hidden="true"
-                          />
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
+                      return (
+                        <li key={item.label}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (dropdownId) openMobileDropdown(dropdownId);
+                            }}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-3.5 text-left text-[15px] font-semibold text-dark-navy transition-colors hover:bg-[#FAFAFA] hover:text-primary-yellow"
+                            aria-expanded={dropdownId ? false : undefined}
+                            aria-haspopup={dropdownId ? "true" : undefined}
+                          >
+                            {item.label}
+                            <ChevronDown
+                              className={cn(
+                                "size-4 -rotate-90 text-text-gray",
+                                item.hasDropdown && "opacity-100"
+                              )}
+                              aria-hidden="true"
+                            />
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
 
