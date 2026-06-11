@@ -59,7 +59,7 @@ function CoreValuesHeader({ className }: { className?: string }) {
   return (
     <div className={cn("flex flex-col items-center text-center", className)}>
       <h2 className="text-[26px] font-extrabold leading-[1.12] tracking-tight text-dark-navy sm:text-[32px] md:text-[36px] lg:text-[38px]">
-        Our Core Values
+        Our Core <span className="text-primary-yellow">Values</span>
       </h2>
       <p className="mt-3 max-w-[600px] text-[13px] font-medium leading-[1.75] text-[#64748B] sm:text-[14px]">
         {aboutCoreValuesIntro}
@@ -129,30 +129,25 @@ export function AboutCoreValuesSection() {
         />
       </div>
 
-      <div
-        className="relative z-10 mx-auto hidden w-full lg:block"
-        style={{ aspectRatio: "1672 / 780" }}
-      >
-        <div className="absolute inset-0 flex flex-col px-10 xl:px-16">
-          <CoreValuesHeader className="shrink-0 pt-[5%] xl:pt-[5.5%]" />
+      <div className="relative z-10 mx-auto hidden w-full px-10 pb-10 xl:px-16 lg:block">
+        <CoreValuesHeader className="shrink-0 pt-8 xl:pt-10" />
 
-          <div className="relative mx-[220px] mt-[180px] w-full">
-            {aboutCoreValues.map((value, index) => (
-              <CoreValueCard
-                key={value.id}
-                value={value}
-                index={index}
-                className="absolute"
-                style={{
-                  top: value.desktopPosition.top,
-                  left: value.desktopPosition.left,
-                  right: value.desktopPosition.right,
-                  opacity: 1,
-                  transform: "none",
-                }}
-              />
-            ))}
-          </div>
+        <div className="relative mx-[220px] mt-[180px] min-h-[280px] w-full">
+          {aboutCoreValues.map((value, index) => (
+            <CoreValueCard
+              key={value.id}
+              value={value}
+              index={index}
+              className="absolute"
+              style={{
+                top: value.desktopPosition.top,
+                left: value.desktopPosition.left,
+                right: value.desktopPosition.right,
+                opacity: 1,
+                transform: "none",
+              }}
+            />
+          ))}
         </div>
       </div>
 

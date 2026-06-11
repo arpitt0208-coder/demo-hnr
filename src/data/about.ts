@@ -65,7 +65,7 @@ export type AboutQuickLink = {
 
 export const aboutQuickLinks: AboutQuickLink[] = [
   { label: "About Hire N Ride", href: "/about", icon: Users },
-  { label: "All blogs", href: "#blogs", icon: FileText },
+  { label: "All blogs", href: "/blogs", icon: FileText },
   { label: "Gallery", href: "/gallery", icon: ImageIcon },
   { label: "Contact Us", href: "/contact", icon: Phone },
 ];

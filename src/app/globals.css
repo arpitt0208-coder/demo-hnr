@@ -2,6 +2,8 @@
 @import "../styles/animations.css";
 
 :root {
+  --success: 142.1 70.6% 45.3%;
+  --success-foreground: 0 0% 100%;
   --primary-yellow: #efbe3d;
   --dark-navy: #0f172a;
   --text-gray: #64748b;
@@ -43,6 +45,20 @@
   --color-card: var(--card);
   --color-muted: var(--muted);
   --font-sans: var(--font-montserrat);
+  --animate-flip: flip 6s infinite steps(2, end);
+  --animate-rotate: rotate 3s linear infinite both;
+}
+
+@keyframes flip {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(90deg);
+  }
 }
 
 *,

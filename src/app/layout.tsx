@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { Providers } from "@/components/Providers";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -43,7 +44,7 @@ export default function RootLayout({
         className={`${montserrat.className} min-h-full overflow-x-clip font-sans antialiased`}
         suppressHydrationWarning
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

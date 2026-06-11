@@ -277,6 +277,17 @@ const GalleryModal = ({
             aria-hidden="true"
           />
 
+          <motion.button
+            type="button"
+            aria-label="Close preview"
+            className="absolute right-4 top-4 z-[301] flex size-10 items-center justify-center rounded-full bg-white/90 text-gray-800 shadow-md backdrop-blur-sm hover:bg-white sm:right-6 sm:top-6 sm:size-11"
+            onClick={requestClose}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <X className="size-5 sm:size-6" />
+          </motion.button>
+
           <motion.div
             initial={{ scale: 0.98, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -359,17 +370,6 @@ const GalleryModal = ({
               </motion.button>
             </>
           ) : null}
-
-          <motion.button
-            type="button"
-            aria-label="Close preview"
-            className="absolute -top-2 right-0 flex size-9 items-center justify-center rounded-full bg-white/90 text-gray-800 shadow-md backdrop-blur-sm hover:bg-white sm:-top-3 sm:size-10"
-            onClick={requestClose}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <X className="size-4 sm:size-5" />
-          </motion.button>
         </div>
           </motion.div>
 
