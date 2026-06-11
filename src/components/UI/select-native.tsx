@@ -2,7 +2,7 @@ import { cn } from "@/lib/cn";
 import * as React from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
-export interface SelectPropsNative
+interface SelectPropsNative
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
   children: React.ReactNode;
 }

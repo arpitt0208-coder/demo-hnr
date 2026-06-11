@@ -2,24 +2,24 @@ import type { StaticImageData } from "next/image";
 import { bikeImages, manali } from "@/assets/images";
 import { resolveVehicleSlug } from "@/lib/vehicle-routes";
 
-export type VehicleReview = {
+type VehicleReview = {
   name: string;
   date: string;
   rating: number;
   text: string;
 };
 
-export type VehicleFaq = {
+type VehicleFaq = {
   question: string;
   answer: string;
 };
 
-export type VehicleSpecification = {
+type VehicleSpecification = {
   label: string;
   value: string;
 };
 
-export type VehicleHighlight = {
+type VehicleHighlight = {
   label: string;
 };
 
@@ -425,7 +425,7 @@ export type BrowseVehicle = Pick<
   | "price"
 > & { href: string };
 
-export function toBrowseVehicle(vehicle: Vehicle): BrowseVehicle {
+function toBrowseVehicle(vehicle: Vehicle): BrowseVehicle {
   return {
     id: vehicle.id,
     title: vehicle.title,

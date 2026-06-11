@@ -13,25 +13,6 @@ export function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-export function InstagramBrandIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <defs>
-        <linearGradient id="instagram-brand-gradient" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#F58529" />
-          <stop offset="0.35" stopColor="#DD2A7B" />
-          <stop offset="0.7" stopColor="#8134AF" />
-          <stop offset="1" stopColor="#515BD4" />
-        </linearGradient>
-      </defs>
-      <rect width="24" height="24" rx="6" fill="url(#instagram-brand-gradient)" />
-      <rect x="6.5" y="6.5" width="11" height="11" rx="3" stroke="white" strokeWidth="1.6" fill="none" />
-      <circle cx="12" cy="12" r="2.8" stroke="white" strokeWidth="1.6" fill="none" />
-      <circle cx="16.4" cy="7.6" r="1" fill="white" />
-    </svg>
-  );
-}
-
 export function FacebookIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -46,39 +27,6 @@ export function FacebookIcon({ className }: { className?: string }) {
       aria-hidden="true"
     >
       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  );
-}
-
-export function FacebookBrandIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <rect width="24" height="24" rx="6" fill="#1877F2" />
-      <path
-        d="M14.2 8.2h2.1l-.3 2.5H14.2v7.3h-2.9v-7.3H9.5V8.2h1.8V7c0-1.1.3-2 1-2.7.7-.7 1.7-1.1 2.9-1.1.8 0 1.5.1 2.2.3v2.4H14.8c-.6 0-1 .2-1.3.5-.3.3-.4.8-.4 1.4v.7z"
-        fill="white"
-      />
-    </svg>
-  );
-}
-
-export function XBrandIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <rect width="24" height="24" rx="6" fill="white" />
-      <path
-        d="M13.2 10.7 17.9 5h-1.1l-4.1 4.9L9.7 5H5.5l4.9 7.1L5.5 19h1.1l4.3-5.2 3.5 5.2h4.2l-5.1-7.5Zm-1.5 1.8-.5-.7-3.9-5.6h1.3l3.2 4.6.5.7 4.1 5.8h-1.3l-3.3-4.8Z"
-        fill="black"
-      />
-    </svg>
-  );
-}
-
-export function YoutubeBrandIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <rect width="24" height="24" rx="6" fill="#FF0000" />
-      <path d="M10 8.2v7.6l6.2-3.8L10 8.2z" fill="white" />
     </svg>
   );
 }

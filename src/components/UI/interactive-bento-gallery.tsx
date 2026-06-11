@@ -293,7 +293,7 @@ const GalleryModal = ({
   );
 };
 
-export interface InteractiveBentoGalleryProps {
+interface InteractiveBentoGalleryProps {
   mediaItems: MediaItemType[];
   title: string;
   description: string;

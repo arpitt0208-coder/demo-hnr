@@ -1,11 +1,8 @@
 import {
-  Award,
   Bike,
   Calendar,
   Clock,
   Headphones,
-  ShieldCheck,
-  Zap,
   type LucideIcon,
 } from "lucide-react";
 
@@ -20,12 +17,6 @@ export type AppStatCard = {
   value: string;
   label: string;
   description: string;
-};
-
-export type AppTrustItem = {
-  icon: LucideIcon;
-  title: string;
-  subtitle: string;
 };
 
 export const appFeatures: AppFeature[] = [
@@ -58,23 +49,5 @@ export const appStatCards: AppStatCard[] = [
     value: "24/7",
     label: "Support",
     description: "We're here anytime, anywhere.",
-  },
-];
-
-export const appTrustItems: AppTrustItem[] = [
-  {
-    icon: ShieldCheck,
-    title: "Secure",
-    subtitle: "Your data is 100% safe",
-  },
-  {
-    icon: Award,
-    title: "Trusted by 10K+ Riders",
-    subtitle: "Join our growing community",
-  },
-  {
-    icon: Zap,
-    title: "Reliable",
-    subtitle: "Always here for your ride",
   },
 ];

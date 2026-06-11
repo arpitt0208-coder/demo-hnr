@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 import type { GalleryAccordionItem } from "@/data/gallery";
 
-export type AccordionItemData = GalleryAccordionItem;
+type AccordionItemData = GalleryAccordionItem;
 
 const panelSpring = {
   type: "spring" as const,
@@ -167,6 +167,3 @@ export function GalleryImageAccordion({
     </section>
   );
 }
-
-/** @deprecated Use GalleryImageAccordion — kept for demo compatibility */
-export const LandingAccordionItem = GalleryImageAccordion;

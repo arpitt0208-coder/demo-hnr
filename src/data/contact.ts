@@ -55,50 +55,6 @@ export const contactHeroFeatures: ContactHeroFeature[] = [
 export const contactIntroText =
   "At Hire N Ride, we believe that every great adventure starts with a simple conversation. Whether you're looking for bike rental in Manali, need help with your booking, or just want to hear from someone who has actually ridden the roads you're planning on visiting – our team is here to help.";
 
-export type ContactValueItem = {
-  id: string;
-  title: string;
-  description: string;
-  icon: LucideIcon;
-  iconClassName: string;
-  iconBgClassName: string;
-};
-
-export const contactValueItems: ContactValueItem[] = [
-  {
-    id: "trusted-fleet",
-    title: "Trusted Fleet",
-    description: "Well-maintained bikes checked before every ride.",
-    icon: Shield,
-    iconClassName: "text-[#F97316]",
-    iconBgClassName: "bg-[#FFF7ED]",
-  },
-  {
-    id: "local-support",
-    title: "Local Support",
-    description: "Real riders who know these roads inside out.",
-    icon: Headphones,
-    iconClassName: "text-primary-yellow",
-    iconBgClassName: "bg-[#FFFBF0]",
-  },
-  {
-    id: "quick-booking",
-    title: "Quick Booking",
-    description: "Reserve your bike in minutes, hit the road faster.",
-    icon: Calendar,
-    iconClassName: "text-[#F97316]",
-    iconBgClassName: "bg-[#FFF7ED]",
-  },
-  {
-    id: "on-road-help",
-    title: "On-Road Help",
-    description: "Stuck on the trail? We're just a call away.",
-    icon: MessageCircle,
-    iconClassName: "text-[#22C55E]",
-    iconBgClassName: "bg-[#F0FDF4]",
-  },
-];
-
 export type ContactHelpItem = {
   id: string;
   title: string;

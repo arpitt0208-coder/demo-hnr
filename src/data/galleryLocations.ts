@@ -1,5 +1,3 @@
-export const GALLERY_PREVIEW_COUNT = 6;
-
 export type GalleryLocationImage = {
   id: string;
   src: string;
