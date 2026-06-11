@@ -2,6 +2,7 @@
 
 import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/UI/shadcn-button";
@@ -194,7 +195,7 @@ const Gallery4 = ({
                 )}
               >
                 {useFleetCards ? (
-                  <a
+                  <Link
                     href={item.href}
                     aria-label={item.ctaText ?? item.title}
                     className="group/card flex h-full flex-col rounded-[16px] border border-[#E8ECF0] bg-white p-4 shadow-[0_2px_14px_rgba(15,23,42,0.04)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary-yellow/35 hover:shadow-[0_12px_32px_rgba(239,190,61,0.12)]"
@@ -221,9 +222,9 @@ const Gallery4 = ({
                       </span>
                     </div>
                     <span className="sr-only">{item.description}</span>
-                  </a>
+                  </Link>
                 ) : compact ? (
-                  <a
+                  <Link
                     href={item.href}
                     className="group block overflow-hidden rounded-xl border border-border/60 bg-white shadow-[0_2px_12px_rgba(15,23,42,0.06)]"
                   >
@@ -250,9 +251,9 @@ const Gallery4 = ({
                         />
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 ) : (
-                  <a href={item.href} className="group rounded-xl">
+                  <Link href={item.href} className="group rounded-xl">
                     <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-xl bg-[#EEF2F6] md:aspect-[5/4] lg:aspect-[16/9]">
                       <Image
                         src={item.image}
@@ -274,7 +275,7 @@ const Gallery4 = ({
                         />
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 )}
               </CarouselItem>
             ))}

@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { ChevronRight, Link2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { fleetBikes, fleetQuickLinks } from "@/data/fleet";
+import { vehicleDetailPath } from "@/lib/vehicle-routes";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -43,13 +45,15 @@ export function FleetDropdown() {
           className="grid min-w-0 flex-1 grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5"
         >
           {fleetBikes.map((bike) => (
-            <motion.a
+            <motion.div
               key={bike.id}
-              href="#fleet"
               variants={cardVariants}
               whileHover={{ y: -4, transition: { duration: 0.22 } }}
-              className="group/card flex flex-col rounded-[16px] border border-[#E8ECF0] bg-white p-4 shadow-[0_2px_14px_rgba(15,23,42,0.04)] transition-[border-color,box-shadow] duration-300 hover:border-primary-yellow/35 hover:shadow-[0_12px_32px_rgba(239,190,61,0.12)]"
             >
+              <Link
+                href={vehicleDetailPath(bike.id)}
+                className="group/card flex flex-col rounded-[16px] border border-[#E8ECF0] bg-white p-4 shadow-[0_2px_14px_rgba(15,23,42,0.04)] transition-[border-color,box-shadow] duration-300 hover:border-primary-yellow/35 hover:shadow-[0_12px_32px_rgba(239,190,61,0.12)]"
+              >
               <div className="relative mb-3 h-[84px] w-full sm:mb-4 sm:h-[92px]">
                 <Image
                   src={bike.image}
@@ -72,7 +76,8 @@ export function FleetDropdown() {
                   />
                 </span>
               </div>
-            </motion.a>
+              </Link>
+            </motion.div>
           ))}
         </motion.div>
 
@@ -101,10 +106,17 @@ export function FleetDropdown() {
           />
 
           <ul className="mt-1 max-h-[340px] overflow-y-auto pr-1">
-            {fleetQuickLinks.map((link) => (
+            {fleetQuickLinks.map((link) => {
+              const matchedBike = fleetBikes.find((bike) => bike.name === link);
+              const href =
+                link === "Explore all models"
+                  ? "/explore"
+                  : vehicleDetailPath(matchedBike?.id ?? link);
+
+              return (
               <li key={link} className="border-b border-[#F1F5F9] last:border-b-0">
-                <a
-                  href="#fleet"
+                <Link
+                  href={href}
                   className="group/link flex items-center justify-between rounded-lg py-3.5 transition-colors hover:bg-[#FFFBF0]/80"
                 >
                   <span className="flex min-w-0 items-center gap-2.5 pl-1">
@@ -121,9 +133,10 @@ export function FleetDropdown() {
                     strokeWidth={2}
                     aria-hidden="true"
                   />
-                </a>
+                </Link>
               </li>
-            ))}
+            );
+            })}
           </ul>
         </motion.aside>
       </div>

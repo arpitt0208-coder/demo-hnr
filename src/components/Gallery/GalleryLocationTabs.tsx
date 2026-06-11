@@ -27,7 +27,7 @@ const LOCATION_ICONS: Record<string, LucideIcon> = {
   "kullu-valley": Trees,
   "leh-ladakh": Landmark,
   "rohtang-pass": Snowflake,
-  sissu: Droplets,
+  "sissu-valley": Droplets,
   "solang-valley": MountainSnow,
   "spiti-valley": Landmark,
   mohali: Building2,

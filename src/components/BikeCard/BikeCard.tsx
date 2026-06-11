@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { MapPin } from "lucide-react";
 import type { Bike } from "@/data/bikes";
 import { cn } from "@/lib/cn";
@@ -17,58 +18,10 @@ export function BikeCard({ bike, className, variant = "floating" }: BikeCardProp
   const isGrid = variant === "grid";
   const isFixedTransform = bike.position.transform === "none";
   const isClickable = Boolean(bike.href);
-  const CardTag = isClickable ? motion.a : motion.article;
+  const CardTag = motion.article;
 
-  return (
-    <CardTag
-      {...(isClickable
-        ? {
-            href: bike.href,
-            "aria-label": `${bike.brand} ${bike.model} in ${bike.location}`,
-          }
-        : {})}
-      initial={
-        isFloating && !isFixedTransform ? { opacity: 0, scale: 0.9 } : { opacity: 1 }
-      }
-      animate={
-        isFloating && !isFixedTransform
-          ? { opacity: 1, scale: 1 }
-          : { opacity: 1 }
-      }
-      transition={{ duration: 0.5, delay: bike.floatDelay + 0.6 }}
-      whileHover={
-        isClickable
-          ? isFixedTransform || isGrid
-            ? { y: -4, scale: 1.02 }
-            : { y: -6, scale: 1.02 }
-          : undefined
-      }
-      whileTap={isClickable && isGrid ? { scale: 0.98 } : undefined}
-      className={cn(
-        "rounded-2xl border border-border/50 bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)]",
-        isFloating &&
-          "absolute z-20 hidden w-[156px] lg:block lg:w-[184px] xl:w-[192px]",
-        isGrid &&
-          "relative flex min-w-0 w-full flex-col p-3 sm:p-3.5",
-        !isFloating && !isGrid && "relative w-full p-4",
-        isClickable &&
-          "cursor-pointer no-underline transition-shadow hover:shadow-[0_12px_40px_rgba(15,23,42,0.12)] active:shadow-[0_6px_24px_rgba(15,23,42,0.1)]",
-        className
-      )}
-      style={
-        isFloating
-          ? {
-              top: bike.position.top,
-              right: bike.position.right,
-              bottom: bike.position.bottom,
-              left: bike.position.left,
-              marginBottom: bike.position.marginBottom,
-              opacity: bike.position.opacity,
-              transform: bike.position.transform,
-            }
-          : undefined
-      }
-    >
+  const cardContent = (
+    <>
       {isGrid ? (
         <div className="flex min-h-0 flex-1 items-stretch gap-2.5 sm:gap-3">
           <div className="flex min-w-0 flex-1 flex-col justify-between gap-2">
@@ -132,6 +85,77 @@ export function BikeCard({ bike, className, variant = "floating" }: BikeCardProp
           </div>
         </div>
       )}
+    </>
+  );
+
+  const cardClassName = cn(
+    "rounded-2xl border border-border/50 bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)]",
+    isFloating &&
+      "absolute z-20 hidden w-[156px] lg:block lg:w-[184px] xl:w-[192px]",
+    isGrid && "relative flex min-w-0 w-full flex-col p-3 sm:p-3.5",
+    !isFloating && !isGrid && "relative w-full p-4",
+    isClickable &&
+      "cursor-pointer no-underline transition-shadow hover:shadow-[0_12px_40px_rgba(15,23,42,0.12)] active:shadow-[0_6px_24px_rgba(15,23,42,0.1)]",
+    className,
+  );
+
+  const cardStyle = isFloating
+    ? {
+        top: bike.position.top,
+        right: bike.position.right,
+        bottom: bike.position.bottom,
+        left: bike.position.left,
+        marginBottom: bike.position.marginBottom,
+        opacity: bike.position.opacity,
+        transform: bike.position.transform,
+      }
+    : undefined;
+
+  if (isClickable) {
+    return (
+      <motion.div
+        initial={
+          isFloating && !isFixedTransform ? { opacity: 0, scale: 0.9 } : { opacity: 1 }
+        }
+        animate={
+          isFloating && !isFixedTransform
+            ? { opacity: 1, scale: 1 }
+            : { opacity: 1 }
+        }
+        transition={{ duration: 0.5, delay: bike.floatDelay + 0.6 }}
+        whileHover={
+          isFixedTransform || isGrid ? { y: -4, scale: 1.02 } : { y: -6, scale: 1.02 }
+        }
+        whileTap={isGrid ? { scale: 0.98 } : undefined}
+        className={cardClassName}
+        style={cardStyle}
+      >
+        <Link
+          href={bike.href}
+          aria-label={`${bike.brand} ${bike.model} in ${bike.location}`}
+          className="block h-full no-underline text-inherit"
+        >
+          {cardContent}
+        </Link>
+      </motion.div>
+    );
+  }
+
+  return (
+    <CardTag
+      initial={
+        isFloating && !isFixedTransform ? { opacity: 0, scale: 0.9 } : { opacity: 1 }
+      }
+      animate={
+        isFloating && !isFixedTransform
+          ? { opacity: 1, scale: 1 }
+          : { opacity: 1 }
+      }
+      transition={{ duration: 0.5, delay: bike.floatDelay + 0.6 }}
+      className={cardClassName}
+      style={cardStyle}
+    >
+      {cardContent}
     </CardTag>
   );
 }

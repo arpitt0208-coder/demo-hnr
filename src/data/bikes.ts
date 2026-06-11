@@ -1,5 +1,6 @@
 import type { StaticImageData } from "next/image";
 import { bikeImages } from "@/assets/images";
+import { vehicleDetailPath } from "@/lib/vehicle-routes";
 
 export interface Bike {
   id: string;
@@ -27,7 +28,7 @@ export const featuredBikes: Bike[] = [
     brand: "ROYAL ENFIELD",
     model: "Scram 411",
     location: "Manali",
-    href: "#locations",
+    href: vehicleDetailPath("scram-411"),
     image: bikeImages.scram,
     position: { top: "35%", left: "0%", opacity: 1, transform: "none" },
     floatDelay: 0.8,
@@ -38,7 +39,7 @@ export const featuredBikes: Bike[] = [
     brand: "ROYAL ENFIELD",
     model: "Meteor 350",
     location: "Kullu",
-    href: "#locations",
+    href: vehicleDetailPath("meteor-350"),
     image: bikeImages.meteor,
     position: { top: "26%", right: "0%", opacity: 1, transform: "none" },
     floatDelay: 1.2,
@@ -49,7 +50,7 @@ export const featuredBikes: Bike[] = [
     brand: "ROYAL ENFIELD",
     model: "Himalayan 450",
     location: "Leh Ladakh",
-    href: "#locations",
+    href: vehicleDetailPath("himalayan-450"),
     image: bikeImages.himalayan,
     position: {
       bottom: "0%",
@@ -66,7 +67,7 @@ export const featuredBikes: Bike[] = [
     brand: "ROYAL ENFIELD",
     model: "Hunter 350",
     location: "Kasol",
-    href: "#locations",
+    href: vehicleDetailPath("hunter-350"),
     image: bikeImages.hunter,
     position: {
       bottom: "0%",

@@ -1,8 +1,8 @@
 import type { StaticImageData } from "next/image";
 import {
-  bhuntar,
   earnRestaurant,
   heroBg,
+  him4,
   kasol,
   manali,
 } from "@/assets/images";
@@ -36,9 +36,9 @@ export const galleryAccordionItems: GalleryAccordionItem[] = [
   },
   {
     id: 3,
-    title: "Bhuntar",
-    image: bhuntar,
-    alt: "Bhuntar valley with the Beas River and Himalayan peaks",
+    title: "Leh Ladakh",
+    image: him4,
+    alt: "Leh Ladakh high-altitude desert landscape and mountain roads",
     objectPosition: "center 42%",
   },
   {

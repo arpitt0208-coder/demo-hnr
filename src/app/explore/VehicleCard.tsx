@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
@@ -35,28 +36,42 @@ export function VehicleCard({ vehicle }: { vehicle: BrowseVehicle }) {
   const imageCount = vehicle.images.length;
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const goToPrevious = () => {
+  const goToPrevious = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     setActiveImageIndex((current) =>
       current === 0 ? imageCount - 1 : current - 1,
     );
   };
 
-  const goToNext = () => {
+  const goToNext = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     setActiveImageIndex((current) =>
       current === imageCount - 1 ? 0 : current + 1,
     );
   };
 
+  const goToImage = (event: React.MouseEvent, index: number) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setActiveImageIndex(index);
+  };
+
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#E8ECF0] bg-white shadow-[0_2px_14px_rgba(15,23,42,0.04)]">
-      <div className="relative bg-[#EEF2F6] px-3 pb-6 pt-3">
+    <article className="group/card flex h-full flex-col overflow-hidden rounded-2xl border border-[#E8ECF0] bg-white shadow-[0_2px_14px_rgba(15,23,42,0.04)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary-yellow/30 hover:shadow-[0_12px_32px_rgba(239,190,61,0.1)]">
+      <Link
+        href={vehicle.href}
+        className="relative block bg-[#EEF2F6] px-3 pb-6 pt-3 no-underline"
+        aria-label={`View details for ${vehicle.title}`}
+      >
         <div className="relative mx-auto h-[148px] w-full sm:h-[156px]">
           <Image
             src={vehicle.images[activeImageIndex]}
             alt={`${vehicle.title} - image ${activeImageIndex + 1}`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-contain object-center"
+            className="object-contain object-center transition-transform duration-500 group-hover/card:scale-[1.02]"
           />
 
           <button
@@ -96,7 +111,7 @@ export function VehicleCard({ vehicle }: { vehicle: BrowseVehicle }) {
               key={index}
               type="button"
               aria-label={`Go to image ${index + 1}`}
-              onClick={() => setActiveImageIndex(index)}
+              onClick={(event) => goToImage(event, index)}
               className={
                 index === activeImageIndex
                   ? "size-1.5 rounded-full bg-[#334155]"
@@ -105,9 +120,12 @@ export function VehicleCard({ vehicle }: { vehicle: BrowseVehicle }) {
             />
           ))}
         </div>
-      </div>
+      </Link>
 
-      <div className="flex flex-1 flex-col px-4 pb-4 pt-4 sm:px-5 sm:pb-5 sm:pt-4">
+      <Link
+        href={vehicle.href}
+        className="flex flex-1 flex-col px-4 pb-4 pt-4 no-underline sm:px-5 sm:pb-5 sm:pt-4"
+      >
         <h3 className="text-[11px] font-extrabold uppercase leading-[1.35] tracking-[0.01em] text-dark-navy sm:text-[12px]">
           {vehicle.title}
         </h3>
@@ -142,14 +160,11 @@ export function VehicleCard({ vehicle }: { vehicle: BrowseVehicle }) {
             <span>₹ {formatPrice(vehicle.price)}</span>
             <span className="text-[13px] font-medium text-[#64748B]"> / day</span>
           </p>
-          <a
-            href={vehicle.href}
-            className="shrink-0 text-[13px] font-bold text-primary-yellow no-underline transition-opacity hover:opacity-80"
-          >
+          <span className="shrink-0 text-[13px] font-bold text-primary-yellow transition-opacity group-hover/card:opacity-80">
             More details →
-          </a>
+          </span>
         </div>
-      </div>
+      </Link>
     </article>
   );
 }

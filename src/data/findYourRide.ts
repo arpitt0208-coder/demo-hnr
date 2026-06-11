@@ -1,6 +1,7 @@
 import type { StaticImageData } from "next/image";
 import type { Gallery4Item } from "@/components/UI/gallery4";
 import { bikeImages } from "@/assets/images";
+import { vehicleDetailPath } from "@/lib/vehicle-routes";
 
 type FindYourRideBike = {
   id: string;
@@ -56,7 +57,7 @@ export const findYourRideGalleryItems: Gallery4Item[] = findYourRideBikes.map(
     id: bike.id,
     title: findYourRideGalleryDetails[bike.id].title,
     description: findYourRideGalleryDetails[bike.id].description,
-    href: `#${bike.id}`,
+    href: vehicleDetailPath(bike.id),
     image: bike.image,
     ctaText: `Explore ${bike.name}`,
   }),

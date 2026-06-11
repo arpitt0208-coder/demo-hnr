@@ -72,7 +72,7 @@ function GalleryCompactGrid({
           image={image}
           priority={index < 2}
           className="aspect-[4/3]"
-          onClick={() => onImageClick?.(startIndex + index)}
+          onClick={() => onImageClick?.((startIndex ?? 0) + index)}
         />
       ))}
     </div>
@@ -91,7 +91,7 @@ export function GalleryBentoGrid({
     return null;
   }
 
-  const click = (offset: number) => onImageClick?.(startIndex + offset);
+  const click = (offset: number) => onImageClick?.((startIndex ?? 0) + offset);
 
   if (!isFullBento) {
     return (

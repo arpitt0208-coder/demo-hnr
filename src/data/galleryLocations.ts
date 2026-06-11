@@ -1,7 +1,6 @@
 import type { StaticImageData } from "next/image";
 import {
   adventure,
-  bhuntar,
   earnHotel,
   earnRestaurant,
   earnVolvo,
@@ -33,7 +32,6 @@ export type GalleryLocationSection = {
 const placeholderPool: StaticImageData[] = [
   manali,
   kasol,
-  bhuntar,
   earnRestaurant,
   earnHotel,
   earnVolvo,
@@ -90,12 +88,12 @@ export const galleryLocationSections: GalleryLocationSection[] = [
     images: buildPlaceholderImages("rohtang-pass", "Rohtang Pass"),
   },
   {
-    id: "sissu",
-    slug: "sissu",
-    name: "Sissu",
+    id: "sissu-valley",
+    slug: "sissu-valley",
+    name: "Sissu Valley",
     description:
       "Waterfalls, riverside trails, and quiet Himalayan scenery along the Manali–Leh highway.",
-    images: buildPlaceholderImages("sissu", "Sissu"),
+    images: buildPlaceholderImages("sissu-valley", "Sissu Valley"),
   },
   {
     id: "solang-valley",
@@ -106,31 +104,34 @@ export const galleryLocationSections: GalleryLocationSection[] = [
     images: buildPlaceholderImages("solang-valley", "Solang Valley"),
   },
   {
-    id: "tamsara",
-    slug: "tamsara",
-    name: "Tamsara",
-    description: "Scenic trails and untouched Himalayan scenery.",
-    images: buildPlaceholderImages("tamsara", "Tamsara"),
-  },
-  {
-    id: "spiti",
-    slug: "spiti",
-    name: "Spiti",
+    id: "spiti-valley",
+    slug: "spiti-valley",
+    name: "Spiti Valley",
     description: "Cold desert valleys, cliffside villages, and starry skies.",
-    images: buildPlaceholderImages("spiti", "Spiti"),
+    images: buildPlaceholderImages("spiti-valley", "Spiti Valley"),
   },
   {
-    id: "bhuntar",
-    slug: "bhuntar",
-    name: "Bhuntar",
-    description: "River confluence town and gateway to the Kullu valley.",
-    images: buildPlaceholderImages("bhuntar", "Bhuntar"),
+    id: "mohali",
+    slug: "mohali",
+    name: "Mohali",
+    description:
+      "Urban gateways and smooth highway runs before you head into the hills.",
+    images: buildPlaceholderImages("mohali", "Mohali"),
   },
   {
-    id: "kasol",
-    slug: "kasol",
-    name: "Kasol",
-    description: "Parvati valley views, riverside walks, and mountain cafes.",
-    images: buildPlaceholderImages("kasol", "Kasol"),
+    id: "bir-billing",
+    slug: "bir-billing",
+    name: "Bir Billing",
+    description:
+      "Paragliding capital of India with lush tea gardens and Dhauladhar views.",
+    images: buildPlaceholderImages("bir-billing", "Bir Billing"),
+  },
+  {
+    id: "dharamshala",
+    slug: "dharamshala",
+    name: "Dharamshala",
+    description:
+      "Monasteries, cedar forests, and Tibetan culture in the Kangra foothills.",
+    images: buildPlaceholderImages("dharamshala", "Dharamshala"),
   },
 ];

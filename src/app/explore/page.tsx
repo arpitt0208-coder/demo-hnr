@@ -1,76 +1,16 @@
 import type { Metadata } from "next";
-import { bikeImages } from "@/assets/images";
 import { BrowseVehiclesSection } from "@/components/Explore/BrowseVehiclesSection";
 import { ExploreHeroSection } from "@/components/Explore/ExploreHeroSection";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { WhatsAppContactButton } from "@/components/UI/WhatsAppContactButton";
-import type { BrowseVehicle } from "./VehicleCard";
+import { browseVehicles } from "@/data/vehicles";
 
 export const metadata: Metadata = {
   title: "Explore Bike Models | Hire N Ride",
   description:
     "Browse our trusted fleet of Himalayan bikes. Well maintained, locally guided, and ready to book in minutes.",
 };
-
-const browseVehicles: BrowseVehicle[] = [
-  {
-    id: "suzuki-access-125",
-    title: "SUZUKI MOTORCYCLE INDIA PVT LTD ACCESS 125",
-    description: "A well-maintained SUZUKI MOTORCYCLE INDIA PVT LTD",
-    images: [bikeImages.scram, bikeImages.hunter, bikeImages.meteor, bikeImages.himalayan],
-    rating: 5.0,
-    capacity: 3,
-    category: "scooters",
-    location: "bhuntar",
-    distance: "Around 17.3 km from Manali",
-    age: "1 year+ old",
-    price: 816,
-    href: "#suzuki-access-125",
-  },
-  {
-    id: "royal-enfield-himalayan",
-    title: "ROYAL ENFIELD MOTORCYCLES LTD HIMALAYAN",
-    description: "A well-maintained ROYAL ENFIELD MOTORCYCLES LTD",
-    images: [bikeImages.himalayan, bikeImages.scram, bikeImages.hunter, bikeImages.meteor],
-    rating: 5.0,
-    capacity: 2,
-    category: "bikes",
-    location: "bhuntar",
-    distance: "Around 17.3 km from Manali",
-    age: "2 year+ old",
-    price: 2208,
-    href: "#royal-enfield-himalayan",
-  },
-  {
-    id: "royal-enfield-classic-350",
-    title: "ROYAL ENFIELD MOTORCYCLES LTD CLASSIC 350 CC",
-    description: "A well-maintained ROYAL ENFIELD MOTORCYCLES LTD",
-    images: [bikeImages.meteor, bikeImages.himalayan, bikeImages.scram, bikeImages.hunter],
-    rating: 5.0,
-    capacity: 3,
-    category: "bikes",
-    location: "bhuntar",
-    distance: "Around 17.3 km from Manali",
-    age: "10 year+ old",
-    price: 1488,
-    href: "#royal-enfield-classic-350",
-  },
-  {
-    id: "royal-enfield-hunter-350",
-    title: "ROYAL ENFIELD MOTORCYCLES LTD HUNTER 350",
-    description: "A well-maintained ROYAL ENFIELD MOTORCYCLES LTD",
-    images: [bikeImages.hunter, bikeImages.meteor, bikeImages.scram, bikeImages.himalayan],
-    rating: 5.0,
-    capacity: 2,
-    category: "bikes",
-    location: "bhuntar",
-    distance: "Around 12.1 km from Bhuntar",
-    age: "3 year+ old",
-    price: 1680,
-    href: "#royal-enfield-hunter-350",
-  },
-];
 
 export default function ExplorePage() {
   return (
