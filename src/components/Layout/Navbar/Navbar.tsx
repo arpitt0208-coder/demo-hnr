@@ -242,18 +242,20 @@ export function Navbar() {
 
         <div
           className={cn(
-            "pointer-events-none fixed inset-0 transition-opacity duration-200 ease-out",
+            "fixed inset-0 z-0 transition-opacity duration-200 ease-out lg:bg-[#0F172A]/20",
             mobileMenuOpen
-              ? "z-0 opacity-0 lg:block"
-              : "z-40 bg-[#0F172A]/20",
-            !mobileMenuOpen && dropdownOpen ? "opacity-100" : !mobileMenuOpen ? "opacity-0" : ""
+              ? "pointer-events-none opacity-0"
+              : dropdownOpen
+                ? "pointer-events-auto opacity-100"
+                : "pointer-events-none opacity-0"
           )}
           aria-hidden={!dropdownOpen || mobileMenuOpen}
+          onClick={closeDropdown}
         />
 
         <div
           ref={navContainerRef}
-          className="relative z-10"
+          className="relative z-10 isolate"
           onMouseEnter={cancelScheduledClose}
           onMouseLeave={scheduleCloseDropdown}
         >
@@ -440,7 +442,7 @@ export function Navbar() {
           >
             <div
               className={cn(
-                "max-h-[calc(100dvh-6.5rem)] overflow-x-hidden overflow-y-auto overscroll-y-contain rounded-b-[24px] border-t border-[#F1F5F9] bg-gradient-to-b from-[#FAFAFA]/80 to-white shadow-[0_16px_48px_rgba(15,23,42,0.12)] transition-[opacity,transform] duration-200 ease-out",
+                "max-h-[calc(100dvh-6.5rem)] overflow-x-hidden overflow-y-auto overscroll-y-contain rounded-b-[24px] border-t border-[#F1F5F9] bg-white shadow-[0_16px_48px_rgba(15,23,42,0.12)] transition-[opacity,transform] duration-200 ease-out",
                 dropdownOpen
                   ? "translate-y-0 opacity-100"
                   : "pointer-events-none -translate-y-1 opacity-0"
