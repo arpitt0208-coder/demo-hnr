@@ -21,6 +21,7 @@ function LocationGalleryBlock({ section }: LocationGalleryBlockProps) {
   return (
     <article id={section.slug} className="scroll-mt-28">
       <InteractiveBentoGallery
+        galleryKey={section.id}
         mediaItems={mediaItems}
         title={`${section.name} in Pictures`}
         description={
