@@ -1,21 +1,8 @@
-import type { StaticImageData } from "next/image";
-import {
-  adventure,
-  earnHotel,
-  earnRestaurant,
-  earnVolvo,
-  him4,
-  him5,
-  kasol,
-  manali,
-  mountainbg,
-} from "@/assets/images";
-
 export const GALLERY_PREVIEW_COUNT = 6;
 
 export type GalleryLocationImage = {
   id: string;
-  src: StaticImageData | string;
+  src: string;
   alt: string;
 };
 
@@ -28,17 +15,18 @@ export type GalleryLocationSection = {
   images: GalleryLocationImage[];
 };
 
-/** Placeholder pool — swap per-location `images` with your real assets later. */
-const placeholderPool: StaticImageData[] = [
-  manali,
-  kasol,
-  earnRestaurant,
-  earnHotel,
-  earnVolvo,
-  him4,
-  him5,
-  adventure,
-  mountainbg,
+/** Curated Unsplash Himalayan / travel imagery for location galleries. */
+const unsplashPool = [
+  "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1200&q=80",
+  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
+  "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80",
+  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80",
+  "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=1200&q=80",
+  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80",
+  "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=1200&q=80",
+  "https://images.unsplash.com/photo-1548013146-72479768bada?w=1200&q=80",
+  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=80",
+  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80",
 ];
 
 function buildPlaceholderImages(
@@ -47,7 +35,7 @@ function buildPlaceholderImages(
   count = 8,
 ): GalleryLocationImage[] {
   return Array.from({ length: count }, (_, index) => {
-    const src = placeholderPool[index % placeholderPool.length];
+    const src = unsplashPool[index % unsplashPool.length];
 
     return {
       id: `${locationSlug}-${index + 1}`,

@@ -50,7 +50,7 @@ export function VehicleRelatedBikes({ vehicles }: VehicleRelatedBikesProps) {
   }
 
   return (
-    <section className="mt-12 border-t border-[#EEF2F6] pt-10 sm:mt-14 sm:pt-12">
+    <section className="mt-8 border-t border-[#EEF2F6] pt-8 sm:mt-10 sm:pt-9">
       <div className="flex items-end justify-between gap-4">
         <h2 className="text-[22px] font-extrabold tracking-tight text-dark-navy sm:text-[26px]">
           More bikes you&apos;ll love
