@@ -18,7 +18,7 @@ export default function ExplorePage() {
       <Navbar />
       <WhatsAppContactButton />
       <div className="relative z-10 mx-auto w-full max-w-full overflow-x-clip">
-        <ExploreHeroSection ctaHref="#bike-models" />
+        <ExploreHeroSection />
 
         <section
           id="bike-models"

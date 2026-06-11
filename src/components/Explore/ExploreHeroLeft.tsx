@@ -1,19 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { exploreHeroTags } from "@/data/hero";
 import { cn } from "@/lib/cn";
 
 interface ExploreHeroLeftProps {
-  ctaHref?: string;
   className?: string;
 }
 
-export function ExploreHeroLeft({
-  ctaHref = "#bike-models",
-  className,
-}: ExploreHeroLeftProps) {
+export function ExploreHeroLeft({ className }: ExploreHeroLeftProps) {
   return (
     <motion.div
       initial={{ opacity: 0, x: -30 }}
@@ -59,20 +54,6 @@ export function ExploreHeroLeft({
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.65 }}
-        className="mt-6"
-      >
-        <Link
-          href={ctaHref}
-          className="inline-flex h-12 items-center justify-center rounded-full bg-[#1A1A1A] px-8 text-[14px] font-bold text-white shadow-[0_4px_16px_rgba(15,23,42,0.18)] transition-shadow hover:shadow-[0_6px_20px_rgba(15,23,42,0.28)]"
-        >
-          Explore bikes
-        </Link>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
         className="mt-5 flex flex-wrap gap-2.5"
       >
         {exploreHeroTags.map((tag) => (

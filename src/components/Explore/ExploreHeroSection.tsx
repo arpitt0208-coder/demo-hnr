@@ -6,11 +6,7 @@ import { heroBg } from "@/assets/images";
 import { ExploreHeroLeft } from "./ExploreHeroLeft";
 import { ExploreHeroShowcase } from "./ExploreHeroShowcase";
 
-interface ExploreHeroSectionProps {
-  ctaHref?: string;
-}
-
-export function ExploreHeroSection({ ctaHref }: ExploreHeroSectionProps) {
+export function ExploreHeroSection() {
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -33,7 +29,7 @@ export function ExploreHeroSection({ ctaHref }: ExploreHeroSectionProps) {
       <div className="relative z-10 mx-auto w-full max-w-[1320px]">
         <div className="relative grid items-center gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-10">
           <div className="relative z-20 w-full min-w-0 self-center justify-self-start lg:max-w-[680px] xl:max-w-[720px]">
-            <ExploreHeroLeft ctaHref={ctaHref} />
+            <ExploreHeroLeft />
           </div>
 
           <div className="relative z-10 flex w-full min-w-0 items-center justify-center overflow-x-clip">
