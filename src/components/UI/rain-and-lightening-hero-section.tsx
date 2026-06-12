@@ -23,7 +23,10 @@ interface LightningBolt {
   type: "flash" | "bolt";
   intensity: number;
   duration: number;
+  xOffset: number;
 }
+
+const randomLightningXOffset = () => Math.random() * 1.2 - 0.6;
 
 interface WeatherEffectProps {
   rainIntensity?: number;
@@ -298,6 +301,9 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
 }) => {
   const [raindrops, setRaindrops] = useState<RainDrop[]>([]);
   const [lightning, setLightning] = useState<LightningBolt | null>(null);
+  const [lightningPosition, setLightningPosition] = useState(
+    () => lightningXOffset ?? randomLightningXOffset(),
+  );
   const thunderAudioRef = useRef<HTMLAudioElement | null>(null);
   const lightningTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
@@ -312,6 +318,16 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
       thunderAudioRef.current = audio;
     }
   }, [thunderEnabled, thunderVolume]);
+
+  useEffect(() => {
+    if (!lightningEnabled) return;
+
+    const interval = setInterval(() => {
+      setLightningPosition(randomLightningXOffset());
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [lightningEnabled]);
 
   useEffect(() => {
     const drops: RainDrop[] = Array.from({ length: rainIntensity }).map(
@@ -337,6 +353,7 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
       type: "flash",
       intensity: Math.random() * 0.8 + 0.2,
       duration: 200 + Math.random() * 300,
+      xOffset: lightningPosition,
     };
 
     setLightning(newLightning);
@@ -360,6 +377,7 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
   }, [
     lightningEnabled,
     lightningFrequency,
+    lightningPosition,
     thunderEnabled,
     thunderDelay,
   ]);
@@ -382,7 +400,7 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
         <div className="absolute inset-0 z-10">
           <Lightning
             lightningHue={lightningHue}
-            lightningXOffset={lightningXOffset}
+            lightningXOffset={lightning.xOffset}
             lightningSpeed={lightningSpeed}
             lightningIntensity={lightningIntensity}
             lightningSize={lightningSize}
@@ -430,7 +448,7 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
           className={cn(
             "relative z-40 h-full w-full",
             contentLayout === "centered" &&
-              "flex items-center justify-center",
+            "flex items-center justify-center",
           )}
         >
           {children}

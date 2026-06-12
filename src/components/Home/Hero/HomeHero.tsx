@@ -146,13 +146,13 @@ export function HomeHero() {
             rainSpeed={stormMode ? 0.1 : 0.14}
             rainAngle={stormMode ? 15 : 12}
             rainColor="rgba(174, 194, 224, 0.55)"
-            lightningEnabled={stormMode}
-            lightningFrequency={stormMode ? 4 : 0}
+            lightningEnabled
+            lightningFrequency={stormMode ? 4 : 3}
             lightningSpeed={0.8}
-            lightningIntensity={1.2}
-            lightningSize={1.8}
-            thunderEnabled={stormMode}
-            thunderVolume={0.35}
+            lightningIntensity={stormMode ? 1.2 : 0.9}
+            lightningSize={stormMode ? 1.8 : 1.4}
+            thunderEnabled
+            thunderVolume={stormMode ? 0.35 : 0.25}
             thunderDelay={1.5}
           />
         </div>
