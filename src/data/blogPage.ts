@@ -3,7 +3,7 @@ import { BookOpen, MapPin, Shield } from "lucide-react";
 import type { StaticImageData } from "next/image";
 import {
   adventure,
-  blogHero,
+  blogBg,
   bhuntar,
   earnHotel,
   him4,
@@ -62,7 +62,7 @@ export const blogHeroOverlay = {
   thumbnail: him5,
 };
 
-export const blogHeroImage = blogHero;
+export const blogHeroImage = blogBg;
 
 export const blogTrendingTitle = "Our Trending Insights & Stories";
 
@@ -253,4 +253,44 @@ export function getBlogRelatedPosts(): BlogPost[] {
   return blogRelatedPostSlugs
     .map((slug) => blogPosts.find((post) => post.slug === slug))
     .filter((post): post is BlogPost => post !== undefined);
+}
+
+export type BlogCategorySummary = {
+  name: string;
+  count: number;
+};
+
+export type BlogPopularLink = {
+  label: string;
+  href: string;
+};
+
+export const blogPopularLinks: BlogPopularLink[] = [
+  { label: "Browse All Articles", href: "/blogs" },
+  { label: "Explore Bikes in Manali", href: "/explore/locations/manali" },
+  { label: "Kasol Bike Rentals", href: "/explore/locations/kasol" },
+  { label: "Royal Enfield Himalayan", href: "/explore/royal-enfield-himalayan" },
+  { label: "Contact Support", href: "/contact" },
+  { label: "About Hire N Ride", href: "/about" },
+];
+
+export function getBlogCategories(): BlogCategorySummary[] {
+  const counts = new Map<string, number>();
+
+  for (const post of blogPosts) {
+    counts.set(post.category, (counts.get(post.category) ?? 0) + 1);
+  }
+
+  return Array.from(counts.entries())
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export function getBlogRecentPosts(
+  excludeSlug?: string,
+  limit = 4,
+): BlogPost[] {
+  return blogPosts
+    .filter((post) => post.slug !== excludeSlug)
+    .slice(0, limit);
 }

@@ -5,25 +5,22 @@ import Link from "next/link";
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
-interface ReadMoreButtonProps extends ComponentProps<typeof Link> {
+interface ReadMoreButtonBaseProps {
   children?: string;
+  className?: string;
 }
 
-export function ReadMoreButton({
-  children = "Read More",
-  className,
-  ...props
-}: ReadMoreButtonProps) {
-  return (
-    <Link
-        className={cn(
-          "group relative grid w-full overflow-hidden rounded-[14px] px-5 py-1.5 transition-all duration-200",
-          "shadow-[0_1000px_0_0_hsl(0_0%_85%)_inset] hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]",
-          "group-hover/card:scale-[1.02] group-hover/card:shadow-lg",
-          className,
-        )}
-      {...props}
-    >
+type ReadMoreButtonProps = ReadMoreButtonBaseProps &
+  (
+    | ({ asSpan?: false } & ComponentProps<typeof Link>)
+    | { asSpan: true }
+  );
+
+export function ReadMoreButton(props: ReadMoreButtonProps) {
+  const { children = "Read More", className } = props;
+
+  const content = (
+    <>
       <span
         className={cn(
           "spark mask-gradient absolute inset-0 h-full w-full animate-flip overflow-hidden rounded-[14px]",
@@ -51,6 +48,29 @@ export function ReadMoreButton({
           aria-hidden="true"
         />
       </span>
+    </>
+  );
+
+  const sharedClassName = cn(
+    "group relative grid w-full overflow-hidden rounded-[14px] px-5 py-1.5 transition-all duration-200",
+    "shadow-[0_1000px_0_0_hsl(0_0%_85%)_inset] hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]",
+    "group-hover/card:scale-[1.02] group-hover/card:shadow-lg",
+    className,
+  );
+
+  if (props.asSpan) {
+    return (
+      <span className={sharedClassName} aria-hidden="true">
+        {content}
+      </span>
+    );
+  }
+
+  const { asSpan: _, ...linkProps } = props;
+
+  return (
+    <Link className={sharedClassName} {...linkProps}>
+      {content}
     </Link>
   );
 }

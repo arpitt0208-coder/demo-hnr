@@ -39,18 +39,23 @@ export function BlogPostCard({ post, index = 0 }: BlogPostCardProps) {
       }}
       className="h-full overflow-visible"
     >
-      <HoverBorderGradient
-        as="article"
-        duration={1.2}
-        highlight="radial-gradient(75% 181% at 50% 50%, #efbe3d 0%, rgba(255, 255, 255, 0) 100%)"
-        containerClassName="group/card h-full w-full cursor-pointer rounded-[16px] border-transparent bg-transparent shadow-[0_4px_24px_rgba(15,23,42,0.08)] hover:bg-transparent"
-        className="flex h-full w-full flex-col overflow-hidden rounded-[inherit] bg-white p-0 text-inherit"
-        maskClassName="bg-white"
+      <Link
+        href={href}
+        aria-label={`Read article: ${post.title}`}
+        className="block h-full no-underline focus-visible:outline-none"
       >
+        <HoverBorderGradient
+          as="div"
+          duration={1.2}
+          highlight="radial-gradient(75% 181% at 50% 50%, #efbe3d 0%, rgba(255, 255, 255, 0) 100%)"
+          containerClassName="group/card h-full w-full cursor-pointer rounded-[16px] border-transparent bg-transparent shadow-[0_4px_24px_rgba(15,23,42,0.08)] hover:bg-transparent focus-within:ring-2 focus-within:ring-primary-yellow focus-within:ring-offset-2"
+          className="flex h-full w-full flex-col overflow-hidden rounded-[inherit] bg-white p-0 text-inherit"
+          maskClassName="bg-white"
+        >
         <div className="relative aspect-[4/3] w-full overflow-hidden">
           <Image
             src={post.image}
-            alt={post.title}
+            alt=""
             fill
             className="object-cover object-center transition-transform duration-500 group-hover/card:scale-[1.03]"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -88,10 +93,8 @@ export function BlogPostCard({ post, index = 0 }: BlogPostCardProps) {
             </span>
           </div>
 
-          <h3 className="mt-3 text-[15px] font-extrabold leading-[1.3] tracking-tight text-dark-navy transition-colors duration-300 group-hover/card:text-primary-yellow sm:text-[16px]">
-            <Link href={href} className="line-clamp-2">
-              {post.title}
-            </Link>
+          <h3 className="mt-3 line-clamp-2 text-[15px] font-extrabold leading-[1.3] tracking-tight text-dark-navy transition-colors duration-300 group-hover/card:text-primary-yellow sm:text-[16px]">
+            {post.title}
           </h3>
 
           <p className="mt-2 line-clamp-2 flex-1 text-[12px] font-medium leading-[1.65] text-[#64748B] sm:text-[13px]">
@@ -117,9 +120,10 @@ export function BlogPostCard({ post, index = 0 }: BlogPostCardProps) {
             </span>
           </div>
 
-          <ReadMoreButton href={href} className="mt-5" />
+          <ReadMoreButton asSpan className="mt-5" />
         </div>
-      </HoverBorderGradient>
+        </HoverBorderGradient>
+      </Link>
     </motion.div>
   );
 }

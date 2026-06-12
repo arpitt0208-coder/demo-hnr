@@ -4,6 +4,7 @@ import aboutCardGallery from "./about-card-gallery.png";
 import aboutCardStory from "./about-card-story.png";
 import aboutCardSupport from "./about-card-support.png";
 import blogHero from "./blog-hero.jpg";
+import blogBg from "./blogbg.webp";
 import bhuntar from "./bhuntar.jpg";
 import adventure from "./adventure.avif";
 import kasol from "./kasol.jpeg";
@@ -56,6 +57,7 @@ export {
   appText,
   adventure,
   blogHero,
+  blogBg,
   bhuntar,
   bike,
   card,
