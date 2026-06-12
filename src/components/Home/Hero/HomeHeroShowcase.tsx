@@ -6,12 +6,7 @@ import { bikeImages, podium } from "@/assets/images";
 import { HomeBikeCard } from "@/components/Home/BikeCard/HomeBikeCard";
 import { featuredBikes } from "@/data/bikes";
 
-type HomeHeroShowcaseProps = {
-  theme?: "default" | "storm";
-};
-
-export function HomeHeroShowcase({ theme = "default" }: HomeHeroShowcaseProps) {
-  const isStorm = theme === "storm";
+export function HomeHeroShowcase() {
   return (
     <div className="w-full min-w-0">
       <motion.div
@@ -52,7 +47,7 @@ export function HomeHeroShowcase({ theme = "default" }: HomeHeroShowcaseProps) {
 
       <div className="mt-5 w-full lg:hidden">
         <p
-          className={`mb-3 text-center text-[11px] font-bold tracking-[0.14em] ${isStorm ? "text-zinc-400" : "text-[#475569]"}`}
+          className="mb-3 text-center text-[11px] font-bold tracking-[0.14em] text-[#475569]"
         >
           EXPLORE BY LOCATION
         </p>
