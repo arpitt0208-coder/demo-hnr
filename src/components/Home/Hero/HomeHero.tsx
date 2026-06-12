@@ -152,7 +152,7 @@ export function HomeHero() {
             lightningIntensity={stormMode ? 1.2 : 0.9}
             lightningSize={stormMode ? 1.8 : 1.4}
             thunderEnabled
-            thunderVolume={stormMode ? 0.35 : 0.25}
+            thunderVolume={stormMode ? 0.85 : 0.8}
             thunderDelay={1.5}
           />
         </div>
