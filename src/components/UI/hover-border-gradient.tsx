@@ -108,11 +108,3 @@ export function HoverBorderGradient({
     </Element>
   );
 }
-
-export default function HoverBorderDemo() {
-  return (
-    <HoverBorderGradient>
-      <span>Emerald UI Components</span>
-    </HoverBorderGradient>
-  );
-}

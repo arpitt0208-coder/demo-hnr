@@ -248,7 +248,7 @@ export const blogRelatedSubtitle =
   "Discover more adventure stories and tips that might interest you";
 
 /** Slugs for the related-articles row (order matches layout left → right). */
-export const blogRelatedPostSlugs = [
+const blogRelatedPostSlugs = [
   "manali-leh-ladakh-bike-trip-in-june",
   "kasol-vs-tosh-vs-malana-best-place-to-rent-a-bike",
   "how-instant-bike-booking-works-at-hire-n-ride",

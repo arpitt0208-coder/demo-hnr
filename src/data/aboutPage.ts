@@ -83,7 +83,7 @@ export type AboutServiceCard = {
 export const aboutWhatWeDoIntro =
   "We provide wide bike rental service in the Himalayas, ensuring that every adventure is safe, memorable and trouble free.";
 
-export type AboutCoreValueDesktopPosition = {
+type AboutCoreValueDesktopPosition = {
   top: string;
   left?: string;
   right?: string;
@@ -223,7 +223,7 @@ export type AboutGalleryImage = {
 export const aboutStoryIntro =
   "We started this out of love for the mountains—and frustration at seeing riders stranded with unreliable bikes. Our mission is simple: give you a bike you can trust, get you on the road quickly, and always be there when you call. So you can focus on the views, not the vehicle.";
 
-export type AboutStoryHighlight = {
+type AboutStoryHighlight = {
   id: string;
   title: string;
   subtitle: string;

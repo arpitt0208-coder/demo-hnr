@@ -151,9 +151,7 @@ export const dharamshalaGalleryImages: LocationGalleryAsset[] = [
 /** Hero / card highlights — reused across gallery accordion, explore, and blog cards. */
 export {
   atalTunnel,
-  barotValley,
   bhagsuWaterfall,
-  dharamshala,
   khardungLa,
   kasol,
   manaliView,
@@ -161,7 +159,6 @@ export {
   rohtangRide,
   rohtangRideThrill,
   shantiStupa,
-  solangValley,
   keyMonastery,
   malanaVillage,
   skiSlopesSolang,

@@ -9,8 +9,6 @@ import {
   type MediaItemType,
 } from "@/components/Gallery/GalleryModal";
 
-export type { MediaItemType };
-
 const INITIAL_VISIBLE_COUNT = 5;
 
 const galleryViewMoreButtonClassName = cn(
