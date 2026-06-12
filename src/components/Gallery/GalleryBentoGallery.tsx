@@ -10,6 +10,23 @@ import {
 } from "@/components/Gallery/GalleryModal";
 
 const INITIAL_VISIBLE_COUNT = 5;
+const DRAG_ENABLED_MEDIA_QUERY = "(min-width: 640px)";
+
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(query);
+    const updateMatches = () => setMatches(mediaQuery.matches);
+
+    updateMatches();
+    mediaQuery.addEventListener("change", updateMatches);
+
+    return () => mediaQuery.removeEventListener("change", updateMatches);
+  }, [query]);
+
+  return matches;
+}
 
 const galleryViewMoreButtonClassName = cn(
   "group inline-flex items-center justify-center gap-2.5 rounded-[20px]",
@@ -173,9 +190,11 @@ function BentoMediaGrid({
   onSelectItem,
   galleryKey,
 }: BentoMediaGridProps) {
+  const isDragEnabled = useMediaQuery(DRAG_ENABLED_MEDIA_QUERY);
+
   return (
     <motion.div
-      className="grid auto-rows-[minmax(160px,45vw)] grid-cols-1 gap-3 sm:auto-rows-[60px] sm:grid-cols-3 md:grid-cols-4"
+      className="grid auto-rows-[minmax(100px,28vw)] grid-cols-1 gap-2.5 sm:auto-rows-[60px] sm:grid-cols-3 sm:gap-3 md:grid-cols-4"
       initial="hidden"
       animate="visible"
       variants={{
@@ -192,7 +211,11 @@ function BentoMediaGrid({
         return (
           <motion.div
             key={`${galleryKey}-${item.id}`}
-            className={`relative cursor-move overflow-hidden rounded-xl ${item.span}`}
+            className={cn(
+              "relative overflow-hidden rounded-xl",
+              isDragEnabled ? "cursor-move" : "cursor-pointer touch-pan-y",
+              item.span,
+            )}
             onClick={() => !isDragging && onSelectItem(item)}
             variants={{
               hidden: { y: 50, scale: 0.9, opacity: 0 },
@@ -208,26 +231,32 @@ function BentoMediaGrid({
                 },
               },
             }}
-            whileHover={{ scale: 1.02 }}
-            drag
-            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-            dragElastic={1}
-            onDragStart={() => setIsDragging(true)}
-            onDragEnd={(_e, info) => {
-              setIsDragging(false);
-              const moveDistance = info.offset.x + info.offset.y;
-              if (Math.abs(moveDistance) > 50) {
-                const newItems = [...allItems];
-                const draggedItem = newItems[index];
-                const targetIndex =
-                  moveDistance > 0
-                    ? Math.min(index + 1, allItems.length - 1)
-                    : Math.max(index - 1, 0);
-                newItems.splice(index, 1);
-                newItems.splice(targetIndex, 0, draggedItem);
-                setItems(newItems);
-              }
-            }}
+            whileHover={isDragEnabled ? { scale: 1.02 } : undefined}
+            drag={isDragEnabled}
+            dragConstraints={
+              isDragEnabled ? { left: 0, right: 0, top: 0, bottom: 0 } : false
+            }
+            dragElastic={isDragEnabled ? 1 : undefined}
+            onDragStart={isDragEnabled ? () => setIsDragging(true) : undefined}
+            onDragEnd={
+              isDragEnabled
+                ? (_e, info) => {
+                    setIsDragging(false);
+                    const moveDistance = info.offset.x + info.offset.y;
+                    if (Math.abs(moveDistance) > 50) {
+                      const newItems = [...allItems];
+                      const draggedItem = newItems[index];
+                      const targetIndex =
+                        moveDistance > 0
+                          ? Math.min(index + 1, allItems.length - 1)
+                          : Math.max(index - 1, 0);
+                      newItems.splice(index, 1);
+                      newItems.splice(targetIndex, 0, draggedItem);
+                      setItems(newItems);
+                    }
+                  }
+                : undefined
+            }
           >
             <MediaItem
               item={item}

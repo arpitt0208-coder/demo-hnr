@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/UI/social-icons";
@@ -20,7 +21,7 @@ const floatingButtonClassName = cn(
 const easeOut = [0.22, 1, 0.36, 1] as const;
 const floatEase = "easeInOut" as const;
 
-function contactButtonMotion(index: number) {
+function contactButtonMotion(index: number, isDragging: boolean) {
   const entranceDelay = 0.5 + index * 0.14;
 
   return {
@@ -29,18 +30,20 @@ function contactButtonMotion(index: number) {
       opacity: 1,
       x: 0,
       scale: 1,
-      y: [0, -5, 0],
+      y: isDragging ? 0 : [0, -5, 0],
     },
     transition: {
       opacity: { duration: 0.5, delay: entranceDelay, ease: easeOut },
       x: { duration: 0.5, delay: entranceDelay, ease: easeOut },
       scale: { duration: 0.5, delay: entranceDelay, ease: easeOut },
-      y: {
-        duration: 2.8,
-        repeat: Infinity,
-        ease: floatEase,
-        delay: entranceDelay + 0.7 + index * 0.9,
-      },
+      y: isDragging
+        ? { duration: 0.15 }
+        : {
+            duration: 2.8,
+            repeat: Infinity,
+            ease: floatEase,
+            delay: entranceDelay + 0.7 + index * 0.9,
+          },
     },
     whileHover: { scale: 1.06 },
     whileTap: { scale: 0.94 },
@@ -49,36 +52,86 @@ function contactButtonMotion(index: number) {
 
 export function WhatsAppContactButton() {
   const reduceMotion = useReducedMotion();
+  const constraintsRef = useRef<HTMLDivElement>(null);
+  const didDragRef = useRef(false);
+  const [isDragging, setIsDragging] = useState(false);
   const phoneHref = `tel:${footerContact.phone.replace(/\s/g, "")}`;
 
-  return (
-    <div
-      className="pointer-events-none fixed right-4 bottom-[calc(env(safe-area-inset-bottom,0px)+5.5rem)] z-50 flex flex-col gap-3 sm:right-5 sm:bottom-8"
-      aria-label="Contact options"
-    >
-      <motion.a
-        href={phoneHref}
-        aria-label="Call us"
-        className={cn(floatingButtonClassName, "pointer-events-auto")}
-        {...(reduceMotion ? {} : contactButtonMotion(0))}
-      >
-        <Phone
-          className="size-5 text-primary-yellow"
-          strokeWidth={2.2}
-          aria-hidden="true"
-        />
-      </motion.a>
+  const handleDragStart = () => {
+    didDragRef.current = false;
+    setIsDragging(true);
+  };
 
-      <motion.a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat with us on WhatsApp"
-        className={cn(floatingButtonClassName, "pointer-events-auto")}
-        {...(reduceMotion ? {} : contactButtonMotion(1))}
+  const handleDrag = (
+    _event: MouseEvent | TouchEvent | PointerEvent,
+    info: { offset: { x: number; y: number } },
+  ) => {
+    if (Math.abs(info.offset.x) > 4 || Math.abs(info.offset.y) > 4) {
+      didDragRef.current = true;
+    }
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+    if (didDragRef.current) {
+      window.setTimeout(() => {
+        didDragRef.current = false;
+      }, 0);
+    }
+  };
+
+  const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (didDragRef.current) {
+      event.preventDefault();
+    }
+  };
+
+  return (
+    <>
+      <div
+        ref={constraintsRef}
+        className="pointer-events-none fixed inset-0"
+        aria-hidden="true"
+      />
+      <motion.div
+        drag
+        dragMomentum={false}
+        dragElastic={0}
+        dragConstraints={constraintsRef}
+        onDragStart={handleDragStart}
+        onDrag={handleDrag}
+        onDragEnd={handleDragEnd}
+        aria-label="Contact options"
+        className={cn(
+          "fixed right-4 bottom-[calc(env(safe-area-inset-bottom,0px)+5.5rem)] z-50 flex cursor-grab flex-col gap-3 touch-none active:cursor-grabbing sm:right-5 sm:bottom-8",
+        )}
       >
-        <WhatsAppIcon className="size-6 text-[#25D366]" aria-hidden="true" />
-      </motion.a>
-    </div>
+        <motion.a
+          href={phoneHref}
+          aria-label="Call us"
+          className={floatingButtonClassName}
+          onClick={handleLinkClick}
+          {...(reduceMotion ? {} : contactButtonMotion(0, isDragging))}
+        >
+          <Phone
+            className="size-5 text-primary-yellow"
+            strokeWidth={2.2}
+            aria-hidden="true"
+          />
+        </motion.a>
+
+        <motion.a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat with us on WhatsApp"
+          className={floatingButtonClassName}
+          onClick={handleLinkClick}
+          {...(reduceMotion ? {} : contactButtonMotion(1, isDragging))}
+        >
+          <WhatsAppIcon className="size-6 text-[#25D366]" aria-hidden="true" />
+        </motion.a>
+      </motion.div>
+    </>
   );
 }
