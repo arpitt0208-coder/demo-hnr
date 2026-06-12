@@ -7,7 +7,7 @@ const LOGO_WIDTH = 121;
 const LOGO_HEIGHT = 32;
 
 const sizeStyles = {
-  header: "h-8 w-[121px]",
+  header: "h-10 w-[152px] sm:h-11 sm:w-[167px] md:h-12 md:w-[182px]",
   footer: "h-10 w-[152px] sm:h-12 sm:w-[182px]",
 } as const;
 

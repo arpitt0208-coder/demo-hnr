@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { cn } from "@/lib/cn";
 
 export interface MediaItemType {
   id: number;
@@ -128,7 +129,7 @@ const MediaItem = ({
     <img
       src={item.url}
       alt={item.title}
-      className={`${className} cursor-pointer object-cover`}
+      className={cn("h-full w-full cursor-pointer object-cover", className)}
       onClick={onClick}
       loading="lazy"
       decoding="async"
@@ -274,7 +275,7 @@ export const GalleryModal = ({
               <AnimatePresence mode="wait">
                 <motion.div
                   key={selectedItem.id}
-                  className="relative aspect-[16/9] h-auto max-h-[70vh] w-full overflow-hidden rounded-lg shadow-2xl"
+                  className="relative aspect-[16/9] h-auto max-h-[70vh] w-full overflow-hidden rounded-lg bg-[#3A3F47] shadow-2xl"
                   initial={{ y: 20, scale: 0.97 }}
                   animate={{
                     y: 0,
@@ -295,14 +296,14 @@ export const GalleryModal = ({
                 >
                   <MediaItem
                     item={selectedItem}
-                    className="h-full w-full bg-black/20 object-contain"
+                    className="object-contain p-3 sm:p-5 md:p-6"
                     onClick={requestClose}
                   />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 sm:p-4">
+                  <div className="pointer-events-none absolute left-0 top-0 z-10 p-3 sm:p-4 md:p-5">
                     <h3 className="text-base font-semibold text-white sm:text-lg md:text-xl">
                       {selectedItem.title}
                     </h3>
-                    <p className="mt-1 text-xs text-white/80 sm:text-sm">
+                    <p className="mt-0.5 text-xs text-white/75 sm:mt-1 sm:text-sm">
                       {selectedItem.desc}
                     </p>
                   </div>
