@@ -6,6 +6,14 @@ import {
   tirthanValley,
 } from "@/assets/images/gallery/galleryImages";
 
+export type ExploreLocationHero = {
+  badge: string;
+  titleHighlight: string;
+  titleRest: string;
+  subtitle: string;
+  pricingNote: string;
+};
+
 export type ExploreLocation = {
   slug: string;
   name: string;
@@ -14,6 +22,7 @@ export type ExploreLocation = {
   image: StaticImageData;
   highlights: string[];
   bikesLabel: string;
+  hero: ExploreLocationHero;
   /** Vehicle `location` field values shown on this location explore page. */
   vehicleLocationSlugs: string[];
 };
@@ -28,6 +37,15 @@ export const exploreLocations: ExploreLocation[] = [
     image: manaliView,
     highlights: ["Solang Valley", "Rohtang Pass", "Old Manali cafes"],
     bikesLabel: "55+ Bikes",
+    hero: {
+      badge: "MANALI, HIMACHAL PRADESH",
+      titleHighlight: "Rent a Bike",
+      titleRest: "in Manali — Delivered to Your Hotel",
+      subtitle:
+        "Royal Enfield, Himalayan and scooters — book in minutes, right from the app.",
+      pricingNote:
+        "From ₹800/day • hourly rides from ₹31/hr (varies by bike & dates).",
+    },
     vehicleLocationSlugs: ["manali", "bhuntar"],
   },
   {
@@ -39,6 +57,15 @@ export const exploreLocations: ExploreLocation[] = [
     image: tirthanValley,
     highlights: ["Kullu Valley", "Beas River", "Temple towns"],
     bikesLabel: "40+ Bikes",
+    hero: {
+      badge: "KULLU, HIMACHAL PRADESH",
+      titleHighlight: "Rent a Bike",
+      titleRest: "in Kullu — Delivered to Your Stay",
+      subtitle:
+        "Royal Enfield, Himalayan and scooters — book in minutes, right from the app.",
+      pricingNote:
+        "From ₹750/day • hourly rides from ₹29/hr (varies by bike & dates).",
+    },
     vehicleLocationSlugs: ["kullu", "bhuntar"],
   },
   {
@@ -50,6 +77,15 @@ export const exploreLocations: ExploreLocation[] = [
     image: kasol,
     highlights: ["Parvati River", "Pine forests", "Trekking trails"],
     bikesLabel: "40+ Bikes",
+    hero: {
+      badge: "KASOL, HIMACHAL PRADESH",
+      titleHighlight: "Rent a Bike",
+      titleRest: "in Kasol — Delivered to Your Stay",
+      subtitle:
+        "Royal Enfield, Himalayan and scooters — book in minutes, right from the app.",
+      pricingNote:
+        "From ₹800/day • hourly rides from ₹31/hr (varies by bike & dates).",
+    },
     vehicleLocationSlugs: ["kasol", "bhuntar"],
   },
   {
@@ -61,6 +97,15 @@ export const exploreLocations: ExploreLocation[] = [
     image: khardungLa,
     highlights: ["High passes", "Monasteries", "Adventure routes"],
     bikesLabel: "30+ Bikes",
+    hero: {
+      badge: "LEH LADAKH, INDIA",
+      titleHighlight: "Rent a Bike",
+      titleRest: "in Leh — Delivered to Your Hotel",
+      subtitle:
+        "Adventure-ready Royal Enfield and Himalayan bikes — book in minutes, right from the app.",
+      pricingNote:
+        "From ₹1,200/day • hourly rides from ₹45/hr (varies by bike & dates).",
+    },
     vehicleLocationSlugs: ["leh-ladakh", "bhuntar"],
   },
   {
@@ -72,6 +117,15 @@ export const exploreLocations: ExploreLocation[] = [
     image: bhuntar,
     highlights: ["Bhuntar Airport", "Beas River", "Kullu Valley gateway"],
     bikesLabel: "55+ Bikes",
+    hero: {
+      badge: "BHUNTAR, HIMACHAL PRADESH",
+      titleHighlight: "Rent a Bike",
+      titleRest: "in Bhuntar — Airport Pickup Available",
+      subtitle:
+        "Royal Enfield, Himalayan and scooters — book in minutes, right from the app.",
+      pricingNote:
+        "From ₹800/day • hourly rides from ₹31/hr (varies by bike & dates).",
+    },
     vehicleLocationSlugs: ["bhuntar"],
   },
 ];

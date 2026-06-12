@@ -3,12 +3,15 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Bike, Compass, MapPin } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import type { StaticImageData } from "next/image";
 import { bhuntar, kasol, manali } from "@/assets/images";
+import { locationExplorePath } from "@/lib/location-routes";
 
 type Place = {
   id: number;
   name: string;
+  slug: string;
   category: string;
   bikesLabel: string;
   image: StaticImageData;
@@ -18,6 +21,7 @@ const places: Place[] = [
   {
     id: 1,
     name: "Manali",
+    slug: "manali",
     category: "Himachal Pradesh",
     bikesLabel: "55+ Bikes",
     image: manali,
@@ -25,6 +29,7 @@ const places: Place[] = [
   {
     id: 2,
     name: "Kasol",
+    slug: "kasol",
     category: "Himachal Pradesh",
     bikesLabel: "40+ Bikes",
     image: kasol,
@@ -32,6 +37,7 @@ const places: Place[] = [
   {
     id: 3,
     name: "Bhuntar",
+    slug: "bhuntar",
     category: "Himachal Pradesh",
     bikesLabel: "30+ Bikes",
     image: bhuntar,
@@ -81,6 +87,11 @@ function LocationCard({
       }
       className="group overflow-hidden rounded-2xl border border-border/60 bg-white shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-shadow duration-300 hover:shadow-[0_16px_40px_rgba(15,23,42,0.12)]"
     >
+      <Link
+        href={locationExplorePath(place.slug)}
+        className="block no-underline text-inherit"
+        aria-label={`Explore bikes in ${place.name}`}
+      >
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={place.image}
@@ -155,6 +166,7 @@ function LocationCard({
           </motion.p>
         )}
       </div>
+      </Link>
     </motion.article>
   );
 }
