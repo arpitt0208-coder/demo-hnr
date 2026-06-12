@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Bike, Mail, MapPin, Phone, ShieldCheck, User } from "lucide-react";
-import logoWhite2x from "@/assets/images/logowhite-2x.png";
+import { BrandLogo } from "@/components/Layout/BrandLogo";
 import { SocialTooltip } from "@/components/UI/social-media";
 import {
   footerColumns,
@@ -12,9 +11,6 @@ import {
 } from "@/data/footer";
 import { BorderRotate } from "@/components/UI/animated-gradient-border";
 import { FooterAppBadges } from "./FooterAppBadges";
-
-const FOOTER_LOGO_WIDTH = 182;
-const FOOTER_LOGO_HEIGHT = 48;
 
 const columnIcons = {
   LOCATIONS: MapPin,
@@ -57,13 +53,7 @@ export function Footer() {
               className="inline-flex shrink-0 items-center"
               aria-label="Hire n Ride home"
             >
-              <Image
-                src={logoWhite2x}
-                width={FOOTER_LOGO_WIDTH}
-                height={FOOTER_LOGO_HEIGHT}
-                alt="Hire n Ride — Your travel partner"
-                className="block h-12 w-[182px] max-w-none"
-              />
+              <BrandLogo variant="white" size="footer" />
             </Link>
             <p className="mt-8 text-sm text-white/65 md:mt-0">
               © {new Date().getFullYear()} Hire N Ride — All rights reserved.

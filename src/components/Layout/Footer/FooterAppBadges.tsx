@@ -10,6 +10,9 @@ export function FooterAppBadges() {
         alt="Scan to download the Hire n Ride app"
         width={96}
         height={96}
+        sizes="(max-width: 640px) 80px, 96px"
+        quality={100}
+        unoptimized
         className="size-[80px] shrink-0 rounded-[4px] sm:size-[96px]"
       />
       <AppStoreButtonStack variant="footer" />

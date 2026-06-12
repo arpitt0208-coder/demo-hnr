@@ -78,8 +78,10 @@ function StoreBadge({
         <Image
           src={icon}
           alt=""
-          width={isFooter ? Math.round(iconWidth * 0.85) : iconWidth}
-          height={isFooter ? Math.round(iconHeight * 0.85) : iconHeight}
+          width={iconWidth}
+          height={iconHeight}
+          quality={100}
+          unoptimized
           className="max-h-full max-w-full object-contain object-center"
           aria-hidden="true"
         />
