@@ -1,11 +1,11 @@
 import type { StaticImageData } from "next/image";
 import {
-  earnRestaurant,
-  heroBg,
-  him4,
   kasol,
-  manali,
-} from "@/assets/images";
+  khardungLa,
+  manaliView,
+  tirthanValley,
+} from "@/assets/images/gallery/galleryImages";
+import { heroBg } from "@/assets/images";
 
 export const galleryHeroBackground = heroBg;
 
@@ -23,22 +23,22 @@ export const galleryAccordionItems: GalleryAccordionItem[] = [
   {
     id: 1,
     title: "Manali",
-    image: manali,
-    alt: "Manali valley and mountain scenery, Himachal Pradesh",
+    image: manaliView,
+    alt: "Panoramic view of Manali valley and snow-capped peaks",
     objectPosition: "62% 45%",
   },
   {
     id: 2,
     title: "Kullu",
-    image: earnRestaurant,
-    alt: "Kullu Valley terrace overlooking pine forests and Himalayan peaks",
+    image: tirthanValley,
+    alt: "Tirthan Valley terraced hills and river views in Kullu",
     objectPosition: "center 38%",
   },
   {
     id: 3,
     title: "Leh Ladakh",
-    image: him4,
-    alt: "Leh Ladakh high-altitude desert landscape and mountain roads",
+    image: khardungLa,
+    alt: "Khardung La pass — high-altitude road in Ladakh",
     objectPosition: "center 42%",
   },
   {

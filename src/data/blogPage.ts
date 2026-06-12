@@ -6,14 +6,19 @@ import {
   blogBg,
   bhuntar,
   earnHotel,
-  him4,
-  him5,
   instant2,
-  kasol,
-  manali,
-  mountainbg,
   safe2,
 } from "@/assets/images";
+import {
+  atalTunnel,
+  bhagsuWaterfall,
+  keyMonastery,
+  malanaVillage,
+  rohtangPass,
+  rohtangRideThrill,
+  shantiStupa,
+  skiSlopesSolang,
+} from "@/assets/images/gallery/galleryImages";
 
 export const blogHeroBadge = "TRAVEL & STORIES";
 
@@ -59,7 +64,7 @@ export const blogHeroOverlay = {
   location: "HIMALAYAS",
   quote: "Every turn tells a story",
   subtext: "Where journeys become memories.",
-  thumbnail: him5,
+  thumbnail: shantiStupa,
 };
 
 export const blogHeroImage = blogBg;
@@ -96,7 +101,7 @@ export const blogPosts: BlogPost[] = [
     author: "Hire N Ride Team",
     publishedAt: "May 29, 2026",
     readTime: "5 min read",
-    image: kasol,
+    image: malanaVillage,
     featured: true,
   },
   {
@@ -109,7 +114,7 @@ export const blogPosts: BlogPost[] = [
     author: "Hire N Ride Team",
     publishedAt: "May 22, 2026",
     readTime: "7 min read",
-    image: him4,
+    image: atalTunnel,
   },
   {
     id: "own-bike-vs-rent",
@@ -121,7 +126,7 @@ export const blogPosts: BlogPost[] = [
     author: "Hire N Ride Team",
     publishedAt: "May 15, 2026",
     readTime: "4 min read",
-    image: manali,
+    image: rohtangRideThrill,
   },
   {
     id: "spiti-valley-guide",
@@ -133,7 +138,7 @@ export const blogPosts: BlogPost[] = [
     author: "Hire N Ride Team",
     publishedAt: "May 8, 2026",
     readTime: "8 min read",
-    image: him5,
+    image: keyMonastery,
   },
   {
     id: "monsoon-riding-tips",
@@ -181,7 +186,7 @@ export const blogPosts: BlogPost[] = [
     author: "Hire N Ride Team",
     publishedAt: "Apr 10, 2026",
     readTime: "5 min read",
-    image: mountainbg,
+    image: bhagsuWaterfall,
   },
   {
     id: "instant-booking",
@@ -217,7 +222,7 @@ export const blogPosts: BlogPost[] = [
     author: "Hire N Ride Team",
     publishedAt: "Mar 20, 2026",
     readTime: "7 min read",
-    image: him4,
+    image: rohtangPass,
   },
   {
     id: "winter-riding-manali",
@@ -229,7 +234,7 @@ export const blogPosts: BlogPost[] = [
     author: "Hire N Ride Team",
     publishedAt: "Mar 13, 2026",
     readTime: "6 min read",
-    image: kasol,
+    image: skiSlopesSolang,
   },
 ];
 

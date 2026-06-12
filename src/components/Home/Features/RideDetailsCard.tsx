@@ -2,16 +2,14 @@
 
 import Image from "next/image";
 import { Mountain } from "lucide-react";
-
-const RIDE_DETAILS_IMAGE =
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&h=600&fit=crop";
+import biker from "@/assets/images/gallery/biker.webp";
 
 export function RideDetailsCard() {
   return (
     <article className="relative min-h-[220px] overflow-hidden rounded-[20px] border border-[#EEF2F6] shadow-[0_2px_14px_rgba(15,23,42,0.05)] sm:min-h-[240px]">
       <Image
-        src={RIDE_DETAILS_IMAGE}
-        alt=""
+        src={biker}
+        alt="Rider on a motorcycle with Himalayan mountain scenery"
         fill
         sizes="(max-width: 1024px) 100vw, 640px"
         className="object-cover object-center"

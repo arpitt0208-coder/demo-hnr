@@ -9,7 +9,8 @@ import {
   Waves,
 } from "lucide-react";
 import type { StaticImageData } from "next/image";
-import { bhuntar, kasol, manali } from "@/assets/images";
+import { bhuntar, kasol } from "@/assets/images";
+import { manaliView } from "@/assets/images/gallery/galleryImages";
 
 type LocationFeature = {
   icon: LucideIcon;
@@ -33,7 +34,7 @@ export const featuredLocations: FeaturedLocation[] = [
     title: "Queen of Hills",
     region: "Himachal Pradesh, India",
     href: "#locations",
-    image: manali,
+    image: manaliView,
     isTopPick: true,
     highlight: {
       icon: Mountain,

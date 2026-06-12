@@ -9,10 +9,10 @@ import {
 } from "lucide-react";
 import type { StaticImageData } from "next/image";
 import {
-  aboutCardGallery,
   aboutCardStory,
   aboutCardSupport,
 } from "@/assets/images";
+import { rohtangRideThrill } from "@/assets/images/gallery/galleryImages";
 
 export type AboutCard = {
   id: string;
@@ -52,7 +52,7 @@ export const aboutCards: AboutCard[] = [
       "See real journeys from fellow riders—scenic routes, mountain passes, and unforgettable memories.",
     cta: "View gallery",
     href: "/gallery",
-    image: aboutCardGallery,
+    image: rohtangRideThrill,
     icon: Camera,
   },
 ];

@@ -18,13 +18,15 @@ import {
 } from "lucide-react";
 import type { StaticImageData } from "next/image";
 import {
-  aboutCardGallery,
   aboutCardSupport,
-  him4,
-  him5,
   kasol,
   safe2,
 } from "@/assets/images";
+import {
+  keyMonastery,
+  manaliView,
+  rohtangRideThrill,
+} from "@/assets/images/gallery/galleryImages";
 
 export const aboutHeroBadge = "INNER PAGE HIGHLIGHT";
 
@@ -295,7 +297,7 @@ export const aboutStoryCards: AboutStoryCard[] = [
 
 export const aboutStoryVideo = {
   src: "https://debuggeddata.s3.amazonaws.com/projects/attachments/1768550718744132b29ef-fba2-49ba-8403-d5da1b2ad7aa.mp4",
-  poster: him4,
+  poster: manaliView,
 };
 
 export type AboutWhyChooseCard = {
@@ -344,7 +346,7 @@ export const aboutWhyChooseCards: AboutWhyChooseCard[] = [
       "Multiple bike categories",
       "Adventure-ready fleet",
     ],
-    image: him5,
+    image: rohtangRideThrill,
     imageAlt: "Rider on a Royal Enfield Himalayan along a mountain road",
     icon: Bike,
     color: "#3B82F6",
@@ -380,7 +382,7 @@ export const aboutWhyChooseCards: AboutWhyChooseCard[] = [
       "Local expertise",
       "Mountain-ready service",
     ],
-    image: aboutCardGallery,
+    image: keyMonastery,
     imageAlt: "Group of riders overlooking snow-capped Himalayan peaks at sunset",
     icon: Mountain,
     color: "#8B5CF6",
@@ -429,19 +431,19 @@ export const aboutCustomerRating = {
 export const aboutWhatWeDoImages: AboutGalleryImage[] = [
   {
     id: "group-ride",
-    src: him4,
+    src: manaliView,
     alt: "Group of riders on a scenic Himalayan mountain road",
     className: "col-span-2 aspect-[16/9] min-h-[180px] sm:min-h-[220px]",
   },
   {
     id: "solo-rider",
-    src: him5,
+    src: rohtangRideThrill,
     alt: "Rider on a motorcycle with mountain backdrop",
     className: "aspect-[3/4] min-h-[200px]",
   },
   {
     id: "group-pause",
-    src: aboutCardGallery,
+    src: keyMonastery,
     alt: "Riders gathered with their bikes near a mountain stream",
     className: "aspect-[3/4] min-h-[200px]",
   },

@@ -1,9 +1,7 @@
 import appStoreIcon from "./app-store.svg";
 import appText from "./apptext.webp";
-import aboutCardGallery from "./about-card-gallery.png";
 import aboutCardStory from "./about-card-story.png";
 import aboutCardSupport from "./about-card-support.png";
-import blogHero from "./blog-hero.jpg";
 import blogBg from "./blogbg.webp";
 import bhuntar from "./bhuntar.jpg";
 import adventure from "./adventure.avif";
@@ -16,8 +14,6 @@ import corebg from "./corebg.png";
 import heroBg from "./bg.png";
 import faqsec from "./faqsec.png";
 import fee from "./fee.webp";
-import him4 from "./him4.webp";
-import him5 from "./him5.webp";
 import googlePlayIcon from "./googleplay.png";
 import instant2 from "./instant2.webp";
 import mountainbg from "./mountainbg.png";
@@ -50,13 +46,11 @@ export const bikeImages = {
 } as const;
 
 export {
-  aboutCardGallery,
   aboutCardStory,
   aboutCardSupport,
   appStoreIcon,
   appText,
   adventure,
-  blogHero,
   blogBg,
   bhuntar,
   bike,
@@ -69,8 +63,6 @@ export {
   earnVolvo,
   faqsec,
   fee,
-  him4,
-  him5,
   googlePlayIcon,
   instant2,
   heroBg,

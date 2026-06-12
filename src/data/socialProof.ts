@@ -6,7 +6,12 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { StaticImageData } from "next/image";
-import { him4, him5, instant2, safe2 } from "@/assets/images";
+import pickgo from "@/assets/images/pickgo.webp";
+import rentalReadyFleet from "@/assets/images/gallery/rental-ready-fleet.png";
+import {
+  rohtangRide,
+  rohtangRideThrill,
+} from "@/assets/images/gallery/galleryImages";
 
 export type SocialProofCard = {
   id: number;
@@ -22,7 +27,7 @@ export type SocialProofCard = {
 export const socialProofCards: SocialProofCard[] = [
   {
     id: 1,
-    image: him4,
+    image: rohtangRide,
     icon: Users,
     titleBefore: "Trusted by ",
     titleHighlight: "10K+",
@@ -32,7 +37,7 @@ export const socialProofCards: SocialProofCard[] = [
   },
   {
     id: 2,
-    image: safe2,
+    image: rentalReadyFleet,
     icon: Bike,
     titleHighlight: "500+",
     titleAfter: " Curated Rides",
@@ -41,7 +46,7 @@ export const socialProofCards: SocialProofCard[] = [
   },
   {
     id: 3,
-    image: him5,
+    image: rohtangRideThrill,
     icon: Star,
     titleHighlight: "4.8 ★",
     titleAfter: " Real Reviews",
@@ -50,7 +55,7 @@ export const socialProofCards: SocialProofCard[] = [
   },
   {
     id: 4,
-    image: instant2,
+    image: pickgo,
     icon: Zap,
     titleHighlight: "Instant",
     titleAfter: " Everything",
