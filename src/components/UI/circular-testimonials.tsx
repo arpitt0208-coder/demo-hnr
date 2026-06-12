@@ -4,7 +4,6 @@ import React, {
   useEffect,
   useRef,
   useState,
-  useMemo,
   useCallback,
 } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -82,46 +81,57 @@ export const CircularTestimonials = ({
   const autoplayIntervalRef = useRef<ReturnType<typeof setInterval> | null>(
     null
   );
+  const testimonialsRef = useRef(testimonials);
+  testimonialsRef.current = testimonials;
 
-  const testimonialsLength = useMemo(() => testimonials.length, [testimonials]);
-  const activeTestimonial = useMemo(
-    () => testimonials[activeIndex],
-    [activeIndex, testimonials]
-  );
+  const testimonialsLength = testimonials.length;
+  const activeTestimonial = testimonials[activeIndex];
 
   useEffect(() => {
     function handleResize() {
-      if (imageContainerRef.current) {
-        setContainerWidth(imageContainerRef.current.offsetWidth);
-      }
+      if (!imageContainerRef.current) return;
+      const nextWidth = imageContainerRef.current.offsetWidth;
+      setContainerWidth((prev) => (prev === nextWidth ? prev : nextWidth));
     }
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const clearAutoplayInterval = useCallback(() => {
+    if (autoplayIntervalRef.current) {
+      clearInterval(autoplayIntervalRef.current);
+      autoplayIntervalRef.current = null;
+    }
+  }, []);
+
   const handleNext = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % testimonialsLength);
-    if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
-  }, [testimonialsLength]);
+    const len = testimonialsRef.current.length;
+    if (len === 0) return;
+    setActiveIndex((prev) => (prev + 1) % len);
+    clearAutoplayInterval();
+  }, [clearAutoplayInterval]);
 
   const handlePrev = useCallback(() => {
-    setActiveIndex(
-      (prev) => (prev - 1 + testimonialsLength) % testimonialsLength
-    );
-    if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
-  }, [testimonialsLength]);
+    const len = testimonialsRef.current.length;
+    if (len === 0) return;
+    setActiveIndex((prev) => (prev - 1 + len) % len);
+    clearAutoplayInterval();
+  }, [clearAutoplayInterval]);
 
   useEffect(() => {
-    if (autoplay) {
-      autoplayIntervalRef.current = setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % testimonialsLength);
-      }, 5000);
-    }
+    if (!autoplay) return;
+
+    autoplayIntervalRef.current = setInterval(() => {
+      const len = testimonialsRef.current.length;
+      if (len === 0) return;
+      setActiveIndex((prev) => (prev + 1) % len);
+    }, 5000);
+
     return () => {
-      if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
+      clearAutoplayInterval();
     };
-  }, [autoplay, testimonialsLength]);
+  }, [autoplay, clearAutoplayInterval]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {

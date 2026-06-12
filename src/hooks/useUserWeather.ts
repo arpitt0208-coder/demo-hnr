@@ -2,79 +2,113 @@
 
 import { useEffect, useState } from "react";
 import {
-  DEFAULT_LOCATION,
-  fetchCurrentWeather,
-  isBadWeather,
-  isStormWeather,
-  requestUserCoordinates,
-  reverseGeocode,
-  type CurrentWeather,
-  type GeoLocation,
+  DEFAULT_COORDINATES,
+  fetchWeatherByCoordinates,
+  reverseGeocodeCoordinates,
+  type WeatherSnapshot,
 } from "@/lib/weather";
 
-export type UserWeatherState = {
-  weather: CurrentWeather | null;
-  location: GeoLocation | null;
-  isLoading: boolean;
-  isBadWeather: boolean;
-  isStorm: boolean;
+type UserWeatherState = {
+  loading: boolean;
+  error: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  locationLabel: string;
+  usedFallbackLocation: boolean;
+  weather: WeatherSnapshot | null;
 };
 
-export function useUserWeather(): UserWeatherState {
-  const [weather, setWeather] = useState<CurrentWeather | null>(null);
-  const [location, setLocation] = useState<GeoLocation | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+const initialState: UserWeatherState = {
+  loading: true,
+  error: null,
+  latitude: null,
+  longitude: null,
+  locationLabel: DEFAULT_COORDINATES.label,
+  usedFallbackLocation: true,
+  weather: null,
+};
+
+function getCoordinates(): Promise<GeolocationCoordinates> {
+  return new Promise((resolve, reject) => {
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
+      reject(new Error("Geolocation is not supported."));
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => resolve(position.coords),
+      (error) => reject(error),
+      {
+        enableHighAccuracy: false,
+        timeout: 10_000,
+        maximumAge: 15 * 60 * 1000,
+      },
+    );
+  });
+}
+
+export function useUserWeather() {
+  const [state, setState] = useState<UserWeatherState>(initialState);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadWeather() {
+      let latitude: number = DEFAULT_COORDINATES.latitude;
+      let longitude: number = DEFAULT_COORDINATES.longitude;
+      let locationLabel = DEFAULT_COORDINATES.label;
+      let usedFallbackLocation = true;
+
       try {
-        let coords = {
-          latitude: DEFAULT_LOCATION.latitude,
-          longitude: DEFAULT_LOCATION.longitude,
-        };
+        const coords = await getCoordinates();
+        latitude = coords.latitude;
+        longitude = coords.longitude;
+        usedFallbackLocation = false;
+      } catch {
+        // Keep Manali as the fallback when permission is denied or unavailable.
+      }
 
-        try {
-          const position = await requestUserCoordinates();
-          coords = {
-            latitude: position.latitude,
-            longitude: position.longitude,
-          };
-        } catch {
-          // Fall back to the primary service area when permission is denied.
-        }
-
-        const [resolvedLocation, currentWeather] = await Promise.all([
-          reverseGeocode(coords.latitude, coords.longitude),
-          fetchCurrentWeather(coords.latitude, coords.longitude),
+      try {
+        const [weather, reverseLabel] = await Promise.all([
+          fetchWeatherByCoordinates(latitude, longitude),
+          reverseGeocodeCoordinates(latitude, longitude),
         ]);
 
         if (cancelled) return;
 
-        setLocation(resolvedLocation);
-        setWeather(currentWeather);
+        setState({
+          loading: false,
+          error: null,
+          latitude,
+          longitude,
+          locationLabel: reverseLabel ?? locationLabel,
+          usedFallbackLocation,
+          weather,
+        });
       } catch (error) {
-        console.error("Failed to load weather for hero:", error);
-      } finally {
-        if (!cancelled) {
-          setIsLoading(false);
-        }
+        if (cancelled) return;
+
+        setState({
+          loading: false,
+          error:
+            error instanceof Error
+              ? error.message
+              : "Unable to load weather for your location.",
+          latitude,
+          longitude,
+          locationLabel,
+          usedFallbackLocation,
+          weather: null,
+        });
       }
     }
 
-    loadWeather();
+    void loadWeather();
 
     return () => {
       cancelled = true;
     };
   }, []);
 
-  return {
-    weather,
-    location,
-    isLoading,
-    isBadWeather: weather ? isBadWeather(weather.weatherCode) : false,
-    isStorm: weather ? isStormWeather(weather.weatherCode) : false,
-  };
+  return state;
 }

@@ -59,13 +59,14 @@ function getDotIndex(trackIndex: number): number {
 
 export function HomeHowItWorksCarousel() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const trackIndexRef = useRef(START_INDEX);
   const isLockedRef = useRef(false);
+  const goNextRef = useRef<() => void>(() => {});
 
   const [containerWidth, setContainerWidth] = useState(0);
   const [trackIndex, setTrackIndex] = useState(START_INDEX);
   const [isPaused, setIsPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [instant, setInstant] = useState(false);
 
   const isReady = containerWidth > 0;
@@ -86,29 +87,37 @@ export function HomeHowItWorksCarousel() {
     requestAnimationFrame(() => setInstant(false));
   }, []);
 
+  const resetProgress = useCallback(() => {
+    if (progressBarRef.current) {
+      progressBarRef.current.style.width = "0%";
+    }
+  }, []);
+
   const goToSlide = useCallback(
     (index: number) => {
       if (isLockedRef.current) return;
       isLockedRef.current = true;
       setTrackIndexSafe(index + 1);
-      setProgress(0);
+      resetProgress();
     },
-    [setTrackIndexSafe]
+    [resetProgress, setTrackIndexSafe]
   );
 
   const goNext = useCallback(() => {
     if (isLockedRef.current) return;
     isLockedRef.current = true;
     setTrackIndexSafe((prev) => prev + 1);
-    setProgress(0);
-  }, [setTrackIndexSafe]);
+    resetProgress();
+  }, [resetProgress, setTrackIndexSafe]);
 
   const goPrev = useCallback(() => {
     if (isLockedRef.current) return;
     isLockedRef.current = true;
     setTrackIndexSafe((prev) => prev - 1);
-    setProgress(0);
-  }, [setTrackIndexSafe]);
+    resetProgress();
+  }, [resetProgress, setTrackIndexSafe]);
+
+  goNextRef.current = goNext;
 
   const handlePanStart = useCallback(() => {
     window.getSelection()?.removeAllRanges();
@@ -172,23 +181,28 @@ export function HomeHowItWorksCarousel() {
   useEffect(() => {
     if (isPaused) return;
 
+    resetProgress();
     const start = performance.now();
     let frameId = 0;
 
     const animate = (now: number) => {
       const elapsed = now - start;
-      setProgress(Math.min(elapsed / AUTOPLAY_MS, 1));
+      const nextProgress = Math.min(elapsed / AUTOPLAY_MS, 1);
+
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${nextProgress * 100}%`;
+      }
 
       if (elapsed < AUTOPLAY_MS) {
         frameId = requestAnimationFrame(animate);
       } else {
-        goNext();
+        goNextRef.current();
       }
     };
 
     frameId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frameId);
-  }, [trackIndex, isPaused, goNext]);
+  }, [trackIndex, isPaused, resetProgress]);
 
   const trackX = isReady
     ? getTrackOffset(trackIndex, containerWidth, slideWidth)
@@ -259,8 +273,9 @@ export function HomeHowItWorksCarousel() {
 
         <div className="h-[3px] w-[132px] overflow-hidden rounded-full bg-[#E2E8F0]">
           <div
+            ref={progressBarRef}
             className="h-full rounded-full bg-primary-yellow"
-            style={{ width: `${progress * 100}%` }}
+            style={{ width: "0%" }}
           />
         </div>
 

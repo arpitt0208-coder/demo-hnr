@@ -29,9 +29,8 @@ export function HomeAppPhoneMockup() {
                 preload="auto"
                 poster={downloadAppVideoPoster.src}
                 className="h-full w-full object-cover"
-              >
-                <source src={APP_DEMO_VIDEO} type="video/mp4" />
-              </video>
+                src={APP_DEMO_VIDEO}
+              />
             </div>
           </div>
         </div>

@@ -89,8 +89,6 @@ const MediaItem = ({
       mounted = false;
       if (video) {
         video.pause();
-        video.removeAttribute("src");
-        video.load();
       }
     };
   }, [isInView]);
@@ -106,15 +104,14 @@ const MediaItem = ({
           muted
           loop
           preload="auto"
+          src={item.url}
           style={{
             opacity: isBuffering ? 0.8 : 1,
             transition: "opacity 0.2s",
             transform: "translateZ(0)",
             willChange: "transform",
           }}
-        >
-          <source src={item.url} type="video/mp4" />
-        </video>
+        />
         {isBuffering ? (
           <div className="absolute inset-0 flex items-center justify-center bg-black/10">
             <div className="h-6 w-6 animate-spin rounded-full border-2 border-white/30 border-t-white" />

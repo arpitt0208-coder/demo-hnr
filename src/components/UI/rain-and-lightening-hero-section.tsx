@@ -23,10 +23,7 @@ interface LightningBolt {
   type: "flash" | "bolt";
   intensity: number;
   duration: number;
-  xOffset: number;
 }
-
-const randomLightningXOffset = () => Math.random() * 1.2 - 0.6;
 
 interface WeatherEffectProps {
   rainIntensity?: number;
@@ -45,8 +42,6 @@ interface WeatherEffectProps {
   thunderVolume?: number;
   thunderDelay?: number;
   className?: string;
-  /** When "default", children fill the container instead of being centered. */
-  contentLayout?: "centered" | "default";
   children?: React.ReactNode;
 }
 
@@ -296,14 +291,10 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
   thunderVolume = 0.5,
   thunderDelay = 2,
   className,
-  contentLayout = "centered",
   children,
 }) => {
   const [raindrops, setRaindrops] = useState<RainDrop[]>([]);
   const [lightning, setLightning] = useState<LightningBolt | null>(null);
-  const [lightningPosition, setLightningPosition] = useState(
-    () => lightningXOffset ?? randomLightningXOffset(),
-  );
   const thunderAudioRef = useRef<HTMLAudioElement | null>(null);
   const lightningTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
@@ -318,16 +309,6 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
       thunderAudioRef.current = audio;
     }
   }, [thunderEnabled, thunderVolume]);
-
-  useEffect(() => {
-    if (!lightningEnabled) return;
-
-    const interval = setInterval(() => {
-      setLightningPosition(randomLightningXOffset());
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [lightningEnabled]);
 
   useEffect(() => {
     const drops: RainDrop[] = Array.from({ length: rainIntensity }).map(
@@ -353,7 +334,6 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
       type: "flash",
       intensity: Math.random() * 0.8 + 0.2,
       duration: 200 + Math.random() * 300,
-      xOffset: lightningPosition,
     };
 
     setLightning(newLightning);
@@ -374,13 +354,7 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
     const nextStrike =
       (lightningFrequency + Math.random() * lightningFrequency) * 1000;
     lightningTimeoutRef.current = setTimeout(triggerLightning, nextStrike);
-  }, [
-    lightningEnabled,
-    lightningFrequency,
-    lightningPosition,
-    thunderEnabled,
-    thunderDelay,
-  ]);
+  }, [lightningEnabled, lightningFrequency, thunderEnabled, thunderDelay]);
 
   useEffect(() => {
     if (lightningEnabled) {
@@ -400,7 +374,7 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
         <div className="absolute inset-0 z-10">
           <Lightning
             lightningHue={lightningHue}
-            lightningXOffset={lightning.xOffset}
+            lightningXOffset={lightningXOffset}
             lightningSpeed={lightningSpeed}
             lightningIntensity={lightningIntensity}
             lightningSize={lightningSize}
@@ -412,7 +386,7 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
         <div
           className="pointer-events-none absolute inset-0 z-30"
           style={{
-            background: `radial-gradient(circle, rgba(255,255,255,${lightning.intensity * 0.35}) 0%, rgba(255,255,255,0) 100%)`,
+            background: `radial-gradient(circle, rgba(255, 255, 255, ${lightning.intensity}) 0%, rgba(255, 255, 255, 0) 100%)`,
             animation: `lightning-flash ${lightning.duration}ms ease-out forwards`,
           }}
         />
@@ -443,17 +417,22 @@ export const WeatherEffect: React.FC<WeatherEffectProps> = ({
         ))}
       </div>
 
-      {children ? (
-        <div
-          className={cn(
-            "relative z-40 h-full w-full",
-            contentLayout === "centered" &&
-            "flex items-center justify-center",
-          )}
-        >
-          {children}
-        </div>
-      ) : null}
+      <div className="relative z-40 flex h-full items-center justify-center">
+        {children}
+      </div>
+
+      <style>{`
+        @keyframes rain-fall {
+          0% { transform: translateY(-20px); }
+          100% { transform: translateY(calc(100vh + 20px)); }
+        }
+        @keyframes lightning-flash {
+          0%, 100% { opacity: 0; }
+          10%, 30% { opacity: 1; }
+          20% { opacity: 0.3; }
+          40% { opacity: 0; }
+        }
+      `}</style>
     </div>
   );
 };
