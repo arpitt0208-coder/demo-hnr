@@ -16,11 +16,12 @@ export function ReadMoreButton({
 }: ReadMoreButtonProps) {
   return (
     <Link
-      className={cn(
-        "group relative grid w-full overflow-hidden rounded-[14px] px-5 py-1.5 transition-all duration-200",
-        "shadow-[0_1000px_0_0_hsl(0_0%_85%)_inset] hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]",
-        className,
-      )}
+        className={cn(
+          "group relative grid w-full overflow-hidden rounded-[14px] px-5 py-1.5 transition-all duration-200",
+          "shadow-[0_1000px_0_0_hsl(0_0%_85%)_inset] hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]",
+          "group-hover/card:scale-[1.02] group-hover/card:shadow-lg",
+          className,
+        )}
       {...props}
     >
       <span
@@ -34,18 +35,18 @@ export function ReadMoreButton({
       <span
         className={cn(
           "backdrop absolute inset-px rounded-[13px] bg-dark-navy transition-colors duration-200",
-          "group-hover:bg-primary-yellow",
+          "group-hover:bg-primary-yellow group-hover/card:bg-primary-yellow",
         )}
       />
       <span
         className={cn(
           "z-10 flex h-9 items-center justify-center gap-1.5 text-[12px] font-bold sm:h-10 sm:text-[13px]",
-          "text-white transition-colors duration-200 group-hover:text-dark-navy",
+          "text-white transition-colors duration-200 group-hover:text-dark-navy group-hover/card:text-dark-navy",
         )}
       >
         {children}
         <ChevronRight
-          className="size-4 transition-transform group-hover:translate-x-0.5"
+          className="size-4 transition-transform group-hover:translate-x-0.5 group-hover/card:translate-x-0.5"
           strokeWidth={2.25}
           aria-hidden="true"
         />
