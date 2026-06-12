@@ -5,8 +5,14 @@ import Image from "next/image";
 import { bikeImages, podium } from "@/assets/images";
 import { HomeBikeCard } from "@/components/Home/BikeCard/HomeBikeCard";
 import { featuredBikes } from "@/data/bikes";
+import { cn } from "@/lib/utils";
 
-export function HomeHeroShowcase() {
+type HomeHeroShowcaseProps = {
+  theme?: "default" | "storm";
+};
+
+export function HomeHeroShowcase({ theme = "default" }: HomeHeroShowcaseProps) {
+  const isStormTheme = theme === "storm";
   return (
     <div className="w-full min-w-0">
       <motion.div
@@ -46,7 +52,12 @@ export function HomeHeroShowcase() {
       </motion.div>
 
       <div className="mt-5 w-full lg:hidden">
-        <p className="mb-3 text-center text-[11px] font-bold tracking-[0.14em] text-[#475569]">
+        <p
+          className={cn(
+            "mb-3 text-center text-[11px] font-bold tracking-[0.14em]",
+            isStormTheme ? "text-zinc-400" : "text-[#475569]",
+          )}
+        >
           EXPLORE BY LOCATION
         </p>
         <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
