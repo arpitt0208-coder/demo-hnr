@@ -1,4 +1,4 @@
-import type { MediaItemType } from "@/components/Gallery/GalleryBentoGallery";
+import type { MediaItemType } from "@/components/Gallery/GalleryModal";
 import type { GalleryLocationImage } from "@/data/galleryLocations";
 
 const BENTO_SPAN_PATTERNS = [
@@ -23,5 +23,19 @@ export function toBentoMediaItems(
     desc: image.alt,
     url: image.src,
     span: BENTO_SPAN_PATTERNS[index % BENTO_SPAN_PATTERNS.length],
+  }));
+}
+
+export function toGalleryMediaItems(
+  images: { src: string }[],
+  title: string,
+): MediaItemType[] {
+  return images.map((image, index) => ({
+    id: index + 1,
+    type: "image",
+    title,
+    desc: `Photo ${index + 1}`,
+    url: image.src,
+    span: "",
   }));
 }

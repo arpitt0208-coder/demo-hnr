@@ -17,13 +17,13 @@ import {
   Zap,
 } from "lucide-react";
 import type { StaticImageData } from "next/image";
-import {
-  aboutCardSupport,
-  kasol,
-  safe2,
-} from "@/assets/images";
+import { kasol } from "@/assets/images";
+import rentalReadyFleet from "@/assets/images/gallery/rental-ready-fleet.png";
+import safetyFirst from "@/assets/images/gallery/safety-first.webp";
+import pickgo from "@/assets/images/pickgo.webp";
 import {
   keyMonastery,
+  khardungLa,
   manaliView,
   rohtangRideThrill,
 } from "@/assets/images/gallery/galleryImages";
@@ -328,8 +328,9 @@ export const aboutWhyChooseCards: AboutWhyChooseCard[] = [
       "Verified local partners",
       "24/7 roadside help",
     ],
-    image: safe2,
-    imageAlt: "Rider in gear standing next to a motorcycle in the Himalayas",
+    image: safetyFirst,
+    imageAlt:
+      "Motorcyclist riding on a guarded mountain road alongside a river in the Himalayas",
     icon: ShieldCheck,
     color: "#F5A623",
     iconBgClassName: "bg-[#FFFBF0]",
@@ -346,8 +347,8 @@ export const aboutWhyChooseCards: AboutWhyChooseCard[] = [
       "Multiple bike categories",
       "Adventure-ready fleet",
     ],
-    image: rohtangRideThrill,
-    imageAlt: "Rider on a Royal Enfield Himalayan along a mountain road",
+    image: rentalReadyFleet,
+    imageAlt: "Well-maintained rental bikes ready for Himalayan roads",
     icon: Bike,
     color: "#3B82F6",
     iconBgClassName: "bg-[#EFF6FF]",
@@ -364,8 +365,8 @@ export const aboutWhyChooseCards: AboutWhyChooseCard[] = [
       "Emergency assistance",
       "Local insights",
     ],
-    image: aboutCardSupport,
-    imageAlt: "Hire N Ride support team assisting a customer in the showroom",
+    image: pickgo,
+    imageAlt: "Rider picking up a rental bike and heading out on the road",
     icon: Headphones,
     color: "#22C55E",
     iconBgClassName: "bg-[#F0FDF4]",
@@ -382,8 +383,8 @@ export const aboutWhyChooseCards: AboutWhyChooseCard[] = [
       "Local expertise",
       "Mountain-ready service",
     ],
-    image: keyMonastery,
-    imageAlt: "Group of riders overlooking snow-capped Himalayan peaks at sunset",
+    image: khardungLa,
+    imageAlt: "Khardung La pass — iconic Himalayan high-altitude riding route",
     icon: Mountain,
     color: "#8B5CF6",
     iconBgClassName: "bg-[#F5F3FF]",

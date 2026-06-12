@@ -1,8 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 import { Camera, ChevronLeft, ChevronRight, Heart, Share2, Star } from "lucide-react";
+import {
+  GalleryModal,
+  type MediaItemType,
+} from "@/components/Gallery/GalleryModal";
+import { toGalleryMediaItems } from "@/lib/galleryBentoMedia";
 import { cn } from "@/lib/cn";
 
 type VehicleImageGalleryProps = {
@@ -20,6 +25,12 @@ export function VehicleImageGallery({
 }: VehicleImageGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<MediaItemType | null>(null);
+
+  const mediaItems = useMemo(
+    () => toGalleryMediaItems(images, title),
+    [images, title],
+  );
 
   const goToPrevious = () => {
     setActiveIndex((index) => (index === 0 ? images.length - 1 : index - 1));
@@ -33,14 +44,21 @@ export function VehicleImageGallery({
     <div className={cn("space-y-3", className)}>
       <div className="relative overflow-hidden rounded-2xl bg-[#F0F0F0]">
         <div className="relative aspect-[16/10] w-full">
-          <Image
-            src={images[activeIndex]}
-            alt={`${title} - photo ${activeIndex + 1}`}
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 58vw"
-            className="object-contain object-center p-4"
-          />
+          <button
+            type="button"
+            onClick={() => setSelectedItem(mediaItems[activeIndex])}
+            aria-label={`Open photo ${activeIndex + 1} preview`}
+            className="absolute inset-0 z-0 cursor-zoom-in"
+          >
+            <Image
+              src={images[activeIndex]}
+              alt={`${title} - photo ${activeIndex + 1}`}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 58vw"
+              className="object-contain object-center p-4"
+            />
+          </button>
 
           {isPopular && (
             <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-[11px] font-semibold text-dark-navy shadow-[0_1px_4px_rgba(15,23,42,0.08)]">
@@ -143,6 +161,16 @@ export function VehicleImageGallery({
           </button>
         ))}
       </div>
+
+      {selectedItem ? (
+        <GalleryModal
+          selectedItem={selectedItem}
+          isOpen={true}
+          onClose={() => setSelectedItem(null)}
+          setSelectedItem={setSelectedItem}
+          mediaItems={mediaItems}
+        />
+      ) : null}
     </div>
   );
 }

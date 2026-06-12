@@ -118,8 +118,8 @@ function WhyChooseCard({
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{
         duration: 0.45,
@@ -139,22 +139,27 @@ function WhyChooseCard({
       >
         <div
           className={cn(
-            "flex w-full shrink-0 items-center justify-center px-3.5 py-3.5 min-[480px]:w-[36%] min-[480px]:self-stretch min-[480px]:px-4 min-[480px]:py-4 sm:w-[34%]",
+            "relative z-0 flex w-full shrink-0 items-center justify-center overflow-hidden px-3.5 py-3.5 min-[480px]:w-[36%] min-[480px]:max-w-[36%] min-[480px]:self-stretch min-[480px]:p-0 sm:w-[34%] sm:max-w-[34%]",
             card.iconBgClassName,
           )}
         >
-          <div className="relative h-[148px] w-[112px] shrink-0 overflow-hidden rounded-xl shadow-[0_4px_14px_rgba(15,23,42,0.08)] sm:h-[164px] sm:w-[124px]">
+          <div className="relative h-[172px] min-h-[150px] w-[138px] max-w-full shrink-0 overflow-hidden rounded-xl shadow-[0_4px_14px_rgba(15,23,42,0.08)] min-[480px]:h-full min-[480px]:w-full min-[480px]:rounded-none min-[480px]:shadow-none">
             <Image
               src={card.image}
               alt={card.imageAlt}
               fill
+              quality={90}
+              sizes="(max-width: 479px) 276px, (max-width: 1023px) 320px, 420px"
               className="object-cover object-center"
-              sizes="(max-width: 640px) 112px, 124px"
+            />
+            <div
+              className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/50"
+              aria-hidden="true"
             />
           </div>
         </div>
 
-        <div className="flex w-full min-w-0 flex-1 flex-col justify-center px-3.5 pb-3.5 min-[480px]:px-4 min-[480px]:py-4 sm:pr-5">
+        <div className="relative z-10 flex w-full min-w-0 flex-1 flex-col justify-center px-3.5 pb-3.5 min-[480px]:px-4 min-[480px]:py-4 sm:pr-5">
           <div className="flex items-center gap-2.5">
             <span
               className="flex size-8 shrink-0 items-center justify-center rounded-lg sm:size-9"
