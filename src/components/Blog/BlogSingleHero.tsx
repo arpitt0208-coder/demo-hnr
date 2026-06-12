@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { Bike, Calendar, Clock } from "lucide-react";
+import { AuroraHero } from "@/components/UI/aurora-hero-bg";
 import type { BlogPost } from "@/data/blogPage";
 
 interface BlogSingleHeroProps {
@@ -16,24 +16,8 @@ function formatCategory(category: string) {
 
 export function BlogSingleHero({ post }: BlogSingleHeroProps) {
   return (
-    <section
-      className="relative overflow-hidden bg-dark-navy px-4 pb-14 pt-28 sm:px-6 sm:pb-16 sm:pt-32 md:px-10 lg:px-16 lg:pb-20 lg:pt-36 xl:px-20"
-      aria-label="Article header"
-    >
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <Image
-          src={post.image}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center opacity-25"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-navy/95 via-dark-navy/90 to-dark-navy" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(239,190,61,0.12),transparent_55%)]" />
-      </div>
-
-      <div className="relative z-10 mx-auto w-full max-w-[1280px]">
+    <AuroraHero className="min-h-0 items-start bg-dark-navy px-4 pb-14 pt-28 sm:px-6 sm:pb-16 sm:pt-32 md:px-10 lg:px-16 lg:pb-20 lg:pt-36 xl:px-20">
+      <div className="mx-auto w-full max-w-[1280px]">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-yellow px-3 py-1.5 text-[10px] font-bold tracking-[0.08em] text-dark-navy sm:text-[11px]">
           <Bike className="size-3 shrink-0" strokeWidth={2.25} aria-hidden="true" />
           {formatCategory(post.category)}
@@ -64,6 +48,6 @@ export function BlogSingleHero({ post }: BlogSingleHeroProps) {
           </span>
         </div>
       </div>
-    </section>
+    </AuroraHero>
   );
 }
