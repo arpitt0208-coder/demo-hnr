@@ -1,8 +1,8 @@
 import type { StaticImageData } from "next/image";
 import { bhuntar, kasol } from "@/assets/images";
+import biker from "@/assets/images/gallery/biker.webp";
 import {
   khardungLa,
-  manaliView,
   tirthanValley,
 } from "@/assets/images/gallery/galleryImages";
 
@@ -34,7 +34,7 @@ export const exploreLocations: ExploreLocation[] = [
     region: "Himachal Pradesh, India",
     description:
       "Snow peaks, pine forests, and the charm of old Manali town—pick up a well-maintained bike and ride Solang, Rohtang, and riverside trails with local support.",
-    image: manaliView,
+    image: biker,
     highlights: ["Solang Valley", "Rohtang Pass", "Old Manali cafes"],
     bikesLabel: "55+ Bikes",
     hero: {

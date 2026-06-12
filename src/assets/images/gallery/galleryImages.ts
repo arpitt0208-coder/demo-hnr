@@ -155,6 +155,7 @@ export {
   khardungLa,
   kasol,
   manaliView,
+  oldManaliTown,
   rohtangPass,
   rohtangRide,
   rohtangRideThrill,
