@@ -27,6 +27,7 @@ export function LocationExploreView({
         hero={location.hero}
         showcaseBikes={showcaseBikes}
         locationName={location.name}
+        backgroundImage={location.image}
       />
 
       <section

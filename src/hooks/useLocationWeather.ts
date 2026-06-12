@@ -5,27 +5,32 @@ import {
   DEFAULT_COORDINATES,
   fetchWeatherByCoordinates,
   reverseGeocodeCoordinates,
+  type WeatherCondition,
   type WeatherSnapshot,
 } from "@/lib/weather";
 
-type UserWeatherState = {
-  loading: boolean;
+export type LocationWeatherState = {
+  isLoading: boolean;
   error: string | null;
-  latitude: number | null;
-  longitude: number | null;
-  locationLabel: string;
+  locationName: string;
+  temperature: number | null;
+  condition: WeatherCondition;
+  conditionLabel: string;
+  isStormy: boolean;
+  isThunderstorm: boolean;
   usedFallbackLocation: boolean;
-  weather: WeatherSnapshot | null;
 };
 
-const initialState: UserWeatherState = {
-  loading: true,
+const initialState: LocationWeatherState = {
+  isLoading: true,
   error: null,
-  latitude: null,
-  longitude: null,
-  locationLabel: DEFAULT_COORDINATES.label,
+  locationName: DEFAULT_COORDINATES.label,
+  temperature: null,
+  condition: "unknown",
+  conditionLabel: "Current weather",
+  isStormy: false,
+  isThunderstorm: false,
   usedFallbackLocation: true,
-  weather: null,
 };
 
 function getCoordinates(): Promise<GeolocationCoordinates> {
@@ -47,8 +52,27 @@ function getCoordinates(): Promise<GeolocationCoordinates> {
   });
 }
 
-export function useUserWeather() {
-  const [state, setState] = useState<UserWeatherState>(initialState);
+function toLocationWeatherState(
+  weather: WeatherSnapshot | null,
+  locationName: string,
+  usedFallbackLocation: boolean,
+  error: string | null,
+): LocationWeatherState {
+  return {
+    isLoading: false,
+    error,
+    locationName,
+    temperature: weather?.temperature ?? null,
+    condition: weather?.condition ?? "unknown",
+    conditionLabel: weather?.label ?? "Current weather",
+    isStormy: weather?.isStormy ?? false,
+    isThunderstorm: weather?.isThunderstorm ?? false,
+    usedFallbackLocation,
+  };
+}
+
+export function useLocationWeather(): LocationWeatherState {
+  const [state, setState] = useState<LocationWeatherState>(initialState);
 
   useEffect(() => {
     let cancelled = false;
@@ -56,7 +80,7 @@ export function useUserWeather() {
     async function loadWeather() {
       let latitude: number = DEFAULT_COORDINATES.latitude;
       let longitude: number = DEFAULT_COORDINATES.longitude;
-      let locationLabel = DEFAULT_COORDINATES.label;
+      let locationName = DEFAULT_COORDINATES.label;
       let usedFallbackLocation = true;
 
       try {
@@ -76,30 +100,27 @@ export function useUserWeather() {
 
         if (cancelled) return;
 
-        setState({
-          loading: false,
-          error: null,
-          latitude,
-          longitude,
-          locationLabel: reverseLabel ?? locationLabel,
-          usedFallbackLocation,
-          weather,
-        });
+        setState(
+          toLocationWeatherState(
+            weather,
+            reverseLabel ?? locationName,
+            usedFallbackLocation,
+            null,
+          ),
+        );
       } catch (error) {
         if (cancelled) return;
 
-        setState({
-          loading: false,
-          error:
+        setState(
+          toLocationWeatherState(
+            null,
+            locationName,
+            usedFallbackLocation,
             error instanceof Error
               ? error.message
               : "Unable to load weather for your location.",
-          latitude,
-          longitude,
-          locationLabel,
-          usedFallbackLocation,
-          weather: null,
-        });
+          ),
+        );
       }
     }
 
