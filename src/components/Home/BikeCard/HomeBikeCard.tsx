@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { Bike } from "@/data/bikes";
 import { locationExplorePath } from "@/lib/location-routes";
 import { cn } from "@/lib/cn";
+import { TiltCard } from "@/components/UI/tilt-card";
 import { HomeBikeCardLocationBadge } from "./HomeBikeCardLocationBadge";
 
 interface BikeCardProps {
@@ -104,10 +105,10 @@ export function HomeBikeCard({ bike, className, variant = "floating" }: BikeCard
             size={isShowcase ? "xs" : "sm"}
             className="mt-1.5"
           />
-          <Link href={bike.href} className="no-underline text-inherit">
+          <Link href={bike.href} className="no-underline text-inherit group">
             <div
               className={cn(
-                "relative mt-3 w-full",
+                "relative mt-3 w-full overflow-hidden",
                 isShowcase
                   ? "h-[68px] min-[400px]:h-[74px] sm:h-[80px]"
                   : "h-[72px] lg:mt-4 lg:h-[78px]",
@@ -117,7 +118,7 @@ export function HomeBikeCard({ bike, className, variant = "floating" }: BikeCard
                 src={bike.image}
                 alt={`${bike.brand} ${bike.model}`}
                 fill
-                className="object-contain object-center"
+                className="object-contain object-center transition-transform duration-700 group-hover:scale-110"
                 sizes={
                   isShowcase
                     ? "(max-width: 640px) 42vw, 188px"
@@ -132,14 +133,14 @@ export function HomeBikeCard({ bike, className, variant = "floating" }: BikeCard
   );
 
   const cardClassName = cn(
-    "rounded-2xl border border-border/50 bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)]",
+    "rounded-2xl glass-card shadow-[0_8px_32px_rgba(15,23,42,0.08)] transition-all duration-700",
     isFloating &&
       "absolute z-20 hidden w-[156px] lg:block lg:w-[184px] xl:w-[192px]",
     isShowcase && "relative w-full",
     isGrid && "relative flex min-w-0 w-full flex-col p-3 sm:p-3.5",
     !isFloating && !isGrid && !isShowcase && "relative w-full p-4",
     isClickable &&
-      "transition-shadow hover:shadow-[0_12px_40px_rgba(15,23,42,0.12)] active:shadow-[0_6px_24px_rgba(15,23,42,0.1)]",
+      "hover:shadow-[0_12px_40px_rgba(15,23,42,0.12)] hover:border-primary-yellow/25",
     className,
   );
 
@@ -157,27 +158,22 @@ export function HomeBikeCard({ bike, className, variant = "floating" }: BikeCard
 
   if (isClickable) {
     return (
-      <motion.div
-        initial={
-          isFloating && !isFixedTransform ? { opacity: 0, scale: 0.9 } : { opacity: 1 }
-        }
-        animate={
-          isFloating && !isFixedTransform
-            ? { opacity: 1, scale: 1 }
-            : { opacity: 1 }
-        }
-        transition={{ duration: 0.5, delay: bike.floatDelay + 0.6 }}
-        whileHover={
-          isFixedTransform || isGrid || isShowcase
-            ? { y: -4, scale: 1.02 }
-            : { y: -6, scale: 1.02 }
-        }
-        whileTap={isGrid || isShowcase ? { scale: 0.98 } : undefined}
-        className={cardClassName}
-        style={cardStyle}
-      >
-        {cardContent}
-      </motion.div>
+      <TiltCard className={cardClassName} style={cardStyle as React.CSSProperties}>
+        <motion.div
+          initial={
+            isFloating && !isFixedTransform ? { opacity: 0, scale: 0.9 } : { opacity: 1 }
+          }
+          animate={
+            isFloating && !isFixedTransform
+              ? { opacity: 1, scale: 1 }
+              : { opacity: 1 }
+          }
+          transition={{ duration: 0.5, delay: bike.floatDelay + 0.6 }}
+          whileTap={isGrid || isShowcase ? { scale: 0.98 } : undefined}
+        >
+          {cardContent}
+        </motion.div>
+      </TiltCard>
     );
   }
 

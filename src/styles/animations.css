@@ -33,3 +33,50 @@
 .gradient-border-stop-hover:hover {
   animation-play-state: paused;
 }
+
+@keyframes premium-glow-pulse {
+  0%,
+  100% {
+    text-shadow: 0 0 8px rgba(247, 203, 70, 0.2);
+  }
+
+  50% {
+    text-shadow: 0 0 18px rgba(247, 203, 70, 0.4);
+  }
+}
+
+.text-shadow-glow {
+  animation: premium-glow-pulse 3s ease-in-out infinite;
+}
+
+body.custom-cursor-active,
+body.custom-cursor-active * {
+  cursor: none !important;
+}
+
+.home-premium {
+  --primary-yellow: #f7cb46;
+  --color-primary-yellow: #f7cb46;
+  --premium-bg: #ffffff;
+  --premium-surface: #fafafa;
+  --premium-accent: #ff6b35;
+  --premium-text: #0f172a;
+  --premium-muted: #475569;
+  background-color: var(--premium-bg);
+  color: var(--premium-text);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+}

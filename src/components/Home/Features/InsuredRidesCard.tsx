@@ -7,7 +7,7 @@ import { bike } from "@/assets/images";
 
 export function InsuredRidesCard() {
   return (
-    <article className="relative flex min-h-[220px] flex-col overflow-hidden rounded-[20px] border border-[#EEF2F6] bg-white shadow-[0_2px_14px_rgba(15,23,42,0.05)] sm:min-h-[240px] lg:min-h-0 lg:flex-row">
+    <article className="relative flex min-h-[220px] flex-col overflow-hidden rounded-[20px] border border-[#EEF2F6] bg-white shadow-[0_2px_14px_rgba(15,23,42,0.05)] transition-shadow duration-700 hover:shadow-[0_8px_28px_rgba(15,23,42,0.08)] sm:min-h-[240px] lg:min-h-0 lg:flex-row">
       <div className="relative z-10 flex w-full flex-col justify-between p-4 sm:p-5 lg:w-[50%] lg:shrink-0 lg:self-stretch lg:p-5 xl:w-[48%]">
         <div>
           <div className="mb-2.5 flex size-8 items-center justify-center rounded-full bg-[#FFF3E0]">

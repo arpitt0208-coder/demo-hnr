@@ -32,6 +32,7 @@ interface Gallery4Props {
   compact?: boolean;
   variant?: "default" | "fleet";
   showDots?: boolean;
+  premium?: boolean;
 }
 
 function Gallery4CtaButton({
@@ -64,6 +65,7 @@ const Gallery4 = ({
   compact = false,
   variant = "default",
   showDots = true,
+  premium = false,
 }: Gallery4Props) => {
   const useFleetCards = variant === "fleet";
   const useCompactLayout = compact || useFleetCards;
@@ -147,7 +149,10 @@ const Gallery4 = ({
               }}
               disabled={!canScrollPrev}
               className={cn(
-                "rounded-full border-border bg-white shadow-sm disabled:pointer-events-auto",
+                "rounded-full shadow-sm disabled:pointer-events-auto",
+                premium
+                  ? "border-white/10 bg-white/5 text-white hover:bg-white/10"
+                  : "border-border bg-white",
                 useCompactLayout ? "size-8" : "size-9",
               )}
               aria-label="Previous slide"
@@ -162,7 +167,10 @@ const Gallery4 = ({
               }}
               disabled={!canScrollNext}
               className={cn(
-                "rounded-full border-border bg-white shadow-sm disabled:pointer-events-auto",
+                "rounded-full shadow-sm disabled:pointer-events-auto",
+                premium
+                  ? "border-white/10 bg-white/5 text-white hover:bg-white/10"
+                  : "border-border bg-white",
                 useCompactLayout ? "size-8" : "size-9",
               )}
               aria-label="Next slide"
@@ -198,7 +206,12 @@ const Gallery4 = ({
                   <Link
                     href={item.href}
                     aria-label={item.ctaText ?? item.title}
-                    className="group/card flex h-full flex-col rounded-[16px] border border-[#E8ECF0] bg-white p-4 shadow-[0_2px_14px_rgba(15,23,42,0.04)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary-yellow/35 hover:shadow-[0_12px_32px_rgba(239,190,61,0.12)]"
+                    className={cn(
+                      "group/card flex h-full flex-col rounded-[16px] p-4 transition-[border-color,box-shadow,transform] duration-500 hover:-translate-y-1.5",
+                      premium
+                        ? "glass-card shadow-[0_4px_24px_rgba(0,0,0,0.35)] hover:border-[#F7CB46]/30 hover:shadow-[0_16px_40px_rgba(247,203,70,0.12)]"
+                        : "border border-[#E8ECF0] bg-white shadow-[0_2px_14px_rgba(15,23,42,0.04)] hover:border-primary-yellow/35 hover:shadow-[0_12px_32px_rgba(239,190,61,0.12)]",
+                    )}
                   >
                     <div className="relative mb-3 h-[90px] w-full sm:mb-3.5 sm:h-[104px]">
                       <Image
@@ -210,7 +223,14 @@ const Gallery4 = ({
                       />
                     </div>
                     <div className="mt-auto flex items-center justify-between gap-2">
-                      <p className="text-[12px] font-semibold leading-tight text-[#1E293B] transition-colors group-hover/card:text-[#0F172A] sm:text-[14px]">
+                      <p
+                        className={cn(
+                          "text-[12px] font-semibold leading-tight transition-colors sm:text-[14px]",
+                          premium
+                            ? "text-white group-hover/card:text-[#F7CB46]"
+                            : "text-[#1E293B] group-hover/card:text-[#0F172A]",
+                        )}
+                      >
                         {item.title}
                       </p>
                       <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary-yellow shadow-[0_2px_8px_rgba(239,190,61,0.35)] transition-all duration-300 group-hover/card:scale-110 group-hover/card:shadow-[0_4px_14px_rgba(239,190,61,0.45)]">

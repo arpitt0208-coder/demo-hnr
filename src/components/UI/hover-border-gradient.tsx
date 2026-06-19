@@ -64,8 +64,10 @@ export function HoverBorderGradient({
     return () => clearInterval(interval);
   }, [hovered, duration, clockwise]);
 
+  const Component = Element as "button";
+
   return (
-    <Element
+    <Component
       data-hovered={hovered || undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -105,6 +107,6 @@ export function HoverBorderGradient({
           maskClassName,
         )}
       />
-    </Element>
+    </Component>
   );
 }

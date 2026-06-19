@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { ShieldCheck } from "lucide-react";
 import {
@@ -8,6 +7,7 @@ import {
   type SocialProofCard,
 } from "@/data/socialProof";
 import { CircularTestimonials } from "@/components/UI/circular-testimonials";
+import { ScrollReveal } from "@/components/UI/scroll-reveal";
 
 function getCardTitle(card: SocialProofCard): string {
   if (card.title) return card.title;
@@ -28,12 +28,8 @@ const testimonials = socialProofCards.map((card) => ({
 
 export function HomeSocialProofSection() {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="relative w-full overflow-x-clip bg-black px-4 py-12 sm:px-6 sm:py-14 md:py-16"
+    <section
+      className="relative w-full overflow-x-clip bg-black px-4 py-14 sm:px-6 sm:py-16 md:py-20"
       aria-label="Social proof"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
@@ -47,7 +43,7 @@ export function HomeSocialProofSection() {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1280px]">
-        <div className="flex flex-col items-center text-center">
+        <ScrollReveal variant="blur" className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-sm">
             <ShieldCheck
               className="size-3.5 shrink-0 text-primary-yellow"
@@ -71,9 +67,9 @@ export function HomeSocialProofSection() {
             confidence, ride with peace of mind, and join riders who keep coming
             back.
           </p>
-        </div>
+        </ScrollReveal>
 
-        <div className="mt-8 flex justify-center overflow-x-clip sm:mt-10 lg:mt-12">
+        <ScrollReveal variant="scale" delay={0.12} className="mt-8 flex justify-center overflow-x-clip sm:mt-10 lg:mt-12">
           <div className="relative flex w-full max-w-[1456px] items-center justify-center overflow-x-clip">
             <CircularTestimonials
               testimonials={testimonials}
@@ -89,8 +85,8 @@ export function HomeSocialProofSection() {
               }}
             />
           </div>
-        </div>
+        </ScrollReveal>
       </div>
-    </motion.section>
+    </section>
   );
 }

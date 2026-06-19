@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { MagneticButton } from "@/components/UI/magnetic-button";
+import { ScrollReveal } from "@/components/UI/scroll-reveal";
+import { smoothEase } from "@/lib/motion";
 import { HomeHowItWorksCarousel } from "./HomeHowItWorksCarousel";
 
 function SectionDotGrid() {
@@ -24,18 +27,17 @@ function SectionDotGrid() {
 
 export function HomeHowItWorksSection() {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="relative flex flex-col overflow-x-clip px-4 py-8 sm:px-6 sm:py-10"
+    <section
+      className="relative flex flex-col overflow-x-clip px-4 py-12 sm:px-6 sm:py-14"
       aria-label="How it works"
     >
       <SectionDotGrid />
 
       <div className="relative mx-auto w-full max-w-[1520px]">
-        <div className="flex flex-col gap-5 sm:gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <ScrollReveal
+          variant="fade-up"
+          className="flex flex-col gap-5 sm:gap-4 lg:flex-row lg:items-start lg:justify-between"
+        >
           <div className="max-w-xl">
             <h2 className="text-[28px] font-extrabold leading-[1.08] tracking-tight text-[#0f172a] sm:text-[32px] md:text-[38px] xl:text-[42px]">
               Rent.{" "}
@@ -47,27 +49,29 @@ export function HomeHowItWorksSection() {
             </p>
           </div>
 
-          <Link href="/explore" className="block w-full sm:w-fit">
-            <motion.span
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="group inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-primary-yellow px-7 py-3 text-[14px] font-bold text-dark-navy shadow-[0_6px_24px_rgba(239,190,61,0.35)] transition-shadow hover:shadow-[0_10px_32px_rgba(239,190,61,0.45)] sm:w-fit"
-              aria-label="Explore"
-            >
-              Explore
-              <ArrowRight
-                className="size-4 transition-transform group-hover:translate-x-0.5"
-                aria-hidden="true"
-              />
-            </motion.span>
-          </Link>
-        </div>
-
+          <MagneticButton>
+            <Link href="/explore" className="block w-full sm:w-fit" data-cursor-hover>
+              <motion.span
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.4, ease: smoothEase }}
+                className="group inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-primary-yellow px-7 py-3 text-[14px] font-bold text-dark-navy shadow-[0_6px_24px_rgba(239,190,61,0.35)] transition-shadow duration-500 hover:shadow-[0_10px_32px_rgba(239,190,61,0.45)] sm:w-fit"
+                aria-label="Explore"
+              >
+                Explore
+                <ArrowRight
+                  className="size-4 transition-transform duration-500 ease-out group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </motion.span>
+            </Link>
+          </MagneticButton>
+        </ScrollReveal>
       </div>
 
-      <div className="relative mt-2 w-full sm:mt-0">
+      <ScrollReveal variant="scale" delay={0.12} className="relative mt-4 w-full sm:mt-2">
         <HomeHowItWorksCarousel />
-      </div>
-    </motion.section>
+      </ScrollReveal>
+    </section>
   );
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Bike, Mail, MapPin, Phone, ShieldCheck, User } from "lucide-react";
+import { cn } from "@/lib/cn";
 import { BrandLogo } from "@/components/Layout/BrandLogo";
 import { SocialTooltip } from "@/components/UI/social-media";
 import {
@@ -40,9 +41,20 @@ function FooterLinkList({
   );
 }
 
-export function Footer() {
+interface FooterProps {
+  variant?: "default" | "premium";
+}
+
+export function Footer({ variant = "default" }: FooterProps) {
+  const isPremium = variant === "premium";
+
   return (
-    <footer className="relative w-full border-t border-white/10 bg-black text-white">
+    <footer
+      className={cn(
+        "relative w-full border-t border-white/10 text-white",
+        isPremium ? "bg-[#050505]" : "bg-black",
+      )}
+    >
       <div className="relative mx-auto px-4 py-10 pb-[calc(env(safe-area-inset-bottom,0px)+2.5rem)] sm:px-6 sm:py-12 sm:pb-12 md:px-10 lg:px-20 xl:px-32 lg:py-16">
         <div className="absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/20" />
 

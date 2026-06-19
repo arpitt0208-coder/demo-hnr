@@ -1,27 +1,25 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ShieldCheck } from "lucide-react";
 import Image from "next/image";
+import { ShieldCheck } from "lucide-react";
 import { textJourney } from "@/assets/images";
 import { findYourRideGalleryItems } from "@/data/findYourRide";
 import { Gallery4 } from "@/components/UI/gallery4";
 import { HeadingSparkle } from "@/components/UI/HeadingSparkle";
+import { ScrollReveal } from "@/components/UI/scroll-reveal";
 
 export function HomeFindYourRideSection() {
   return (
-    <motion.section
+    <section
       id="fleet"
-      initial={{ opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="relative w-full scroll-mt-24 overflow-hidden px-4 py-10 sm:px-6 sm:py-12"
+      className="relative w-full scroll-mt-24 overflow-hidden px-4 py-14 sm:px-6 sm:py-16"
       aria-label="Find your perfect ride"
     >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(247,203,70,0.05),transparent_55%)]" />
+
       <div className="relative mx-auto w-full max-w-[1280px]">
-        <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-white px-4 py-2">
+        <ScrollReveal variant="blur" className="flex flex-col items-center text-center">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-white px-4 py-2 shadow-sm">
             <ShieldCheck
               className="size-3.5 shrink-0 text-primary-yellow"
               strokeWidth={2.2}
@@ -56,16 +54,18 @@ export function HomeFindYourRideSection() {
             Pick a category to see what we offer—then jump straight into
             available models.
           </p>
-        </div>
+        </ScrollReveal>
 
-        <Gallery4
-          items={findYourRideGalleryItems}
-          className="mt-6 lg:mt-8"
-          compact
-          variant="fleet"
-          showDots={false}
-        />
+        <ScrollReveal variant="fade-up" delay={0.15}>
+          <Gallery4
+            items={findYourRideGalleryItems}
+            className="mt-6 lg:mt-8"
+            compact
+            variant="fleet"
+            showDots={false}
+          />
+        </ScrollReveal>
       </div>
-    </motion.section>
+    </section>
   );
 }

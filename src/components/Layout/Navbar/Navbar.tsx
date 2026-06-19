@@ -52,7 +52,12 @@ function getNavDropdownId(label: string): NavDropdownId | null {
   return null;
 }
 
-export function Navbar() {
+interface NavbarProps {
+  variant?: "default" | "premium";
+}
+
+export function Navbar({ variant = "default" }: NavbarProps) {
+  const isPremium = variant === "premium";
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navContainerRef = useRef<HTMLDivElement>(null);
   const mobileMenuScrollRef = useRef<HTMLDivElement>(null);
@@ -61,6 +66,7 @@ export function Navbar() {
     null
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const cancelScheduledClose = useCallback(() => {
     if (closeTimerRef.current) {
@@ -95,6 +101,15 @@ export function Navbar() {
       if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isPremium) return;
+
+    const onScroll = () => setScrolled(window.scrollY > 48);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isPremium]);
 
   const dropdownOpen = activeDropdown !== null;
 
@@ -261,15 +276,31 @@ export function Navbar() {
         >
           <div
             className={cn(
-              "bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)] transition-[border-radius,box-shadow] duration-200",
+              "transition-[border-radius,box-shadow,height,background] duration-300",
+              isPremium
+                ? cn(
+                    "glass-nav shadow-[0_8px_40px_rgba(0,0,0,0.45)]",
+                    scrolled && !navPanelOpen && "shadow-[0_4px_24px_rgba(0,0,0,0.35)]",
+                  )
+                : "bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)]",
               navPanelOpen
-                ? "rounded-t-[24px] shadow-[0_16px_48px_rgba(15,23,42,0.12)] lg:rounded-b-none"
+                ? cn(
+                    "rounded-t-[24px] lg:rounded-b-none",
+                    isPremium
+                      ? "shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
+                      : "shadow-[0_16px_48px_rgba(15,23,42,0.12)]",
+                  )
                 : "rounded-[24px]",
               mobileMenuOpen && "rounded-b-[24px]"
             )}
           >
             <nav
-              className="mx-auto flex h-[68px] items-center justify-between px-4 sm:h-[74px] sm:px-6 md:h-[80px] md:px-12 lg:px-20"
+              className={cn(
+                "mx-auto flex items-center justify-between px-4 transition-[height] duration-300 sm:px-6 md:px-12 lg:px-20",
+                isPremium && scrolled && !navPanelOpen
+                  ? "h-[60px] sm:h-[64px] md:h-[68px]"
+                  : "h-[68px] sm:h-[74px] md:h-[80px]",
+              )}
               aria-label="Main navigation"
             >
               <Logo />
@@ -292,10 +323,12 @@ export function Navbar() {
                       <a
                         href={item.href}
                         className={cn(
-                          "group relative flex items-center gap-1.5 py-2 text-sm font-medium transition-colors duration-300",
+                          "group relative flex items-center gap-1.5 py-2 text-sm font-medium transition-colors duration-500",
                           isDropdownOpen
                             ? "text-primary-yellow"
-                            : "text-dark-navy/75 hover:text-dark-navy"
+                            : isPremium
+                              ? "text-dark-navy/75 hover:text-dark-navy"
+                              : "text-dark-navy/75 hover:text-dark-navy"
                         )}
                         aria-expanded={
                           dropdownId ? isDropdownOpen : undefined
@@ -338,7 +371,10 @@ export function Navbar() {
 
               <button
                 type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border lg:hidden"
+                className={cn(
+                  "flex h-10 w-10 items-center justify-center rounded-full border lg:hidden",
+                  isPremium ? "border-border/80" : "border-border",
+                )}
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileMenuOpen}
                 onClick={() => {
@@ -363,7 +399,10 @@ export function Navbar() {
 
             <div
               className={cn(
-                "border-t border-[#F1F5F9] bg-white transition-[max-height,opacity] duration-300 ease-out lg:hidden",
+                "border-t transition-[max-height,opacity] duration-500 ease-out lg:hidden",
+                isPremium
+                  ? "border-border/60 bg-white/95"
+                  : "border-[#F1F5F9] bg-white",
                 mobileMenuOpen
                   ? "flex max-h-[calc(100dvh-5.5rem-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px))] flex-col opacity-100"
                   : "max-h-0 overflow-hidden opacity-0"
@@ -379,7 +418,14 @@ export function Navbar() {
               >
                 {activeDropdown ? (
                   <>
-                    <div className="sticky top-0 z-10 border-b border-[#F1F5F9] bg-white px-4 py-3 sm:px-6">
+                    <div
+                      className={cn(
+                        "sticky top-0 z-10 border-b px-4 py-3 sm:px-6",
+                        isPremium
+                          ? "border-border/60 bg-white/95"
+                          : "border-[#F1F5F9] bg-white",
+                      )}
+                    >
                       <button
                         type="button"
                         onClick={() => setActiveDropdown(null)}
@@ -442,7 +488,10 @@ export function Navbar() {
           >
             <div
               className={cn(
-                "max-h-[calc(100dvh-6.5rem)] overflow-x-hidden overflow-y-auto overscroll-y-contain rounded-b-[24px] border-t border-[#F1F5F9] bg-white shadow-[0_16px_48px_rgba(15,23,42,0.12)] transition-[opacity,transform] duration-200 ease-out",
+                "max-h-[calc(100dvh-6.5rem)] overflow-x-hidden overflow-y-auto overscroll-y-contain rounded-b-[24px] border-t transition-[opacity,transform] duration-200 ease-out",
+                isPremium
+                  ? "border-border/60 bg-white shadow-[0_16px_48px_rgba(15,23,42,0.1)]"
+                  : "border-[#F1F5F9] bg-white shadow-[0_16px_48px_rgba(15,23,42,0.12)]",
                 dropdownOpen
                   ? "translate-y-0 opacity-100"
                   : "pointer-events-none -translate-y-1 opacity-0"

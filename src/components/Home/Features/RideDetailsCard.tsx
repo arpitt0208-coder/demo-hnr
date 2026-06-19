@@ -6,7 +6,7 @@ import biker from "@/assets/images/gallery/biker.webp";
 
 export function RideDetailsCard() {
   return (
-    <article className="relative min-h-[220px] overflow-hidden rounded-[20px] border border-[#EEF2F6] shadow-[0_2px_14px_rgba(15,23,42,0.05)] sm:min-h-[240px]">
+    <article className="relative min-h-[220px] overflow-hidden rounded-[20px] border border-[#EEF2F6] bg-white shadow-[0_2px_14px_rgba(15,23,42,0.05)] transition-shadow duration-700 hover:shadow-[0_8px_28px_rgba(15,23,42,0.08)] sm:min-h-[240px]">
       <Image
         src={biker}
         alt="Rider on a motorcycle with Himalayan mountain scenery"

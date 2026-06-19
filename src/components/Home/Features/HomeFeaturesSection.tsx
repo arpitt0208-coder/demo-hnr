@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Mountain } from "lucide-react";
 import backBg from "@/assets/images/back.png";
+import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/UI/scroll-reveal";
 import { CommunityCard } from "./CommunityCard";
 import { FeaturesSupportCard } from "./FeaturesSupportCard";
 import { InsuredRidesCard } from "./InsuredRidesCard";
@@ -12,12 +12,8 @@ import { RideDetailsCard } from "./RideDetailsCard";
 
 export function HomeFeaturesSection() {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="relative w-full overflow-hidden px-4 py-14 sm:px-6 sm:py-16"
+    <section
+      className="relative w-full overflow-hidden px-4 py-16 sm:px-6 sm:py-20"
       aria-label="What makes us different"
     >
       <div
@@ -27,7 +23,7 @@ export function HomeFeaturesSection() {
       />
 
       <div className="relative mx-auto w-full max-w-[1280px]">
-        <div className="flex flex-col items-center text-center">
+        <ScrollReveal variant="blur" className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-primary-yellow/70 bg-[#FFFBF0] px-4 py-2 shadow-[0_2px_12px_rgba(15,23,42,0.04)]">
             <Mountain
               className="size-3.5 shrink-0 text-primary-yellow"
@@ -49,22 +45,34 @@ export function HomeFeaturesSection() {
             partner. From maintained rides to local guides, we make sure your
             journey is safe, smooth, and unforgettable.
           </p>
-        </div>
+        </ScrollReveal>
 
-        <div className="mt-8 flex flex-col gap-4 lg:mt-10">
+        <StaggerReveal className="mt-8 flex flex-col gap-4 lg:mt-10" stagger={0.08}>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            <RideDetailsCard />
-            <InsuredRidesCard />
+            <StaggerItem variant="scale">
+              <RideDetailsCard />
+            </StaggerItem>
+            <StaggerItem variant="scale">
+              <InsuredRidesCard />
+            </StaggerItem>
           </div>
 
           <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <FeaturesSupportCard />
-            <PricingCard />
-            <KycCard />
-            <CommunityCard />
+            <StaggerItem variant="fade-up">
+              <FeaturesSupportCard />
+            </StaggerItem>
+            <StaggerItem variant="fade-up">
+              <PricingCard />
+            </StaggerItem>
+            <StaggerItem variant="fade-up">
+              <KycCard />
+            </StaggerItem>
+            <StaggerItem variant="fade-up">
+              <CommunityCard />
+            </StaggerItem>
           </div>
-        </div>
+        </StaggerReveal>
       </div>
-    </motion.section>
+    </section>
   );
 }

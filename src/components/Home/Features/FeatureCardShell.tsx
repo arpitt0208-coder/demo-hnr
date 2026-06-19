@@ -18,7 +18,7 @@ export function FeatureCardShell({
   return (
     <article
       className={cn(
-        "relative flex h-full min-h-[280px] flex-col overflow-hidden rounded-[20px] border border-[#EEF2F6] bg-white shadow-[0_2px_14px_rgba(15,23,42,0.05)] transition-shadow duration-300 hover:shadow-[0_6px_24px_rgba(15,23,42,0.08)] sm:min-h-[300px]",
+        "relative flex h-full min-h-[280px] flex-col overflow-hidden rounded-[20px] border border-[#EEF2F6] bg-white shadow-[0_2px_14px_rgba(15,23,42,0.05)] transition-shadow duration-700 hover:shadow-[0_8px_28px_rgba(15,23,42,0.08)] sm:min-h-[300px]",
         className
       )}
     >
