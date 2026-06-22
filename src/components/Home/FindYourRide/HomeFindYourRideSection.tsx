@@ -5,7 +5,7 @@ import { ShieldCheck } from "lucide-react";
 import { textJourney } from "@/assets/images";
 import { findYourRideGalleryItems } from "@/data/findYourRide";
 import { HeadingSparkle } from "@/components/UI/HeadingSparkle";
-import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/UI/scroll-reveal";
+import { ScrollReveal } from "@/components/UI/scroll-reveal";
 import { FindYourRideCard } from "./FindYourRideCard";
 
 export function HomeFindYourRideSection() {
@@ -55,20 +55,20 @@ export function HomeFindYourRideSection() {
         </ScrollReveal>
 
         <ScrollReveal variant="scale" delay={0.12} className="mt-6 lg:mt-8">
-          <StaggerReveal
-            className="grid grid-cols-1 items-stretch gap-6 min-[520px]:grid-cols-2 lg:grid-cols-4 lg:gap-6"
-            stagger={0.1}
+          <div
+            className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-5 lg:gap-6 [&::-webkit-scrollbar]:hidden"
+            role="region"
+            aria-label="Browse ride categories"
           >
-            {findYourRideGalleryItems.map((item, index) => (
-              <StaggerItem
+            {findYourRideGalleryItems.map((item) => (
+              <div
                 key={item.id}
-                variant={index % 2 === 0 ? "slide-left" : "slide-right"}
-                className="h-full"
+                className="h-full w-[min(82vw,280px)] shrink-0 snap-start sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-4.5rem)/4)]"
               >
                 <FindYourRideCard item={item} />
-              </StaggerItem>
+              </div>
             ))}
-          </StaggerReveal>
+          </div>
         </ScrollReveal>
       </div>
     </section>

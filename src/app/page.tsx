@@ -5,12 +5,15 @@ import {
   // HomeHelpInfoSection,
   HomeHero,
   HomeLocationsMapSection,
+  HomeServicesSection,
   HomeSocialProofSection,
   HomeTestimonialsSection,
 } from "@/components/Home";
 import { HomePremiumProvider } from "@/components/Home/HomePremiumProvider";
+import { ServiceTierCard } from "@/components/Home/Services/ServiceTierCard";
 import { Footer, Navbar } from "@/components/Layout";
 import { WhatsAppContactButton } from "@/components/UI/WhatsAppContactButton";
+import { serviceTiers } from "@/data/serviceTiers";
 
 export default function Home() {
   return (
@@ -21,6 +24,7 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto w-full max-w-full overflow-x-clip">
           <HomeHero />
+          <HomeServicesSection />
           <HomeLocationsMapSection />
           <HomeFindYourRideSection />
           <HomeFeaturesSection />
