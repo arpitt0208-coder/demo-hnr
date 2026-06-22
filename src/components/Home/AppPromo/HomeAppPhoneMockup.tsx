@@ -8,8 +8,8 @@ const APP_DEMO_VIDEO =
 
 export function HomeAppPhoneMockup() {
   return (
-    <div className="flex justify-center">
-      <div className="phone-float relative w-full max-w-[220px] sm:max-w-[240px] lg:max-w-[260px] xl:max-w-[280px]">
+    <div className="flex justify-center drop-shadow-[0_20px_40px_rgba(15,23,42,0.18)]">
+      <div className="relative w-full max-w-[220px] sm:max-w-[240px] lg:max-w-[260px] xl:max-w-[280px]">
         <div className="relative aspect-[9/20] w-full">
           <Image
             src={iphoneFrame15}

@@ -2,7 +2,7 @@ import {
   HomeAppPromoSection,
   HomeFeaturesSection,
   HomeFindYourRideSection,
-  HomeHelpInfoSection,
+  // HomeHelpInfoSection,
   HomeHero,
   HomeLocationsMapSection,
   HomeSocialProofSection,
@@ -26,8 +26,8 @@ export default function Home() {
           <HomeFeaturesSection />
           <HomeSocialProofSection />
           <HomeTestimonialsSection />
-          {/* <HomeAppPromoSection />
-          <HomeHelpInfoSection /> */}
+          <HomeAppPromoSection />
+          {/* <HomeHelpInfoSection /> */}
           <Footer />
         </div>
       </main>

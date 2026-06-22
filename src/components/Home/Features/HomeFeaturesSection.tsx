@@ -2,13 +2,9 @@
 
 import { Mountain } from "lucide-react";
 import backBg from "@/assets/images/back.png";
-import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/UI/scroll-reveal";
-import { CommunityCard } from "./CommunityCard";
-import { FeaturesSupportCard } from "./FeaturesSupportCard";
-import { InsuredRidesCard } from "./InsuredRidesCard";
-import { KycCard } from "./KycCard";
-import { PricingCard } from "./PricingCard";
-import { RideDetailsCard } from "./RideDetailsCard";
+import LinearCard from "@/components/UI/linear-card";
+import { ScrollReveal } from "@/components/UI/scroll-reveal";
+import { homeFeaturesItems } from "./homeFeaturesData";
 
 export function HomeFeaturesSection() {
   return (
@@ -47,31 +43,9 @@ export function HomeFeaturesSection() {
           </p>
         </ScrollReveal>
 
-        <StaggerReveal className="mt-8 flex flex-col gap-4 lg:mt-10" stagger={0.1}>
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            <StaggerItem variant="slide-left">
-              <RideDetailsCard />
-            </StaggerItem>
-            <StaggerItem variant="slide-right">
-              <InsuredRidesCard />
-            </StaggerItem>
-          </div>
-
-          <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <StaggerItem variant="rotate-in">
-              <FeaturesSupportCard />
-            </StaggerItem>
-            <StaggerItem variant="clip-up">
-              <PricingCard />
-            </StaggerItem>
-            <StaggerItem variant="rotate-in">
-              <KycCard />
-            </StaggerItem>
-            <StaggerItem variant="clip-up">
-              <CommunityCard />
-            </StaggerItem>
-          </div>
-        </StaggerReveal>
+        <ScrollReveal variant="fade" delay={0.15} className="mt-8 lg:mt-10">
+          <LinearCard items={[...homeFeaturesItems]} />
+        </ScrollReveal>
       </div>
     </section>
   );
