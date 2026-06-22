@@ -5,6 +5,7 @@ import { ArrowRight, Minus, Plus } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { FAQItem } from "@/components/UI/faq-tabs";
 import { TiltCard } from "@/components/UI/tilt-card";
+import { StaggerItem } from "@/components/UI/scroll-reveal";
 import { smoothEase } from "@/lib/motion";
 import {
   helpContactPanel,
@@ -17,7 +18,7 @@ import {
 function PanelIcon({ icon: Icon }: { icon: typeof helpFaqPanel.icon }) {
   return (
     <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#FFF0D4]">
-      <Icon className="size-5 text-dark-navy" strokeWidth={1.8} aria-hidden="true" />
+      <Icon className="icon-float size-5 text-dark-navy" strokeWidth={1.8} aria-hidden="true" />
     </div>
   );
 }
@@ -109,103 +110,110 @@ export function HomeHelpInfoCards() {
   const ContactIcon = helpContactPanel.icon;
 
   return (
-    <div className="flex flex-col gap-4">
-      <TiltCard className="rounded-[20px]">
-        <article className={panelClass}>
-          <div className="flex items-start gap-3 sm:gap-4">
-            <PanelIcon icon={FaqIcon} />
-            <div className="flex min-w-0 flex-1 items-start justify-between gap-2 sm:gap-3">
-              <div>
-                <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
-                  {helpFaqPanel.title}
-                </h3>
-                <p className="mt-1 text-[12px] font-medium leading-[1.6] text-[#475569] sm:text-[13px]">
-                  {helpFaqPanel.description}
-                </p>
-              </div>
-              <ToggleButton
-                isOpen={faqOpen}
-                onClick={() => setFaqOpen((prev) => !prev)}
-                label={faqOpen ? "Collapse FAQ section" : "Expand FAQ section"}
-              />
-            </div>
-          </div>
-
-          <ExpandablePanelContent isOpen={faqOpen}>
-            {helpFaqItems.map((item) => (
-              <FAQItem
-                key={item.id}
-                question={item.question}
-                answer={item.answer}
-                className="rounded-2xl shadow-none [&_button_span:first-child]:text-[13px] [&_button_span:first-child]:sm:text-[14px] [&_p]:text-[12px] [&_p]:leading-[1.7] [&_p]:sm:text-[13px]"
-              />
-            ))}
-          </ExpandablePanelContent>
-        </article>
-      </TiltCard>
-
-      <TiltCard className="rounded-[20px]">
-        <article className={panelClass}>
-          <button
-            type="button"
-            onClick={() => setDisclaimerOpen((prev) => !prev)}
-            aria-expanded={disclaimerOpen}
-            aria-label={
-              disclaimerOpen
-                ? "Collapse disclaimer section"
-                : "Expand disclaimer section"
-            }
-            className="flex w-full cursor-pointer items-start gap-3 text-left transition-opacity duration-500 hover:opacity-90 sm:gap-4"
-            data-cursor-hover
-          >
-            <PanelIcon icon={DisclaimerIcon} />
-            <div className="flex min-w-0 flex-1 items-start justify-between gap-2 sm:gap-3">
-              <div>
-                <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
-                  {helpDisclaimerPanel.title}
-                </h3>
-                <p className="mt-1 text-[12px] font-medium leading-[1.6] text-[#475569] sm:text-[13px]">
-                  {helpDisclaimerPanel.description}
-                </p>
-              </div>
-              <ToggleIcon isOpen={disclaimerOpen} />
-            </div>
-          </button>
-
-          <ExpandablePanelContent isOpen={disclaimerOpen}>
-            <p className="text-[12px] font-medium leading-[1.75] text-[#475569] sm:text-[13px]">
-              {helpDisclaimerContent}
-            </p>
-          </ExpandablePanelContent>
-        </article>
-      </TiltCard>
-
-      <TiltCard className="rounded-[20px]">
-        <article className={panelClass}>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3 sm:gap-4">
-              <PanelIcon icon={ContactIcon} />
-              <div>
-                <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
-                  {helpContactPanel.title}
-                </h3>
-                <p className="mt-1 text-[12px] font-medium leading-[1.6] text-[#475569] sm:text-[13px]">
-                  {helpContactPanel.description}
-                </p>
+    <>
+      <StaggerItem variant="clip-up">
+        <TiltCard className="rounded-[20px]">
+          <article className={panelClass}>
+            <div className="flex items-start gap-3 sm:gap-4">
+              <PanelIcon icon={FaqIcon} />
+              <div className="flex min-w-0 flex-1 items-start justify-between gap-2 sm:gap-3">
+                <div>
+                  <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
+                    {helpFaqPanel.title}
+                  </h3>
+                  <p className="mt-1 text-[12px] font-medium leading-[1.6] text-[#475569] sm:text-[13px]">
+                    {helpFaqPanel.description}
+                  </p>
+                </div>
+                <ToggleButton
+                  isOpen={faqOpen}
+                  onClick={() => setFaqOpen((prev) => !prev)}
+                  label={faqOpen ? "Collapse FAQ section" : "Expand FAQ section"}
+                />
               </div>
             </div>
 
-            <a
-              href="/contact"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary-yellow px-6 py-3 text-[13px] font-bold text-dark-navy shadow-[0_6px_24px_rgba(239,190,61,0.35)] transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_10px_32px_rgba(239,190,61,0.45)] sm:w-auto sm:shrink-0"
+            <ExpandablePanelContent isOpen={faqOpen}>
+              {helpFaqItems.map((item) => (
+                <FAQItem
+                  key={item.id}
+                  question={item.question}
+                  answer={item.answer}
+                  className="rounded-2xl shadow-none [&_button_span:first-child]:text-[13px] [&_button_span:first-child]:sm:text-[14px] [&_p]:text-[12px] [&_p]:leading-[1.7] [&_p]:sm:text-[13px]"
+                />
+              ))}
+            </ExpandablePanelContent>
+          </article>
+        </TiltCard>
+      </StaggerItem>
+
+      <StaggerItem variant="clip-up">
+        <TiltCard className="rounded-[20px]">
+          <article className={panelClass}>
+            <button
+              type="button"
+              onClick={() => setDisclaimerOpen((prev) => !prev)}
+              aria-expanded={disclaimerOpen}
+              aria-label={
+                disclaimerOpen
+                  ? "Collapse disclaimer section"
+                  : "Expand disclaimer section"
+              }
+              className="flex w-full cursor-pointer items-start gap-3 text-left transition-opacity duration-500 hover:opacity-90 sm:gap-4"
               data-cursor-hover
             >
-              {helpContactPanel.cta}
-              <ArrowRight className="size-4" strokeWidth={2.25} aria-hidden="true" />
-            </a>
-          </div>
-        </article>
-      </TiltCard>
-    </div>
+              <PanelIcon icon={DisclaimerIcon} />
+              <div className="flex min-w-0 flex-1 items-start justify-between gap-2 sm:gap-3">
+                <div>
+                  <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
+                    {helpDisclaimerPanel.title}
+                  </h3>
+                  <p className="mt-1 text-[12px] font-medium leading-[1.6] text-[#475569] sm:text-[13px]">
+                    {helpDisclaimerPanel.description}
+                  </p>
+                </div>
+                <ToggleIcon isOpen={disclaimerOpen} />
+              </div>
+            </button>
+
+            <ExpandablePanelContent isOpen={disclaimerOpen}>
+              <p className="text-[12px] font-medium leading-[1.75] text-[#475569] sm:text-[13px]">
+                {helpDisclaimerContent}
+              </p>
+            </ExpandablePanelContent>
+          </article>
+        </TiltCard>
+      </StaggerItem>
+
+      <StaggerItem variant="clip-up">
+        <TiltCard className="rounded-[20px]">
+          <article className={panelClass}>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <PanelIcon icon={ContactIcon} />
+                <div>
+                  <h3 className="text-[16px] font-bold leading-tight text-dark-navy sm:text-[17px]">
+                    {helpContactPanel.title}
+                  </h3>
+                  <p className="mt-1 text-[12px] font-medium leading-[1.6] text-[#475569] sm:text-[13px]">
+                    {helpContactPanel.description}
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href="/contact"
+                className="hero-cta-shimmer group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-primary-yellow px-6 py-3 text-[13px] font-bold text-dark-navy shadow-[0_6px_24px_rgba(239,190,61,0.35)] transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_10px_32px_rgba(239,190,61,0.45)] sm:w-auto sm:shrink-0"
+                data-cursor-hover
+              >
+                <span className="relative z-10">{helpContactPanel.cta}</span>
+                <ArrowRight className="relative z-10 size-4" strokeWidth={2.25} aria-hidden="true" />
+                <span className="hero-cta-shimmer__shine pointer-events-none absolute inset-0 z-20" aria-hidden="true" />
+              </a>
+            </div>
+          </article>
+        </TiltCard>
+      </StaggerItem>
+    </>
   );
 }

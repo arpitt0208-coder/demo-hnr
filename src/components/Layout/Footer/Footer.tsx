@@ -11,6 +11,7 @@ import {
   footerSocialTooltipItems,
 } from "@/data/footer";
 import { BorderRotate } from "@/components/UI/animated-gradient-border";
+import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/UI/scroll-reveal";
 import { FooterAppBadges } from "./FooterAppBadges";
 
 const columnIcons = {
@@ -58,7 +59,8 @@ export function Footer({ variant = "default" }: FooterProps) {
       <div className="relative mx-auto px-4 py-10 pb-[calc(env(safe-area-inset-bottom,0px)+2.5rem)] sm:px-6 sm:py-12 sm:pb-12 md:px-10 lg:px-20 xl:px-32 lg:py-16">
         <div className="absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/20" />
 
-        <div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8">
+        <StaggerReveal className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8" stagger={0.08}>
+          <StaggerItem variant="fade-up">
           <div className="space-y-4">
             <Link
               href="/"
@@ -71,8 +73,10 @@ export function Footer({ variant = "default" }: FooterProps) {
               © {new Date().getFullYear()} Hire N Ride — All rights reserved.
             </p>
           </div>
+          </StaggerItem>
 
-          <div className="mt-8 grid grid-cols-1 gap-8 sm:mt-10 sm:grid-cols-2 sm:gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">
+          <StaggerItem variant="fade-up" className="mt-8 sm:mt-10 xl:col-span-2 xl:mt-0">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 md:grid-cols-4">
             {footerColumns.map((column) => {
               const Icon =
                 columnIcons[column.title as keyof typeof columnIcons];
@@ -82,7 +86,7 @@ export function Footer({ variant = "default" }: FooterProps) {
                   <div className="mb-10 md:mb-0">
                     <div className="mb-4 flex items-center gap-2">
                       <Icon
-                        className="size-4 shrink-0 text-primary-yellow"
+                        className="icon-float size-4 shrink-0 text-primary-yellow"
                         strokeWidth={2.2}
                         aria-hidden="true"
                       />
@@ -104,9 +108,10 @@ export function Footer({ variant = "default" }: FooterProps) {
               );
             })}
           </div>
-        </div>
+          </StaggerItem>
+        </StaggerReveal>
 
-        <div className="mt-10">
+        <ScrollReveal variant="fade-up" delay={0.1} className="mt-10">
           <BorderRotate
             animationMode="auto-rotate"
             animationSpeed={6}
@@ -183,9 +188,9 @@ export function Footer({ variant = "default" }: FooterProps) {
               </div>
             </div>
           </BorderRotate>
-        </div>
+        </ScrollReveal>
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-3 text-[11px] font-medium text-white/65 sm:flex-row sm:gap-4">
+        <ScrollReveal variant="fade" delay={0.15} className="mt-8 flex flex-col items-center justify-between gap-3 text-[11px] font-medium text-white/65 sm:flex-row sm:gap-4">
             <p className="text-center sm:text-left">
               All information is subject to specific conditions.
             </p>
@@ -198,7 +203,7 @@ export function Footer({ variant = "default" }: FooterProps) {
                 Privacy Policy
               </a>
             </p>
-        </div>
+        </ScrollReveal>
       </div>
     </footer>
   );

@@ -29,7 +29,8 @@ export function HomeTrustBar({ className }: HomeTrustBarProps) {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2 + index * 0.07, duration: 0.75, ease: smoothEase }}
-                className="relative flex min-w-0 items-center gap-2 sm:gap-3 md:flex-1 md:justify-center md:px-4"
+                whileHover={{ y: -2 }}
+                className="group relative flex min-w-0 items-center gap-2 sm:gap-3 md:flex-1 md:justify-center md:px-4"
               >
                 {index > 0 && (
                   <div
@@ -37,9 +38,9 @@ export function HomeTrustBar({ className }: HomeTrustBarProps) {
                     aria-hidden="true"
                   />
                 )}
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-yellow/20">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-yellow/20 transition-transform duration-500 group-hover:scale-110">
                   <Icon
-                    className="h-5 w-5 text-[#c9971a]"
+                    className="icon-pulse-soft h-5 w-5 text-[#c9971a]"
                     strokeWidth={2}
                     aria-hidden="true"
                   />

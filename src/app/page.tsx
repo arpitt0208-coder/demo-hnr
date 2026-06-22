@@ -4,8 +4,9 @@ import {
   HomeFindYourRideSection,
   HomeHelpInfoSection,
   HomeHero,
-  HomeHowItWorksSection,
+  // HomeHowItWorksSection,
   HomeLocationsMapSection,
+  HomeReviewsSection,
   HomeServicesSection,
   HomeSocialProofSection,
 } from "@/components/Home";
@@ -22,13 +23,14 @@ export default function Home() {
         <div className="relative z-10 mx-auto w-full max-w-full overflow-x-clip">
           <HomeHero />
           <HomeServicesSection />
+          <HomeLocationsMapSection />
           <div className="relative z-10 mx-auto w-full max-w-[1440px] overflow-x-clip px-0">
-            <HomeLocationsMapSection />
-            <HomeHowItWorksSection />
+            {/* <HomeHowItWorksSection /> */}
             <HomeFindYourRideSection />
           </div>
-          <HomeSocialProofSection />
           <HomeFeaturesSection />
+          <HomeReviewsSection />
+          <HomeSocialProofSection />
           <HomeAppPromoSection />
           <HomeHelpInfoSection />
           <Footer />

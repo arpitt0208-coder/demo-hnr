@@ -4,24 +4,22 @@ import Image from "next/image";
 import { ShieldCheck } from "lucide-react";
 import { textJourney } from "@/assets/images";
 import { findYourRideGalleryItems } from "@/data/findYourRide";
-import { Gallery4 } from "@/components/UI/gallery4";
 import { HeadingSparkle } from "@/components/UI/HeadingSparkle";
-import { ScrollReveal } from "@/components/UI/scroll-reveal";
+import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/UI/scroll-reveal";
+import { FindYourRideCard } from "./FindYourRideCard";
 
 export function HomeFindYourRideSection() {
   return (
     <section
       id="fleet"
-      className="relative w-full scroll-mt-24 overflow-hidden px-4 py-14 sm:px-6 sm:py-16"
+      className="relative w-full scroll-mt-24 overflow-hidden bg-white px-4 py-14 sm:px-6 sm:py-16"
       aria-label="Find your perfect ride"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(247,203,70,0.05),transparent_55%)]" />
-
       <div className="relative mx-auto w-full max-w-[1280px]">
-        <ScrollReveal variant="blur" className="flex flex-col items-center text-center">
+        <ScrollReveal variant="slide-right" className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-white px-4 py-2 shadow-sm">
             <ShieldCheck
-              className="size-3.5 shrink-0 text-primary-yellow"
+              className="icon-pulse-soft size-3.5 shrink-0 text-primary-yellow"
               strokeWidth={2.2}
               aria-hidden="true"
             />
@@ -56,14 +54,21 @@ export function HomeFindYourRideSection() {
           </p>
         </ScrollReveal>
 
-        <ScrollReveal variant="fade-up" delay={0.15}>
-          <Gallery4
-            items={findYourRideGalleryItems}
-            className="mt-6 lg:mt-8"
-            compact
-            variant="fleet"
-            showDots={false}
-          />
+        <ScrollReveal variant="scale" delay={0.12} className="mt-6 lg:mt-8">
+          <StaggerReveal
+            className="grid grid-cols-1 items-stretch gap-6 min-[520px]:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+            stagger={0.1}
+          >
+            {findYourRideGalleryItems.map((item, index) => (
+              <StaggerItem
+                key={item.id}
+                variant={index % 2 === 0 ? "slide-left" : "slide-right"}
+                className="h-full"
+              >
+                <FindYourRideCard item={item} />
+              </StaggerItem>
+            ))}
+          </StaggerReveal>
         </ScrollReveal>
       </div>
     </section>

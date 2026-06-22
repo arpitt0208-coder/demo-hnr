@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "../styles/animations.css";
+@import "../styles/reviews.css";
 @import "../styles/spotlight.css";
+@import "../styles/glow-button.css";
 
 :root {
   --success: 142.1 70.6% 45.3%;

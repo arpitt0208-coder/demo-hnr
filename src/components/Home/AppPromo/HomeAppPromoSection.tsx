@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { Smartphone } from "lucide-react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { appText, manali } from "@/assets/images";
 import {
   appFeatures,
@@ -14,25 +16,39 @@ import { HomeAppDownloadBadges } from "./HomeAppDownloadBadges";
 import { HomeAppPhoneMockup } from "./HomeAppPhoneMockup";
 
 export function HomeAppPromoSection() {
+  const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+
   return (
     <section
+      ref={sectionRef}
       className="relative w-full overflow-hidden px-4 py-16 sm:px-6 sm:py-20"
       aria-label="Download the Hire N Ride app"
     >
       <div className="relative mx-auto w-full max-w-[1280px]">
-        <ScrollReveal variant="scale">
+        <ScrollReveal variant="slide-left">
           <div className="relative overflow-hidden rounded-[28px] border border-[#E8ECF0] bg-[#FDFBF7] shadow-[0_8px_40px_rgba(15,23,42,0.06)]">
             <div
               className="pointer-events-none absolute inset-x-0 bottom-0 h-[40%] sm:inset-y-0 sm:left-auto sm:h-auto sm:w-[50%] lg:w-[58%]"
               aria-hidden="true"
             >
-              <Image
-                src={manali}
-                alt=""
-                fill
-                sizes="(max-width: 1024px) 0px, 740px"
-                className="object-cover object-[62%_45%] transition-transform duration-1000 ease-out"
-              />
+              <motion.div
+                className="relative h-full w-full"
+                style={reduceMotion ? undefined : { scale: imageScale }}
+              >
+                <Image
+                  src={manali}
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 0px, 740px"
+                  className="object-cover object-[62%_45%]"
+                />
+              </motion.div>
               <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7]/20 via-[#FDFBF7]/90 to-[#FDFBF7] sm:bg-gradient-to-r sm:from-[#FDFBF7] sm:via-[#FDFBF7]/88 sm:to-[#FDFBF7]/15" />
             </div>
 
@@ -41,7 +57,7 @@ export function HomeAppPromoSection() {
                 <div className="lg:col-span-5">
                   <div className="inline-flex items-center gap-2.5 rounded-full border border-primary-yellow/70 bg-[#FFFBF0] px-4 py-2 shadow-[0_2px_12px_rgba(15,23,42,0.04)]">
                     <Smartphone
-                      className="size-3.5 shrink-0 text-primary-yellow"
+                      className="icon-float size-3.5 shrink-0 text-primary-yellow"
                       strokeWidth={2.2}
                       aria-hidden="true"
                     />
@@ -68,15 +84,15 @@ export function HomeAppPromoSection() {
                     Download and start your adventure today.
                   </p>
 
-                  <StaggerReveal className="mt-6 flex flex-col gap-3" stagger={0.08}>
+                  <StaggerReveal className="mt-6 flex flex-col gap-3" stagger={0.1}>
                     {appFeatures.map((feature) => {
                       const Icon = feature.icon;
 
                       return (
-                        <StaggerItem key={feature.title} variant="fade-up">
+                        <StaggerItem key={feature.title} variant="slide-right">
                           <TiltCard className="rounded-[16px]">
-                            <article className="flex items-center gap-3.5 rounded-[16px] border border-[#F1F5F9] bg-white px-4 py-3.5 shadow-[0_4px_20px_rgba(15,23,42,0.05)] transition-shadow duration-700 hover:shadow-[0_8px_28px_rgba(15,23,42,0.08)]">
-                              <div className="flex size-10 shrink-0 items-center justify-center rounded-[12px] bg-primary-yellow">
+                            <article className="group flex items-center gap-3.5 rounded-[16px] border border-[#F1F5F9] bg-white px-4 py-3.5 shadow-[0_4px_20px_rgba(15,23,42,0.05)] transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(15,23,42,0.08)]">
+                              <div className="flex size-10 shrink-0 items-center justify-center rounded-[12px] bg-primary-yellow transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
                                 <Icon
                                   className="size-5 text-dark-navy"
                                   strokeWidth={2}

@@ -1,0 +1,98 @@
+@keyframes reviews-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes reviews-star-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 0.88;
+  }
+}
+
+@keyframes reviews-avatar-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes reviews-quote-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg);
+    opacity: 0.12;
+  }
+
+  50% {
+    transform: translateY(-4px) rotate(-6deg);
+    opacity: 0.2;
+  }
+}
+
+.reviews-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: reviews-marquee var(--reviews-marquee-duration, 48s) linear infinite;
+  will-change: transform;
+}
+
+.reviews-marquee-track:hover,
+.reviews-marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
+.reviews-marquee-fade {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.review-card:hover .review-star-pulse {
+  animation: reviews-star-pulse 1.4s ease-in-out infinite;
+}
+
+.review-card:hover .review-avatar-ring {
+  animation: reviews-avatar-ring 3s linear infinite;
+}
+
+.review-quote-deco {
+  animation: reviews-quote-float 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-marquee-track {
+    animation: none;
+  }
+
+  .review-card:hover .review-star-pulse,
+  .review-card:hover .review-avatar-ring,
+  .review-quote-deco {
+    animation: none;
+  }
+}

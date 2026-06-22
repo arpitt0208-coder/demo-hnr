@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { ShieldCheck } from "lucide-react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import {
   socialProofCards,
   type SocialProofCard,
@@ -27,26 +29,41 @@ const testimonials = socialProofCards.map((card) => ({
 }));
 
 export function HomeSocialProofSection() {
+  const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.12]);
+
   return (
     <section
+      ref={sectionRef}
       className="relative w-full overflow-x-clip bg-black px-4 py-14 sm:px-6 sm:py-16 md:py-20"
       aria-label="Social proof"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <Image
-          src={MOUNTAIN_BG}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-        />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <motion.div
+          className="absolute inset-0"
+          style={reduceMotion ? undefined : { y: bgY, scale: bgScale }}
+        >
+          <Image
+            src={MOUNTAIN_BG}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </motion.div>
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1280px]">
-        <ScrollReveal variant="blur" className="flex flex-col items-center text-center">
+        <ScrollReveal variant="fade-up" className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-sm">
             <ShieldCheck
-              className="size-3.5 shrink-0 text-primary-yellow"
+              className="icon-pulse-soft size-3.5 shrink-0 text-primary-yellow"
               strokeWidth={2.2}
               aria-hidden="true"
             />
@@ -69,7 +86,7 @@ export function HomeSocialProofSection() {
           </p>
         </ScrollReveal>
 
-        <ScrollReveal variant="scale" delay={0.12} className="mt-8 flex justify-center overflow-x-clip sm:mt-10 lg:mt-12">
+        <ScrollReveal variant="scale" delay={0.15} className="mt-8 flex justify-center overflow-x-clip sm:mt-10 lg:mt-12">
           <div className="relative flex w-full max-w-[1456px] items-center justify-center overflow-x-clip">
             <CircularTestimonials
               testimonials={testimonials}

@@ -4,7 +4,15 @@ import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
 import { smoothEase } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
-type RevealVariant = "fade-up" | "blur" | "scale" | "fade";
+type RevealVariant =
+  | "fade-up"
+  | "blur"
+  | "scale"
+  | "fade"
+  | "slide-left"
+  | "slide-right"
+  | "clip-up"
+  | "rotate-in";
 
 const variants = {
   "fade-up": {
@@ -22,6 +30,22 @@ const variants = {
   fade: {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
+  },
+  "slide-left": {
+    hidden: { opacity: 0, x: -36 },
+    visible: { opacity: 1, x: 0 },
+  },
+  "slide-right": {
+    hidden: { opacity: 0, x: 36 },
+    visible: { opacity: 1, x: 0 },
+  },
+  "clip-up": {
+    hidden: { opacity: 0, y: 32, clipPath: "inset(100% 0 0 0)" },
+    visible: { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" },
+  },
+  "rotate-in": {
+    hidden: { opacity: 0, y: 20, rotate: -2, scale: 0.97 },
+    visible: { opacity: 1, y: 0, rotate: 0, scale: 1 },
   },
 };
 

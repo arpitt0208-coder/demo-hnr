@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import { Globe, MapPin, Phone } from "lucide-react";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, type Variants } from "framer-motion";
 import { smoothEase } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
@@ -95,6 +95,13 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
     ref,
   ) => {
     const reduceMotion = useReducedMotion();
+    const imageRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+      target: imageRef,
+      offset: ["start end", "end start"],
+    });
+    const imageY = useTransform(scrollYProgress, [0, 1], [24, -24]);
+    const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.97, 1, 1.02]);
     const isInternalLink = callToAction.href.startsWith("/");
     const CtaTag = isInternalLink ? Link : "a";
     const ctaProps = isInternalLink
@@ -166,18 +173,22 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
         </div>
 
         <motion.div
+          ref={imageRef}
           className="relative mt-6 w-full sm:mt-8 md:mt-9"
           variants={imageRevealVariants}
         >
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-t from-black to-transparent sm:h-24" />
           <div className="mx-auto flex w-full max-w-[min(100%,960px)] items-end justify-center px-4 sm:px-6">
-            <div className="relative flex h-[min(52vw,300px)] w-full items-end justify-center sm:h-[min(46vw,380px)] md:h-[min(42vw,440px)]">
+            <motion.div
+              className="relative flex h-[min(52vw,300px)] w-full items-end justify-center sm:h-[min(46vw,380px)] md:h-[min(42vw,440px)]"
+              style={reduceMotion ? undefined : { y: imageY, scale: imageScale }}
+            >
               <img
                 src={backgroundImage}
                 alt="Royal Enfield Himalayan motorcycle"
                 className="h-auto max-h-full w-auto max-w-[min(100%,900px)] object-contain object-bottom"
               />
-            </div>
+            </motion.div>
           </div>
         </motion.div>
 
