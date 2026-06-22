@@ -12,7 +12,7 @@ export function HomeFindYourRideSection() {
   return (
     <section
       id="fleet"
-      className="relative w-full scroll-mt-24 overflow-hidden bg-white px-4 py-14 sm:px-6 sm:py-16"
+      className="relative w-full scroll-mt-24 overflow-hidden bg-black px-4 py-14 sm:px-6 sm:py-16"
       aria-label="Find your perfect ride"
     >
       <div className="relative mx-auto w-full max-w-[1280px]">
@@ -23,12 +23,12 @@ export function HomeFindYourRideSection() {
               strokeWidth={2.2}
               aria-hidden="true"
             />
-            <span className="text-[10px] font-bold tracking-[0.08em] text-dark-navy">
+            <span className="text-[10px] font-bold tracking-[0.08em] text-black">
               Premium Safety
             </span>
           </div>
 
-          <h2 className="mt-4 text-[26px] font-extrabold leading-[1.08] tracking-tight text-dark-navy min-[400px]:text-[30px] sm:text-[38px] md:text-[46px] xl:text-[52px]">
+          <h2 className="mt-4 text-[26px] font-extrabold leading-[1.08] tracking-tight text-white min-[400px]:text-[30px] sm:text-[38px] md:text-[46px] xl:text-[52px]">
             <span className="block">
               Find Your Perfect{" "}
               <span className="relative inline-block">

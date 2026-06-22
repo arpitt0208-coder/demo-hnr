@@ -69,7 +69,7 @@ export function HomeLocationsMapSection() {
   return (
     <section
       id="locations"
-      className="relative w-full scroll-mt-24 overflow-x-clip bg-black pt-20 pb-14 sm:pt-24 sm:pb-16 md:pt-[4.5rem]"
+      className="relative w-full scroll-mt-24 overflow-x-clip pt-20 pb-14 sm:pt-24 sm:pb-16 md:pt-[4.5rem]"
       aria-label="Popular destinations"
     >
       <div className="relative z-10 w-full px-4 sm:px-6">
@@ -77,16 +77,16 @@ export function HomeLocationsMapSection() {
           variant="blur"
           className="mx-auto flex w-full max-w-[720px] flex-col items-center text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[10px] font-extrabold tracking-[0.16em] text-primary-yellow backdrop-blur-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/10 px-4 py-2 text-[10px] font-extrabold tracking-[0.16em] text-primary-yellow backdrop-blur-sm">
             <Compass className="compass-drift size-3.5 shrink-0" aria-hidden="true" />
             OUR LOCATIONS
           </span>
 
-          <h2 className="mt-4 text-[28px] font-extrabold leading-[1.08] tracking-tight text-white sm:mt-5 sm:text-[36px] md:text-[42px]">
+          <h2 className="mt-4 text-[28px] font-extrabold leading-[1.08] tracking-tight text-black sm:mt-5 sm:text-[36px] md:text-[42px]">
             We&apos;re Where You Need Us
           </h2>
 
-          <p className="mt-3 max-w-[560px] text-[14px] font-medium leading-[1.75] text-white/85 sm:mt-4 sm:text-[15px]">
+          <p className="mt-3 max-w-[560px] text-[14px] font-medium leading-[1.75] text-black/85 sm:mt-4 sm:text-[15px]">
             Explore the places we currently serve across the Himalayas.
           </p>
         </ScrollReveal>

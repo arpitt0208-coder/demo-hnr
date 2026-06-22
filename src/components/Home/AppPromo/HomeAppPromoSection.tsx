@@ -1,38 +1,71 @@
 "use client";
 
 import Image from "next/image";
-import { Smartphone } from "lucide-react";
+import { Smartphone, type LucideIcon } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { appText, manali } from "@/assets/images";
 import {
   appFeatures,
   appStatCards,
+  appTrustBadges,
   type AppStatCard,
 } from "@/data/appPromo";
 import { CountUpText } from "@/components/UI/count-up";
 import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/UI/scroll-reveal";
 import { smoothEase } from "@/lib/motion";
+import { AppPromoDotDecorations } from "./AppPromoDecorations";
 import { HomeAppDownloadBadges } from "./HomeAppDownloadBadges";
 import { HomeAppPhoneMockup } from "./HomeAppPhoneMockup";
 
-function AppStatCardItem({ card }: { card: AppStatCard }) {
+const cardSurface =
+  "rounded-2xl border border-[#EEF2F6] bg-white/95 shadow-[0_8px_28px_rgba(15,23,42,0.07)] backdrop-blur-sm";
+
+function FloatingStatCard({ card }: { card: AppStatCard }) {
   const Icon = card.icon;
 
   return (
-    <article className="flex min-w-0 flex-1 items-start gap-3 rounded-[18px] border border-[#E8ECF0] bg-white px-4 py-4 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
-      <div className="flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-primary-yellow/15">
+    <article className={`${cardSurface} px-4 py-3.5 sm:px-5 sm:py-4`}>
+      <div className="flex items-center gap-3">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary-yellow/15">
+          <Icon className="size-5 text-primary-yellow" strokeWidth={2} aria-hidden="true" />
+        </div>
+        <div className="min-w-0">
+          <p className="text-[14px] font-extrabold leading-tight text-dark-navy sm:text-[15px]">
+            <span className="text-primary-yellow">
+              <CountUpText value={card.value} />
+            </span>{" "}
+            {card.label}
+          </p>
+          <p className="mt-0.5 text-[11px] font-medium leading-snug text-[#64748B] sm:text-xs">
+            {card.description}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function TrustBadgeItem({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="flex items-center gap-3 sm:gap-3.5">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-primary-yellow/60 bg-white shadow-[0_2px_10px_rgba(239,190,61,0.12)]">
         <Icon className="size-[18px] text-primary-yellow" strokeWidth={2} aria-hidden="true" />
       </div>
       <div className="min-w-0">
-        <p className="text-[22px] font-extrabold leading-none text-dark-navy">
-          <CountUpText value={card.value} />
-        </p>
-        <p className="mt-1 text-[13px] font-bold text-dark-navy">{card.label}</p>
-        <p className="mt-0.5 text-[11px] font-medium leading-snug text-[#475569]">
-          {card.description}
+        <p className="text-[13px] font-bold leading-tight text-dark-navy sm:text-sm">{title}</p>
+        <p className="mt-0.5 text-[11px] font-medium leading-snug text-[#64748B] sm:text-xs">
+          {description}
         </p>
       </div>
-    </article>
+    </div>
   );
 }
 
@@ -42,26 +75,42 @@ export function HomeAppPromoSection() {
   return (
     <section
       id="app"
-      className="relative w-full scroll-mt-24 overflow-hidden bg-[#FAFAFA] px-4 py-14 sm:px-6 sm:py-16 md:py-20"
+      className="relative w-full scroll-mt-24 overflow-hidden bg-[#FDFBF7]"
       aria-label="Download the Hire N Ride app"
     >
-      <div className="relative mx-auto w-full max-w-[1280px]">
-        <ScrollReveal variant="blur">
-          <div className="overflow-hidden rounded-[28px] border border-[#E8ECF0] bg-white shadow-[0_8px_40px_rgba(15,23,42,0.06)]">
-            <div className="grid items-center lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-              <div className="flex flex-col px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-                <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-primary-yellow/50 bg-[#FFFBF0] px-4 py-2 shadow-[0_2px_12px_rgba(15,23,42,0.04)]">
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%] sm:inset-y-0 sm:left-auto sm:h-auto sm:w-[52%] lg:w-[58%]"
+        aria-hidden="true"
+      >
+        <Image
+          src={manali}
+          alt=""
+          fill
+          sizes="(max-width: 1024px) 100vw, 58vw"
+          className="object-cover object-[62%_45%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7]/20 via-[#FDFBF7]/90 to-[#FDFBF7] sm:bg-gradient-to-r sm:from-[#FDFBF7] sm:via-[#FDFBF7]/88 sm:to-[#FDFBF7]/15" />
+      </div>
+
+      <AppPromoDotDecorations />
+
+      <div className="relative z-[2] w-full px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20 xl:px-10">
+        <ScrollReveal variant="fade">
+          <div className="mx-auto w-full max-w-[1280px]">
+            <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-10 xl:gap-14">
+              <div className="flex flex-col">
+                <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-primary-yellow/70 bg-[#FFFBF0] px-4 py-2 shadow-[0_2px_12px_rgba(15,23,42,0.04)]">
                   <Smartphone
                     className="icon-float size-3.5 shrink-0 text-primary-yellow"
                     strokeWidth={2.2}
                     aria-hidden="true"
                   />
-                  <span className="text-[10px] font-bold tracking-[0.16em] text-primary-yellow">
-                    MOBILE APP
+                  <span className="text-[10px] font-bold tracking-[0.16em] text-dark-navy">
+                    AVAILABLE NOW
                   </span>
                 </div>
 
-                <h2 className="mt-5 text-[28px] font-extrabold leading-[1.08] tracking-tight text-dark-navy sm:text-[34px] md:text-[40px]">
+                <h2 className="mt-4 text-[28px] font-extrabold leading-[1.08] tracking-tight text-dark-navy sm:text-[34px] md:text-[40px] xl:text-[44px]">
                   <span className="block">Hire N Ride</span>
                   <span className="mt-1 flex flex-wrap items-center gap-2">
                     Bike Rental
@@ -70,29 +119,31 @@ export function HomeAppPromoSection() {
                       alt="App"
                       width={400}
                       height={244}
-                      className="h-[34px] w-auto sm:h-[42px] md:h-[48px]"
+                      className="h-[36px] w-auto sm:h-[44px] md:h-[50px] xl:h-[54px]"
                     />
                   </span>
                 </h2>
 
-                <p className="mt-4 max-w-[420px] text-[14px] font-medium leading-[1.75] text-[#475569] sm:text-[15px]">
+                <p className="mt-3 max-w-[400px] text-[14px] font-medium leading-[1.7] text-[#475569] sm:text-[15px]">
                   Download and start your adventure today.
                 </p>
 
-                <div className="order-3 mt-8 lg:order-none lg:mt-8">
-                  <StaggerReveal className="flex flex-col gap-3" stagger={0.08}>
+                <div className="mt-5">
+                  <StaggerReveal className="flex max-w-[480px] flex-col gap-2.5" stagger={0.08}>
                     {appFeatures.map((feature) => {
                       const Icon = feature.icon;
 
                       return (
                         <StaggerItem key={feature.title} variant="fade-up">
                           <motion.article
-                            className="group flex items-center gap-3.5 rounded-[16px] border border-[#E8ECF0] bg-[#FAFAFA] px-4 py-3.5 transition-all duration-300 hover:border-primary-yellow/35 hover:bg-white hover:shadow-[0_8px_24px_rgba(15,23,42,0.06)]"
+                            className={`group flex items-center gap-3.5 px-4 py-3 sm:px-5 sm:py-3.5 ${cardSurface}`}
                             whileHover={
-                              reduceMotion ? undefined : { y: -2, transition: { duration: 0.3, ease: smoothEase } }
+                              reduceMotion
+                                ? undefined
+                                : { y: -2, transition: { duration: 0.3, ease: smoothEase } }
                             }
                           >
-                            <div className="flex size-10 shrink-0 items-center justify-center rounded-[12px] bg-primary-yellow transition-transform duration-300 group-hover:scale-105">
+                            <div className="flex size-10 shrink-0 items-center justify-center rounded-[12px] bg-primary-yellow">
                               <Icon
                                 className="size-5 text-dark-navy"
                                 strokeWidth={2}
@@ -100,7 +151,7 @@ export function HomeAppPromoSection() {
                               />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-[14px] font-bold leading-tight text-dark-navy">
+                              <p className="text-[14px] font-bold leading-tight text-dark-navy sm:text-[15px]">
                                 {feature.title}
                               </p>
                               <p className="mt-0.5 text-[12px] font-medium text-[#475569]">
@@ -114,35 +165,44 @@ export function HomeAppPromoSection() {
                   </StaggerReveal>
                 </div>
 
-                <div className="order-4 mt-6 grid gap-3 sm:grid-cols-2 lg:order-none">
-                  {appStatCards.map((card) => (
-                    <AppStatCardItem key={card.label} card={card} />
-                  ))}
-                </div>
-
-                <div className="order-5 mt-6 lg:order-none">
+                <div className="mt-5">
                   <HomeAppDownloadBadges />
                 </div>
               </div>
 
-              <div className="relative flex min-h-[320px] items-center justify-center overflow-hidden bg-[#FDFBF7] px-6 py-10 sm:min-h-[380px] sm:px-8 lg:min-h-full lg:px-10 lg:py-12">
-                <div
-                  className="pointer-events-none absolute inset-0 overflow-hidden"
-                  aria-hidden="true"
-                >
-                  <Image
-                    src={manali}
-                    alt=""
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 560px"
-                    className="object-cover object-center scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/82 to-[#FDFBF7]/55 lg:bg-gradient-to-l lg:from-[#FDFBF7] lg:via-[#FDFBF7]/88 lg:to-[#FDFBF7]/35" />
+              <div className="flex w-full flex-col items-center lg:items-end">
+                <div className="relative mx-auto w-full max-w-[300px] sm:max-w-[320px] xl:max-w-[780px]">
+                  <div className="absolute left-[-160px] top-[8%] z-10 hidden w-[300px] xl:block">
+                    <FloatingStatCard card={appStatCards[0]} />
+                  </div>
+
+                  <div className="absolute right-[-160px] bottom-[10%] z-10 hidden w-[300px] xl:block">
+                    <FloatingStatCard card={appStatCards[1]} />
+                  </div>
+
+                  <div className="relative z-[1] mx-auto w-full max-w-[260px] sm:max-w-[280px] lg:max-w-[300px] xl:max-w-[320px]">
+                    <HomeAppPhoneMockup />
+                  </div>
                 </div>
 
-                <div className="relative z-10 w-full max-w-[280px] sm:max-w-[300px] lg:max-w-[320px]">
-                  <HomeAppPhoneMockup />
+                <div className="mt-5 grid w-full max-w-md grid-cols-1 gap-2.5 sm:grid-cols-2 xl:hidden">
+                  {appStatCards.map((card) => (
+                    <FloatingStatCard key={card.label} card={card} />
+                  ))}
                 </div>
+              </div>
+            </div>
+
+            <div className="mt-8 border-t border-[#E8ECF0]/80 pt-7 sm:mt-10 sm:pt-8 lg:mt-12 lg:pt-10">
+              <div className="grid gap-6 sm:grid-cols-3 sm:gap-4 lg:gap-8">
+                {appTrustBadges.map((badge) => (
+                  <TrustBadgeItem
+                    key={badge.title}
+                    icon={badge.icon}
+                    title={badge.title}
+                    description={badge.description}
+                  />
+                ))}
               </div>
             </div>
           </div>

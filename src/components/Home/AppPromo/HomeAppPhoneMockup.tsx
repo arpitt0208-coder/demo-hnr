@@ -3,13 +3,12 @@
 import Image from "next/image";
 import { downloadAppVideoPoster, iphoneFrame15 } from "@/assets/images";
 
-const APP_DEMO_VIDEO =
-  "https://debuggeddata.s3.amazonaws.com/projects/attachments/17745937500891774593494160844.mp4";
+const APP_DEMO_VIDEO = "/assets/videos/app-mockup.mp4";
 
 export function HomeAppPhoneMockup() {
   return (
-    <div className="flex justify-center">
-      <div className="relative w-full max-w-[220px] sm:max-w-[240px] lg:max-w-[260px] xl:max-w-[280px]">
+    <div className="flex justify-center drop-shadow-[0_24px_48px_rgba(15,23,42,0.22)]">
+      <div className="relative w-full max-w-[240px] sm:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px]">
         <div className="relative aspect-[9/20] w-full">
           <Image
             src={iphoneFrame15}
