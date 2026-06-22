@@ -10,10 +10,8 @@ import {
   HomeTestimonialsSection,
 } from "@/components/Home";
 import { HomePremiumProvider } from "@/components/Home/HomePremiumProvider";
-import { ServiceTierCard } from "@/components/Home/Services/ServiceTierCard";
 import { Footer, Navbar } from "@/components/Layout";
 import { WhatsAppContactButton } from "@/components/UI/WhatsAppContactButton";
-import { serviceTiers } from "@/data/serviceTiers";
 
 export default function Home() {
   return (
