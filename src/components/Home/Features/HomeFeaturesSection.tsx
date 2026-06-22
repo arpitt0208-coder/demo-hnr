@@ -14,7 +14,7 @@ export function HomeFeaturesSection() {
   return (
     <section
       className="relative w-full overflow-hidden px-4 py-16 sm:px-6 sm:py-20"
-      aria-label="What makes us different"
+      aria-label="Why choose Hire N Ride"
     >
       <div
         className="pointer-events-none absolute inset-0 bg-top bg-no-repeat bg-[length:100%_auto] opacity-50"
@@ -36,8 +36,8 @@ export function HomeFeaturesSection() {
           </div>
 
           <h2 className="mt-5 text-[24px] font-extrabold leading-[1.12] tracking-tight text-dark-navy min-[400px]:text-[28px] sm:text-[34px] md:text-[40px] xl:text-[46px]">
-            Here&apos;s What{" "}
-            <span className="text-primary-yellow">Makes Us Different</span>
+            Why Choose{" "}
+            <span className="text-primary-yellow">Hire N Ride</span>
           </h2>
 
           <p className="mt-4 max-w-[620px] text-[14px] font-medium leading-[1.75] text-[#475569] sm:text-[15px]">

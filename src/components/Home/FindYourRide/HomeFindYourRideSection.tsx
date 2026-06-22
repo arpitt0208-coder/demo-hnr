@@ -43,7 +43,7 @@ export function HomeFindYourRideSection() {
                 alt="Journey Ahead"
                 width={600}
                 height={149}
-                className="inline-block h-[42px] w-auto align-baseline mix-blend-screen sm:h-[50px] md:h-[58px] xl:h-[64px]"
+                className="mx-1 inline-block h-[42px] w-auto align-middle sm:h-[50px] md:h-[58px] xl:h-[64px]"
               />
             </span>
           </h2>

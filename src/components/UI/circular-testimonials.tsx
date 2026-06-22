@@ -38,6 +38,8 @@ interface FontSizes {
 interface CircularTestimonialsProps {
   testimonials: Testimonial[];
   autoplay?: boolean;
+  /** Milliseconds between auto-advances. Defaults to 5000. */
+  autoplayInterval?: number;
   colors?: Colors;
   fontSizes?: FontSizes;
 }
@@ -58,6 +60,7 @@ function calculateGap(width: number) {
 export const CircularTestimonials = ({
   testimonials,
   autoplay = true,
+  autoplayInterval = 5000,
   colors = {},
   fontSizes = {},
 }: CircularTestimonialsProps) => {
@@ -126,12 +129,12 @@ export const CircularTestimonials = ({
       const len = testimonialsRef.current.length;
       if (len === 0) return;
       setActiveIndex((prev) => (prev + 1) % len);
-    }, 5000);
+    }, autoplayInterval);
 
     return () => {
       clearAutoplayInterval();
     };
-  }, [autoplay, clearAutoplayInterval]);
+  }, [autoplay, autoplayInterval, clearAutoplayInterval]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -156,7 +159,7 @@ export const CircularTestimonials = ({
         opacity: 1,
         pointerEvents: "auto",
         transform: "translateX(0px) translateY(0px) scale(1) rotateY(0deg)",
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+        transition: "all 0.65s cubic-bezier(.4,2,.3,1)",
       };
     }
     if (isLeft) {
@@ -165,7 +168,7 @@ export const CircularTestimonials = ({
         opacity: 1,
         pointerEvents: "auto",
         transform: `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(15deg)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+        transition: "all 0.65s cubic-bezier(.4,2,.3,1)",
       };
     }
     if (isRight) {
@@ -174,14 +177,14 @@ export const CircularTestimonials = ({
         opacity: 1,
         pointerEvents: "auto",
         transform: `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(-15deg)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+        transition: "all 0.65s cubic-bezier(.4,2,.3,1)",
       };
     }
     return {
       zIndex: 1,
       opacity: 0,
       pointerEvents: "none",
-      transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+      transition: "all 0.65s cubic-bezier(.4,2,.3,1)",
     };
   }
 

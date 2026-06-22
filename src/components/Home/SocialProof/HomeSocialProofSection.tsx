@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, Star } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import {
   socialProofCards,
   type SocialProofCard,
 } from "@/data/socialProof";
+import { reviewStats } from "@/data/homeReviews";
+import { CountUpText } from "@/components/UI/count-up";
 import { CircularTestimonials } from "@/components/UI/circular-testimonials";
-import { ScrollReveal } from "@/components/UI/scroll-reveal";
+import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/UI/scroll-reveal";
+import { smoothEase } from "@/lib/motion";
 
 function getCardTitle(card: SocialProofCard): string {
   if (card.title) return card.title;
@@ -17,6 +20,30 @@ function getCardTitle(card: SocialProofCard): string {
 }
 
 const MOUNTAIN_BG = "/assets/social-proof/mountain-bg.png";
+
+const statItems = [
+  {
+    id: "rating",
+    value: reviewStats.averageRating.toFixed(1),
+    label: "Average Rating",
+    icon: Star,
+    animate: false,
+  },
+  {
+    id: "reviews",
+    value: reviewStats.totalReviews,
+    label: "Happy Riders",
+    icon: null,
+    animate: false,
+  },
+  {
+    id: "recommend",
+    value: `${reviewStats.recommendPercent}%`,
+    label: "Would Recommend",
+    icon: null,
+    animate: true,
+  },
+] as const;
 
 const testimonials = socialProofCards.map((card) => ({
   quote: card.description,
@@ -86,11 +113,46 @@ export function HomeSocialProofSection() {
           </p>
         </ScrollReveal>
 
+        <StaggerReveal
+          className="mx-auto mt-8 flex max-w-[640px] flex-wrap items-center justify-center gap-3 sm:mt-10 sm:gap-4"
+          stagger={0.12}
+        >
+          {statItems.map((stat) => (
+            <StaggerItem key={stat.id} variant="scale">
+              <motion.div
+                className="flex min-w-[140px] flex-col items-center rounded-2xl border border-[#E8ECF0] bg-white px-5 py-4 shadow-[0_4px_20px_rgba(15,23,42,0.08)] sm:min-w-[160px] sm:px-6 sm:py-5"
+                whileHover={reduceMotion ? undefined : { y: -4, scale: 1.03 }}
+                transition={{ duration: 0.35, ease: smoothEase }}
+              >
+                <div className="flex items-center gap-1.5">
+                  {stat.icon ? (
+                    <stat.icon
+                      className="icon-pulse-soft size-4 fill-primary-yellow text-primary-yellow"
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                  <span className="text-[22px] font-extrabold tracking-tight text-dark-navy sm:text-[26px]">
+                    {stat.animate ? (
+                      <CountUpText value={stat.value} />
+                    ) : (
+                      stat.value
+                    )}
+                  </span>
+                </div>
+                <span className="mt-1 text-[11px] font-semibold tracking-wide text-[#94A3B8] uppercase">
+                  {stat.label}
+                </span>
+              </motion.div>
+            </StaggerItem>
+          ))}
+        </StaggerReveal>
+
         <ScrollReveal variant="scale" delay={0.15} className="mt-8 flex justify-center overflow-x-clip sm:mt-10 lg:mt-12">
           <div className="relative flex w-full max-w-[1456px] items-center justify-center overflow-x-clip">
             <CircularTestimonials
               testimonials={testimonials}
               autoplay
+              autoplayInterval={3800}
               colors={{
                 name: "#f8fafc",
                 nameHighlight: "#efbe3d",

@@ -5,6 +5,9 @@ export { HomeHelpInfoSection } from "./HelpInfo";
 export { HomeHero } from "./Hero/HomeHero";
 export { HomeHowItWorksSection } from "./HowItWorks";
 export { HomeLocationsMapSection } from "./Locations";
-export { HomeReviewsSection } from "./Reviews";
+export {
+  HomeReviewsSection,
+  HomeTestimonialsSection,
+} from "./Reviews";
 export { HomeServicesSection } from "./Services";
 export { HomeSocialProofSection } from "./SocialProof";

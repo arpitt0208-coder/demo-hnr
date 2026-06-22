@@ -12,7 +12,7 @@ export function HomeHelpInfoSection() {
   return (
     <section
       className="relative w-full overflow-hidden px-4 py-16 sm:px-6 sm:py-20"
-      aria-label="Help and information"
+      aria-label="FAQ"
     >
       <div className="relative mx-auto w-full max-w-[1280px]">
         <ScrollReveal variant="fade-up">

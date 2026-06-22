@@ -69,8 +69,8 @@ export function HomeLocationsMapSection() {
   return (
     <section
       id="locations"
-      className="relative w-full scroll-mt-24 overflow-x-clip bg-black py-14 sm:py-16"
-      aria-label="Locations"
+      className="relative w-full scroll-mt-24 overflow-x-clip bg-black pt-20 pb-14 sm:pt-24 sm:pb-16 md:pt-[4.5rem]"
+      aria-label="Popular destinations"
     >
       <div className="relative z-10 w-full px-4 sm:px-6">
         <ScrollReveal
