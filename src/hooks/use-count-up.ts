@@ -17,12 +17,17 @@ export function useCountUp(
   const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
+    const parsed = parseNumericValue(value);
+
     if (!enabled) {
-      setDisplay(value);
+      if (parsed) {
+        setDisplay(`${parsed.prefix}0${parsed.suffix}`);
+      } else {
+        setDisplay(value);
+      }
       return;
     }
 
-    const parsed = parseNumericValue(value);
     if (!parsed) {
       setDisplay(value);
       return;

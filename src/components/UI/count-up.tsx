@@ -3,6 +3,7 @@
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { useCountUp } from "@/hooks/use-count-up";
+import { scrollRevealViewport } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
 interface CountUpTextProps {
@@ -12,7 +13,11 @@ interface CountUpTextProps {
 
 export function CountUpText({ value, className }: CountUpTextProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, {
+    once: scrollRevealViewport.once,
+    margin: scrollRevealViewport.margin,
+    amount: scrollRevealViewport.amount,
+  });
   const display = useCountUp(value, inView);
 
   return (

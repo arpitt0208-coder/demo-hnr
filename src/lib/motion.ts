@@ -12,3 +12,10 @@ export const smoothSpring = {
   damping: 22,
   mass: 0.8,
 };
+
+/** Lenis-friendly viewport — replays when scrolling back into view. */
+export const scrollRevealViewport = {
+  once: false,
+  amount: 0.12,
+  margin: "0px 0px -64px 0px",
+} as const;

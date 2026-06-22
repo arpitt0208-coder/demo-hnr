@@ -116,8 +116,7 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
           className,
         )}
         initial={reduceMotion ? false : "hidden"}
-        whileInView={reduceMotion ? undefined : "visible"}
-        viewport={{ once: true, amount: 0.12, margin: "0px" }}
+        animate={reduceMotion ? undefined : "visible"}
         variants={containerVariants}
       >
         {logo && (

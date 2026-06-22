@@ -13,7 +13,6 @@ import {
 import { CountUpText } from "@/components/UI/count-up";
 import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/UI/scroll-reveal";
 import { smoothEase } from "@/lib/motion";
-import { AppPromoDotDecorations } from "./AppPromoDecorations";
 import { HomeAppDownloadBadges } from "./HomeAppDownloadBadges";
 import { HomeAppPhoneMockup } from "./HomeAppPhoneMockup";
 
@@ -92,13 +91,11 @@ export function HomeAppPromoSection() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7]/20 via-[#FDFBF7]/90 to-[#FDFBF7] sm:bg-gradient-to-r sm:from-[#FDFBF7] sm:via-[#FDFBF7]/88 sm:to-[#FDFBF7]/15" />
       </div>
 
-      <AppPromoDotDecorations />
-
       <div className="relative z-[2] w-full px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20 xl:px-10">
-        <ScrollReveal variant="fade">
-          <div className="mx-auto w-full max-w-[1280px]">
-            <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-10 xl:gap-14">
-              <div className="flex flex-col">
+        <div className="mx-auto w-full max-w-[1280px]">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-10 xl:gap-14">
+            <div className="flex flex-col">
+              <ScrollReveal variant="fade-up">
                 <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-primary-yellow/70 bg-[#FFFBF0] px-4 py-2 shadow-[0_2px_12px_rgba(15,23,42,0.04)]">
                   <Smartphone
                     className="icon-float size-3.5 shrink-0 text-primary-yellow"
@@ -127,9 +124,10 @@ export function HomeAppPromoSection() {
                 <p className="mt-3 max-w-[400px] text-[14px] font-medium leading-[1.7] text-[#475569] sm:text-[15px]">
                   Download and start your adventure today.
                 </p>
+              </ScrollReveal>
 
-                <div className="mt-5">
-                  <StaggerReveal className="flex max-w-[480px] flex-col gap-2.5" stagger={0.08}>
+              <div className="mt-5">
+                <StaggerReveal className="flex max-w-[480px] flex-col gap-2.5" stagger={0.08}>
                     {appFeatures.map((feature) => {
                       const Icon = feature.icon;
 
@@ -165,13 +163,13 @@ export function HomeAppPromoSection() {
                   </StaggerReveal>
                 </div>
 
-                <div className="mt-5">
-                  <HomeAppDownloadBadges />
-                </div>
+              <div className="mt-5">
+                <HomeAppDownloadBadges />
               </div>
+            </div>
 
-              <div className="flex w-full flex-col items-center lg:items-end">
-                <div className="relative mx-auto w-full max-w-[300px] sm:max-w-[320px] xl:max-w-[780px]">
+            <ScrollReveal variant="scale" delay={0.1} className="flex w-full flex-col items-center lg:items-end">
+              <div className="relative mx-auto w-full max-w-[300px] sm:max-w-[320px] xl:max-w-[780px]">
                   <div className="absolute left-[-160px] top-[8%] z-10 hidden w-[300px] xl:block">
                     <FloatingStatCard card={appStatCards[0]} />
                   </div>
@@ -190,10 +188,10 @@ export function HomeAppPromoSection() {
                     <FloatingStatCard key={card.label} card={card} />
                   ))}
                 </div>
-              </div>
+              </ScrollReveal>
             </div>
 
-            <div className="mt-8 border-t border-[#E8ECF0]/80 pt-7 sm:mt-10 sm:pt-8 lg:mt-12 lg:pt-10">
+            <ScrollReveal variant="fade-up" delay={0.15} className="mt-8 border-t border-[#E8ECF0]/80 pt-7 sm:mt-10 sm:pt-8 lg:mt-12 lg:pt-10">
               <div className="grid gap-6 sm:grid-cols-3 sm:gap-4 lg:gap-8">
                 {appTrustBadges.map((badge) => (
                   <TrustBadgeItem
@@ -204,9 +202,8 @@ export function HomeAppPromoSection() {
                   />
                 ))}
               </div>
-            </div>
+            </ScrollReveal>
           </div>
-        </ScrollReveal>
       </div>
     </section>
   );

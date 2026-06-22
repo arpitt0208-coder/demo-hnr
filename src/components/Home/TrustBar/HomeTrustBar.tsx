@@ -14,7 +14,7 @@ export function HomeTrustBar({ className }: HomeTrustBarProps) {
     <motion.section
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, delay: 1.1, ease: smoothEase }}
+      transition={{ duration: 0.85, delay: 0.75, ease: smoothEase }}
       className={cn("relative z-30 w-full", className)}
       aria-label="Trust indicators"
     >
@@ -28,7 +28,7 @@ export function HomeTrustBar({ className }: HomeTrustBarProps) {
                 key={item.title}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2 + index * 0.07, duration: 0.75, ease: smoothEase }}
+                transition={{ delay: 0.85 + index * 0.07, duration: 0.75, ease: smoothEase }}
                 whileHover={{ y: -2 }}
                 className="group relative flex min-w-0 items-center gap-2 sm:gap-3 md:flex-1 md:justify-center md:px-4"
               >

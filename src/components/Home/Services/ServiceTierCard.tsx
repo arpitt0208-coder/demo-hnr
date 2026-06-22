@@ -1,7 +1,9 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { GlowButton } from "@/components/UI/glow-button";
 import { cn } from "@/lib/cn";
+import { scrollRevealViewport, smoothEase } from "@/lib/motion";
 import type { ServiceTier } from "@/data/serviceTiers";
 
 type ServiceTierCardProps = {
@@ -10,6 +12,7 @@ type ServiceTierCardProps = {
 
 export function ServiceTierCard({ tier }: ServiceTierCardProps) {
   const isLight = tier.variant === "light";
+  const reduceMotion = useReducedMotion();
 
   return (
     <article
@@ -42,7 +45,17 @@ export function ServiceTierCard({ tier }: ServiceTierCardProps) {
         </div>
       </div>
 
-      <div className="relative mt-10 flex flex-1 items-end justify-center px-0 sm:mt-12">
+      <motion.div
+        className="relative mt-10 flex flex-1 items-end justify-center px-0 sm:mt-12"
+        initial={reduceMotion ? false : { opacity: 0, y: 48, scale: 0.94 }}
+        whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+        viewport={{
+          once: scrollRevealViewport.once,
+          amount: 0.28,
+          margin: scrollRevealViewport.margin,
+        }}
+        transition={{ duration: 1.05, ease: smoothEase, delay: 0.2 }}
+      >
         <div className="relative flex h-[min(42vw,320px)] w-full max-w-[92%] items-end justify-center sm:h-[min(38vw,360px)] md:h-[min(34vw,380px)]">
           <img
             src={tier.image}
@@ -50,7 +63,7 @@ export function ServiceTierCard({ tier }: ServiceTierCardProps) {
             className="image-hover-zoom max-h-full w-auto max-w-full object-contain object-bottom"
           />
         </div>
-      </div>
+      </motion.div>
     </article>
   );
 }

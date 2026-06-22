@@ -12,12 +12,14 @@ export function HomeServicesSection() {
     >
       <StaggerReveal
         className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4"
-        stagger={0.14}
+        stagger={0.16}
+        amount={0.2}
+        viewportMargin="-60px 0px -80px 0px"
       >
         {serviceTiers.map((tier, index) => (
           <StaggerItem
             key={tier.id}
-            variant={index === 0 ? "slide-left" : "slide-right"}
+            variant={index === 0 ? "clip-up" : "scale"}
           >
             <ServiceTierCard tier={tier} />
           </StaggerItem>

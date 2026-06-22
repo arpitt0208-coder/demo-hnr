@@ -1,40 +1,69 @@
 "use client";
 
 import Lenis from "lenis";
-import { useEffect, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  createContext,
+  Fragment,
+  useContext,
+  useEffect,
+  useId,
+  type ReactNode,
+} from "react";
+
 gsap.registerPlugin(ScrollTrigger);
+
+const HomeAnimationScopeContext = createContext("");
+
+/** Unique per home-page mount — resets Framer Motion scroll animations on each visit. */
+export function useHomeAnimationScope() {
+  return useContext(HomeAnimationScopeContext);
+}
 
 interface HomePremiumProviderProps {
   children: ReactNode;
 }
 
 export function HomePremiumProvider({ children }: HomePremiumProviderProps) {
+  const animationScope = useId();
+
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.6,
-      lerp: 0.08,
+      duration: 1.2,
+      lerp: 0.1,
       smoothWheel: true,
-      wheelMultiplier: 0.9,
+      wheelMultiplier: 0.85,
       easing: (t) => 1 - Math.pow(1 - t, 4),
+      autoRaf: false,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    let frame: number;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      frame = requestAnimationFrame(raf);
+    const onTick = (time: number) => {
+      lenis.raf(time * 1000);
     };
-    frame = requestAnimationFrame(raf);
+
+    gsap.ticker.add(onTick);
+    gsap.ticker.lagSmoothing(0);
+
+    lenis.scrollTo(0, { immediate: true, force: true });
+
+    const refreshTimer = window.setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
 
     return () => {
-      cancelAnimationFrame(frame);
+      window.clearTimeout(refreshTimer);
+      gsap.ticker.remove(onTick);
       lenis.destroy();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
-  return children;
+  return (
+    <HomeAnimationScopeContext.Provider value={animationScope}>
+      <Fragment key={animationScope}>{children}</Fragment>
+    </HomeAnimationScopeContext.Provider>
+  );
 }

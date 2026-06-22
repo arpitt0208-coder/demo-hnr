@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
-import { smoothEase } from "@/lib/motion";
+import { scrollRevealViewport, smoothEase } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
 type RevealVariant =
@@ -55,6 +55,7 @@ interface ScrollRevealProps extends HTMLMotionProps<"div"> {
   duration?: number;
   once?: boolean;
   amount?: number;
+  viewportMargin?: string;
 }
 
 export function ScrollReveal({
@@ -63,8 +64,9 @@ export function ScrollReveal({
   variant = "fade-up",
   delay = 0,
   duration = 0.95,
-  once = true,
-  amount = 0.18,
+  once = scrollRevealViewport.once,
+  amount = scrollRevealViewport.amount,
+  viewportMargin = scrollRevealViewport.margin,
   ...props
 }: ScrollRevealProps) {
   const reduceMotion = useReducedMotion();
@@ -74,7 +76,7 @@ export function ScrollReveal({
       className={cn(className)}
       initial={reduceMotion ? false : "hidden"}
       whileInView={reduceMotion ? undefined : "visible"}
-      viewport={{ once, amount, margin: "-40px" }}
+      viewport={{ once, amount, margin: viewportMargin }}
       variants={variants[variant]}
       transition={{ duration, delay, ease: smoothEase }}
       {...props}
@@ -88,12 +90,18 @@ interface StaggerRevealProps {
   children: React.ReactNode;
   className?: string;
   stagger?: number;
+  amount?: number;
+  once?: boolean;
+  viewportMargin?: string;
 }
 
 export function StaggerReveal({
   children,
   className,
   stagger = 0.08,
+  amount = scrollRevealViewport.amount,
+  once = scrollRevealViewport.once,
+  viewportMargin = scrollRevealViewport.margin,
 }: StaggerRevealProps) {
   const reduceMotion = useReducedMotion();
 
@@ -102,7 +110,7 @@ export function StaggerReveal({
       className={cn(className)}
       initial={reduceMotion ? false : "hidden"}
       whileInView={reduceMotion ? undefined : "visible"}
-      viewport={{ once: true, margin: "-40px", amount: 0.12 }}
+      viewport={{ once, margin: viewportMargin, amount }}
       variants={{
         hidden: {},
         visible: {
