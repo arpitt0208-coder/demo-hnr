@@ -236,9 +236,9 @@ export function Navbar({ variant = "default" }: NavbarProps) {
       <motion.header
         initial={false}
         className={cn(
-          "pointer-events-auto top-4 right-4 left-4 sm:top-5 sm:right-5 sm:left-5 lg:top-6 lg:right-6 lg:left-6",
+          "pointer-events-auto w-full",
           mobileMenuOpen
-            ? "fixed z-[100] lg:absolute lg:z-auto"
+            ? "fixed z-[100] lg:absolute lg:z-auto br-[0px]"
             : "absolute"
         )}
       >
@@ -276,22 +276,22 @@ export function Navbar({ variant = "default" }: NavbarProps) {
         >
           <div
             className={cn(
-              "transition-[border-radius,box-shadow,height,background] duration-300",
+              "transition-[box-shadow,height,background] duration-300",
               isPremium
                 ? cn(
-                    "glass-nav shadow-[0_8px_40px_rgba(0,0,0,0.45)]",
-                    scrolled && !navPanelOpen && "shadow-[0_4px_24px_rgba(0,0,0,0.35)]",
-                  )
+                  "glass-nav shadow-[0_8px_40px_rgba(0,0,0,0.45)]",
+                  scrolled && !navPanelOpen && "shadow-[0_4px_24px_rgba(0,0,0,0.35)]",
+                )
                 : "bg-white shadow-[0_8px_32px_rgba(15,23,42,0.08)]",
               navPanelOpen
                 ? cn(
-                    "rounded-t-[24px] lg:rounded-b-none",
-                    isPremium
-                      ? "shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
-                      : "shadow-[0_16px_48px_rgba(15,23,42,0.12)]",
-                  )
-                : "rounded-[24px]",
-              mobileMenuOpen && "rounded-b-[24px]"
+                  "lg:rounded-b-none",
+                  isPremium
+                    ? "shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
+                    : "shadow-[0_16px_48px_rgba(15,23,42,0.12)]",
+                )
+                : "rounded-[0px]",
+              mobileMenuOpen && "rounded-b-[0px]"
             )}
           >
             <nav

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "../styles/animations.css";
+@import "../styles/spotlight.css";
 
 :root {
   --success: 142.1 70.6% 45.3%;

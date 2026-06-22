@@ -4,8 +4,6 @@ import Lenis from "lenis";
 import { useEffect, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CustomCursor } from "@/components/UI/custom-cursor";
-
 gsap.registerPlugin(ScrollTrigger);
 
 interface HomePremiumProviderProps {
@@ -38,10 +36,5 @@ export function HomePremiumProvider({ children }: HomePremiumProviderProps) {
     };
   }, []);
 
-  return (
-    <>
-      <CustomCursor />
-      {children}
-    </>
-  );
+  return children;
 }

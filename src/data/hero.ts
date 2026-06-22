@@ -1,4 +1,5 @@
 import logoSvg from "@/assets/images/logo.svg";
+import { bikeImages } from "@/assets/images";
 import { footerContact } from "@/data/footer";
 
 export const exploreHeroTags = [
@@ -7,9 +8,8 @@ export const exploreHeroTags = [
   "Quick booking",
 ] as const;
 
-/** Reliable Unsplash — snow-capped Himalayan peaks */
-export const heroBackgroundImage =
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&auto=format&fit=crop&q=80";
+/** Royal Enfield Himalayan — hero product shot */
+export const heroBackgroundImage = bikeImages.himalayan.src;
 
 export const homeHeroContent = {
   logo: {

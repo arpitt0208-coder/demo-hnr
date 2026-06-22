@@ -6,6 +6,7 @@ import {
   HomeHero,
   HomeHowItWorksSection,
   HomeLocationsMapSection,
+  HomeServicesSection,
   HomeSocialProofSection,
 } from "@/components/Home";
 import { HomePremiumProvider } from "@/components/Home/HomePremiumProvider";
@@ -20,6 +21,7 @@ export default function Home() {
         <WhatsAppContactButton />
         <div className="relative z-10 mx-auto w-full max-w-full overflow-x-clip">
           <HomeHero />
+          <HomeServicesSection />
           <div className="relative z-10 mx-auto w-full max-w-[1440px] overflow-x-clip px-0">
             <HomeLocationsMapSection />
             <HomeHowItWorksSection />

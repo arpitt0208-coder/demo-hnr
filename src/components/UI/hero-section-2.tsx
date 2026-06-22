@@ -3,14 +3,15 @@
 import React from "react";
 import Link from "next/link";
 import { Globe, MapPin, Phone } from "lucide-react";
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { smoothEase } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
 const InfoIcon = ({ type }: { type: "website" | "phone" | "address" }) => {
   const icons = {
-    website: <Globe className="size-4 text-primary sm:size-[18px]" aria-hidden="true" />,
-    phone: <Phone className="size-4 text-primary sm:size-[18px]" aria-hidden="true" />,
-    address: <MapPin className="size-4 text-primary sm:size-[18px]" aria-hidden="true" />,
+    website: <Globe className="size-4 text-[#2997ff] sm:size-[18px]" aria-hidden="true" />,
+    phone: <Phone className="size-4 text-[#2997ff] sm:size-[18px]" aria-hidden="true" />,
+    address: <MapPin className="size-4 text-[#2997ff] sm:size-[18px]" aria-hidden="true" />,
   };
 
   return <div className="mt-0.5 shrink-0">{icons[type]}</div>;
@@ -43,21 +44,39 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
     },
   },
 };
 
-const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
+const textRevealVariants: Variants = {
+  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
   visible: {
-    y: 0,
     opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.85, ease: smoothEase },
+  },
+};
+
+const ctaRevealVariants: Variants = {
+  hidden: { opacity: 0, y: 18, scale: 0.94 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.8, ease: smoothEase },
+  },
+};
+
+const imageRevealVariants: Variants = {
+  hidden: { opacity: 0, y: 28, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 1, ease: smoothEase, delay: 0.2 },
   },
 };
 
@@ -75,6 +94,7 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
     },
     ref,
   ) => {
+    const reduceMotion = useReducedMotion();
     const isInternalLink = callToAction.href.startsWith("/");
     const CtaTag = isInternalLink ? Link : "a";
     const ctaProps = isInternalLink
@@ -85,105 +105,107 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
       <motion.section
         ref={ref}
         className={cn(
-          "relative flex w-full flex-col overflow-hidden bg-background text-left text-foreground md:flex-row md:items-stretch",
+          "relative flex w-full flex-col items-center overflow-x-clip bg-transparent text-center text-white",
           className,
         )}
-        initial="hidden"
-        animate="visible"
+        initial={reduceMotion ? false : "hidden"}
+        whileInView={reduceMotion ? undefined : "visible"}
+        viewport={{ once: true, amount: 0.12, margin: "0px" }}
         variants={containerVariants}
       >
-        {/* Content column */}
-        <div className="flex w-full min-w-0 flex-col justify-center gap-6 py-6 sm:gap-7 sm:py-7 md:w-[58%] md:gap-8 md:py-8 lg:w-[60%] lg:py-9">
-          {logo && (
-            <motion.header className="w-full" variants={itemVariants}>
-              <div className="flex flex-col items-start gap-2.5">
-                <img
-                  src={logo.url}
-                  alt={logo.alt}
-                  className="h-10 w-auto object-contain object-left sm:h-11 md:h-12"
-                />
-                {logo.text && (
-                  <p className="sr-only">{logo.text}</p>
-                )}
-                {slogan && (
-                  <p className="text-[11px] font-bold tracking-[0.14em] text-muted-foreground sm:text-xs">
-                    {slogan}
-                  </p>
-                )}
-              </div>
-            </motion.header>
+        {logo && (
+          <span className="sr-only">
+            <img src={logo.url} alt={logo.alt} />
+            {logo.text}
+          </span>
+        )}
+
+        <div className="flex w-full max-w-[920px] flex-col items-center px-4 pt-2 sm:px-6 sm:pt-3 md:pt-4">
+          {slogan && (
+            <motion.p
+              className="text-xs font-normal tracking-normal text-white"
+              variants={textRevealVariants}
+            >
+              {slogan}
+            </motion.p>
           )}
 
-          <motion.main
-            className="flex w-full min-w-0 flex-col items-start"
-            variants={containerVariants}
+          <motion.h1
+            className="mt-1.5 text-[2.125rem] font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:mt-2 sm:text-[2.75rem] md:text-[3rem]"
+            variants={textRevealVariants}
           >
-            <motion.h1
-              className="w-full text-left text-[1.75rem] font-bold leading-[1.12] tracking-tight text-foreground min-[400px]:text-[2rem] sm:text-4xl md:text-[2.5rem] lg:text-[2.75rem]"
-              variants={itemVariants}
-            >
-              {title}
-            </motion.h1>
+            {title}
+          </motion.h1>
+
+          <motion.p
+            className="mt-2.5 max-w-[32rem] text-[0.9375rem] font-normal leading-[1.5] text-[#a1a1a6] sm:mt-3 sm:text-base"
+            variants={textRevealVariants}
+          >
+            {subtitle}
+          </motion.p>
+
+          <motion.div className="mt-5 sm:mt-6" variants={ctaRevealVariants}>
             <motion.div
-              className="my-4 h-1 w-16 bg-primary sm:my-5"
-              variants={itemVariants}
-              aria-hidden="true"
-            />
-            <motion.p
-              className="mb-5 max-w-[34rem] text-left text-sm leading-[1.75] text-muted-foreground sm:text-[15px]"
-              variants={itemVariants}
+              whileHover={reduceMotion ? undefined : { scale: 1.04, y: -1 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 380, damping: 22 }}
             >
-              {subtitle}
-            </motion.p>
-            <motion.div className="w-full text-left" variants={itemVariants}>
               <CtaTag
                 {...ctaProps}
-                className="inline-block text-sm font-bold tracking-[0.18em] text-primary transition-colors hover:text-primary/80 sm:text-base"
+                className="hero-cta-shimmer group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-primary-yellow px-[1.375rem] py-[0.4375rem] text-[0.9375rem] font-semibold leading-none text-dark-navy transition-colors hover:bg-[#f5c84a]"
                 data-cursor-hover
               >
-                {callToAction.text}
+                <span className="relative z-10">{callToAction.text}</span>
+                <span
+                  className="hero-cta-shimmer__shine pointer-events-none absolute inset-0 z-20"
+                  aria-hidden="true"
+                />
               </CtaTag>
             </motion.div>
-          </motion.main>
-
-          <motion.footer className="w-full border-t border-border/60 pt-5 sm:pt-6" variants={itemVariants}>
-            <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-4 lg:grid-cols-3">
-              <div className="flex min-w-0 items-start gap-2.5">
-                <InfoIcon type="website" />
-                <span className="min-w-0 break-words text-xs leading-snug text-muted-foreground">
-                  {contactInfo.website}
-                </span>
-              </div>
-              <div className="flex min-w-0 items-start gap-2.5">
-                <InfoIcon type="phone" />
-                <span className="min-w-0 break-words text-xs leading-snug text-muted-foreground">
-                  {contactInfo.phone}
-                </span>
-              </div>
-              <div className="flex min-w-0 items-start gap-2.5 sm:col-span-2 lg:col-span-1">
-                <InfoIcon type="address" />
-                <span className="min-w-0 break-words text-xs leading-snug text-muted-foreground">
-                  {contactInfo.address}
-                </span>
-              </div>
-            </div>
-          </motion.footer>
+          </motion.div>
         </div>
 
-        {/* Image column */}
         <motion.div
-          className="min-h-[200px] w-full shrink-0 bg-cover bg-center sm:min-h-[220px] md:min-h-0 md:w-[42%] md:self-stretch lg:w-[40%]"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-          initial={{
-            clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
-          }}
-          animate={{
-            clipPath: "polygon(20% 0, 100% 0, 100% 100%, 0% 100%)",
-          }}
-          transition={{ duration: 1.2, ease: "circOut" }}
-          role="img"
-          aria-label="Himalayan mountain landscape"
-        />
+          className="relative mt-6 w-full sm:mt-8 md:mt-9"
+          variants={imageRevealVariants}
+        >
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-t from-black to-transparent sm:h-24" />
+          <div className="mx-auto flex w-full max-w-[min(100%,960px)] items-end justify-center px-4 sm:px-6">
+            <div className="relative flex h-[min(52vw,300px)] w-full items-end justify-center sm:h-[min(46vw,380px)] md:h-[min(42vw,440px)]">
+              <img
+                src={backgroundImage}
+                alt="Royal Enfield Himalayan motorcycle"
+                className="h-auto max-h-full w-auto max-w-[min(100%,900px)] object-contain object-bottom"
+              />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.footer
+          className="sr-only w-full border-t border-white/10 px-4 py-5 sm:px-6 sm:py-6"
+          variants={textRevealVariants}
+        >
+          <div className="mx-auto grid max-w-[980px] grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-4 lg:grid-cols-3">
+            <div className="flex min-w-0 items-start gap-2.5">
+              <InfoIcon type="website" />
+              <span className="min-w-0 break-words text-xs leading-snug text-[#a1a1a6]">
+                {contactInfo.website}
+              </span>
+            </div>
+            <div className="flex min-w-0 items-start gap-2.5">
+              <InfoIcon type="phone" />
+              <span className="min-w-0 break-words text-xs leading-snug text-[#a1a1a6]">
+                {contactInfo.phone}
+              </span>
+            </div>
+            <div className="flex min-w-0 items-start gap-2.5 sm:col-span-2 lg:col-span-1">
+              <InfoIcon type="address" />
+              <span className="min-w-0 break-words text-xs leading-snug text-[#a1a1a6]">
+                {contactInfo.address}
+              </span>
+            </div>
+          </div>
+        </motion.footer>
       </motion.section>
     );
   },
