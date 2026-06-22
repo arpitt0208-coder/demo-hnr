@@ -1,5 +1,10 @@
+"use client";
+
 import { BadgeCheck, MapPin, Star } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import type { Vehicle } from "@/data/vehicles";
+import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/UI/scroll-reveal";
+import { smoothEase } from "@/lib/motion";
 import { VehicleBreadcrumbs } from "./VehicleBreadcrumbs";
 import { VehicleImageGallery } from "./VehicleImageGallery";
 import { VehicleBookingSidebar } from "./VehicleBookingSidebar";
@@ -90,68 +95,114 @@ function VehicleSummary({ vehicle }: { vehicle: Vehicle }) {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-2.5">
+      <StaggerReveal
+        className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-2.5"
+        stagger={0.06}
+        amount={0.3}
+        once
+      >
         {vehicle.highlights.map((highlight) => {
           const { Icon, bg, color } = getHighlightIconStyle(highlight.label);
           return (
-            <div
-              key={highlight.label}
-              className="flex flex-col items-center rounded-xl border border-[#EEF2F6] bg-white px-2.5 py-3 text-center sm:px-3 sm:py-3.5"
-            >
-              <span
-                className={cn(
-                  "flex size-9 items-center justify-center rounded-full sm:size-10",
-                  bg,
-                )}
-              >
-                <Icon
-                  className={cn("size-4 sm:size-[18px]", color)}
-                  strokeWidth={2.25}
-                  aria-hidden="true"
-                />
-              </span>
-              <p className="mt-2 text-[10px] font-semibold leading-snug text-[#475569] sm:text-[11px]">
-                {highlight.label}
-              </p>
-            </div>
+            <StaggerItem key={highlight.label} variant="scale">
+              <div className="flex flex-col items-center rounded-xl border border-[#EEF2F6] bg-white px-2.5 py-3 text-center sm:px-3 sm:py-3.5">
+                <span
+                  className={cn(
+                    "flex size-9 items-center justify-center rounded-full sm:size-10",
+                    bg,
+                  )}
+                >
+                  <Icon
+                    className={cn("size-4 sm:size-[18px]", color)}
+                    strokeWidth={2.25}
+                    aria-hidden="true"
+                  />
+                </span>
+                <p className="mt-2 text-[10px] font-semibold leading-snug text-[#475569] sm:text-[11px]">
+                  {highlight.label}
+                </p>
+              </div>
+            </StaggerItem>
           );
         })}
-      </div>
+      </StaggerReveal>
     </div>
   );
 }
+
+const pageReveal = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.04 },
+  },
+} as const;
+
+const pageRevealItem = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, ease: smoothEase },
+  },
+} as const;
 
 export function VehicleDetailView({
   vehicle,
   relatedVehicles,
 }: VehicleDetailViewProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section className="px-4 pb-10 pt-24 sm:px-6 sm:pb-12 sm:pt-28 lg:px-16 xl:px-20">
       <div className="mx-auto w-full max-w-[1200px]">
-        <VehicleBreadcrumbs
-          shortTitle={vehicle.shortTitle}
-          location={vehicle.location}
-        />
+        <motion.div
+          initial={reduceMotion ? false : "hidden"}
+          animate={reduceMotion ? undefined : "visible"}
+          variants={pageReveal}
+        >
+          <motion.div variants={pageRevealItem}>
+            <VehicleBreadcrumbs
+              shortTitle={vehicle.shortTitle}
+              location={vehicle.location}
+            />
+          </motion.div>
 
-        <div className="mt-4 grid gap-5 sm:mt-5 lg:grid-cols-[minmax(0,1fr)_minmax(280px,340px)] lg:items-start lg:gap-6">
-          <VehicleImageGallery
-            images={vehicle.images}
-            title={vehicle.shortTitle}
-            isPopular={vehicle.isPopular}
-            className="order-1 min-w-0 lg:col-start-1 lg:row-start-1"
-          />
+          <div className="mt-4 grid gap-5 sm:mt-5 lg:grid-cols-[minmax(0,1fr)_minmax(280px,340px)] lg:items-start lg:gap-6">
+            <motion.div
+              variants={pageRevealItem}
+              className="order-1 min-w-0 lg:col-start-1 lg:row-start-1"
+            >
+              <VehicleImageGallery
+                images={vehicle.images}
+                title={vehicle.shortTitle}
+                isPopular={vehicle.isPopular}
+              />
+            </motion.div>
 
-          <div className="order-2 min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2">
-            <VehicleBookingSidebar vehicle={vehicle} variant="compact" />
+            <motion.div
+              variants={pageRevealItem}
+              className="order-2 min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2"
+            >
+              <VehicleBookingSidebar vehicle={vehicle} variant="compact" />
+            </motion.div>
+
+            <motion.div
+              variants={pageRevealItem}
+              className="order-3 min-w-0 lg:col-start-1 lg:row-start-2"
+            >
+              <VehicleSummary vehicle={vehicle} />
+            </motion.div>
           </div>
+        </motion.div>
 
-          <div className="order-3 min-w-0 lg:col-start-1 lg:row-start-2">
-            <VehicleSummary vehicle={vehicle} />
-          </div>
-        </div>
+        <ScrollReveal variant="fade-up" delay={0.05} once amount={0.15}>
+          <VehicleDetailTabs vehicle={vehicle} />
+        </ScrollReveal>
 
-        <VehicleDetailTabs vehicle={vehicle} />
-        <VehicleRelatedBikes vehicles={relatedVehicles} />
+        <ScrollReveal variant="fade-up" delay={0.08} once amount={0.12}>
+          <VehicleRelatedBikes vehicles={relatedVehicles} />
+        </ScrollReveal>
       </div>
     </section>
   );

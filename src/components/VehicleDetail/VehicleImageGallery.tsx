@@ -2,12 +2,14 @@
 
 import { useMemo, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Camera, ChevronLeft, ChevronRight, Heart, Share2, Star } from "lucide-react";
 import {
   GalleryModal,
   type MediaItemType,
 } from "@/components/Gallery/GalleryModal";
 import { toGalleryMediaItems } from "@/lib/galleryBentoMedia";
+import { smoothEase } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
 type VehicleImageGalleryProps = {
@@ -26,6 +28,7 @@ export function VehicleImageGallery({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MediaItemType | null>(null);
+  const reduceMotion = useReducedMotion();
 
   const mediaItems = useMemo(
     () => toGalleryMediaItems(images, title),
@@ -50,14 +53,25 @@ export function VehicleImageGallery({
             aria-label={`Open photo ${activeIndex + 1} preview`}
             className="absolute inset-0 z-0 cursor-zoom-in"
           >
-            <Image
-              src={images[activeIndex]}
-              alt={`${title} - photo ${activeIndex + 1}`}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 58vw"
-              className="object-contain object-center p-4"
-            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={reduceMotion ? false : { opacity: 0, scale: 1.02 }}
+                animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
+                exit={reduceMotion ? undefined : { opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.4, ease: smoothEase }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={images[activeIndex]}
+                  alt={`${title} - photo ${activeIndex + 1}`}
+                  fill
+                  priority={activeIndex === 0}
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  className="object-contain object-center p-4"
+                />
+              </motion.div>
+            </AnimatePresence>
           </button>
 
           {isPopular && (

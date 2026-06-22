@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Droplets,
   FileText,
@@ -10,6 +11,7 @@ import {
 } from "lucide-react";
 import type { Vehicle } from "@/data/vehicles";
 import { FAQItem } from "@/components/UI/faq-tabs";
+import { smoothEase } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 import {
   getFeatureIconStyle,
@@ -99,6 +101,7 @@ function ReviewsGrid({ vehicle }: { vehicle: Vehicle }) {
 export function VehicleDetailTabs({ vehicle }: VehicleDetailTabsProps) {
   const [activeTab, setActiveTab] = useState<TabId>("overview");
   const [showFullAbout, setShowFullAbout] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   const aboutPreview =
     vehicle.aboutText.length > 220 && !showFullAbout
@@ -126,6 +129,14 @@ export function VehicleDetailTabs({ vehicle }: VehicleDetailTabsProps) {
       </div>
 
       <div className="mt-6 sm:mt-7">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.35, ease: smoothEase }}
+          >
         {activeTab === "overview" && (
           <div className="space-y-6 sm:space-y-7">
             <div>
@@ -298,6 +309,8 @@ export function VehicleDetailTabs({ vehicle }: VehicleDetailTabsProps) {
             </div>
           </div>
         )}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
